@@ -1,0 +1,15 @@
+.CorreliHeader {
+    font-size: 1em;
+    background: green;
+    color: red;
+    margin: 0;
+}
+
+.CorreliWindow {
+    position: absolute;
+    left    : 0;
+    right   : 0;
+    top     : 2em;
+    bottom  : 0;
+}
+ 
