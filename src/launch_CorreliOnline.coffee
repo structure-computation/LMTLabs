@@ -7,7 +7,7 @@ launch_CorreliOnline = ->
     m.new_session "Session 1"
     
     s = m.selected_session()
-    s._children.push new ImgItem "/home/leclerc/0062_001-0.png"
+    s._children.push new ImgItem "../data/1007.png"
     
     v = new TreeApp document.getElementById( "main_window" ), m
     
