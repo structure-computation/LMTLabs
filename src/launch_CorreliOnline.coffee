@@ -4,10 +4,10 @@ launch_CorreliOnline = ->
     m.modules.push new TreeAppModule_PanelManager
     m.modules.push new TreeAppModule_UndoManager 
     m.modules.push new TreeAppModule_Sketch
-    m.new_session "Session 1"
+    m.new_session "LMT"
     
     s = m.selected_session()
-    s._children.push new ImgItem "../data/1007.png"
+#     s._children.push new ImgItem "../data/1007.png"
     
     v = new TreeApp document.getElementById( "main_window" ), m
     

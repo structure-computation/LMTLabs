@@ -1,15 +1,27 @@
 .CorreliHeader {
     font-size: 1em;
-    background: green;
-    color: red;
-    margin: 0;
+    padding:0px;
+    margin:0px;
+    text-indent:10%;
+    background: -moz-linear-gradient(50% 60% 270deg,#4065DE, #292961);
+    background: -webkit-linear-gradient(linear, top, bottom, from(#4065DE), to(#292961));
+    background: linear-gradient(linear, top, bottom, from(#4065DE), to(#292961));
 }
 
 .CorreliWindow {
     position: absolute;
     left    : 0;
     right   : 0;
-    top     : 2em;
+    top     : 4em;
     bottom  : 0;
 }
- 
+h1 {
+    padding:0px;
+    margin:0px;
+    height:3em;
+    line-height:3em;
+    color:#9dabce;
+}
+body {
+    margin: 0 auto;
+}
