@@ -7,6 +7,8 @@ launch_CorreliOnline = ->
     m.modules.push new TreeAppModule_Mask
     m.modules.push new TreeAppModule_Correlation
     m.modules.push new TreeAppModule_Transform
+    m.modules.push new TreeAppModule_ImageSet
+    
     m.new_session "LMT"
     
     s = m.selected_session()
