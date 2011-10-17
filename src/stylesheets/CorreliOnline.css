@@ -2,10 +2,11 @@
     font-size: 1em;
     padding:0px;
     margin:0px;
-    text-indent:10%;
-    background: -moz-linear-gradient(50% 60% 270deg,#4065DE, #292961);
-    background: -webkit-linear-gradient(linear, top, bottom, from(#4065DE), to(#292961));
-    background: linear-gradient(linear, top, bottom, from(#4065DE), to(#292961));
+    background: -moz-linear-gradient(270deg,#4065DE, #292961);
+    background: -webkit-linear-gradient(top, #4065DE, #292961);
+    background: -o-linear-gradient(top, #4065DE, #292961);
+    background: -ms-linear-gradient(top, #4065DE, #292961);
+    background: linear-gradient(top, #4065DE, #292961);
 }
 
 .CorreliWindow {
@@ -16,11 +17,12 @@
     bottom  : 0;
 }
 h1 {
-    padding:0px;
-    margin:0px;
-    height:3em;
-    line-height:3em;
-    color:#9dabce;
+    padding     :0px;
+    margin      :0px;
+    height      :3em;
+    line-height :2em;
+    text-indent :5%;
+    color       :#eee;
 }
 body {
     margin: 0 auto;
