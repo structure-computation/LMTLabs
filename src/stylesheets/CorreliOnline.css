@@ -27,3 +27,17 @@ h1 {
 body {
     margin: 0 auto;
 }
+
+
+#contextMenu {
+    background: white;
+    border: thin solid black;
+    box-shadow: 3px 3px 3px black;
+}
+.contextMenuElement {
+    cursor: pointer;
+    padding: 6px;
+}
+.contextMenuElement:hover {
+    background: grey;
+}
