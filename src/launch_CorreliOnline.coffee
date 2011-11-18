@@ -7,10 +7,11 @@ launch_CorreliOnline = ->
     m.modules.push new TreeAppModule_Correlation
     m.modules.push new TreeAppModule_Transform
     m.modules.push new TreeAppModule_ImageSet
+    m.modules.push new TreeAppModule_Photo
     
     m.new_session "LMT"
     
     s = m.selected_session()
-#     s._children.push new ImgItem "../data/1007.png"
+    #     s._children.push new ImgItem "../data/1007.png"
     
     v = new TreeApp document.getElementById( "main_window" ), m        
