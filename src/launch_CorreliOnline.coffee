@@ -8,6 +8,7 @@ launch_CorreliOnline = ->
     m.modules.push new TreeAppModule_Transform
     m.modules.push new TreeAppModule_Photo
     m.modules.push new TreeAppModule_UndoManager
+    m.modules.push new TreeAppModule_TreeView
     
     m.new_session "LMT"
     
