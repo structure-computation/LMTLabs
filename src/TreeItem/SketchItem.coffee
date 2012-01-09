@@ -1,11 +1,11 @@
 #
 class SketchItem extends TreeItem
-    constructor: (name = "Mesh" ) ->
+    constructor: ( name = "Mesh" ) ->
         super()
         
         # attributes
         @add_attr
-            mesh: new Mesh name
+            mesh: new Mesh
         
         # default values
         @_name.set name
