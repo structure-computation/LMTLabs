@@ -39,7 +39,6 @@ class TreeAppModule_Sketch extends TreeAppModule
             fun: ( evt, app ) =>
                 
                 @sketch = @add_item_depending_selected_tree app, SketchItem
-                console.log @sketch
                 
                 @sketch.mesh.set_mv new MoveScheme_2D
                 currentPoint = @sketch.mesh.points.length

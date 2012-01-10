@@ -6,7 +6,7 @@ class ResultItem extends TreeItem
         @add_attr
             legend: new Legend "Displacement X"
             
-        disp = @add_child new DisplacementItem @legend
+        disp = @add_child new MeshItem @legend
             
         # default values
         @_name.set "Results"
@@ -17,13 +17,13 @@ class ResultItem extends TreeItem
     accept_child: ( ch ) ->
         ch instanceof SketchItem or
         ch instanceof ImgItem or
-        ch instanceof DisplacementItem 
+        ch instanceof MeshItem
         
     z_index: ->
         #could call z_index() of child
         
     sub_canvas_items: ->
-        [ ]
+        [ @legend ]
         
     anim_min_max: ->
         #

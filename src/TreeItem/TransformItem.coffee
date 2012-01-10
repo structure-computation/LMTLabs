@@ -16,6 +16,7 @@ class TransformItem extends TreeItem
         ch instanceof MaskItem or 
         ch instanceof DiscretizationItem or
         ch instanceof SketchItem or 
+        ch instanceof MeshItem or 
         ch instanceof ImgSetItem or
         ch instanceof ImgItem
                 
