@@ -3,8 +3,10 @@ class ResultItem extends TreeItem
     constructor: ( app ) ->
         super()
         
+        @add_attr
+            legend: new Legend "Displacement X"
             
-        disp = @add_child new DisplacementItem app
+        disp = @add_child new DisplacementItem @legend
             
         # default values
         @_name.set "Results"
