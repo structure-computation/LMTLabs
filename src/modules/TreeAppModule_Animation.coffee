@@ -7,6 +7,8 @@ class TreeAppModule_Animation extends TreeAppModule
         @timer = 0
         @img_per_sec = 3
         
+        @name = 'Time'
+        
 
         @actions.push
             ico: "img/first_24.png"

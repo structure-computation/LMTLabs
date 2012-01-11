@@ -4,6 +4,8 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         sketch = ''
         
+        @name = 'Sketch'
+        
         @actions.push
             ico: "img/mesh_32.png"
             txt: "Create Mesh"

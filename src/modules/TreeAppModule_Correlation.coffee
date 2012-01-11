@@ -2,6 +2,8 @@ class TreeAppModule_Correlation extends TreeAppModule
     constructor: ->
         super()
                 
+        @name = 'Correlation'
+        
         @actions.push
             ico: "img/correlation_24.png"
             txt: "Correlation"

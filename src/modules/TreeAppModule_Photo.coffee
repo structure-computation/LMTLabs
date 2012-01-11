@@ -6,6 +6,8 @@ class TreeAppModule_Photo extends TreeAppModule
     constructor: ->
         super()
 
+        @name = 'Device'
+        
 
         @actions.push
             ico: "img/camera-photo.png"
