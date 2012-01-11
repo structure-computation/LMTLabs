@@ -6,7 +6,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         @actions.push
             ico: "img/mesh_32.png"
-            txt: "Create Mesh (Shift+M)"
+            txt: "Create Mesh"
             fun: ( evt, app ) =>
                 #
                 @sketch = @add_item_depending_selected_tree app, SketchItem
@@ -71,7 +71,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                       
         @actions.push
             ico: "img/curve_24.png"
-            txt: "Transform line to curve (Shift+C)"
+            txt: "Transform line to curve"
             fun: ( evt, app ) =>
 #                 session = @data.selected_session()
 #                 layout = @layouts[ session.model_id ]
@@ -84,7 +84,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 
         @actions.push
             ico: "img/break_24.png"
-            txt: "Break curve to line (Shift+B)"
+            txt: "Break curve to line"
             fun: ( evt, app ) =>
                 cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
                 @sketch.mesh.break_line_from_selected(cam_info)
@@ -93,7 +93,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         @actions.push
             ico: "img/deletePoint_24.png"
-            txt: "Delete Point (Del)"
+            txt: "Delete Point"
             fun: ( evt, app ) =>
                 if app.selected_view != "EditView" and app.selected_view != "TreeView"
                     cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
@@ -104,7 +104,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         @actions.push
             ico: "img/cube3d_32.png"
-            txt: "Create complex 3D shape (Shift+T)"
+            txt: "Create complex 3D shape"
             fun: ( evt, app ) =>
                 #
                 @sketch = @add_item_depending_selected_tree app, SketchItem

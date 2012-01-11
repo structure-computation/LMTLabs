@@ -10,7 +10,7 @@ class TreeAppModule_Animation extends TreeAppModule
 
         @actions.push
             ico: "img/first_24.png"
-            txt: "Go to First Image (Shift+1)"
+            txt: "Go to First Image"
             fun: ( evt, app ) =>
                 #
                 ds = @get_display_settings_item app
@@ -20,7 +20,7 @@ class TreeAppModule_Animation extends TreeAppModule
                 
         @actions.push
             ico: "img/rewind_24.png"
-            txt: "Rewind (Shift+2)"
+            txt: "Rewind"
             fun: ( evt, app ) =>
                 #
                 ds = @get_display_settings_item app
@@ -31,7 +31,7 @@ class TreeAppModule_Animation extends TreeAppModule
                 
         @actions.push
             ico: "img/play_24.png"
-            txt: "Play (Shift+3 or Space Bar)"
+            txt: "Play"
             fun: ( evt, app ) =>
                 #
                 @play_state = true
@@ -44,7 +44,7 @@ class TreeAppModule_Animation extends TreeAppModule
                 
         @actions.push
             ico: "img/pause_24.png"
-            txt: "Pause (Shift+4)"
+            txt: "Pause"
             fun: ( evt, app ) =>
                 #
                 @clear_timer()
@@ -53,7 +53,7 @@ class TreeAppModule_Animation extends TreeAppModule
                 
         @actions.push
             ico: "img/forward_24.png"
-            txt: "Forward (Shift+5)"
+            txt: "Forward"
             fun: ( evt, app ) =>
                 #
                 ds = @get_display_settings_item app
@@ -65,7 +65,7 @@ class TreeAppModule_Animation extends TreeAppModule
                 
         @actions.push
             ico: "img/last_24.png"
-            txt: "Go to Last Image (Shift+6)"
+            txt: "Go to Last Image"
             fun: ( evt, app ) =>
                 #
                 ds = @get_display_settings_item app
