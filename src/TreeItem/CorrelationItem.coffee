@@ -24,7 +24,7 @@ class CorrelationItem extends TreeItem
             iteration: 50
             preview_result: false
             element_size: [ 16, 16 ]
-#             correlation: new Button("Compute")
+            correlation: new Button("Compute")
         
 #         @correlation = new_dom_element
 #             typeName  : "button"
@@ -41,6 +41,8 @@ class CorrelationItem extends TreeItem
         @preview_result._model_editor_display_name = "Preview result"
 
         @multi_resolution._model_editor_display_name = "Multi-resolution"
+        
+        @correlation._model_editor_item_type = ModelEditorItem_Button
         
         #         @elX._model_editor_display_name = "Element size X"
         #         @elY._model_editor_display_name = "Element size Y"
