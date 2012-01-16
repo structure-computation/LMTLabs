@@ -8,6 +8,7 @@ class TreeAppModule_Transform extends TreeAppModule
         
         @actions.push
             ico: "img/transform_24.png"
+            siz: 2
             txt: "Start making transformation"
             fun: ( evt, app ) =>
                 #
@@ -19,6 +20,7 @@ class TreeAppModule_Transform extends TreeAppModule
                 
         @actions.push
             ico: "img/node_add_24.png"
+            siz: 1
             txt: "Add a transformation node"
             fun: ( evt, app ) =>
                 canvas = app.selected_canvas_inst()[ 0 ].div
@@ -49,6 +51,7 @@ class TreeAppModule_Transform extends TreeAppModule
         
         @actions.push
             ico: "img/node_del_24.png"
+            siz: 1
             txt: "Remove a transformation node"
             fun: ( evt, app ) =>
             

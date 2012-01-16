@@ -8,6 +8,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         @actions.push
             ico: "img/mesh_32.png"
+            siz: 1
             txt: "Create Mesh"
             fun: ( evt, app ) =>
                 #
@@ -37,6 +38,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             
         @actions.push
             ico: "img/square_24.png"
+            siz: 1
             txt: "Create a Square edge"
             fun: ( evt, app ) =>
                 
@@ -57,6 +59,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         @actions.push
             ico: "img/circle_24.png"
+            siz: 1
             txt: "Create a Circle edge"
             fun: ( evt, app ) =>
 
@@ -73,6 +76,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                       
         @actions.push
             ico: "img/curve_24.png"
+            siz: 1
             txt: "Transform line to curve"
             fun: ( evt, app ) =>
 #                 session = @data.selected_session()
@@ -86,6 +90,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 
         @actions.push
             ico: "img/break_24.png"
+            siz: 1
             txt: "Break curve to line"
             fun: ( evt, app ) =>
                 cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
@@ -95,6 +100,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         @actions.push
             ico: "img/deletePoint_24.png"
+            siz: 2
             txt: "Delete Point"
             fun: ( evt, app ) =>
                 if app.selected_view != "EditView" and app.selected_view != "TreeView"

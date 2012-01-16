@@ -11,6 +11,7 @@ class TreeAppModule_Photo extends TreeAppModule
 
         @actions.push
             ico: "img/camera-photo.png"
+            siz: 1
             txt: "Update cam devices"
             fun: ( evt, app ) =>
                 TreeAppModule_Photo.app = app
