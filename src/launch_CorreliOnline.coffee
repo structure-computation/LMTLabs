@@ -1,6 +1,8 @@
 
 launch_CorreliOnline = ->
     m = new TreeAppData
+    m.modules.push new TreeAppModule_File
+    m.modules.push new TreeAppModule_UndoManager
     m.modules.push new TreeAppModule_PanelManager
     m.modules.push new TreeAppModule_Correlation
     m.modules.push new TreeAppModule_ImageSet
@@ -8,7 +10,6 @@ launch_CorreliOnline = ->
     m.modules.push new TreeAppModule_Sketch
     m.modules.push new TreeAppModule_Transform
     m.modules.push new TreeAppModule_Photo
-    m.modules.push new TreeAppModule_UndoManager
     m.modules.push new TreeAppModule_TreeView
     
     m.new_session "LMT"
