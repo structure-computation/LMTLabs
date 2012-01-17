@@ -12,6 +12,7 @@ class TreeAppModule_Animation extends TreeAppModule
 
         @actions.push
             ico: "img/first_24.png"
+            siz: 1
             txt: "Go to First Image"
             fun: ( evt, app ) =>
                 #
@@ -22,6 +23,7 @@ class TreeAppModule_Animation extends TreeAppModule
                 
         @actions.push
             ico: "img/rewind_24.png"
+            siz: 1
             txt: "Rewind"
             fun: ( evt, app ) =>
                 #
@@ -33,6 +35,7 @@ class TreeAppModule_Animation extends TreeAppModule
                 
         @actions.push
             ico: "img/play_24.png"
+            siz: 1
             txt: "Play"
             fun: ( evt, app ) =>
                 #
@@ -46,6 +49,7 @@ class TreeAppModule_Animation extends TreeAppModule
                 
         @actions.push
             ico: "img/pause_24.png"
+            siz: 1
             txt: "Pause"
             fun: ( evt, app ) =>
                 #
@@ -55,6 +59,7 @@ class TreeAppModule_Animation extends TreeAppModule
                 
         @actions.push
             ico: "img/forward_24.png"
+            siz: 1
             txt: "Forward"
             fun: ( evt, app ) =>
                 #
@@ -67,6 +72,7 @@ class TreeAppModule_Animation extends TreeAppModule
                 
         @actions.push
             ico: "img/last_24.png"
+            siz: 1
             txt: "Go to Last Image"
             fun: ( evt, app ) =>
                 #

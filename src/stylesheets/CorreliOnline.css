@@ -31,19 +31,6 @@ body {
 
 /* IcoBar */
 
-.IcoBar img {
-    margin-right:2px;
-    padding: 0.1em;
-}
-
-.IcoBar img:hover {
-    background-color     : #ccc;
-    -moz-border-radius   : 3px;
-    -webkit-border-radius: 3px;
-    -o-border-radius     : 3px;
-    border-radius        : 3px;
-}
-
 /*.IcoBar div {
     display: inline-block;
     width: 4px;
@@ -81,16 +68,55 @@ body {
 }
 
 
+.IcoBar img {
+    margin-right:2px;
+    padding: 0.1em;
+}
+
+.IcoBar img:hover {
+    background-color     : #ccc;
+    -moz-border-radius   : 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius     : 3px;
+    border-radius        : 3px;
+}
+
+.container_hidden_icon {
+    position: absolute;
+    z-index: 1001;
+    background : darkGrey;
+    padding: 0.4em;
+    
+    border: thin solid grey;
+    -moz-border-radius   : 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius     : 3px;
+    border-radius        : 3px;
+}
+
+.container_hidden_icon img {
+    margin-top: 0.4em;
+}
+
+.container_hidden_icon img:hover {
+    background-color     : #ccc;
+    -moz-border-radius   : 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius     : 3px;
+    border-radius        : 3px;
+}
 
 #contextMenu {
     background: white;
     border: thin solid black;
     box-shadow: 3px 3px 3px black;
 }
+
 .contextMenuElement {
     cursor: pointer;
     padding: 6px;
 }
+
 .contextMenuElement:hover {
     background: grey;
 }
