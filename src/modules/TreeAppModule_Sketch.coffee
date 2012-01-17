@@ -36,7 +36,13 @@ class TreeAppModule_Sketch extends TreeAppModule
                 
             key: [ "Shift+M" ]
             
-        @actions.push
+        mesher = @add_action
+            ico: "img/shape.png"
+            siz: 1
+            txt: "Create Shape"
+            key: [ "M" ]
+        
+        mesher.add_sub_action
             ico: "img/square_24.png"
             siz: 1
             txt: "Create a Square edge"
@@ -57,7 +63,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.lines.push [ currentPoint + 3, currentPoint ]
                 app.undo_manager.snapshot()
         
-        @actions.push
+        mesher.add_sub_action
             ico: "img/circle_24.png"
             siz: 1
             txt: "Create a Circle edge"
@@ -73,7 +79,27 @@ class TreeAppModule_Sketch extends TreeAppModule
                     
                 @sketch.mesh.lines.push [ currentPoint, currentPoint + 1, currentPoint + 2, currentPoint ]
                 app.undo_manager.snapshot()
-                      
+                
+        mesher.add_sub_action
+            ico: "img/circle_24.png"
+            siz: 1
+            txt: "Create a Triangle edge"
+            fun: ( evt, app ) =>
+
+                @sketch = @add_item_depending_selected_tree app, SketchItem
+                    
+                currentPoint = @sketch.mesh.points.length
+                
+                for coord in [ [ 0, 0.33 ], [ -0.33, -0.333 ], [ 0.33, -0.333 ] ]
+                    point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
+                    @sketch.mesh.add_point point
+                    
+                @sketch.mesh.lines.push [ currentPoint, currentPoint + 1 ]
+                @sketch.mesh.lines.push [ currentPoint + 1, currentPoint + 2 ]
+                @sketch.mesh.lines.push [ currentPoint + 2, currentPoint ]
+                
+                app.undo_manager.snapshot()
+                
         @actions.push
             ico: "img/curve_24.png"
             siz: 1

@@ -81,6 +81,23 @@ body {
     border-radius        : 3px;
 }
 
+
+.parent_hidden_icon {
+    background-color     : grey;
+    -moz-border-radius   : 3px 3px 0px 3px;
+    -webkit-border-radius: 3px 3px 0px 3px;
+    -o-border-radius     : 3px 3px 0px 3px;
+    border-radius        : 3px 3px 0px 3px;
+}
+
+.parent_hidden_icon img:hover {
+    background-color     : #ccc;
+    -moz-border-radius   : 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius     : 5px;
+    border-radius        : 5px;
+}
+
 .container_hidden_icon {
     position: absolute;
     z-index: 1001;
