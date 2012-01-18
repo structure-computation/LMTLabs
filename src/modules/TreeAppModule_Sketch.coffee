@@ -81,7 +81,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 app.undo_manager.snapshot()
                 
         mesher.add_sub_action
-            ico: "img/circle_24.png"
+            ico: "img/triangle.png"
             siz: 1
             txt: "Create a Triangle edge"
             fun: ( evt, app ) =>

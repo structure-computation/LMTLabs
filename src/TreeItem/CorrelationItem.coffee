@@ -5,7 +5,7 @@ class CorrelationItem extends TreeItem
         
         # default values
         @_name.set "Correlation"
-        @_ico.set "img/correlation_16.png"
+        @_ico.set "img/correlation_19.png"
         @_viewable.set true
         @add_child new ImgSetItem
         @add_child new MaskItem

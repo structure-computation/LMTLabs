@@ -5,7 +5,7 @@ class TreeAppModule_Correlation extends TreeAppModule
         @name = 'Correlation'
         
         @actions.push
-            ico: "img/correlation_24.png"
+            ico: "img/correlation.png"
             siz: 2
             txt: "Correlation"
             fun: ( evt, app ) =>
