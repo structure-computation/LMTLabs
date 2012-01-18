@@ -7,7 +7,7 @@ class TreeAppModule_Transform extends TreeAppModule
         @name = 'Transformation'
         
         @actions.push
-            ico: "img/transform_24.png"
+            ico: "img/transform_48.png"
             siz: 2
             txt: "Start making transformation"
             fun: ( evt, app ) =>
