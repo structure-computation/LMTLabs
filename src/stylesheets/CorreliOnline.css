@@ -13,7 +13,7 @@
     position: absolute;
     left    : 0;
     right   : 0;
-    top     : 5.3em;
+    top     : 6.3em;
     bottom  : 0;
 }
 h1 {
@@ -62,9 +62,23 @@ body {
     text-align: center;
 }
 
+.container_icon {
+    float:left;
+}
+
+.icon_top_span {
+}
+
+.icon_bot_span {
+}
+
+.big_icon_span {
+}
+
 .module_title{
     display: inline-block;
     margin-top: 0.5em;
+    clear:both;
 }
 
 
@@ -89,6 +103,7 @@ body {
     -o-border-radius     : 3px 3px 0px 3px;
     border-radius        : 3px 3px 0px 3px;
 }
+
 
 .parent_hidden_icon img:hover {
     background-color     : #ccc;

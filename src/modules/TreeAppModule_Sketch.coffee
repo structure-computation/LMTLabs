@@ -138,6 +138,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         @actions.push
             ico: "img/cube3d_32.png"
+            siz: 1
             txt: "Create complex 3D shape"
             fun: ( evt, app ) =>
                 #
