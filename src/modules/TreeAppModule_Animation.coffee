@@ -13,6 +13,7 @@ class TreeAppModule_Animation extends TreeAppModule
         @actions.push
             ico: "img/first_24.png"
             siz: 1
+            ord: false
             txt: "Go to First Image"
             fun: ( evt, app ) =>
                 #
@@ -24,6 +25,7 @@ class TreeAppModule_Animation extends TreeAppModule
         @actions.push
             ico: "img/rewind_24.png"
             siz: 1
+            ord: false
             txt: "Rewind"
             fun: ( evt, app ) =>
                 #
@@ -36,6 +38,7 @@ class TreeAppModule_Animation extends TreeAppModule
         @actions.push
             ico: "img/play_24.png"
             siz: 1
+            ord: false
             txt: "Play"
             fun: ( evt, app ) =>
                 #
@@ -50,6 +53,7 @@ class TreeAppModule_Animation extends TreeAppModule
         @actions.push
             ico: "img/pause_24.png"
             siz: 1
+            ord: false
             txt: "Pause"
             fun: ( evt, app ) =>
                 #
@@ -60,6 +64,7 @@ class TreeAppModule_Animation extends TreeAppModule
         @actions.push
             ico: "img/forward_24.png"
             siz: 1
+            ord: false
             txt: "Forward"
             fun: ( evt, app ) =>
                 #
@@ -73,6 +78,7 @@ class TreeAppModule_Animation extends TreeAppModule
         @actions.push
             ico: "img/last_24.png"
             siz: 1
+            ord: false
             txt: "Go to Last Image"
             fun: ( evt, app ) =>
                 #
@@ -80,6 +86,17 @@ class TreeAppModule_Animation extends TreeAppModule
                 ds.anim_time.set ds.anim_time._max.get()
                 @clear_timer()
             key: [ "Shift+6" ]
+        
+        # constrained value
+#         @actions.push
+#             ico: "img/"
+#             siz: 1
+#             fun: ( evt, app ) =>
+#                 anim_time: new ConstrainedVal( 0,
+#                     min: 0
+#                     max: -1
+#                     div: 0
+#                 )
                 
                     
     run_timer : ( app ) =>

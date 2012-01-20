@@ -13,7 +13,7 @@
     position: absolute;
     left    : 0;
     right   : 0;
-    top     : 6.3em;
+    top     : 6.1em;
     bottom  : 0;
 }
 h1 {
@@ -64,6 +64,8 @@ body {
 
 .container_icon {
     float:left;
+    margin-bottom:5px;
+    height: 3.4em;
 }
 
 .icon_top_span {
@@ -76,9 +78,9 @@ body {
 }
 
 .module_title{
-    display: inline-block;
-    margin-top: 0.5em;
+    margin-top: 1.5em;
     clear:both;
+    text-align: center;
 }
 
 

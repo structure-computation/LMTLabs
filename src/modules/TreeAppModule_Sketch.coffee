@@ -126,7 +126,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         @actions.push
             ico: "img/deletePoint_24.png"
-            siz: 2
+            siz: 1
             txt: "Delete Point"
             fun: ( evt, app ) =>
                 if app.selected_view != "EditView" and app.selected_view != "TreeView"
