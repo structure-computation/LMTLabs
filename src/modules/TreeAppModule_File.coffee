@@ -60,5 +60,6 @@ class TreeAppModule_File extends TreeAppModule
                         
                 p = new_popup "Browse Folder", event : evt, width : 70
                 p.appendChild @d
+                
             key: [ "Shift+O" ]
             

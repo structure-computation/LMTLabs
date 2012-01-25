@@ -6,106 +6,13 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         @name = 'Sketch'
         
-        @actions.push
-            ico: "img/mesh_32.png"
-            siz: 1
-            txt: "Create Mesh"
-            fun: ( evt, app ) =>
-                #
-                @sketch = @add_item_depending_selected_tree app, SketchItem
-                @sketch.mesh.set_mv new MoveScheme_2D
-                
-                currentPoint = @sketch.mesh.points.length
-                
-                for coord in [ [ -0.25, -0.25 ], [ 0.25, -0.25 ], [ 0.25, 0.25 ], [ -0.25, 0.25 ], [ -0.75, 0.25 ], [ -0.75, -0.25 ] ]
-                    point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
-                    @sketch.mesh.add_point point
-                
-                @sketch.mesh.lines.push [ currentPoint, currentPoint + 1 ]
-                @sketch.mesh.lines.push [ currentPoint + 1, currentPoint + 3 ]
-                @sketch.mesh.lines.push [ currentPoint + 3, currentPoint ]
-                @sketch.mesh.lines.push [ currentPoint + 1, currentPoint + 2 ]
-                @sketch.mesh.lines.push [ currentPoint + 2, currentPoint + 3 ]
-                @sketch.mesh.lines.push [ currentPoint + 3, currentPoint + 1 ]
-                @sketch.mesh.lines.push [ currentPoint + 3, currentPoint + 4 ]
-                @sketch.mesh.lines.push [ currentPoint + 4, currentPoint ]
-                @sketch.mesh.lines.push [ currentPoint + 4, currentPoint + 5 ]
-                @sketch.mesh.lines.push [ currentPoint + 5, currentPoint ]
-                
-                app.fit()
-                
-            key: [ "Shift+M" ]
-            
-        mesher = @add_action
-            ico: "img/shape.png"
-            siz: 1
-            txt: "Create Shape"
-            key: [ "M" ]
-        
-        mesher.add_sub_action
-            ico: "img/square_24.png"
-            siz: 1
-            txt: "Create a Square edge"
-            fun: ( evt, app ) =>
-                
-                @sketch = @add_item_depending_selected_tree app, SketchItem
-                
-                @sketch.mesh.set_mv new MoveScheme_2D
-                currentPoint = @sketch.mesh.points.length
-                
-                for coord in [ [ -0.33, -0.333 ], [ 0.33, -0.333 ], [ 0.33, 0.333 ], [ -0.33, 0.333 ] ]
-                    point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
-                    @sketch.mesh.add_point point
-                
-                @sketch.mesh.lines.push [ currentPoint, currentPoint + 1 ]
-                @sketch.mesh.lines.push [ currentPoint + 1, currentPoint + 2 ]
-                @sketch.mesh.lines.push [ currentPoint + 2, currentPoint + 3 ]
-                @sketch.mesh.lines.push [ currentPoint + 3, currentPoint ]
-                app.undo_manager.snapshot()
-        
-        mesher.add_sub_action
-            ico: "img/circle_24.png"
-            siz: 1
-            txt: "Create a Circle edge"
-            fun: ( evt, app ) =>
-
-                @sketch = @add_item_depending_selected_tree app, SketchItem
-                    
-                currentPoint = @sketch.mesh.points.length
-                
-                for coord in [ [ -0.33, 0 ], [ 0, 0.33 ], [ 0.33, 0 ] ]
-                    point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
-                    @sketch.mesh.add_point point
-                    
-                @sketch.mesh.lines.push [ currentPoint, currentPoint + 1, currentPoint + 2, currentPoint ]
-                app.undo_manager.snapshot()
-                
-        mesher.add_sub_action
-            ico: "img/triangle.png"
-            siz: 1
-            txt: "Create a Triangle edge"
-            fun: ( evt, app ) =>
-
-                @sketch = @add_item_depending_selected_tree app, SketchItem
-                    
-                currentPoint = @sketch.mesh.points.length
-                
-                for coord in [ [ 0, 0.33 ], [ -0.33, -0.333 ], [ 0.33, -0.333 ] ]
-                    point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
-                    @sketch.mesh.add_point point
-                    
-                @sketch.mesh.lines.push [ currentPoint, currentPoint + 1 ]
-                @sketch.mesh.lines.push [ currentPoint + 1, currentPoint + 2 ]
-                @sketch.mesh.lines.push [ currentPoint + 2, currentPoint ]
-                
-                app.undo_manager.snapshot()
                 
         @actions.push
-            ico: "img/curve_24.png"
+            ico: "img/curve.png"
             siz: 1
             txt: "Transform line to curve"
             fun: ( evt, app ) =>
-#                 session = @data.selected_session()
+#                 session = @data.selected_sessionx()
 #                 layout = @layouts[ session.model_id ]
 #                 for panel_id in @data.selected_canvas_pan when layout._pan_vs_id[ panel_id ]?
 #                     layout._pan_vs_id[ panel_id ]
@@ -113,29 +20,8 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.make_curve_line_from_selected(cam_info)
                 app.undo_manager.snapshot()
             key: [ "Shift+C" ]
+        
                 
-        @actions.push
-            ico: "img/break_24.png"
-            siz: 1
-            txt: "Break curve to line"
-            fun: ( evt, app ) =>
-                cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
-                @sketch.mesh.break_line_from_selected(cam_info)
-                app.undo_manager.snapshot()
-            key: [ "Shift+B" ]
-        
-        @actions.push
-            ico: "img/deletePoint_24.png"
-            siz: 1
-            txt: "Delete Point"
-            fun: ( evt, app ) =>
-                if app.selected_view != "EditView" and app.selected_view != "TreeView"
-                    cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
-                    @sketch.mesh.delete_selected_point( cam_info )
-                    app.undo_manager.snapshot()
-                    
-            key: [ "Del" ]
-        
         @actions.push
             ico: "img/cube3d_32.png"
             siz: 1
@@ -5299,3 +5185,91 @@ class TreeAppModule_Sketch extends TreeAppModule
                 app.fit()
                 
             key: [ "Shift+T" ]
+
+        
+        @actions.push
+            ico: "img/break.png"
+            siz: 1
+            txt: "Break curve to line"
+            fun: ( evt, app ) =>
+                cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
+                @sketch.mesh.break_line_from_selected(cam_info)
+                app.undo_manager.snapshot()
+            key: [ "Shift+B" ]
+        
+                    
+        mesher = @add_action
+            ico: "img/shape.png"
+            siz: 1
+            txt: "Create Shape"
+            key: [ "M" ]
+        
+        mesher.add_sub_action
+            ico: "img/square_24.png"
+            siz: 1
+            txt: "Create a Square edge"
+            fun: ( evt, app ) =>
+                
+                @sketch = @add_item_depending_selected_tree app, SketchItem
+                
+                @sketch.mesh.set_mv new MoveScheme_2D
+                currentPoint = @sketch.mesh.points.length
+                
+                for coord in [ [ -0.33, -0.333 ], [ 0.33, -0.333 ], [ 0.33, 0.333 ], [ -0.33, 0.333 ] ]
+                    point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
+                    @sketch.mesh.add_point point
+                
+                @sketch.mesh.lines.push [ currentPoint, currentPoint + 1 ]
+                @sketch.mesh.lines.push [ currentPoint + 1, currentPoint + 2 ]
+                @sketch.mesh.lines.push [ currentPoint + 2, currentPoint + 3 ]
+                @sketch.mesh.lines.push [ currentPoint + 3, currentPoint ]
+                app.undo_manager.snapshot()
+        
+        mesher.add_sub_action
+            ico: "img/circle_24.png"
+            siz: 1
+            txt: "Create a Circle edge"
+            fun: ( evt, app ) =>
+
+                @sketch = @add_item_depending_selected_tree app, SketchItem
+                    
+                currentPoint = @sketch.mesh.points.length
+                
+                for coord in [ [ -0.33, 0 ], [ 0, 0.33 ], [ 0.33, 0 ] ]
+                    point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
+                    @sketch.mesh.add_point point
+                    
+                @sketch.mesh.lines.push [ currentPoint, currentPoint + 1, currentPoint + 2, currentPoint ]
+                app.undo_manager.snapshot()
+                
+        mesher.add_sub_action
+            ico: "img/triangle.png"
+            siz: 1
+            txt: "Create a Triangle edge"
+            fun: ( evt, app ) =>
+
+                @sketch = @add_item_depending_selected_tree app, SketchItem
+                    
+                currentPoint = @sketch.mesh.points.length
+                
+                for coord in [ [ 0, 0.33 ], [ -0.33, -0.333 ], [ 0.33, -0.333 ] ]
+                    point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
+                    @sketch.mesh.add_point point
+                    
+                @sketch.mesh.lines.push [ currentPoint, currentPoint + 1 ]
+                @sketch.mesh.lines.push [ currentPoint + 1, currentPoint + 2 ]
+                @sketch.mesh.lines.push [ currentPoint + 2, currentPoint ]
+                
+                app.undo_manager.snapshot()
+        
+        @actions.push
+            ico: "img/deletePoint_24.png"
+            siz: 1
+            txt: "Delete Point"
+            fun: ( evt, app ) =>
+                if app.selected_view != "EditView" and app.selected_view != "TreeView"
+                    cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
+                    @sketch.mesh.delete_selected_point( cam_info )
+                    app.undo_manager.snapshot()
+                    
+            key: [ "Del" ]
