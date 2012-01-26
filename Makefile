@@ -13,7 +13,7 @@ conv:
 
 #.PHONY: Soja
 Soja:
-	git clone git@sc1.ens-cachan.fr:Soja-github Soja
+	git clone git@github.com:hleclerc/Soja.git Soja
 
 .PHONY: compilation
 compilation: Soja
