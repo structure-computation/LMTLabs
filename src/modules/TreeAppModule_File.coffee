@@ -6,7 +6,7 @@ class TreeAppModule_File extends TreeAppModule
         @name = 'File'
         
         @actions.push
-            ico: "img/add_folder.png"
+            ico: "img/orange_folder.png"
             siz: 2
             txt: "Open"
             fun: ( evt, app ) ->

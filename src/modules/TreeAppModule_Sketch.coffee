@@ -6,6 +6,12 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         @name = 'Sketch'
         
+        @actions.push
+            ico: "img/mesher.png"
+            siz: 1
+            txt: "Mesher"
+            fun: ( evt, app ) =>
+#             key: [ "Shift+C" ]
                 
         @actions.push
             ico: "img/curve.png"

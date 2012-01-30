@@ -9,6 +9,9 @@ launch_CorreliOnline = ->
     m.modules.push new TreeAppModule_Animation
     m.modules.push new TreeAppModule_Sketch
     m.modules.push new TreeAppModule_Transform
+    m.modules.push new TreeAppModule_Filter
+    m.modules.push new TreeAppModule_ShapeFunction
+    m.modules.push new TreeAppModule_MechanicalData
 #     m.modules.push new TreeAppModule_Photo
     m.modules.push new TreeAppModule_TreeView
     
