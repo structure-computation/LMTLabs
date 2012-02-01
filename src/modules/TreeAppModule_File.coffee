@@ -5,8 +5,16 @@ class TreeAppModule_File extends TreeAppModule
         
         @name = 'File'
         
+#         @actions.push
+#             ico: "img/correli.png"
+#             siz: 2
+#             txt: "Session information"
+#             fun: ( evt, app ) ->
+#                 #
+                
         @actions.push
-            ico: "img/orange_folder.png"
+#             ico: "img/orange_folder.png"
+            ico: "img/correli.png"
             siz: 2
             txt: "Open"
             fun: ( evt, app ) ->
@@ -37,8 +45,13 @@ class TreeAppModule_File extends TreeAppModule
                 mes1 = new File Mesh, "Mesh"
                 mesh.data.children.push mes1
                 
-                res = new File
-                result.data.children.push res
+
+                res0 = new File ImgItem, "res_orig.png"
+                res1 = new File ImgItem, "res_depX.png"
+                res2 = new File ImgItem, "res_depY.png"
+                result.data.children.push res0
+                result.data.children.push res1
+                result.data.children.push res2
                 
                 @d = new_dom_element
                     className : "browse_container"

@@ -20,10 +20,10 @@ class MeshItem extends TreeItem
         @mesh_item.displayed_field.set 1
     
         @mesh_item.nodal_fields.set
-            nodal: [ 1, 0.5, 0, 0.8 ]
+            nodal: [ 3.2, -4.7, -0.74, 1.2 ]
             
         @mesh_item.elementary_fields.set
-            elem : [ 120, 145, 54, 25 ]
+            elem : [ 3.2, -4.7 ]
         
         # default values
         @_name.set "Displacement"
