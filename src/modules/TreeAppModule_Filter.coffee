@@ -15,7 +15,7 @@ class TreeAppModule_Filter extends TreeAppModule
             
         @actions.push
             ico: "img/cutting_plan.png"
-            siz: 2
+            siz: 1
             txt: "Cut 3D shape with a plan"
             fun: ( evt, app ) ->
                 console.log "cutting plan"

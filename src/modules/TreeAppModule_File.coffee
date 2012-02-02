@@ -4,17 +4,9 @@ class TreeAppModule_File extends TreeAppModule
         super()
         
         @name = 'File'
-        
-#         @actions.push
-#             ico: "img/correli.png"
-#             siz: 2
-#             txt: "Session information"
-#             fun: ( evt, app ) ->
-#                 #
                 
         @actions.push
-#             ico: "img/orange_folder.png"
-            ico: "img/correli.png"
+            ico: "img/orange_folder.png"
             siz: 2
             txt: "Open"
             fun: ( evt, app ) ->

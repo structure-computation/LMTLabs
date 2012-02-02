@@ -1,6 +1,7 @@
 
 launch_CorreliOnline = ->
     m = new TreeAppData
+    m.modules.push new TreeAppModule_Session
     m.modules.push new TreeAppModule_File
     m.modules.push new TreeAppModule_UndoManager
     m.modules.push new TreeAppModule_PanelManager
