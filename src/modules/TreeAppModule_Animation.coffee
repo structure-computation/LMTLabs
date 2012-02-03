@@ -78,7 +78,6 @@ class TreeAppModule_Animation extends TreeAppModule
         @actions.push
             ico: "img/last_24.png"
             siz: 1
-            ord: false
             txt: "Go to Last Image"
             fun: ( evt, app ) =>
                 #
@@ -88,15 +87,16 @@ class TreeAppModule_Animation extends TreeAppModule
             key: [ "Shift+6" ]
         
         # constrained value
-#         @actions.push
-#             ico: "img/"
-#             siz: 1
-#             fun: ( evt, app ) =>
-#                 anim_time: new ConstrainedVal( 0,
-#                     min: 0
-#                     max: -1
-#                     div: 0
-#                 )
+        @actions.push
+            mod:
+                anim_time: new ConstrainedVal( 0,
+                    min: 0
+                    max: -1
+                    div: 0
+                )
+            siz: 1
+            fun: ( evt, app ) =>
+                #
                 
                     
     run_timer : ( app ) =>
