@@ -1,5 +1,5 @@
 class TreeAppModule_Animation extends TreeAppModule
-    constructor: ->
+    constructor: ( app_data ) ->
         super()
         
         @current_picture = 0    
@@ -17,9 +17,9 @@ class TreeAppModule_Animation extends TreeAppModule
             txt: "Go to First Image"
             fun: ( evt, app ) =>
                 #
-                anim_module = @get_animation_module app
-                anim_time = anim_module.get_anim_time()
-                anim_time.set anim_time._min
+#                 anim_module = @get_animation_module app
+#                 anim_time = anim_module.get_anim_time()
+                app.data.set anim_time._min
 #                 ds = @get_display_settings_item app
 #                 ds.anim_time.set ds.anim_time._min
                 @clear_timer()
@@ -109,12 +109,12 @@ class TreeAppModule_Animation extends TreeAppModule
         
         # constrained value
         @actions.push
-            mod:
-                anim_time: new ConstrainedVal( 0,
-                    min: 0
-                    max: -1
-                    div: 0
-                )
+            mod: app_data.time
+            #                 anim_time: new ConstrainedVal( 0,
+            #                     min: 0
+            #                     max: -1
+            #                     div: 0
+            #                 )
             siz: 1
             fun: ( evt, app ) =>
                 #
