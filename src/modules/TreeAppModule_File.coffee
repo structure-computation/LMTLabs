@@ -62,10 +62,11 @@ class TreeAppModule_File extends TreeAppModule
                             for m in @modules 
                                 if m instanceof TreeAppModule_Sketch
                                     m.actions[ 0 ].fun evt, app, file.data
-                        
-                p = new_popup "Browse Folder", event : evt, width : 70
-                p.appendChild @d
-#                 app.active_key.set false
+
+                p = new_popup "Browse Folder", event : evt, width : 70, child: @d, onclose: @onPopupClose, onclose_parameter: app
+                app.active_key.set false
                 
             key: [ "Shift+O" ]
             
+            onPopupClose: ( app ) ->
+                app.active_key.set true
