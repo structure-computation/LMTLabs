@@ -7,7 +7,7 @@ launch_CorreliOnline = ->
     m.modules.push new TreeAppModule_PanelManager
     m.modules.push new TreeAppModule_Correlation
     m.modules.push new TreeAppModule_ImageSet
-    m.modules.push new TreeAppModule_Animation
+    m.modules.push new TreeAppModule_Animation, m
     m.modules.push new TreeAppModule_Sketch
     m.modules.push new TreeAppModule_Transform
     m.modules.push new TreeAppModule_Filter
@@ -20,5 +20,5 @@ launch_CorreliOnline = ->
     
     s = m.selected_session()
     
-    v = new TreeApp document.getElementById( "main_window" ), m        
+    v = new TreeApp document.getElementById( "main_window" ), m
     
