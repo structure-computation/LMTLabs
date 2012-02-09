@@ -5,8 +5,6 @@ class MeshItem extends TreeItem
         
         
         # attributes
-
-            
         @add_attr
             mesh_item: new Mesh legend
         
