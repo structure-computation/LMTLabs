@@ -38,11 +38,12 @@ class TreeAppModule_Animation extends TreeAppModule
             txt: "Play"
             fun: ( evt, app ) =>
                 #
-                @play_state = true
-                if app.data.time.get() == app.data.time._max.get() # If play button is clicked when the last picture is selected
-                    app.data.time.set 0                            # Rewind to the first picture
-                    
-                setTimeout @run_timer, 1000 / @img_per_sec, app
+                if @play_state == false
+                    @play_state = true
+                    if app.data.time.get() == app.data.time._max.get() # If play button is clicked when the last picture is selected
+                        app.data.time.set 0                            # Rewind to the first picture
+                        
+                    setTimeout @run_timer, 1000 / @img_per_sec, app
             key: [ "Shift+3", "Space" ]
                 
         @actions.push
