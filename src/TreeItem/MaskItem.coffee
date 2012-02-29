@@ -11,7 +11,8 @@ class MaskItem extends TreeItem
 
     accept_child: ( ch ) ->
         ch instanceof SketchItem or
-        ch instanceof ImgItem
+        ch instanceof ImgItem or
+        ch instanceof TransformItem
 
     z_index: ->
         #could call z_index() of child
