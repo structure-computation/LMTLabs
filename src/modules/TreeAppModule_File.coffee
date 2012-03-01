@@ -13,10 +13,12 @@ class TreeAppModule_File extends TreeAppModule
                 @model = new File Directory, "LMT"
                 
                 p = new File ImgItem, "composite01.png"
+                ma = new File ImgItem, "masque_0.png"
                 d = new File Directory, "Work"
                 m = new File Mesh, "Mesh"
                 
                 @model.data.children.push m
+                @model.data.children.push ma
                 @model.data.children.push p
                 @model.data.children.push d
                 
