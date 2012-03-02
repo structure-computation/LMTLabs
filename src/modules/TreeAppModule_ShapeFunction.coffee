@@ -9,7 +9,8 @@ class TreeAppModule_ShapeFunction extends TreeAppModule
             ico: "img/shape_function.png"
             siz: 2
             txt: "Use shape function"
-            fun: ( evt, app ) ->
-                console.log "shape function"
+            fun: ( evt, app ) =>                
+                shape_function = @add_item_depending_selected_tree app, ShapeFunctionItem
                 
-#             key: [ "Shift+Z" ]
+                app.undo_manager.snapshot()
+            key: [ "Shift+F" ]

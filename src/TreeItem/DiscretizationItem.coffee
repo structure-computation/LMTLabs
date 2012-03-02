@@ -14,7 +14,9 @@ class DiscretizationItem extends TreeItem
         ch instanceof MesherItem or 
         ch instanceof SketchItem or 
         ch instanceof ImgItem or
-        ch instanceof TransformItem
+        ch instanceof TransformItem or 
+        ch instanceof ShapeFunctionItem
+        
         
     z_index: ->
         #could call z_index() of child

@@ -1,6 +1,6 @@
 #
 class MesherItem extends TreeItem
-    constructor: ( name = "Mesh" ) ->
+    constructor: ( name = "Mesher" ) ->
         super()
         
         # attributes
