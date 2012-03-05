@@ -9,7 +9,7 @@ class ShapeFunctionItem extends TreeItem
         
         # default values
         @_name.set name
-        @_ico.set "img/mesh_24.png"
+        @_ico.set "img/shape_function_16.png"
         @_viewable.set true
     
     accept_child: ( ch ) ->
