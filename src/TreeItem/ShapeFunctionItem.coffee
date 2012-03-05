@@ -14,3 +14,7 @@ class ShapeFunctionItem extends TreeItem
     
     accept_child: ( ch ) ->
         false
+        
+    sub_canvas_items: ->
+        [  ]
+       

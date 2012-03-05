@@ -5216,7 +5216,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             key: [ "M" ]
         
         mesher_sub.add_sub_action
-            ico: "img/square_24.png"
+            ico: "img/shape.png"
             siz: 1
             txt: "Create a Square edge"
             fun: ( evt, app ) =>
@@ -5237,7 +5237,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 app.undo_manager.snapshot()
         
         mesher_sub.add_sub_action
-            ico: "img/circle_24.png"
+            ico: "img/circle.png"
             siz: 1
             txt: "Create a Circle edge"
             fun: ( evt, app ) =>
