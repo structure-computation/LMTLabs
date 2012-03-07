@@ -5,6 +5,9 @@ class TreeAppModule_Sketch extends TreeAppModule
         sketch = ''
         
         @name = 'Sketch'
+
+        _ina = ( app ) =>
+            app.data.focus.get() == app.treeview?.view_id
         
         @actions.push
             ico: "img/mesher.png"
@@ -5277,6 +5280,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ico: "img/deletePoint_24.png"
             siz: 1
             txt: "Delete Point"
+            ina: _ina
             fun: ( evt, app ) =>
                 if app.selected_view != "EditView" and app.selected_view != "TreeView"
                     cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
@@ -5284,3 +5288,5 @@ class TreeAppModule_Sketch extends TreeAppModule
                     app.undo_manager.snapshot()
                     
             key: [ "Del" ]
+            
+            
