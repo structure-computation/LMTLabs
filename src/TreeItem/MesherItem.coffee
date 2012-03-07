@@ -5,11 +5,15 @@ class MesherItem extends TreeItem
         
         # attributes
         @add_attr
-            size_X: 8
-            size_Y: 8
-            link: true
-            _mesh: new Mesh
-            mesh: new Button "Start Mesh", "Doing the Mesh (click to abort)"
+            cell_type  : new Choice( 0, [ "Triangle 3", "Triangle 6", "Quad 4",  "Quad 8" ] )
+            size_X     : 8
+            size_Y     : 8
+            link       : true
+            _mesh      : new Mesh
+            point      : new Button "Add Point"
+            density    : 16
+            radius     : 48
+            mesh       : new Button "Start Mesh", "Doing the Mesh (click to abort)"
         
         @mesh.change_allowed = ( state ) ->
             state or confirm "Are you sure you want to abort ?"
