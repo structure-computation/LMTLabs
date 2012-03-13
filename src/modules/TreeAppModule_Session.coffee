@@ -95,6 +95,7 @@ class TreeAppModule_Session extends TreeAppModule
             fun: ( evt, app ) =>
                 #
                 console.log "Save"
+            key: [ "Ctrl+S" ]
                 
         session_info.menu.push 
             ico: "img/.png"
@@ -102,6 +103,7 @@ class TreeAppModule_Session extends TreeAppModule
             fun: ( evt, app ) =>
                 #
                 console.log "Save as"
+            key: [ "Ctrl+Shift+S" ]
                 
         session_info.menu.push 
             ico: "img/.png"
@@ -109,3 +111,10 @@ class TreeAppModule_Session extends TreeAppModule
             fun: ( evt, app ) =>
                 #
                 console.log "Export"
+                
+        session_info.menu.push 
+            ico: "img/.png"
+            txt: "Log out"
+            fun: ( evt, app ) =>
+                #
+                console.log "Log out"
