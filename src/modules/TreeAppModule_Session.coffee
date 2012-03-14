@@ -15,6 +15,7 @@ class TreeAppModule_Session extends TreeAppModule
                 
                 #
             menu:[ ]
+            key: [ "Esc" ]
         @actions.push session_info
             
                 
@@ -111,6 +112,7 @@ class TreeAppModule_Session extends TreeAppModule
             fun: ( evt, app ) =>
                 #
                 console.log "Export"
+            key: [ "Ctrl+E" ]
                 
         session_info.menu.push 
             ico: "img/.png"
@@ -118,3 +120,4 @@ class TreeAppModule_Session extends TreeAppModule
             fun: ( evt, app ) =>
                 #
                 console.log "Log out"
+            key: [ "Ctrl+L" ]
