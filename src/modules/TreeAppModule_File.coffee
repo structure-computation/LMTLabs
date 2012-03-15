@@ -63,7 +63,7 @@ class TreeAppModule_File extends TreeAppModule
                             @modules = app.data.modules
                             for m in @modules 
                                 if m instanceof TreeAppModule_Sketch
-                                    m.actions[ 0 ].fun evt, app, file.data
+                                    m.actions[ 2 ].fun evt, app, file.data
 
                 
                     

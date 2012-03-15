@@ -5283,10 +5283,9 @@ class TreeAppModule_Sketch extends TreeAppModule
             txt: "Delete Point"
             ina: _ina
             fun: ( evt, app ) =>
-                if app.selected_view != "EditView" and app.selected_view != "TreeView"
-                    cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
-                    @sketch.mesh.delete_selected_point( cam_info )
-                    app.undo_manager.snapshot()
+                cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
+                @sketch.mesh.delete_selected_point( cam_info )
+                app.undo_manager.snapshot()
                     
             key: [ "Del" ]
             
