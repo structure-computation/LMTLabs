@@ -7,8 +7,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         @name = 'Sketch'
 
         _ina = ( app ) =>
-            #TODO now if canvasmanager is focused
-            app.data.focus.get() == app.treeview?.view_id
+            app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
         
         @actions.push
             ico: "img/mesher.png"
