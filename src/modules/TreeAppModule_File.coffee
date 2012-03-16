@@ -4,6 +4,7 @@ class TreeAppModule_File extends TreeAppModule
         super()
         
         @name = 'File'
+        @visible = true # must be set to false after test
                 
         @actions.push
             ico: "img/orange_folder.png"
