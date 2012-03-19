@@ -85,8 +85,6 @@ class TreeAppModule_Animation extends TreeAppModule
         @actions.push
             mod: app_data.time
             siz: 1
-            fun: ( evt, app ) =>
-                #
                 
                     
     run_timer : ( app ) =>
