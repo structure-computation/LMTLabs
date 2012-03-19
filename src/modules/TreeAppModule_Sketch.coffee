@@ -5216,6 +5216,8 @@ class TreeAppModule_Sketch extends TreeAppModule
             ico: "img/shape.png"
             siz: 1
             txt: "Create Shape"
+            fun: ( evt, app ) ->
+                @sub[ 0 ].fun evt, app
             key: [ "M" ]
         
         mesher_sub.add_sub_action
