@@ -20,7 +20,7 @@ class TreeAppModule_Session extends TreeAppModule
             
                 
         session_info.menu.push 
-            ico: "img/.png"
+            ico: ""
             txt: "Open"
             fun: ( evt, app ) ->
                 @modules = app.data.modules
@@ -29,7 +29,7 @@ class TreeAppModule_Session extends TreeAppModule
                         m.actions[ 0 ].fun evt, app
         
         session_info.menu.push 
-            ico: "img/.png"
+            ico: ""
             txt: "Save"
             fun: ( evt, app ) =>
                 #
@@ -37,7 +37,7 @@ class TreeAppModule_Session extends TreeAppModule
             key: [ "Ctrl+S" ]
                 
         session_info.menu.push 
-            ico: "img/.png"
+            ico: ""
             txt: "Save as"
             fun: ( evt, app ) =>
                 #
@@ -45,7 +45,7 @@ class TreeAppModule_Session extends TreeAppModule
             key: [ "Ctrl+Shift+S" ]
                 
         session_info.menu.push 
-            ico: "img/.png"
+            ico: ""
             txt: "Export"
             fun: ( evt, app ) =>
                 #
@@ -53,7 +53,7 @@ class TreeAppModule_Session extends TreeAppModule
             key: [ "Ctrl+E" ]
                 
         session_info.menu.push 
-            ico: "img/.png"
+            ico: ""
             txt: "Log out"
             fun: ( evt, app ) =>
                 #
