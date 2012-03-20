@@ -5212,15 +5212,17 @@ class TreeAppModule_Sketch extends TreeAppModule
             key: [ "Shift+B" ]
         
                     
-        mesher_sub = @add_action
+        mesher_sub =
             ico: "img/shape.png"
             siz: 1
             txt: "Create Shape"
-            fun: ( evt, app ) ->
-                @sub[ 0 ].fun evt, app
+            sub:
+                prf: "list"
+                act: [ ]
             key: [ "M" ]
+        @actions.push mesher_sub
         
-        mesher_sub.add_sub_action
+        mesher_sub.sub.act.push 
             ico: "img/shape.png"
             siz: 1
             txt: "Create a Square edge"
@@ -5241,7 +5243,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.lines.push [ currentPoint + 3, currentPoint ]
                 app.undo_manager.snapshot()
         
-        mesher_sub.add_sub_action
+        mesher_sub.sub.act.push 
             ico: "img/circle.png"
             siz: 1
             txt: "Create a Circle edge"
@@ -5258,7 +5260,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.lines.push [ currentPoint, currentPoint + 1, currentPoint + 2, currentPoint ]
                 app.undo_manager.snapshot()
                 
-        mesher_sub.add_sub_action
+        mesher_sub.sub.act.push 
             ico: "img/triangle.png"
             siz: 1
             txt: "Create a Triangle edge"

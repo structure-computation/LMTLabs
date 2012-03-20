@@ -9,17 +9,30 @@ class TreeAppModule_Session extends TreeAppModule
             ico: "img/correli.png"
             siz: 2
             txt: "Session information"
-            fun: ( evt, app ) ->
-                menu_container = document.getElementsByClassName("menu_container")[ 0 ]
-                menu_container.classList.toggle "block"
+            sub:
+                prf: "menu"
+                act: [ ]
                 
-                #
-            menu:[ ]
             key: [ "Esc" ]
+
         @actions.push session_info
             
-                
-        session_info.menu.push 
+        test1 =
+            ico: "img/correli.png"
+            txt: "E"
+            fun: ( evt, app ) =>
+                #
+                console.log "E"
+            key: [ "Ctrl+Alt+E" ]
+        test2 =
+            ico: "img/correli.png"
+            txt: "R"
+            fun: ( evt, app ) =>
+                #
+                console.log "R"
+            key: [ "Ctrl+Alt+R" ]
+            
+        session_info.sub.act.push 
             ico: ""
             txt: "Open"
             fun: ( evt, app ) ->
@@ -27,16 +40,22 @@ class TreeAppModule_Session extends TreeAppModule
                 for m in @modules
                     if m instanceof TreeAppModule_File
                         m.actions[ 0 ].fun evt, app
-        
-        session_info.menu.push 
+                    
+            
+            
+        session_info.sub.act.push 
             ico: ""
             txt: "Save"
             fun: ( evt, app ) =>
                 #
                 console.log "Save"
             key: [ "Ctrl+S" ]
+            #testing recursivity
+            sub:
+                prf: "menu"
+                act: [test1, test2 ]
                 
-        session_info.menu.push 
+        session_info.sub.act.push 
             ico: ""
             txt: "Save as"
             fun: ( evt, app ) =>
@@ -44,7 +63,7 @@ class TreeAppModule_Session extends TreeAppModule
                 console.log "Save as"
             key: [ "Ctrl+Shift+S" ]
                 
-        session_info.menu.push 
+        session_info.sub.act.push 
             ico: ""
             txt: "Export"
             fun: ( evt, app ) =>
@@ -52,7 +71,7 @@ class TreeAppModule_Session extends TreeAppModule
                 console.log "Export"
             key: [ "Ctrl+E" ]
                 
-        session_info.menu.push 
+        session_info.sub.act.push 
             ico: ""
             txt: "Log out"
             fun: ( evt, app ) =>

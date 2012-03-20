@@ -58,7 +58,7 @@ class TreeAppModule_File extends TreeAppModule
                             @modules = app.data.modules
                             for m in @modules
                                 if m instanceof TreeAppModule_ImageSet
-                                    m.actions[ 1 ].fun evt, app, file.data
+                                    m.actions[ 2 ].fun evt, app, file.data
                                 
                         else if file.data instanceof Mesh
                             @modules = app.data.modules
