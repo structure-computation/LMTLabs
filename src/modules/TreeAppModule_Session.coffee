@@ -17,6 +17,16 @@ class TreeAppModule_Session extends TreeAppModule
 
         @actions.push session_info
             
+        session_info.sub.act.push 
+            ico: ""
+            txt: "Open"
+            fun: ( evt, app ) ->
+                @modules = app.data.modules
+                for m in @modules
+                    if m instanceof TreeAppModule_File
+                        m.actions[ 0 ].fun evt, app
+                    
+            
         test1 =
             ico: "img/correli.png"
             txt: "E"
@@ -31,17 +41,6 @@ class TreeAppModule_Session extends TreeAppModule
                 #
                 console.log "R"
             key: [ "Ctrl+Alt+R" ]
-            
-        session_info.sub.act.push 
-            ico: ""
-            txt: "Open"
-            fun: ( evt, app ) ->
-                @modules = app.data.modules
-                for m in @modules
-                    if m instanceof TreeAppModule_File
-                        m.actions[ 0 ].fun evt, app
-                    
-            
             
         session_info.sub.act.push 
             ico: ""
