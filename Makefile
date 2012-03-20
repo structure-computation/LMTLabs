@@ -4,18 +4,29 @@ all: compilation
 	xdotool search "__CorreliOnline__" windowactivate key F5 || ${browser} html/CorreliOnline.html
 
 # launch with server
-srv: compilation
-	make -C Soja server
-	Soja/server/soja_server --port=8888 --xdotoolcmd='search __CorreliOnline__ windowactivate key F5' --browsercmd=${browser} --start-page=html/CorreliOnline.html
+srv: compilation Soda
+	make -C Soda
+	Soda/soda -cp Soda/Celo
+
+Soda:
+	git clone git@sc1.ens-cachan.fr:Sodat Soda
+
+Soja:
+	git clone git@github.com:hleclerc/Soja.git Soja
 
 conv:
 	metil_comp -I../LMT/include conversion/unv2js.cpp
 
-#.PHONY: Soja
-Soja:
-	git clone git@github.com:hleclerc/Soja.git Soja
+html/plugins: plugins
+	ln -sf `pwd`/plugins html/
+
+html/gen: gen
+	ln -sf `pwd`/gen html/
+
+html/gen/Soja: Soja html/gen
+	ln -sf `pwd`/Soja html/gen/
 
 .PHONY: compilation
-compilation: Soja
+compilation: html/gen/Soja html/plugins
 	make -C Soja compilation
 	python bin/make.py
