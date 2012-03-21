@@ -6,7 +6,7 @@ all: compilation
 # launch with server
 srv: compilation Soda
 	make -C Soda
-	Soda/soda -cp Soda/Celo
+	Soda/soda --start-page /CorreliOnline.html
 
 Soda:
 	git clone git@sc1.ens-cachan.fr:Sodat Soda
@@ -17,16 +17,9 @@ Soja:
 conv:
 	metil_comp -I../LMT/include conversion/unv2js.cpp
 
-html/plugins: plugins
-	ln -sf `pwd`/plugins html/
-
-html/gen: gen
-	ln -sf `pwd`/gen html/
-
-html/gen/Soja: Soja html/gen
-	ln -sf `pwd`/Soja html/gen/
-
 .PHONY: compilation
-compilation: html/gen/Soja html/plugins
+compilation:
 	make -C Soja compilation
+	rm -rf html/Soja
+	ln -s `pwd`/Soja/gen html/Soja
 	python bin/make.py
