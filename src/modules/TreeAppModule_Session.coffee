@@ -27,21 +27,6 @@ class TreeAppModule_Session extends TreeAppModule
                         m.actions[ 0 ].fun evt, app
                     
             
-        test1 =
-            ico: "img/correli.png"
-            txt: "E"
-            fun: ( evt, app ) =>
-                #
-                console.log "E"
-            key: [ "Ctrl+Alt+E" ]
-        test2 =
-            ico: "img/correli.png"
-            txt: "R"
-            fun: ( evt, app ) =>
-                #
-                console.log "R"
-            key: [ "Ctrl+Alt+R" ]
-            
         session_info.sub.act.push 
             ico: ""
             txt: "Save"
@@ -49,11 +34,28 @@ class TreeAppModule_Session extends TreeAppModule
                 #
                 console.log "Save"
             key: [ "Ctrl+S" ]
-            #testing recursivity
+            
+        test1 =
+            txt: "PDF"
+            fun: ( evt, app ) =>
+                #
+                console.log "PDF"
             sub:
-                prf: "menu"
-                act: [test1, test2 ]
-                
+                prf: "list"
+                act: [ ]
+            key: [ "Ctrl+Alt+E" ]
+        test2 =
+            txt: "PNG"
+            fun: ( evt, app ) =>
+                #
+                console.log "PNG"
+            key: [ "Ctrl+Alt+R" ]
+            
+        test3 =
+            mod: new Str "name"
+            siz: 1
+            key: [ "Ctrl+Alt+T" ]
+#                 
         session_info.sub.act.push 
             ico: ""
             txt: "Save as"
@@ -61,6 +63,10 @@ class TreeAppModule_Session extends TreeAppModule
                 #
                 console.log "Save as"
             key: [ "Ctrl+Shift+S" ]
+            #testing recursivity
+            sub:
+                prf: "menu"
+                act: [test1, test2, test3 ]
                 
         session_info.sub.act.push 
             ico: ""
