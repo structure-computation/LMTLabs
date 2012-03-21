@@ -20,6 +20,6 @@ conv:
 .PHONY: compilation
 compilation:
 	make -C Soja compilation
-	rm -rf html/Soja
-	ln -s `pwd`/Soja/gen html/Soja
+	mkdir -p html/Soja
+	install Soja/gen/* html/Soja
 	python bin/make.py
