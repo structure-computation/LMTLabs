@@ -7,7 +7,9 @@ class TreeAppModule_File extends TreeAppModule
         @visible = true # must be set to false after test
                 
         _ina = ( app ) =>
-            app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
+            app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id and 
+            app.data.focus.get() != app.treeview.view_id
+            
         @actions.push
             ico: "img/orange_folder.png"
             siz: 2
