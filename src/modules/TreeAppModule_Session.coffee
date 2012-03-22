@@ -25,6 +25,7 @@ class TreeAppModule_Session extends TreeAppModule
                 for m in @modules
                     if m instanceof TreeAppModule_File
                         m.actions[ 0 ].fun evt, app
+            key: [ "Shift+0" ]
                     
             
         session_info.sub.act.push 

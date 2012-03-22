@@ -4,7 +4,7 @@ class TreeAppModule_File extends TreeAppModule
         super()
         
         @name = 'File'
-        @visible = true # must be set to false after test
+        @visible = false
                 
         _ina = ( app ) =>
             app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id and 
@@ -63,7 +63,7 @@ class TreeAppModule_File extends TreeAppModule
                             @modules = app.data.modules
                             for m in @modules
                                 if m instanceof TreeAppModule_ImageSet
-                                    m.actions[ 2 ].fun evt, app, file.data
+                                    m.actions[ 1 ].fun evt, app, file.data
                                 
                         else if file.data instanceof Mesh
                             @modules = app.data.modules
@@ -78,7 +78,7 @@ class TreeAppModule_File extends TreeAppModule
                 
                 app.active_key.set false
                 
-            key: [ "Shift+O" ]
+#             key: [ "Shift+O" ]
 
             onPopupClose: ( app ) =>
                 app.active_key.set true
