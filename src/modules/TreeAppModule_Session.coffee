@@ -36,14 +36,11 @@ class TreeAppModule_Session extends TreeAppModule
             key: [ "Ctrl+S" ]
             
         test1 =
-            txt: "PDF"
-            fun: ( evt, app ) =>
-                #
-                console.log "PDF"
+            mod: new Str "name"
             sub:
                 prf: "list"
                 act: [ ]
-            key: [ "Ctrl+Alt+E" ]
+            key: [ "Ctrl+Alt+T" ]
         test2 =
             txt: "PNG"
             fun: ( evt, app ) =>
@@ -52,12 +49,14 @@ class TreeAppModule_Session extends TreeAppModule
             key: [ "Ctrl+Alt+R" ]
             
         test3 =
-            mod: new Str "name"
+            txt: "PDF"
             siz: 1
-            key: [ "Ctrl+Alt+T" ]
+            fun: ( evt, app ) =>
+                #
+                console.log "PDF"
+            key: [ "Ctrl+Alt+E" ]
 #                 
-        session_info.sub.act.push 
-            ico: ""
+        session_info.sub.act.push
             txt: "Save as"
             fun: ( evt, app ) =>
                 #
