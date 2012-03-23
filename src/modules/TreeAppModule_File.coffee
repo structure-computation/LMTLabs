@@ -46,9 +46,15 @@ class TreeAppModule_File extends TreeAppModule
                 mesh.data.children.push mes1
                 
 
+                dz = new File ImgItem, "explo_dz_alpha.png"
+                inn = new File ImgItem, "explo_in_alpha.png"
+                re = new File ImgItem, "explo_re_alpha.png"
                 res0 = new File ImgItem, "res_orig.png"
                 res1 = new File ImgItem, "res_depX.png"
                 res2 = new File ImgItem, "res_depY.png"
+                result.data.children.push dz
+                result.data.children.push inn
+                result.data.children.push re
                 result.data.children.push res0
                 result.data.children.push res1
                 result.data.children.push res2
