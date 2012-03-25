@@ -37,7 +37,27 @@ class TreeAppModule_Sketch extends TreeAppModule
                 app.undo_manager.snapshot()
             key: [ "Shift+C" ]
         
+        @actions.push
+            ico: "img/cube3d_32.png"
+            siz: 1
+            txt: "ref"
+            ina: _ina
+            fun: ( evt, app ) =>
+                @sketch = @add_item_depending_selected_tree app, SketchItem
+                @sketch.mesh.set_mv new MoveScheme_3D
+                load_ref @sketch.mesh
                 
+        @actions.push
+            ico: "img/cube3d_32.png"
+            siz: 1
+            txt: "def"
+            ina: _ina
+            fun: ( evt, app ) =>
+                @sketch = @add_item_depending_selected_tree app, SketchItem
+                @sketch.mesh.set_mv new MoveScheme_3D
+                load_def @sketch.mesh
+
+        
         @actions.push
             ico: "img/cube3d_32.png"
             siz: 1
