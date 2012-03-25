@@ -7,11 +7,15 @@ class TreeAppModule_Animation extends TreeAppModule
         
         @name = 'Time'
         
-
+        _ina = ( app ) =>
+            app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id and 
+            app.data.focus.get() != app.treeview.view_id
+            
         @actions.push
             ico: "img/first_24.png"
             siz: 1
             ord: false
+            ina: _ina
             txt: "Go to First Image"
             fun: ( evt, app ) =>
                 #
@@ -23,6 +27,7 @@ class TreeAppModule_Animation extends TreeAppModule
             ico: "img/rewind_24.png"
             siz: 1
             ord: false
+            ina: _ina
             txt: "Rewind"
             fun: ( evt, app ) =>
                 #
@@ -35,6 +40,7 @@ class TreeAppModule_Animation extends TreeAppModule
             ico: "img/play_24.png"
             siz: 1
             ord: false
+            ina: _ina
             txt: "Play"
             fun: ( evt, app ) =>
                 #
@@ -50,6 +56,7 @@ class TreeAppModule_Animation extends TreeAppModule
             ico: "img/pause_24.png"
             siz: 1
             ord: false
+            ina: _ina
             txt: "Pause"
             fun: ( evt, app ) =>
                 #
@@ -61,6 +68,7 @@ class TreeAppModule_Animation extends TreeAppModule
             ico: "img/forward_24.png"
             siz: 1
             ord: false
+            ina: _ina
             txt: "Forward"
             fun: ( evt, app ) =>
                 #
@@ -74,6 +82,7 @@ class TreeAppModule_Animation extends TreeAppModule
         @actions.push
             ico: "img/last_24.png"
             siz: 1
+            ina: _ina
             txt: "Go to Last Image"
             fun: ( evt, app ) =>
                 app.data.time.set app.data.time._max.get()

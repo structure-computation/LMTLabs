@@ -6,14 +6,18 @@ class TreeAppModule_Sketch extends TreeAppModule
         
         @name = 'Sketch'
 
+        _ina_cm = ( app ) =>
+            app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id and 
+            app.data.focus.get() != app.treeview.view_id
+        
         _ina = ( app ) =>
             app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
-        
+            
         @actions.push
             ico: "img/mesher.png"
             siz: 1
             txt: "Mesher"
-            ina: _ina
+            ina: _ina_cm
             fun: ( evt, app ) =>
                 
                 @mesher = @add_item_depending_selected_tree app, MesherItem
@@ -26,12 +30,8 @@ class TreeAppModule_Sketch extends TreeAppModule
             ico: "img/curve.png"
             siz: 1
             txt: "Transform line to curve"
-            ina: _ina
+            ina: _ina_cm
             fun: ( evt, app ) =>
-#                 session = @data.selected_sessionx()
-#                 layout = @layouts[ session.model_id ]
-#                 for panel_id in @data.selected_canvas_pan when layout._pan_vs_id[ panel_id ]?
-#                     layout._pan_vs_id[ panel_id ]
                 cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
                 @sketch.mesh.make_curve_line_from_selected(cam_info)
                 app.undo_manager.snapshot()
@@ -62,7 +62,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ico: "img/cube3d_32.png"
             siz: 1
             txt: "Create complex 3D shape"
-            ina: _ina
+            ina: _ina_cm
             fun: ( evt, app ) =>
                 #
                 @sketch = @add_item_depending_selected_tree app, SketchItem
@@ -5228,7 +5228,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ico: "img/break.png"
             siz: 1
             txt: "Break curve to line"
-            ina: _ina
+            ina: _ina_cm
             fun: ( evt, app ) =>
                 cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
                 @sketch.mesh.break_line_from_selected(cam_info)
@@ -5240,7 +5240,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ico: "img/shape.png"
             siz: 1
             txt: "Create Shape"
-            ina: _ina
+            ina: _ina_cm
             sub:
                 prf: "list"
                 act: [ ]
@@ -5251,7 +5251,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ico: "img/shape.png"
             siz: 1
             txt: "Create a Square edge"
-            ina: _ina
+            ina: _ina_cm
             fun: ( evt, app ) =>
                 
                 @sketch = @add_item_depending_selected_tree app, SketchItem
@@ -5273,7 +5273,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ico: "img/circle.png"
             siz: 1
             txt: "Create a Circle edge"
-            ina: _ina
+            ina: _ina_cm
             fun: ( evt, app ) =>
 
                 @sketch = @add_item_depending_selected_tree app, SketchItem
@@ -5291,7 +5291,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ico: "img/triangle.png"
             siz: 1
             txt: "Create a Triangle edge"
-            ina: _ina
+            ina: _ina_cm
             fun: ( evt, app ) =>
 
                 @sketch = @add_item_depending_selected_tree app, SketchItem

@@ -4,10 +4,12 @@ class TreeAppModule_File extends TreeAppModule
         super()
         
         @name = 'File'
-        @visible = true # must be set to false after test
+        @visible = false
                 
         _ina = ( app ) =>
-            app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
+            app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id and 
+            app.data.focus.get() != app.treeview.view_id
+            
         @actions.push
             ico: "img/orange_folder.png"
             siz: 2
@@ -44,9 +46,15 @@ class TreeAppModule_File extends TreeAppModule
                 mesh.data.children.push mes1
                 
 
+                dz = new File ImgItem, "explo_dz_alpha.png"
+                inn = new File ImgItem, "explo_in_alpha.png"
+                re = new File ImgItem, "explo_re_alpha.png"
                 res0 = new File ImgItem, "res_orig.png"
                 res1 = new File ImgItem, "res_depX.png"
                 res2 = new File ImgItem, "res_depY.png"
+                result.data.children.push dz
+                result.data.children.push inn
+                result.data.children.push re
                 result.data.children.push res0
                 result.data.children.push res1
                 result.data.children.push res2
@@ -61,7 +69,7 @@ class TreeAppModule_File extends TreeAppModule
                             @modules = app.data.modules
                             for m in @modules
                                 if m instanceof TreeAppModule_ImageSet
-                                    m.actions[ 2 ].fun evt, app, file.data
+                                    m.actions[ 1 ].fun evt, app, file.data
                                 
                         else if file.data instanceof Mesh
                             @modules = app.data.modules
@@ -76,7 +84,7 @@ class TreeAppModule_File extends TreeAppModule
                 
                 app.active_key.set false
                 
-            key: [ "Shift+O" ]
+#             key: [ "Shift+O" ]
 
             onPopupClose: ( app ) =>
                 app.active_key.set true
