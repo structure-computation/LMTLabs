@@ -5,7 +5,17 @@ class ShapeFunctionItem extends TreeItem
         
         # attributes
         @add_attr
-            code: new StrLanguage "Class Hello World\n   function this\n function that"
+            code: new StrLanguage "
+Class Fissure\n
+    pos := Point( 0, 4 )\n
+    dir := Point( 0, -1 )\n
+    def shape_func( x )\n
+        theta  := ...\n
+        radius := ...\n
+        return [\n
+            heaviside( radius ),\n
+            ...\n
+        ]", "ruby"
         
         # default values
         @_name.set name
