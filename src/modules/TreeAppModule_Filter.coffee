@@ -23,7 +23,11 @@ class TreeAppModule_Filter extends TreeAppModule
             siz: 1
             ina: _ina
             txt: "Cut 3D shape with a plan"
-            fun: ( evt, app ) ->
+            fun: ( evt, app ) =>
                 console.log "cutting plan"
+                selected_items = app.data.get_selected_tree_items()
+                cutting_plan = @add_item_depending_selected_tree app, CuttingPlanItem
+                @child_in_selected app, CuttingPlanItem, selected_items, cutting_plan
+                app.undo_manager.snapshot()
             key: [ "Shift+P" ]
             

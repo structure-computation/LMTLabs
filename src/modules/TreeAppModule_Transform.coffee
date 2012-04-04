@@ -14,7 +14,7 @@ class TreeAppModule_Transform extends TreeAppModule
                 #
                 selected_items = app.data.get_selected_tree_items()
                 @transf = @add_item_depending_selected_tree app, TransformItem
-                @child_in_selected app, TransformItem, selected_items
+                @child_in_selected app, TransformItem, selected_items, @transf
                 app.undo_manager.snapshot()
                 
                 

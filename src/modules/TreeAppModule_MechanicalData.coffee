@@ -26,8 +26,10 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Constrain a border"
             fun: ( evt, app ) ->
                 console.log "now select a constrain border"
-                app.selected_canvas_inst()?[ 0 ]?.cm.add_point_on_line.toggle()
-                app.selected_canvas_inst()?[ 0 ]?.cm.draw() #TODO we should avoid using draw cause onchange method should be call with previous line
+                cmpi = app.all_canvas_inst()
+                for el in cmpi
+                    el.cm.add_point_on_line.toggle()
+                    el.cm.draw() #TODO we should avoid using draw cause onchange method should be call with previous line
                 app.undo_manager.snapshot()
 
             key: [ "Shift+G" ]
@@ -39,8 +41,10 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Make a border out of any constrain"
             fun: ( evt, app ) ->
                 console.log "now select a free border"
-                app.selected_canvas_inst()?[ 0 ]?.cm.add_point_on_line.toggle()
-                app.selected_canvas_inst()?[ 0 ]?.cm.draw()
+                cmpi = app.all_canvas_inst()
+                for el in cmpi
+                    el.cm.add_point_on_line.toggle()
+                    el.cm.draw() #TODO we should avoid using draw cause onchange method should be call with previous line
                 app.undo_manager.snapshot()
 
             key: [ "Shift+F" ]

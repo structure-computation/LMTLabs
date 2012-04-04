@@ -122,7 +122,7 @@ class TreeAppModule_Session extends TreeAppModule
             text = 
             "Correlation used " + ic._children.length + " pictures<br>
             From picture name " + ic._children[ 0 ].img.src + " to " + ic._children[ ic._children.length - 1 ].img.src + "<br>
-            Updates have been done on " + ic._children[ 0 ].img.src + "<br>
+            Updates have been done on " + ic._children[ 0 ].img.src + "<br><br>
             With following parameters :<br>
         Prefft : " + correlation.pre_fft.get() + "<br>
         Luminosity : " + correlation.luminosity_correction.get() + "<br>
@@ -136,22 +136,22 @@ class TreeAppModule_Session extends TreeAppModule
                 nodeName  : "div"
                 txt       : text
                 
-#         Correlation used 4 pictures
-#         From picture name : composite00 to composite04 with updates on : composite03
-#         ZOI
-#         P1 : 213.4 ; 286.1
-#         P2 : 829.3 ; 729.9
-#         Width : 615.9
-#         Height : 443.8
-# 
-#         With following parameters :
-#         prefft on
-#         luminance on
-#         norm 2 u
-#         norm value : 10e-3
-#         Number max of iterations : 50
-#         Multi resolution : 3
-#         Nodes X : 40 with a size of 16
-#         Nodes Y : 29 with a size of 16
-
-        
+            for result in correlation._children when result instanceof ResultItem
+                break;
+                
+            for displacement in result._children when displacement instanceof MeshItem
+                break;
+            
+            disp_txt = ""
+            for p in displacement.mesh_item.points
+                disp_txt += "(" + p.pos.get() + "),"
+                
+            displacement_title = new_dom_element
+                parentNode: parent
+                nodeName  : "span"
+                txt       : "Displacement :<br>"
+                
+            displacement_points = new_dom_element
+                parentNode: parent
+                nodeName  : "textarea"
+                txt       : disp_txt
