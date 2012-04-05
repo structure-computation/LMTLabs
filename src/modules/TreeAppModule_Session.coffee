@@ -54,12 +54,12 @@ class TreeAppModule_Session extends TreeAppModule
                 console.log "Save"
             key: [ "Ctrl+S" ]
             
-        test1 =
-            mod: new Str "name"
-            sub:
-                prf: "list"
-                act: [ ]
-            key: [ "Ctrl+Alt+T" ]
+#         test1 =
+#             mod: new Str "name"
+#             sub:
+#                 prf: "list"
+#                 act: [ ]
+#             key: [ "Ctrl+Alt+T" ]
         test2 =
             txt: "PNG"
             fun: ( evt, app ) =>
@@ -84,7 +84,7 @@ class TreeAppModule_Session extends TreeAppModule
             #testing recursivity
             sub:
                 prf: "menu"
-                act: [test1, test2, test3 ]
+                act: [ test2, test3 ]
                 
         session_info.sub.act.push 
             ico: ""
