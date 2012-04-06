@@ -14,10 +14,13 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             siz: 2
             ina: _ina
             txt: "Configure comportemental law"
-            fun: ( evt, app ) ->
+            fun: ( evt, app ) =>
+                selected_items = app.data.get_selected_tree_items()
+                physics = @add_item_depending_selected_tree app, PhysicsItem
+                app.undo_manager.snapshot()
                 console.log "comportemental law"
                 
-#             key: [ "Shift+L" ]
+            key: [ "Shift+L" ]
 
         @actions.push
             ico: "img/border_constrain.png"
