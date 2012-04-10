@@ -5,7 +5,7 @@ class PhysicsItem extends TreeItem
         
         # default values
         @_name.set "Physics"
-        @_ico.set "img/cutting_plan.png"
+        @_ico.set "img/physics_16.png"
         @_viewable.set false
         
         @add_child new MaterialItem

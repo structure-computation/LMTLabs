@@ -5,7 +5,7 @@ class MaterialItem extends TreeItem
         
         # default values
         @_name.set "Material"
-        @_ico.set "img/cutting_plan.png"
+        @_ico.set "img/material_16.png"
         @_viewable.set false
         
         # attributes
@@ -34,26 +34,25 @@ Class Steel\n
     parse_code_onchange: =>
         # first delete all variables from
         for attr in @lst_variables
-            @rem_attr attr.get()
+            @rem_attr attr.get() # focus seems to be loose when deleting      
         @lst_variables.clear()
         
         # then search all variables of type string := value
-        reg = /(\w+?) := ([0-9\.]+)/g # option g select all occurrence
+        reg = /(\w+?) ?:= ?([0-9\.]+)/g # option g select all occurrence
         i = 0
         while reg.exec @code.get()
-            if i > 1001
-                console.error 'Too much variable'
+            if i > 1000
+                console.error 'Too much variables'
                 break
-            console.log 'variable ',  RegExp.$1 ,' founded, value :', RegExp.$2
+#             console.log 'variable ',  RegExp.$1 ,' founded, value :', RegExp.$2
             variable = RegExp.$1
             variable_value = parseFloat RegExp.$2
-            
+            console.log variable_value
             # add founded variable as attributes
-            @lst_variables.push variable
             if not @[ variable ]?                                 # if variable doesn't exist
                 @add_attr variable, variable_value
-                console.log @[ variable ].get()
+                @lst_variables.push variable
+                
 #             else if @[ variable ].get() != variable_value       # actualise value if it exist
 #                 @[ variable ].set variable_value
             i++
-        true
