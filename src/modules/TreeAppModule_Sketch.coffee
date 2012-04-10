@@ -44,7 +44,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ina: _ina
             fun: ( evt, app ) =>
                 @sketch = @add_item_depending_selected_tree app, SketchItem
-                @sketch.mesh.set_mv new MoveScheme_3D
+                @sketch.mesh.move_scheme = MoveScheme_3D
                 load_ref @sketch.mesh
                 
         @actions.push
@@ -54,7 +54,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ina: _ina
             fun: ( evt, app ) =>
                 @sketch = @add_item_depending_selected_tree app, SketchItem
-                @sketch.mesh.set_mv new MoveScheme_3D
+                @sketch.mesh.move_scheme = MoveScheme_3D
                 load_def @sketch.mesh
 
         
@@ -66,7 +66,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             fun: ( evt, app ) =>
                 #
                 @sketch = @add_item_depending_selected_tree app, SketchItem
-                @sketch.mesh.set_mv new MoveScheme_3D
+                @sketch.mesh.move_scheme = MoveScheme_3D
 
                 mesh = @sketch.mesh
                 
@@ -5253,10 +5253,9 @@ class TreeAppModule_Sketch extends TreeAppModule
             txt: "Create a Square edge"
             ina: _ina_cm
             fun: ( evt, app ) =>
-                
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                 
-                @sketch.mesh.set_mv new MoveScheme_2D
+                @sketch.mesh.move_scheme = MoveScheme_2D
                 currentPoint = @sketch.mesh.points.length
                 
                 for coord in [ [ -0.33, -0.333 ], [ 0.33, -0.333 ], [ 0.33, 0.333 ], [ -0.33, 0.333 ] ]

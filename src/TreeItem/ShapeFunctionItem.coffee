@@ -27,4 +27,7 @@ Class Fissure\n
         
     sub_canvas_items: ->
         [  ]
-       
+
+    on_mouse_down: ( cm, evt ) ->
+        e = cm._get_movable_entities 0
+        true
