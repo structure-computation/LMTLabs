@@ -4,7 +4,7 @@ class PickedZoneItem extends TreeItem
         super()
         
         # default values
-        @_name.set "Physics"
+        @_name.set "Picked Zone"
         @_ico.set "img/cutting_plan.png"
         @_viewable.set false
         
