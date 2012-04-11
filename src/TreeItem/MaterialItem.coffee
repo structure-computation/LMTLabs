@@ -38,7 +38,7 @@ Class Steel\n
         @lst_variables.clear()
         
         # then search all variables of type string := value
-        reg = /(\w+?) ?:= ?([0-9\.]+)/g # option g select all occurrence
+        reg = /(\w+?) *:= *([0-9\.]+)/g # option g select all occurrence
         i = 0
         while reg.exec @code.get()
             if i > 1000

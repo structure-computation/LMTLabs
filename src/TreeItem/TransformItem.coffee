@@ -80,7 +80,12 @@ class TransformItem extends TreeItem
                     ch.z_index()
         
         lst.push @transform
+        
         return lst
         
-    
+    on_mouse_down: ( cm, evt, pos, b ) ->
+        @transform.on_mouse_down cm, evt, pos, b
+            
+    on_mouse_move: ( cm, evt, pos, b ) ->
+        @transform.on_mouse_move cm, evt, pos, b
     
