@@ -24,3 +24,9 @@ class CuttingPlanItem extends TreeItem
     sub_canvas_items: ->
         [ @cutting_plan ]
     
+        
+    on_mouse_down: ( cm, evt, pos, b ) ->
+        @cutting_plan.on_mouse_down cm, evt, pos, b
+                
+    on_mouse_move: ( cm, evt, pos, b ) ->
+        @cutting_plan.on_mouse_move cm, evt, pos, b

@@ -50,9 +50,7 @@ Class Steel\n
             console.log variable_value
             # add founded variable as attributes
             if not @[ variable ]?                                 # if variable doesn't exist
-                @add_attr variable, variable_value
+                @add_attr variable, [ variable_value, false ]
                 @lst_variables.push variable
                 
-#             else if @[ variable ].get() != variable_value       # actualise value if it exist
-#                 @[ variable ].set variable_value
             i++
