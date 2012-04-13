@@ -9,7 +9,9 @@ class BorderConstrainItem extends TreeItem
         @_viewable.set true
         
         # behavior
-        @_selected = new Lst # references of selected points / lines / ...
+        @_selected = new Lst # references of selected lines ...
+        @_pre_sele = new Lst # references of selected lines ...
+        @border = new Border 'constrain'
         
     accept_child: ( ch ) ->
         ch instanceof DiscretizationItem or
@@ -17,36 +19,60 @@ class BorderConstrainItem extends TreeItem
         ch instanceof MeshItem
         
     sub_canvas_items: ->
-        [  ]
-
+        [ @border ]
     
     on_mouse_down: ( cm, evt, pos, b ) ->
-        delete @_movable_entity
         if b == "LEFT"
             if cm._flat?
+                res = []
                 for el in cm._flat when el instanceof Mesh
                     if el.lines?
                         # closest entity under mouse
-                        res = []
                         @get_movable_entities res, cm.cam_info, pos, el
-                        if res.length
-                            res.sort ( a, b ) -> b.dist - a.dist
-                            @_movable_entity = res[ 0 ].item
-                            @_may_need_snapshot = true
-                            
-                            if evt.ctrlKey # add / rem selection
-                                @_selected.toggle_ref @_movable_entity
-                                if not @_selected.contains_ref @_movable_entity
-                                    delete @_movable_entity
-                            else
-                                @_selected.clear()
-                                @_selected.push @_movable_entity
-                                @_movable_entity.beg_click pos
-                                
-                            return true
+                if res.length
+                    res.sort ( a, b ) -> b.dist - a.dist
+                    @_may_need_snapshot = true
+                    line = res[ 0 ].item[ 0 ]
+                    if line not in @_selected
+                        console.log "line founded"
+                        @_selected.push line
+                        l = @border.points.length
+                        
+                        #We could bind P0pos to actual mesh (so if mesh move, P0 will move too)
+                        P0   = res[ 0 ].item[ 1 ]
+                        P1   = res[ 0 ].item[ 2 ]
+                        @border.points.push P0
+                        @border.points.push P1
+                        @border.lines.push [ l, l + 1 ]
+                    else
+                        console.log "line deleted"
+                        ind = @_selected.indexOf line
+                        @_selected.splice ind, 1
+                        #TODO delete line in @border (code is in mesh.coffee)
+                    
+                    return true
                     
         return false
-
+        
+    on_mouse_move: ( cm, evt, pos, b ) ->
+        @_pre_sele.clear()
+        if cm._flat?
+            res = []
+            for el in cm._flat when el instanceof Mesh
+                if el.lines?
+                    # closest entity under mouse
+                    @get_movable_entities res, cm.cam_info, pos, el
+        if res.length
+            res.sort ( a, b ) -> b.dist - a.dist
+            @_may_need_snapshot = true
+            line = res[ 0 ].item[ 0 ]
+            P0   = res[ 0 ].item[ 1 ]
+            P1   = res[ 0 ].item[ 2 ]
+            if line not in @_pre_sele
+                @_pre_sele.push line
+                l = @border.points.length
+           
+            
     get_movable_entities: ( res, info, pos, el ) ->
         x = pos[ 0 ]
         y = pos[ 1 ]
@@ -59,27 +85,10 @@ class BorderConstrainItem extends TreeItem
             
             point = @_get_line_inter proj, P0, P1, x, y, el
             if point?
-                P = [
-                    el.points[ P0 ].pos[ 0 ].get() + point[ 0 ] * point[ 3 ],
-                    el.points[ P0 ].pos[ 1 ].get() + point[ 1 ] * point[ 3 ],
-                    el.points[ P0 ].pos[ 2 ].get() + point[ 2 ] * point[ 3 ]
-                ]
-                console.log "founded ", li
-        
-                _selected.push li
-#                     os = el.points.length
-# 
-#                     @add_point P
-#                         
-#                     n = el.points[ el.points.length-1 ]
-#                     ol = P1
-#                     li[ 1 ]._set os
-#                     el.lines.push [ os, ol ]
-#                     
-#                     res.push
-#                         item: n
-#                         dist: 0
-#                         type: "Mesh"
+                res.push
+                    item: [ li, el.points[ P0 ].pos, el.points[ P1 ].pos ]
+                    dist: 0
+                    type: "Mesh"
                 break
     
     _get_line_inter: ( proj, P0, P1, x, y, el ) ->
