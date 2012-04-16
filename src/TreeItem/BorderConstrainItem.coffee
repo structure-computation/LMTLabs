@@ -2,13 +2,15 @@
 class BorderConstrainItem extends TreeItem
     constructor: ->
         super()
-        
+
+        @add_attr
+            border: new Border 'constrain'
+            
         # default values
         @_name.set "Constrain border"
         @_ico.set "img/border_constrain_16.png"
         @_viewable.set true
         
-        @border = new Border 'constrain'
         
     accept_child: ( ch ) ->
         ch instanceof DiscretizationItem or
