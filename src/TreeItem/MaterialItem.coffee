@@ -32,9 +32,13 @@ Class Steel\n
         []
     
     parse_code_onchange: =>
-        # first delete all variables from
+        # first delete all variables from textarea
         for attr in @lst_variables
-            @rem_attr attr.get() # focus seems to be loose when deleting      
+            @rem_attr attr.get() # focus seems to be loose when deleting
+            # rem_attr that make loosing focus
+#           delete this[ name ]
+#           if signal_change
+#              @_signal_change()
         @lst_variables.clear()
         
         # then search all variables of type string := value

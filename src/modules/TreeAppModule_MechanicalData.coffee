@@ -18,7 +18,6 @@ class TreeAppModule_MechanicalData extends TreeAppModule
                 selected_items = app.data.get_selected_tree_items()
                 physics = @add_item_depending_selected_tree app, PhysicsItem
                 app.undo_manager.snapshot()
-                console.log "comportemental law"
                 
             key: [ "Shift+L" ]
 
@@ -31,14 +30,6 @@ class TreeAppModule_MechanicalData extends TreeAppModule
                 selected_items = app.data.get_selected_tree_items()
                 constrain_border = @add_item_depending_selected_tree app, BorderConstrainItem
                 app.undo_manager.snapshot()
-                
-#                 console.log "now select a constrain border"
-#                 cmpi = app.all_canvas_inst()
-#                 for el in cmpi
-#                     el.cm.add_point_on_line.toggle()
-#                     el.cm.draw() #TODO we should avoid using draw cause onchange method should be call with previous line
-#                 app.undo_manager.snapshot()
-
             key: [ "Shift+G" ]
             
         @actions.push
@@ -50,12 +41,6 @@ class TreeAppModule_MechanicalData extends TreeAppModule
                 selected_items = app.data.get_selected_tree_items()
                 free_border = @add_item_depending_selected_tree app, BorderFreeItem
                 app.undo_manager.snapshot()
-#                 console.log "now select a free border"
-#                 cmpi = app.all_canvas_inst()
-#                 for el in cmpi
-#                     el.cm.add_point_on_line.toggle()
-#                     el.cm.draw() #TODO we should avoid using draw cause onchange method should be call with previous line
-#                 app.undo_manager.snapshot()
 
             key: [ "Shift+F" ]
             
