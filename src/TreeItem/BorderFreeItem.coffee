@@ -7,7 +7,7 @@ class BorderFreeItem extends TreeItem
             border: new Border 'free'
         
         # default values
-        @_name.set "Free border"
+        @_name.set "Free boundary"
         @_ico.set "img/border_free_16.png"
         @_viewable.set true
         

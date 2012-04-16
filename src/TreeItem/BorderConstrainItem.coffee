@@ -4,10 +4,13 @@ class BorderConstrainItem extends TreeItem
         super()
 
         @add_attr
-            border: new Border 'constrain'
+            border       : new Border 'constrain_displacement'
+            boundary_law :
+                x : 0
+                y : 0
             
         # default values
-        @_name.set "Constrain border"
+        @_name.set "Constrain boundary"
         @_ico.set "img/border_constrain_16.png"
         @_viewable.set true
         
