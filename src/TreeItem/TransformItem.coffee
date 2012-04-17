@@ -89,3 +89,5 @@ class TransformItem extends TreeItem
     on_mouse_move: ( cm, evt, pos, b ) ->
         @transform.on_mouse_move cm, evt, pos, b
     
+    get_movable_entities: ( res, info, pos, phase ) ->
+        @transform.get_movable_entities res, info, pos, phase

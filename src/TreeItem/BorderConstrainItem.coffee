@@ -1,10 +1,10 @@
 #
 class BorderConstrainItem extends TreeItem
-    constructor: ->
+    constructor: ( constrain_type = "constrain_displacement" ) ->
         super()
 
         @add_attr
-            border       : new Border 'constrain_displacement'
+            border       : new Border constrain_type
             boundary_law :
                 x : 0
                 y : 0

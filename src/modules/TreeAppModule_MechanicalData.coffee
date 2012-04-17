@@ -22,10 +22,32 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             key: [ "Shift+L" ]
 
         @actions.push
-            ico: "img/border_constrain.png"
+            ico: "img/border_constrain_displacement.png"
             siz: 1
             ina: _ina
-            txt: "Constrain a border"
+            txt: "Constrain boundaries with displacement"
+            fun: ( evt, app ) =>
+                selected_items = app.data.get_selected_tree_items()
+                constrain_border = @add_item_depending_selected_tree app, BorderConstrainItem
+                app.undo_manager.snapshot()
+            key: [ "Shift+G" ]
+            
+        @actions.push
+            ico: "img/border_constrain_strain.png"
+            siz: 1
+            ina: _ina
+            txt: "Constrain boundaries with strain"
+            fun: ( evt, app ) =>
+                selected_items = app.data.get_selected_tree_items()
+                constrain_border = @add_item_depending_selected_tree app, BorderConstrainItem
+                app.undo_manager.snapshot()
+            key: [ "Shift+G" ]
+            
+        @actions.push
+            ico: "img/border_constrain_pressure.png"
+            siz: 1
+            ina: _ina
+            txt: "Constrain boundaries with pressure"
             fun: ( evt, app ) =>
                 selected_items = app.data.get_selected_tree_items()
                 constrain_border = @add_item_depending_selected_tree app, BorderConstrainItem
