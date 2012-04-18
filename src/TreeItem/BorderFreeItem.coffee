@@ -1,5 +1,5 @@
 #
-class BorderFreeItem extends TreeItem
+class BorderFreeItem extends BoundariesSelectionItem
     constructor: ->
         super()
 
@@ -12,6 +12,7 @@ class BorderFreeItem extends TreeItem
         @_viewable.set true
         
     accept_child: ( ch ) ->
+        ch instanceof PickedZoneItem or
         ch instanceof DiscretizationItem or
         ch instanceof SketchItem or 
         ch instanceof MeshItem

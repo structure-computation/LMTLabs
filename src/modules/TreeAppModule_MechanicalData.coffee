@@ -28,7 +28,7 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Constrain boundaries with displacement"
             fun: ( evt, app ) =>
                 selected_items = app.data.get_selected_tree_items()
-                constrain_border = @add_item_depending_selected_tree app, BorderConstrainItem
+                constrain_border = @add_item_depending_selected_tree app, BorderDisplacementItem
                 app.undo_manager.snapshot()
             key: [ "Shift+G" ]
             
@@ -39,7 +39,7 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Constrain boundaries with strain"
             fun: ( evt, app ) =>
                 selected_items = app.data.get_selected_tree_items()
-                constrain_border = @add_item_depending_selected_tree app, BorderConstrainItem
+                constrain_border = @add_item_depending_selected_tree app, BorderStrainItem
                 app.undo_manager.snapshot()
             key: [ "Shift+G" ]
             
@@ -50,7 +50,7 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Constrain boundaries with pressure"
             fun: ( evt, app ) =>
                 selected_items = app.data.get_selected_tree_items()
-                constrain_border = @add_item_depending_selected_tree app, BorderConstrainItem
+                constrain_border = @add_item_depending_selected_tree app, BorderPressureItem
                 app.undo_manager.snapshot()
             key: [ "Shift+G" ]
             
