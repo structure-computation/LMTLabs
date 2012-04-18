@@ -82,12 +82,6 @@ class TransformItem extends TreeItem
         lst.push @transform
         
         return lst
-        
-    on_mouse_down: ( cm, evt, pos, b ) ->
-        @transform.on_mouse_down cm, evt, pos, b
-            
-    on_mouse_move: ( cm, evt, pos, b ) ->
-        @transform.on_mouse_move cm, evt, pos, b
     
     get_movable_entities: ( res, info, pos, phase ) ->
         @transform.get_movable_entities res, info, pos, phase

@@ -20,12 +20,6 @@ class SketchItem extends TreeItem
         
     disp_only_in_model_editor: ->
         @mesh
-        
-    on_mouse_down: ( cm, evt, pos, b ) ->
-        @mesh.on_mouse_down cm, evt, pos, b
-                
-    on_mouse_move: ( cm, evt, pos, b ) ->
-        @mesh.on_mouse_move cm, evt, pos, b
 
     get_movable_entities: ( res, info, pos, phase ) ->
         @mesh.get_movable_entities res, info, pos, phase

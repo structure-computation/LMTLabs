@@ -22,10 +22,4 @@ class BorderConstrainItem extends TreeItem
         
     sub_canvas_items: ->
         [ @border ]
-        
-    on_mouse_down: ( cm, evt, pos, b ) ->
-        @border.on_mouse_down cm, evt, pos, b
-                
-    on_mouse_move: ( cm, evt, pos, b ) ->
-        @border.on_mouse_move cm, evt, pos, b
     
