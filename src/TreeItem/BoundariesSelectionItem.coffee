@@ -56,6 +56,7 @@ class BoundariesSelectionItem extends TreeItem
                     line = res[ 0 ].item[ 0 ]
                     
                     m = @add_child_mesh res
+                    
                     line = res[ 0 ].item[ 0 ]
                     if line not in m._selected
                         # need to use ref
