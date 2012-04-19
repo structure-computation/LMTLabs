@@ -7,8 +7,6 @@ class PickedZoneItem extends TreeItem
         @_name.set "Picked Zone"
         @_ico.set "img/zone_16.png"
         @_viewable.set false
-        
-        @add_child new MaterialItem
         # attributes
 #         @add_attr
             #

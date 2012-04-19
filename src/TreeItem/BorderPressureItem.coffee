@@ -1,5 +1,5 @@
 #
-class BorderPressureItem extends TreeItem
+class BorderPressureItem extends BoundariesSelectionItem
     constructor: ( ) ->
         super()
 
@@ -21,4 +21,4 @@ class BorderPressureItem extends TreeItem
         ch instanceof MeshItem
 
     sub_canvas_items: ->
-        [ @border ]
+        [ ]

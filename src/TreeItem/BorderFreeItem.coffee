@@ -18,5 +18,5 @@ class BorderFreeItem extends BoundariesSelectionItem
         ch instanceof MeshItem
         
     sub_canvas_items: ->
-        [ @border ]
+        [ ]
     

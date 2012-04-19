@@ -9,7 +9,6 @@ class PhysicsItem extends TreeItem
         @_viewable.set false
         
         @add_child new MaterialItem
-        @add_child new PickedZoneItem
         # attributes
 #         @add_attr
             #

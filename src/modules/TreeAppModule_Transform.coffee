@@ -54,18 +54,14 @@ class TreeAppModule_Transform extends TreeAppModule
             siz: 1
             txt: "Remove a transformation node"
             fun: ( evt, app ) =>
-            
+                
                 if @transf?
                     cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
                     
                     if @transf.transform.cur_points.length > 0
-                        selectedPoint = []
-                        for i in [ 0 ... @transf.transform.cur_points.length ]
-                            if cam_info.selected[ @transf.transform.cur_points[ i ].model_id ]?
-                                selectedPoint.push i
-                                
-                        if selectedPoint.length > 0
-                            for i in [ selectedPoint.length-1..0 ]                    
-                                @transf.transform.cur_points.splice( selectedPoint[ i ], 1 )
-                                @transf.transform.old_points.splice( selectedPoint[ i ], 1 )
+                        selected_point = @transf.transform._selected
+                        if selected_point.length > 0
+                            for i in [ selected_point.length-1..0 ]                    
+                                @transf.transform.cur_points.splice( selected_point[ i ], 1 )
+                                @transf.transform.old_points.splice( selected_point[ i ], 1 )
                                 app.undo_manager.snapshot()
