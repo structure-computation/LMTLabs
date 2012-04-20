@@ -28,6 +28,7 @@ class BoundariesSelectionItem extends TreeItem
             @add_child @pzi
             @ski = new SketchItem
             @pzi.add_child @ski
+            @ski.mesh = res[ 0 ].prov
             m = @pzi._children[ 0 ].mesh
             
             #close item
