@@ -5256,16 +5256,20 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                 
                 @sketch.mesh.move_scheme = MoveScheme_2D
-                currentPoint = @sketch.mesh.points.length
+                current_point = @sketch.mesh.points.length
                 
                 for coord in [ [ -0.33, -0.333 ], [ 0.33, -0.333 ], [ 0.33, 0.333 ], [ -0.33, 0.333 ] ]
                     point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
                     @sketch.mesh.add_point point
                 
-                @sketch.mesh.lines.push [ currentPoint, currentPoint + 1 ]
-                @sketch.mesh.lines.push [ currentPoint + 1, currentPoint + 2 ]
-                @sketch.mesh.lines.push [ currentPoint + 2, currentPoint + 3 ]
-                @sketch.mesh.lines.push [ currentPoint + 3, currentPoint ]
+                current_line = @sketch.mesh.lines.length
+                @sketch.mesh.lines.push [ current_point, current_point + 1 ]
+                @sketch.mesh.lines.push [ current_point + 1, current_point + 2 ]
+                @sketch.mesh.lines.push [ current_point + 2, current_point + 3 ]
+                @sketch.mesh.lines.push [ current_point + 3, current_point ]
+                
+                @sketch.mesh.polygons.push [ current_line, current_line + 1, current_line + 2, current_line + 3 ]
+                
                 app.undo_manager.snapshot()
         
         mesher_sub.sub.act.push 
@@ -5277,13 +5281,13 @@ class TreeAppModule_Sketch extends TreeAppModule
 
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                     
-                currentPoint = @sketch.mesh.points.length
+                current_point = @sketch.mesh.points.length
                 
                 for coord in [ [ -0.33, 0 ], [ 0, 0.33 ], [ 0.33, 0 ] ]
                     point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
                     @sketch.mesh.add_point point
                     
-                @sketch.mesh.lines.push [ currentPoint, currentPoint + 1, currentPoint + 2, currentPoint ]
+                @sketch.mesh.lines.push [ current_point, current_point + 1, current_point + 2, current_point ]
                 app.undo_manager.snapshot()
                 
         mesher_sub.sub.act.push 
@@ -5295,16 +5299,17 @@ class TreeAppModule_Sketch extends TreeAppModule
 
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                     
-                currentPoint = @sketch.mesh.points.length
+                current_point = @sketch.mesh.points.length
                 
                 for coord in [ [ 0, 0.33 ], [ -0.33, -0.333 ], [ 0.33, -0.333 ] ]
                     point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
                     @sketch.mesh.add_point point
                     
-                @sketch.mesh.lines.push [ currentPoint, currentPoint + 1 ]
-                @sketch.mesh.lines.push [ currentPoint + 1, currentPoint + 2 ]
-                @sketch.mesh.lines.push [ currentPoint + 2, currentPoint ]
-                
+                current_line = @sketch.mesh.lines.length
+                @sketch.mesh.lines.push [ current_point, current_point + 1 ]
+                @sketch.mesh.lines.push [ current_point + 1, current_point + 2 ]
+                @sketch.mesh.lines.push [ current_point + 2, current_point ]
+                @sketch.mesh.polygons.push [ current_line, current_line + 1, current_line + 2 ]
                 app.undo_manager.snapshot()
         
         @actions.push
