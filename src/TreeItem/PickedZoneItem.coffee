@@ -6,10 +6,12 @@ class PickedZoneItem extends TreeItem
         # default values
         @_name.set "Picked Zone"
         @_ico.set "img/zone_16.png"
-        @_viewable.set false
+        @_viewable.set true
         # attributes
-#         @add_attr
-            #
+        @add_attr
+            # geometry
+            points           : new Lst_Point
+            lines            : new Lst
     
     accept_child: ( ch ) ->
         ch instanceof MaskItem or 
@@ -23,3 +25,5 @@ class PickedZoneItem extends TreeItem
     sub_canvas_items: ->
         []
     
+    draw: ( info ) ->
+        console.log info

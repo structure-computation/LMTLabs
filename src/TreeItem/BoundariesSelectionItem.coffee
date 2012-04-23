@@ -14,7 +14,8 @@ class BoundariesSelectionItem extends TreeItem
         #get app_data
         it = @get_parents_that_check @is_app_data
         return it[ 0 ]
-    
+    #TODO should return PickedZoneItem
+    # piz will have @_points and @_lines and call the mesh draw using params of color and which line as to be drawn (according to his own line)
     add_child_mesh : ( res ) ->
         app_data = @get_app_data()
         
@@ -35,7 +36,7 @@ class BoundariesSelectionItem extends TreeItem
             path_item = app_data.get_root_path this
             app_data.close_item path_item[ 0 ]
             
-            app_data.watch_item @ski
+#             app_data.watch_item @ski
             return m
             
     on_mouse_down: ( cm, evt, pos, b ) ->
