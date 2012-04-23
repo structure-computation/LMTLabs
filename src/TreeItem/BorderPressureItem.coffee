@@ -4,14 +4,14 @@ class BorderPressureItem extends BoundariesSelectionItem
         super()
 
         @add_attr
-            border       : new Border 'constrain_pressure'
+            _border_type : 'constrain_pressure'
             boundary_law :
                 Pressure   : 0
             
         # default values
         @_name.set "Pressure boundary"
         @_ico.set "img/border_constrain_pressure_16.png"
-        @_viewable.set true
+        @_viewable.set false
         
         
     accept_child: ( ch ) ->

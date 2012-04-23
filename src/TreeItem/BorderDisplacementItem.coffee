@@ -4,7 +4,7 @@ class BorderDisplacementItem extends BoundariesSelectionItem
         super()
 
         @add_attr
-            border       : new Border 'constrain_displacement'
+            _border_type :  'constrain_displacement'
             boundary_law :
                 x : 0
                 y : 0
@@ -12,7 +12,7 @@ class BorderDisplacementItem extends BoundariesSelectionItem
         # default values
         @_name.set "Displacement boundary"
         @_ico.set "img/border_constrain_displacement_16.png"
-        @_viewable.set true
+        @_viewable.set false
         
         
     accept_child: ( ch ) ->
@@ -23,3 +23,4 @@ class BorderDisplacementItem extends BoundariesSelectionItem
 
     sub_canvas_items: ->
         [  ]
+    

@@ -4,14 +4,14 @@ class BorderStrainItem extends BoundariesSelectionItem
         super()
 
         @add_attr
-            border       : new Border 'constrain_strain'
+            _border_type : 'constrain_strain'
             boundary_law :
                 Strain     : 0
             
         # default values
         @_name.set "Strain boundary"
         @_ico.set "img/border_constrain_strain_16.png"
-        @_viewable.set true
+        @_viewable.set false
         
         
     accept_child: ( ch ) ->

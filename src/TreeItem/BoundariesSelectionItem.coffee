@@ -3,6 +3,9 @@ class BoundariesSelectionItem extends TreeItem
     constructor: ( ) ->
         super()
     
+    z_index: ->
+        return 1
+    
     is_app_data: ( item ) ->
         if item instanceof TreeAppData
             return true
@@ -14,66 +17,94 @@ class BoundariesSelectionItem extends TreeItem
         #get app_data
         it = @get_parents_that_check @is_app_data
         return it[ 0 ]
-    #TODO should return PickedZoneItem
-    # piz will have @_points and @_lines and call the mesh draw using params of color and which line as to be drawn (according to his own line)
+        
     add_child_mesh : ( res ) ->
         app_data = @get_app_data()
         
-        # check if a SKetch Item already exist
-        m = app_data.get_child_of_type this, SketchItem
-        if m != false and m.length > 0
-            return m[ 0 ].mesh
-        # else create one PickedZoneItem and SketchItem
-        else
-            @pzi = new PickedZoneItem
-            @add_child @pzi
-            @ski = new SketchItem
-            @pzi.add_child @ski
-            @ski.mesh = res[ 0 ].prov
-            m = @pzi._children[ 0 ].mesh
+#         # check if a Sketch Item already exist
+#         m = app_data.get_child_of_type this, SketchItem
+#         if m != false and m.length > 0
+#             #check if it SketchItem is a child of PickedZoneItem
+#             pzi = app_data.get_child_of_type this, PickedZoneItem
+#             app_data.watch_item pzi
+#             m.mesh = res[ 0 ].prov
+#             if pzi != false and pzi.length > 0
+#                 return [ pzi, m[ 0 ].mesh ]
+#             else
+#                 # create PickedZoneItem
+#                 pzi = new PickedZoneItem @_border_type
+#                 @add_child pzi
+#                 pzi.add_child m
+#                 app_data.watch_item pzi
+#                 
+#                 return [ pzi, m[ 0 ].mesh ]
+#             
+#         # else create one PickedZoneItem and SketchItem
+#         else
+
+        @pzi = new PickedZoneItem @_border_type
+        @add_child @pzi
+        @ski = new SketchItem
+        @pzi.add_child @ski
+        @ski.mesh = res[ 0 ].prov
+        m = @pzi._children[ 0 ].mesh
+        
+        #close item
+        path_item = app_data.get_root_path this
+        app_data.close_item path_item[ 0 ]
+        app_data.watch_item @pzi
+        
+        return [ @pzi, m ]
             
-            #close item
-            path_item = app_data.get_root_path this
-            app_data.close_item path_item[ 0 ]
-            
-#             app_data.watch_item @ski
-            return m
-            
+    delete_from_tree: ( app_data,  item ) ->
+        #delete children
+        for c in item._children
+            if c._children.length > 0
+                @delete_from_tree app, c
+            app_data.closed_tree_items.remove c
+            for p in app_data.panel_id_list()
+                app_data.visible_tree_items[ p ].remove c
+        
+        #delete item
+        app_data.closed_tree_items.remove item
+        for p in app_data.panel_id_list()
+            app_data.visible_tree_items[ p ].remove item
+        
     on_mouse_down: ( cm, evt, pos, b ) ->
         if b == "LEFT"
             if cm._flat?
                 res = []
-                app_data = @get_app_data()
-#                 own_child_si = app_data.get_child_of_type this, SketchItem
-#                 own_child = for own_ch in own_child_si
-#                     own_ch.mesh
-                for el in cm._flat when el instanceof Mesh
-                    if el.lines and el.get_movable_entities?
-                        # closest entity under mouse
-#                         el.get_movable_entities res, cm.cam_info, pos, el
-                        el.get_movable_entities res, cm.cam_info, pos, 1, true
+                app_data = @get_app_data()                
+                
+                for ch in @_children when ch instanceof PickedZoneItem
+                    #TODO make a getmovableentities in pickedzoneitem that use ref
+                    if ch._children[ 0 ] instanceof SketchItem and ch._children[ 0 ].mesh.get_movable_entities?
+                        ch._children[ 0 ].mesh.get_movable_entities res, cm.cam_info, pos, 1, true
+                    
                 if res.length
                     res.sort ( a, b ) -> b.dist - a.dist
-                    @_may_need_snapshot = true
-                    line = res[ 0 ].item[ 0 ]
-                    
-                    m = @add_child_mesh res
-                    
-                    line = res[ 0 ].item[ 0 ]
-                    if line not in m._selected
-                        # need to use ref
+                    console.log "line deleted"
+                    console.log res[ 0 ].prov
+                    mesh = res[ 0 ].prov
+                    @delete_from_tree app_data, mesh._parents[ 0 ]
+
+                else
+                    for el in cm._flat when el instanceof Mesh
+                        if el.lines and el.get_movable_entities?
+                            # closest entity under mouse
+                            el.get_movable_entities res, cm.cam_info, pos, 1, true
+                            
+                
+                    if res.length
+                        res.sort ( a, b ) -> b.dist - a.dist
+                        @_may_need_snapshot = true
                         console.log "line selected"
-                        l = m.points.length
-                        m.points.push res[ 0 ].item[ 1 ]
-                        m.points.push res[ 0 ].item[ 2 ]
-                        m.lines.push [ l, l + 1 ]
-                        m._selected.push line
-                    else
-                        console.log "line deleted"
-                        ind = m._selected.indexOf line
-                        m._selected.splice ind, 1
-                        for p in line
-                            m.delete_point p.get()
+                        line = res[ 0 ].item[ 0 ]
+                        [ pzi, m ] = @add_child_mesh res
+                        
+                        pzi.points.push res[ 0 ].item[ 1 ].model_id
+                        pzi.points.push res[ 0 ].item[ 2 ].model_id
+                        pzi.lines.push line.model_id
                             
                     return true
                     
@@ -82,7 +113,7 @@ class BoundariesSelectionItem extends TreeItem
     on_mouse_move: ( cm, evt, pos, b ) ->
         if cm._flat?
             res = []
-            for el in cm._flat when el instanceof Mesh or el instanceof Border
+            for el in cm._flat when el instanceof Mesh
                 if el.lines?
                     # closest entity under mouse
                     el.get_movable_entities res, cm.cam_info, pos, 1, true
