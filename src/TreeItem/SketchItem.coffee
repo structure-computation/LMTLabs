@@ -21,5 +21,5 @@ class SketchItem extends TreeItem
     disp_only_in_model_editor: ->
         @mesh
 
-    get_movable_entities: ( res, info, pos, phase ) ->
-        @mesh.get_movable_entities res, info, pos, phase
+    get_movable_entities: ( res, info, pos, phase, dry = false ) ->
+        @mesh.get_movable_entities res, info, pos, phase, dry

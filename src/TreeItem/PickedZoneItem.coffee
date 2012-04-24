@@ -68,12 +68,14 @@ class PickedZoneItem extends TreeItem
             
     #TODO use only ref in @points, @lines instead of all mesh @lines/@points
     get_movable_entities: ( res, info, pos, phase, dry = true ) ->
+        new_res = []
         if @_children[ 0 ] instanceof SketchItem and @_children[ 0 ].mesh.get_movable_entities?
-            @_children[ 0 ].get_movable_entities res, info, pos, phase, dry
+            @_children[ 0 ].get_movable_entities new_res, info, pos, phase, dry
             
             #add information of current picked_zone_item in res
-            if res.length > 0
-                for touched in res
+            if new_res.length > 0
+                for touched in new_res
                     touched.pzi = this
-    
+        for added_res in new_res
+            res.push added_res
     

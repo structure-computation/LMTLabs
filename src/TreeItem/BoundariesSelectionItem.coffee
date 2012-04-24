@@ -82,17 +82,18 @@ class BoundariesSelectionItem extends TreeItem
                 
                 for ch in @_children when ch instanceof PickedZoneItem
                     ch.get_movable_entities res, cm.cam_info, pos, 1, true
-                    
-#                 console.log res
-                # delete movable entities who are in mesh but not in picked zone item
-                for touched_elem, i in res[ res.length - 1 .. 0 ]
-                    if touched_elem.item[ 0 ].model_id not in touched_elem.pzi.lines
-                        res.splice i, 1
-#                 console.log res
+                
+                if res.length
+                    # delete movable entities who are in mesh but not in picked zone item
+                    l = res.length
+                    for i in [ l - 1 .. 0 ]
+                        touched_elem = res[ i ]
+                        if touched_elem.item[ 0 ].model_id not in touched_elem.pzi.lines.get()
+                            res.splice i, 1
                 
                 if res.length
                     res.sort ( a, b ) -> b.dist - a.dist
-                    console.log "line deleted"
+#                     console.log "line deleted"
                     @delete_from_tree app_data, res[ 0 ].pzi
                     return true
                         
@@ -106,7 +107,7 @@ class BoundariesSelectionItem extends TreeItem
                     if res.length
                         res.sort ( a, b ) -> b.dist - a.dist
                         @_may_need_snapshot = true
-                        console.log "line selected"
+#                         console.log "line selected"
                         line = res[ 0 ].item[ 0 ]
                         [ pzi, m ] = @add_child_mesh res
                         
