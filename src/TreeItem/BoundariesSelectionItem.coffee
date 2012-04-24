@@ -61,14 +61,18 @@ class BoundariesSelectionItem extends TreeItem
         for c in item._children
             if c._children.length > 0
                 @delete_from_tree app, c
+            item.rem_child c
             app_data.closed_tree_items.remove c
             for p in app_data.panel_id_list()
                 app_data.visible_tree_items[ p ].remove c
         
-        #delete item
+        this.rem_child item
         app_data.closed_tree_items.remove item
         for p in app_data.panel_id_list()
             app_data.visible_tree_items[ p ].remove item
+            
+        
+        
         
     on_mouse_down: ( cm, evt, pos, b ) ->
         if b == "LEFT"
@@ -77,17 +81,19 @@ class BoundariesSelectionItem extends TreeItem
                 app_data = @get_app_data()                
                 
                 for ch in @_children when ch instanceof PickedZoneItem
-                    #TODO make a getmovableentities in pickedzoneitem that use ref
-                    if ch._children[ 0 ] instanceof SketchItem and ch._children[ 0 ].mesh.get_movable_entities?
-                        ch._children[ 0 ].mesh.get_movable_entities res, cm.cam_info, pos, 1, true
+                    ch.get_movable_entities res, cm.cam_info, pos, 1, true
                     
                 if res.length
                     res.sort ( a, b ) -> b.dist - a.dist
                     console.log "line deleted"
-                    console.log res[ 0 ].prov
                     mesh = res[ 0 ].prov
-                    @delete_from_tree app_data, mesh._parents[ 0 ]
-
+                    
+                    for ch in @_children when ch instanceof PickedZoneItem
+                        for ski in ch._children when ski instanceof SketchItem
+                            if ski.mesh == mesh
+                                @delete_from_tree app_data, ch
+                    return true
+                        
                 else
                     for el in cm._flat when el instanceof Mesh
                         if el.lines and el.get_movable_entities?

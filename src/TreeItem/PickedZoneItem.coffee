@@ -65,3 +65,10 @@ class PickedZoneItem extends TreeItem
             info.ctx.moveTo proj[ l[ 0 ].get() ][ 0 ], proj[ l[ 0 ].get() ][ 1 ]
             info.ctx.lineTo proj[ l[ 1 ].get() ][ 0 ], proj[ l[ 1 ].get() ][ 1 ]
             info.ctx.stroke()
+            
+    #TODO use only ref in @points, @lines instead of all mesh @lines/@points
+    get_movable_entities: ( res, info, pos, phase, dry ) ->
+        if @_children[ 0 ] instanceof SketchItem and @_children[ 0 ].mesh.get_movable_entities?
+            @_children[ 0 ].get_movable_entities res, info, pos, phase, dry
+    
+    
