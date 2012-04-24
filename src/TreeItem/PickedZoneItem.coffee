@@ -67,8 +67,13 @@ class PickedZoneItem extends TreeItem
             info.ctx.stroke()
             
     #TODO use only ref in @points, @lines instead of all mesh @lines/@points
-    get_movable_entities: ( res, info, pos, phase, dry ) ->
+    get_movable_entities: ( res, info, pos, phase, dry = true ) ->
         if @_children[ 0 ] instanceof SketchItem and @_children[ 0 ].mesh.get_movable_entities?
             @_children[ 0 ].get_movable_entities res, info, pos, phase, dry
+            
+            #add information of current picked_zone_item in res
+            if res.length > 0
+                for touched in res
+                    touched.pzi = this
     
     

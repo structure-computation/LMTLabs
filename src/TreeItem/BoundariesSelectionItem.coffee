@@ -83,15 +83,17 @@ class BoundariesSelectionItem extends TreeItem
                 for ch in @_children when ch instanceof PickedZoneItem
                     ch.get_movable_entities res, cm.cam_info, pos, 1, true
                     
+#                 console.log res
+                # delete movable entities who are in mesh but not in picked zone item
+                for touched_elem, i in res[ res.length - 1 .. 0 ]
+                    if touched_elem.item[ 0 ].model_id not in touched_elem.pzi.lines
+                        res.splice i, 1
+#                 console.log res
+                
                 if res.length
                     res.sort ( a, b ) -> b.dist - a.dist
                     console.log "line deleted"
-                    mesh = res[ 0 ].prov
-                    
-                    for ch in @_children when ch instanceof PickedZoneItem
-                        for ski in ch._children when ski instanceof SketchItem
-                            if ski.mesh == mesh
-                                @delete_from_tree app_data, ch
+                    @delete_from_tree app_data, res[ 0 ].pzi
                     return true
                         
                 else
