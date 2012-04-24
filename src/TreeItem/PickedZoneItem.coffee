@@ -71,6 +71,14 @@ class PickedZoneItem extends TreeItem
         if @_children[ 0 ] instanceof SketchItem and @_children[ 0 ].mesh.get_movable_entities?
             @_children[ 0 ].get_movable_entities new_res, info, pos, phase, dry
             
+            # delete movable entities who are in mesh but not in picked zone item
+            if new_res.length
+                l = new_res.length
+                for i in [ l - 1 .. 0 ]
+                    touched_elem = new_res[ i ]
+                    if touched_elem.item[ 0 ].model_id not in @lines.get()
+                        new_res.splice i, 1
+                        
             #add information of current picked_zone_item in res
             if new_res.length > 0
                 for touched in new_res

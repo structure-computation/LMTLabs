@@ -20,28 +20,6 @@ class BoundariesSelectionItem extends TreeItem
         
     add_child_mesh : ( res ) ->
         app_data = @get_app_data()
-        
-#         # check if a Sketch Item already exist
-#         m = app_data.get_child_of_type this, SketchItem
-#         if m != false and m.length > 0
-#             #check if it SketchItem is a child of PickedZoneItem
-#             pzi = app_data.get_child_of_type this, PickedZoneItem
-#             app_data.watch_item pzi
-#             m.mesh = res[ 0 ].prov
-#             if pzi != false and pzi.length > 0
-#                 return [ pzi, m[ 0 ].mesh ]
-#             else
-#                 # create PickedZoneItem
-#                 pzi = new PickedZoneItem @_border_type
-#                 @add_child pzi
-#                 pzi.add_child m
-#                 app_data.watch_item pzi
-#                 
-#                 return [ pzi, m[ 0 ].mesh ]
-#             
-#         # else create one PickedZoneItem and SketchItem
-#         else
-
         @pzi = new PickedZoneItem @_border_type
         @add_child @pzi
         @ski = new SketchItem
@@ -56,8 +34,9 @@ class BoundariesSelectionItem extends TreeItem
         
         return [ @pzi, m ]
             
+            
     delete_from_tree: ( app_data,  item ) ->
-        #delete children
+        # delete children
         for c in item._children
             if c._children.length > 0
                 @delete_from_tree app, c
@@ -66,13 +45,12 @@ class BoundariesSelectionItem extends TreeItem
             for p in app_data.panel_id_list()
                 app_data.visible_tree_items[ p ].remove c
         
+        # delete item
         this.rem_child item
         app_data.closed_tree_items.remove item
         for p in app_data.panel_id_list()
             app_data.visible_tree_items[ p ].remove item
             
-        
-        
         
     on_mouse_down: ( cm, evt, pos, b ) ->
         if b == "LEFT"
@@ -83,31 +61,18 @@ class BoundariesSelectionItem extends TreeItem
                 for ch in @_children when ch instanceof PickedZoneItem
                     ch.get_movable_entities res, cm.cam_info, pos, 1, true
                 
-                if res.length
-                    # delete movable entities who are in mesh but not in picked zone item
-                    l = res.length
-                    for i in [ l - 1 .. 0 ]
-                        touched_elem = res[ i ]
-                        if touched_elem.item[ 0 ].model_id not in touched_elem.pzi.lines.get()
-                            res.splice i, 1
-                
-                if res.length
+                if res.length # delete a line in PickedZoneItem
                     res.sort ( a, b ) -> b.dist - a.dist
-#                     console.log "line deleted"
                     @delete_from_tree app_data, res[ 0 ].pzi
                     return true
                         
                 else
                     for el in cm._flat when el instanceof Mesh
                         if el.lines and el.get_movable_entities?
-                            # closest entity under mouse
                             el.get_movable_entities res, cm.cam_info, pos, 1, true
-                            
-                
-                    if res.length
+                    if res.length # add a new line in PickedZoneItem
                         res.sort ( a, b ) -> b.dist - a.dist
                         @_may_need_snapshot = true
-#                         console.log "line selected"
                         line = res[ 0 ].item[ 0 ]
                         [ pzi, m ] = @add_child_mesh res
                         
@@ -120,7 +85,7 @@ class BoundariesSelectionItem extends TreeItem
         return false
         
     on_mouse_move: ( cm, evt, pos, b ) ->
-    
+        # clear all _pre_selected array
         app_data = @get_app_data()
         session = app_data.selected_session()
         sketch_child = app_data.get_child_of_type session, SketchItem
@@ -129,30 +94,21 @@ class BoundariesSelectionItem extends TreeItem
                 sc.mesh._pre_sele.clear()
         for ch in @_children when ch instanceof PickedZoneItem
             ch._pre_sele.clear()
-                
+        
         if cm._flat?
             res = []
-            
+            # search to _pre_selecte in priority the already Picked zone
             for ch in @_children when ch instanceof PickedZoneItem
                 ch.get_movable_entities res, cm.cam_info, pos, 1, true
-                # delete movable entities who are in mesh but not in picked zone item
-                if res.length
-                    l = res.length
-                    for i in [ l - 1 .. 0 ]
-                        touched_elem = res[ i ]
-                        if touched_elem.item[ 0 ].model_id not in touched_elem.pzi.lines.get()
-                            res.splice i, 1
                             
             if res.length <= 0
+                # search _pre_selected in all Meshes
                 for el in cm._flat when el instanceof Mesh
                     if el.lines?
-                        # closest entity under mouse
                         el.get_movable_entities res, cm.cam_info, pos, 1, true
                     
-            
             if res.length
                 res.sort ( a, b ) -> b.dist - a.dist
-                
                 @_may_need_snapshot = false
                 line = res[ 0 ].item[ 0 ]
                 P0   = res[ 0 ].item[ 1 ]
@@ -160,6 +116,7 @@ class BoundariesSelectionItem extends TreeItem
                 if res[ 0 ].pzi? # mean we found something in pikcedzonitem
                     if line not in res[ 0 ].pzi._pre_sele
                         res[ 0 ].pzi._pre_sele.push line
+                        
                 else # mean we found something in Mesh
                     if line not in res[ 0 ].prov._pre_sele
                         res[ 0 ].prov._pre_sele.push line
