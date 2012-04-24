@@ -120,26 +120,46 @@ class BoundariesSelectionItem extends TreeItem
         return false
         
     on_mouse_move: ( cm, evt, pos, b ) ->
-        if cm._flat?
-            res = []
-            for el in cm._flat when el instanceof Mesh
-                if el.lines?
-                    # closest entity under mouse
-                    el.get_movable_entities res, cm.cam_info, pos, 1, true
-                    
+    
         app_data = @get_app_data()
         session = app_data.selected_session()
         sketch_child = app_data.get_child_of_type session, SketchItem
         if sketch_child != false and sketch_child.length > 0
             for sc in sketch_child
                 sc.mesh._pre_sele.clear()
+        for ch in @_children when ch instanceof PickedZoneItem
+            ch._pre_sele.clear()
+                
+        if cm._flat?
+            res = []
             
-        if res.length
-            res.sort ( a, b ) -> b.dist - a.dist
+            for ch in @_children when ch instanceof PickedZoneItem
+                ch.get_movable_entities res, cm.cam_info, pos, 1, true
+                # delete movable entities who are in mesh but not in picked zone item
+                if res.length
+                    l = res.length
+                    for i in [ l - 1 .. 0 ]
+                        touched_elem = res[ i ]
+                        if touched_elem.item[ 0 ].model_id not in touched_elem.pzi.lines.get()
+                            res.splice i, 1
+                            
+            if res.length <= 0
+                for el in cm._flat when el instanceof Mesh
+                    if el.lines?
+                        # closest entity under mouse
+                        el.get_movable_entities res, cm.cam_info, pos, 1, true
+                    
             
-            @_may_need_snapshot = false
-            line = res[ 0 ].item[ 0 ]
-            P0   = res[ 0 ].item[ 1 ]
-            P1   = res[ 0 ].item[ 2 ]
-            if line not in res[ 0 ].prov._pre_sele
-                res[ 0 ].prov._pre_sele.push line
+            if res.length
+                res.sort ( a, b ) -> b.dist - a.dist
+                
+                @_may_need_snapshot = false
+                line = res[ 0 ].item[ 0 ]
+                P0   = res[ 0 ].item[ 1 ]
+                P1   = res[ 0 ].item[ 2 ]
+                if res[ 0 ].pzi? # mean we found something in pikcedzonitem
+                    if line not in res[ 0 ].pzi._pre_sele
+                        res[ 0 ].pzi._pre_sele.push line
+                else # mean we found something in Mesh
+                    if line not in res[ 0 ].prov._pre_sele
+                        res[ 0 ].prov._pre_sele.push line

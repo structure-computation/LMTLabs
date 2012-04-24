@@ -12,7 +12,8 @@ class PickedZoneItem extends TreeItem
             # geometry
             _border_type     : _border_type
             points           : new Lst # contains model_id of points in mesh child
-            lines            : new Lst # contains model_id of points in mesh child
+            lines            : new Lst # contains model_id of lines in mesh child
+            _pre_sele        : new Lst # contains model_id of points/lines/surfaces in mesh child
     
     accept_child: ( ch ) ->
         ch instanceof MaskItem or 
@@ -56,17 +57,15 @@ class PickedZoneItem extends TreeItem
                 
         # draw lines
         for l, j in lines when l.length == 2
-#             if l in @_pre_sele
-#                 info.ctx.lineWidth = 2
-#             else
-            
-            info.ctx.lineWidth = 1
+            if l in @_pre_sele
+                info.ctx.lineWidth = 2
+            else
+                info.ctx.lineWidth = 1
             info.ctx.beginPath()
             info.ctx.moveTo proj[ l[ 0 ].get() ][ 0 ], proj[ l[ 0 ].get() ][ 1 ]
             info.ctx.lineTo proj[ l[ 1 ].get() ][ 0 ], proj[ l[ 1 ].get() ][ 1 ]
             info.ctx.stroke()
             
-    #TODO use only ref in @points, @lines instead of all mesh @lines/@points
     get_movable_entities: ( res, info, pos, phase, dry = true ) ->
         new_res = []
         if @_children[ 0 ] instanceof SketchItem and @_children[ 0 ].mesh.get_movable_entities?
