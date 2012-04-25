@@ -4,7 +4,7 @@ class BoundariesSelectionItem extends TreeItem
         super()
     
     z_index: ->
-        return 1
+        return 1000
     
     is_app_data: ( item ) ->
         if item instanceof TreeAppData
@@ -20,19 +20,26 @@ class BoundariesSelectionItem extends TreeItem
         
     add_child_mesh : ( res ) ->
         app_data = @get_app_data()
-        @pzi = new PickedZoneItem @_border_type
-        @add_child @pzi
-        @ski = new SketchItem
-        @pzi.add_child @ski
-        @ski.mesh = res[ 0 ].prov
-        m = @pzi._children[ 0 ].mesh
+        if this._children.length <= 0
+            just_created = true
+        pzi = new PickedZoneItem @_border_type
+        @add_child pzi
+        ski = new SketchItem
+        pzi.add_child ski
+        ski.mesh = res[ 0 ].prov
+        m = pzi._children[ 0 ].mesh
         
         #close item
-        path_item = app_data.get_root_path this
-        app_data.close_item path_item[ 0 ]
-        app_data.watch_item @pzi
+        if just_created == true
+            path_item = app_data.get_root_path this
+            app_data.close_item path_item[ 0 ]
+            
+        pzi_path = app_data.get_root_path pzi
+        app_data.close_item pzi_path[ 0 ]
         
-        return [ @pzi, m ]
+        app_data.watch_item pzi
+        
+        return [ pzi, m ]
             
             
     delete_from_tree: ( app_data,  item ) ->

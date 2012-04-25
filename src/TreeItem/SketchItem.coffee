@@ -18,6 +18,9 @@ class SketchItem extends TreeItem
     sub_canvas_items: ->
         [ @mesh ]
         
+    z_index: ->
+        return @sub_canvas_items()[ 0 ].z_index()
+        
     disp_only_in_model_editor: ->
         @mesh
 

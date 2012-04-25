@@ -28,7 +28,7 @@ class PickedZoneItem extends TreeItem
         [ ]
         
     z_index: ->
-        return 1
+        return 1000
     
     draw: ( info ) ->
         mesh = @_children[ 0 ].mesh
