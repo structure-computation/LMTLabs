@@ -25,7 +25,7 @@ class TreeAppModule_Session extends TreeAppModule
                 for m in @modules
                     if m instanceof TreeAppModule_File
                         m.actions[ 0 ].fun evt, app
-            key: [ "Shift+0" ]
+            key: [ "Shift+O" ]
             
         session_info.sub.act.push 
             ico: ""
@@ -117,7 +117,7 @@ class TreeAppModule_Session extends TreeAppModule
         for correlation in session._children when correlation instanceof CorrelationItem
 #             console.log correlation
             for ic in correlation._children when ic instanceof ImgSetItem
-                break;
+                break
 #             console.log ic
             text = 
             "Correlation used " + ic._children.length + " pictures<br>
@@ -137,10 +137,10 @@ class TreeAppModule_Session extends TreeAppModule
                 txt       : text
                 
             for result in correlation._children when result instanceof ResultItem
-                break;
+                break
                 
             for displacement in result._children when displacement instanceof MeshItem
-                break;
+                break
             
             disp_txt = ""
             for p in displacement.mesh_item.points

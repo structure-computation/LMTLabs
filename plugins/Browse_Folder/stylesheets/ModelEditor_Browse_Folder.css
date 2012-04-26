@@ -40,10 +40,10 @@
     background-color: lightGrey;
 }
 
-.breadcrumb span{
+.breadcrumb{
     cursor: pointer;
 }
-.breadcrumb span:hover{
+.breadcrumb:hover{
     text-decoration: underline;
 }
 

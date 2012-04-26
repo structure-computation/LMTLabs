@@ -61,7 +61,8 @@ class TreeAppModule_File extends TreeAppModule
                 
                 @d = new_dom_element
                     className : "browse_container"
-                @item_cp = new ModelEditorItem_Directory
+                    id        : "id_browse_container"
+                item_cp = new ModelEditorItem_Directory
                     el    : @d
                     model : @model
                     fundblclick: ( evt, file ) =>
@@ -87,4 +88,5 @@ class TreeAppModule_File extends TreeAppModule
 #             key: [ "Shift+O" ]
 
             onPopupClose: ( app ) =>
+                document.onkeydown = undefined
                 app.active_key.set true

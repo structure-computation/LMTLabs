@@ -8,6 +8,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
         
        
         @selected_file = []
+        @clipboard     = [] # contain last 'copy' or 'cut' file
         
         @line_height = 30 # enough to contain the text
         
@@ -40,8 +41,34 @@ class ModelEditorItem_Directory extends ModelEditorItem
                 onclick: ( evt ) =>
                     n = new File Directory, "New folder"
                     @model.data.children.push n
-                    @empty_window()
-                    @init()
+                    @refresh()
+                    
+        @icon_cut = new_dom_element
+                parentNode: @icon_scene
+                nodeName  : "img"
+                src       : "img/cut.png"
+                alt       : "cut"
+                title     : "Cut"
+                onclick: ( evt ) =>
+                    @cut()
+                    
+        @icon_copy = new_dom_element
+                parentNode: @icon_scene
+                nodeName  : "img"
+                src       : "img/copy.png"
+                alt       : "copy"
+                title     : "Copy"
+                onclick: ( evt ) =>
+                    @copy()
+                    
+        @icon_paste = new_dom_element
+                parentNode: @icon_scene
+                nodeName  : "img"
+                src       : "img/paste.png"
+                alt       : "paste"
+                title     : "Paste"
+                onclick: ( evt ) =>
+                    @paste()
 
         @icon_del_folder = new_dom_element
                 parentNode: @icon_scene
@@ -55,13 +82,110 @@ class ModelEditorItem_Directory extends ModelEditorItem
         @breadcrumb_dom = new_dom_element
                 parentNode: @container                
                 nodeName  : "div"
-                className : "breadcrumb"
                     
         @all_file_container = new_dom_element
                 parentNode: @container                
                 nodeName  : "div"
 
+        @refresh()
+        
+        key_map = {
+#             8 : ( evt ) => # backspace
+#                 if @foc_keys.length
+#                     @update_foc_keys( @foc_keys.substr( 0, @foc_keys.length - 1 ) )
+                        
+#             13 : ( evt ) => # enter
+#                 ico = @focused_icon()
+#                 if ico?
+#                     if evt.altKey
+#                         new_name = prompt( 'Rename to', ico.my_file )
+#                         if new_name?
+#                             @queue_img_server_cmd( "push " + @cur_dir + "/" + ico.my_file + "\n" )
+#                             @queue_img_server_cmd( "push " + @cur_dir + "/" + new_name    + "\n" )
+#                             @queue_img_server_cmd( "rename\n" )
+#                             @refresh()
+#                         return undefined
+#                     @click_file( ico.my_file, ico.my_data )
+                
+#             32 : ( evt ) => # space
+                
+#             37 : ( evt ) => # left
+#                 if evt.altKey
+#                     return @cd_prev()
+#                 @change_ico_focus( [ -1,  0 ] )
+                
+#             38 : ( evt ) => # up
+#                 if evt.altKey
+#                     return @cd_pare()
+#                 @change_ico_focus( [  0, -1 ] )
+                
+#             39 : ( evt ) => # right
+#                 if evt.altKey
+#                     return @cd_next()
+#                 @change_ico_focus( [  1,  0 ] )
+                
+#             40 : ( evt ) => # down
+#                 @change_ico_focus( [  0,  1 ] )
+                
+            88 : ( evt ) => # X
+                if evt.ctrlKey # cut
+                    @cut()
+                
+            67 : ( evt ) => # C
+                if evt.ctrlKey # copy
+                    @copy()
+                
+            86 : ( evt ) => # V
+                if evt.ctrlKey # paste
+                    @paste()
+                
+            46 : ( evt ) => # suppr
+                @delete_file()
+                
+#             116 : ( evt ) => # F5
+#                 @refresh()
+        }
+
+        document.onkeydown = ( evt ) =>
+            if key_map[ evt.keyCode ]?
+                evt.stopPropagation()
+                evt.preventDefault()
+                key_map[ evt.keyCode ]( evt )
+                return true
+
+    refresh: ->
+        @empty_window()
         @init()
+
+    cut: ->
+        if @selected_file.length > 0
+            console.log 'cut'
+            @clipboard = []
+            for ind_children in @selected_file
+                real_ind = @search_ord_index_from_id ind_children
+                @clipboard.push @model.data.children[ real_ind ]
+            @cutroot = @model
+            
+    copy: ->
+        if @selected_file.length > 0
+            console.log 'copy'
+            @clipboard = []
+            for ind_children in @selected_file
+                real_ind = @search_ord_index_from_id ind_children
+                @clipboard.push @model.data.children[ real_ind ]
+            @cutroot = undefined
+            
+    paste: ->
+        console.log 'paste'
+        if @cutroot?
+            for mod in @clipboard
+                pos = @cutroot.data.children.indexOf mod
+                if pos != -1
+                    @cutroot.data.children.splice pos, 1
+        for file in @clipboard
+            @model.data.children.push file
+        @refresh()
+        
         
     start_rename_file: ( file, child_index ) ->
         file.contentEditable = "true"
@@ -79,8 +203,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
         @model = children
         @breadcrumb.push @model
         
-        @empty_window()
-        @init()
+        @refresh()
 
         
     draw_breadcrumb: ->
@@ -97,11 +220,16 @@ class ModelEditorItem_Directory extends ModelEditorItem
                             @load_model_from_breadcrumb 0
                         
                 else
+                    l = new_dom_element
+                        parentNode: @breadcrumb_dom
+                        nodeName  : "span"
+                        txt       : " > "
+                        
                     f = new_dom_element
                         parentNode: @breadcrumb_dom
                         nodeName  : "span"
                         className : "breadcrumb"
-                        txt       : " > " + folder.name.get()
+                        txt       : folder.name.get()
                         onclick   : ( evt ) =>
                             @load_model_from_breadcrumb i
 
@@ -110,8 +238,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
         if ind != -1
             @delete_breadcrumb_from_index ind
             @model = @breadcrumb[ ind ]
-            @empty_window()
-            @init()
+            @refresh()
         
     delete_breadcrumb_from_index: ( index ) ->
         for i in [ @breadcrumb.length-1 ... index ]
@@ -135,8 +262,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
             @model.data.children.splice( index_array[ i ] , 1)
             
         @selected_file = []
-        @empty_window()
-        @init()
+        @refresh()
     
     sort_dir = ( a, b ) -> 
         c = 0
@@ -151,7 +277,10 @@ class ModelEditorItem_Directory extends ModelEditorItem
     
     init: ->
         sorted = @model.data.children.sorted sort_dir
-        
+#         if @breadcrumb.length > 1
+#             parent = new File Directory, ".."
+#             sorted.unshift parent
+            
         for elem, i in sorted
             do ( elem, i ) =>
             
@@ -179,22 +308,27 @@ class ModelEditorItem_Directory extends ModelEditorItem
                     
                     ondrop: ( evt ) =>
                         # drop file got index = i
+                        #TODO décalage du au parent, la fonction search_ord_index_from_id ne semble pas très adaptée
                         if sorted[ i ].data instanceof Directory
-                        
-                            # add selected children to target directory
-                            index = @search_ord_index_from_id i
-                            for ind in @drag_source
-                                @model.data.children[ index ].data.children.push sorted[ ind ]
-                            
+                            console.log @drag_source
+                            console.log @breadcrumb[ @breadcrumb.length - 2 ]
+                            if sorted[ i ].name == ".."
+#                                 @breadcrumb[ @breadcrumb.length - 2 ].data.children.push sorted[ ind ]
+                            else
+                                # add selected children to target directory
+                                index = @search_ord_index_from_id i
+                                for ind in @drag_source
+                                    @model.data.children[ index ].data.children.push sorted[ ind ]
+                                
                             # remove selected children from current directory
                             for sorted_ind in @drag_source
                                 index = @search_ord_index_from_id sorted_ind
                                 @model.data.children.splice index, 1
     
                             @selected_file = []
-                            @empty_window()
-                            @init()
-                            
+                            @refresh()
+                        
+                        console.log "stop"
                         evt.stopPropagation()
                         return false
                         
@@ -271,7 +405,10 @@ class ModelEditorItem_Directory extends ModelEditorItem
                         alt       : elem.name
                         title     : elem.name
                         ondblclick: ( evt ) =>
-                            @load_folder sorted[ i ]
+                            if sorted[ i ].name.get() == ".."
+                                @load_model_from_breadcrumb @breadcrumb.length - 2
+                            else
+                                @load_folder sorted[ i ]
                         
                     text = new_dom_element
                         parentNode: file_container
@@ -299,7 +436,5 @@ class ModelEditorItem_Directory extends ModelEditorItem
                 
         @draw_breadcrumb()
         
-
-    onchange: ->
 
 ModelEditor.default_types.push ( model ) -> ModelEditorItem_Directory if model instanceof Directory
