@@ -10,6 +10,8 @@ class ModelEditorItem_Directory extends ModelEditorItem
         @selected_file = []
         @clipboard     = [] # contain last 'copy' or 'cut' file
         
+        @allow_shortkey = true # allow the use of shortkey like Ctrl+C / Delete. Set to false when renaming
+        
         @line_height = 30 # enough to contain the text
         
         
@@ -77,7 +79,13 @@ class ModelEditorItem_Directory extends ModelEditorItem
                 alt       : "Delete"
                 title     : "Delete"
                 onclick: ( evt ) =>
+                    @delete_file()           
+                ondragover: ( evt ) =>
+                    return false
+                ondrop: ( evt ) =>
                     @delete_file()
+                    evt.stopPropagation()
+                    return false
 
         @breadcrumb_dom = new_dom_element
                 parentNode: @container                
@@ -90,43 +98,66 @@ class ModelEditorItem_Directory extends ModelEditorItem
         @refresh()
         
         key_map = {
-#             8 : ( evt ) => # backspace
-#                 if @foc_keys.length
-#                     @update_foc_keys( @foc_keys.substr( 0, @foc_keys.length - 1 ) )
+            8 : ( evt ) => # backspace
+                @load_model_from_breadcrumb @breadcrumb.length - 2
                         
 #             13 : ( evt ) => # enter
-#                 ico = @focused_icon()
-#                 if ico?
-#                     if evt.altKey
-#                         new_name = prompt( 'Rename to', ico.my_file )
-#                         if new_name?
-#                             @queue_img_server_cmd( "push " + @cur_dir + "/" + ico.my_file + "\n" )
-#                             @queue_img_server_cmd( "push " + @cur_dir + "/" + new_name    + "\n" )
-#                             @queue_img_server_cmd( "rename\n" )
-#                             @refresh()
-#                         return undefined
-#                     @click_file( ico.my_file, ico.my_data )
                 
-#             32 : ( evt ) => # space
+            37 : ( evt ) => # left
+                if @selected_file.length > 0
+                    if evt.shiftKey
+                        # TODO shift selected need to use a reference file and not push the next or previous file ( this is to prevent multiple occurence of file when shift leftand then shift+right etc)
+                        index_last_file_selected = @selected_file[ @selected_file.length - 1 ]
+                        if index_last_file_selected > 0
+                            @selected_file.push index_last_file_selected - 1
+                            
+                    else
+                        ind = @selected_file[ @selected_file.length - 1 ]
+                        if ind != 0
+                            @selected_file = []
+                            @selected_file.push ind - 1
+                        else
+                            @selected_file = []
+                            @selected_file.push 0
                 
-#             37 : ( evt ) => # left
-#                 if evt.altKey
-#                     return @cd_prev()
-#                 @change_ico_focus( [ -1,  0 ] )
+                # case no file is selected
+                else
+                    @selected_file.push 0 
+                @draw_selected_file()
                 
 #             38 : ( evt ) => # up
-#                 if evt.altKey
-#                     return @cd_pare()
-#                 @change_ico_focus( [  0, -1 ] )
                 
-#             39 : ( evt ) => # right
-#                 if evt.altKey
-#                     return @cd_next()
-#                 @change_ico_focus( [  1,  0 ] )
+            39 : ( evt ) => # right
+                if @selected_file.length > 0
+                    if evt.shiftKey
+                        index_last_file_selected = @selected_file[ @selected_file.length - 1 ]
+                        if index_last_file_selected < @model.data.children.length - 1
+                            @selected_file.push index_last_file_selected + 1
+                            
+                    else
+                        ind = @selected_file[ @selected_file.length - 1 ]
+                        if ind < @model.data.children.length - 1
+                            @selected_file = []
+                            @selected_file.push ind + 1
+                        else
+                            @selected_file = []
+                            @selected_file.push @model.data.children.length - 1
+                
+                # case no file is selected
+                else
+                    @selected_file.push 0 
+                    
+                @draw_selected_file()
                 
 #             40 : ( evt ) => # down
-#                 @change_ico_focus( [  0,  1 ] )
                 
+            65 : ( evt ) => # A
+                if evt.ctrlKey # select all
+                    @selected_file = []
+                    for child, i in @model.data.children
+                        @selected_file.push i
+                    @draw_selected_file()
+                    
             88 : ( evt ) => # X
                 if evt.ctrlKey # cut
                     @cut()
@@ -142,16 +173,17 @@ class ModelEditorItem_Directory extends ModelEditorItem
             46 : ( evt ) => # suppr
                 @delete_file()
                 
-#             116 : ( evt ) => # F5
-#                 @refresh()
+            116 : ( evt ) => # F5
+                @refresh()
         }
 
         document.onkeydown = ( evt ) =>
-            if key_map[ evt.keyCode ]?
-                evt.stopPropagation()
-                evt.preventDefault()
-                key_map[ evt.keyCode ]( evt )
-                return true
+            if @allow_shortkey == true
+                if key_map[ evt.keyCode ]?
+                    evt.stopPropagation()
+                    evt.preventDefault()
+                    key_map[ evt.keyCode ]( evt )
+                    return true
 
     refresh: ->
         @empty_window()
@@ -159,7 +191,6 @@ class ModelEditorItem_Directory extends ModelEditorItem
 
     cut: ->
         if @selected_file.length > 0
-            console.log 'cut'
             @clipboard = []
             for ind_children in @selected_file
                 real_ind = @search_ord_index_from_id ind_children
@@ -168,7 +199,6 @@ class ModelEditorItem_Directory extends ModelEditorItem
             
     copy: ->
         if @selected_file.length > 0
-            console.log 'copy'
             @clipboard = []
             for ind_children in @selected_file
                 real_ind = @search_ord_index_from_id ind_children
@@ -176,7 +206,6 @@ class ModelEditorItem_Directory extends ModelEditorItem
             @cutroot = undefined
             
     paste: ->
-        console.log 'paste'
         if @cutroot?
             for mod in @clipboard
                 pos = @cutroot.data.children.indexOf mod
@@ -187,9 +216,13 @@ class ModelEditorItem_Directory extends ModelEditorItem
         @refresh()
         
         
-    start_rename_file: ( file, child_index ) ->
+    rename_file: ( file, child_index ) ->
+        # start rename file
+        @allow_shortkey = false
         file.contentEditable = "true"
+        # stop rename file
         file.onblur = ( evt ) =>
+            @allow_shortkey = true
             title = file.innerHTML
             child_index.name.set title
             file.contentEditable = "false"
@@ -253,17 +286,26 @@ class ModelEditorItem_Directory extends ModelEditorItem
         
     
     delete_file: ->
-        index_array = []
-        for i in @selected_file
-            index = @search_ord_index_from_id i
-            index_array.push index
+        if @selected_file.length
+            index_array = []
+            for i in @selected_file
+                index = @search_ord_index_from_id i
+                index_array.push index
+                
+            for i in [ index_array.length - 1 .. 0 ]
+                @model.data.children.splice( index_array[ i ] , 1)
+                
+            @selected_file = []
+            @refresh()
             
-        for i in [ index_array.length - 1 .. 0 ]
-            @model.data.children.splice( index_array[ i ] , 1)
-            
-        @selected_file = []
-        @refresh()
-    
+    draw_selected_file: ->
+        file_contain = document.getElementsByClassName 'file_container'
+        for file, j in file_contain
+            if parseInt(@selected_file.indexOf j) != -1
+                add_class file, 'selected_file'
+            else
+                rem_class file, 'selected_file'
+
     sort_dir = ( a, b ) -> 
         c = 0
         d = 0
@@ -276,7 +318,9 @@ class ModelEditorItem_Directory extends ModelEditorItem
         else if a.name.get().toLowerCase() > b.name.get().toLowerCase() then 1 else -1
     
     init: ->
+        console.log @model.data.children.sorted
         sorted = @model.data.children.sorted sort_dir
+        console.log sorted
 #         if @breadcrumb.length > 1
 #             parent = new File Directory, ".."
 #             sorted.unshift parent
@@ -308,6 +352,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
                     
                     ondrop: ( evt ) =>
                         # drop file got index = i
+                        console.log evt
                         #TODO décalage du au parent, la fonction search_ord_index_from_id ne semble pas très adaptée
                         if sorted[ i ].data instanceof Directory
                             console.log @drag_source
@@ -332,7 +377,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
                         evt.stopPropagation()
                         return false
                         
-                    onclick   : ( evt ) =>
+                    onmousedown : ( evt ) =>
                         if evt.ctrlKey
                             ind = parseInt(@selected_file.indexOf i)
                             if ind != -1
@@ -353,12 +398,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
                             @selected_file = []
                             @selected_file.push i
                         
-                        file_contain = document.getElementsByClassName 'file_container'
-                        for file, j in file_contain
-                            if parseInt(@selected_file.indexOf j) != -1
-                                add_class file, 'selected_file'
-                            else
-                                rem_class file, 'selected_file'
+                        @draw_selected_file()
                 
                 if elem.data instanceof ImgItem
                     @picture = new_dom_element
@@ -377,7 +417,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
                         nodeName  : "div"
                         txt       : elem.name
                         onclick: ( evt ) =>
-                            @start_rename_file text, sorted[ i ]
+                            @rename_file text, sorted[ i ]
                 
                 else if elem.data instanceof Mesh
                     @picture = new_dom_element
@@ -395,7 +435,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
                         nodeName  : "div"
                         txt       : elem.name
                         onclick: ( evt ) =>
-                            @start_rename_file text, sorted[ i ]
+                            @rename_file text, sorted[ i ]
                             
                 else if elem.data instanceof Directory
                     @picture = new_dom_element
@@ -416,7 +456,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
                         nodeName  : "div"
                         txt       : elem.name
                         onclick: ( evt ) =>
-                            @start_rename_file text, sorted[ i ]
+                            @rename_file text, sorted[ i ]
                             
                 else
                     @picture = new_dom_element
@@ -432,7 +472,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
                         nodeName  : "div"
                         txt       : elem.name
                         onclick: ( evt ) =>
-                            @start_rename_file text, sorted[ i ]
+                            @rename_file text, sorted[ i ]
                 
         @draw_breadcrumb()
         
