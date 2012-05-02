@@ -173,6 +173,11 @@ class ModelEditorItem_Directory extends ModelEditorItem
             46 : ( evt ) => # suppr
                 @delete_file()
                 
+            113 : ( evt ) => # F2
+                file_contain = document.getElementsByClassName('selected_file')[ 0 ]?.getElementsByClassName('linkDirectory')
+                if file_contain?
+                    @rename_file file_contain[ 0 ], @model.data.children[ @search_ord_index_from_id @selected_file[ 0 ] ]
+                
             116 : ( evt ) => # F5
                 @refresh()
         }
@@ -211,7 +216,8 @@ class ModelEditorItem_Directory extends ModelEditorItem
                 pos = @cutroot.data.children.indexOf mod
                 if pos != -1
                     @cutroot.data.children.splice pos, 1
-        for file in @clipboard
+        new_cliboard = @clipboard.slice 0
+        for file in new_cliboard
             @model.data.children.push file
         @refresh()
         
@@ -220,6 +226,7 @@ class ModelEditorItem_Directory extends ModelEditorItem
         # start rename file
         @allow_shortkey = false
         file.contentEditable = "true"
+        file.focus()
         # stop rename file
         file.onblur = ( evt ) =>
             @allow_shortkey = true
@@ -307,20 +314,19 @@ class ModelEditorItem_Directory extends ModelEditorItem
                 rem_class file, 'selected_file'
 
     sort_dir = ( a, b ) -> 
-        c = 0
-        d = 0
-        if b.data instanceof Directory
-            c = 1
-        if a.data instanceof Directory
-            d = 1
-        if d - c != 0
-            return 1
-        else if a.name.get().toLowerCase() > b.name.get().toLowerCase() then 1 else -1
+    # following is commented because it doesn't sort item that are pasted
+#         c = 0
+#         d = 0
+#         if b.data instanceof Directory
+#             c = 1
+#         if a.data instanceof Directory
+#             d = 1
+#         if d - c != 0
+#             return 1
+        if a.name.get().toLowerCase() > b.name.get().toLowerCase() then 1 else -1
     
     init: ->
-        console.log @model.data.children.sorted
         sorted = @model.data.children.sorted sort_dir
-        console.log sorted
 #         if @breadcrumb.length > 1
 #             parent = new File Directory, ".."
 #             sorted.unshift parent
@@ -352,11 +358,9 @@ class ModelEditorItem_Directory extends ModelEditorItem
                     
                     ondrop: ( evt ) =>
                         # drop file got index = i
-                        console.log evt
-                        #TODO décalage du au parent, la fonction search_ord_index_from_id ne semble pas très adaptée
                         if sorted[ i ].data instanceof Directory
-                            console.log @drag_source
-                            console.log @breadcrumb[ @breadcrumb.length - 2 ]
+#                             console.log @drag_source
+#                             console.log @breadcrumb[ @breadcrumb.length - 2 ]
                             if sorted[ i ].name == ".."
 #                                 @breadcrumb[ @breadcrumb.length - 2 ].data.children.push sorted[ ind ]
                             else
@@ -373,7 +377,6 @@ class ModelEditorItem_Directory extends ModelEditorItem
                             @selected_file = []
                             @refresh()
                         
-                        console.log "stop"
                         evt.stopPropagation()
                         return false
                         
