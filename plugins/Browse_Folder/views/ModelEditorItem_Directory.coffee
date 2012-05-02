@@ -87,34 +87,33 @@ class ModelEditorItem_Directory extends ModelEditorItem
                     evt.stopPropagation()
                     return false
         
-        @client_side = new_dom_element
-                parentNode: @container                
-                nodeName  : "div"
-                
         @upload_form = new_dom_element
-                parentNode: @client_side
+                parentNode: @icon_scene
                 nodeName  : "form"
+                
+        @txt_upload = new_dom_element
+                parentNode: @icon_scene
+                nodeName  : "span"
+                txt       : "Add new file(s) "
+                
         @upload = new_dom_element
-                parentNode: @upload_form
+                parentNode: @icon_scene
                 nodeName  : "input"
                 type      : "file"
                 accept    : "image/*"
                 multiple  : "true"
                 onchange: ( evt ) ->
-                    console.log evt
-                    console.log this
-#                     @handleFiles '', this.files
+                    if this.files.length > 0
+                        for file in this.files
+                            console.log file
+    #                     @handleFiles '', this.files
                 
-        @server_side = new_dom_element
-            parentNode: @container                
-            nodeName  : "div"
-        
         @breadcrumb_dom = new_dom_element
-                parentNode: @server_side                
+                parentNode: @container                
                 nodeName  : "div"
                     
         @all_file_container = new_dom_element
-                parentNode: @server_side
+                parentNode: @container
                 nodeName  : "div"
 #                 ondragover: ( evt ) =>
 #                     @all_file_container.id = "drop_zone"
@@ -248,9 +247,11 @@ class ModelEditorItem_Directory extends ModelEditorItem
                 pos = @cutroot.data.children.indexOf mod
                 if pos != -1
                     @cutroot.data.children.splice pos, 1
-        new_cliboard = @clipboard.slice 0
-        for file in new_cliboard
-            @model.data.children.push file
+        for file in @clipboard
+#             new_file = file
+            new_file = file.deep_copy()
+            console.log new_file, file
+            @model.data.children.push new_file
         @refresh()
         
         
