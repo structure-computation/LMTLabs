@@ -1,6 +1,14 @@
 .browse_container{
     height: 300px;
 }
+
+#drop_zone {
+    border: medium dashed gray;
+    border-radius: 5px 5px 5px 5px;
+    text-align: center;
+    background: OldLace;
+}
+
 .file_container{
     float: left;
     width: 200px;

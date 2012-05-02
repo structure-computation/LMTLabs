@@ -79,21 +79,53 @@ class ModelEditorItem_Directory extends ModelEditorItem
                 alt       : "Delete"
                 title     : "Delete"
                 onclick: ( evt ) =>
-                    @delete_file()           
+                    @delete_file()
                 ondragover: ( evt ) =>
                     return false
                 ondrop: ( evt ) =>
                     @delete_file()
                     evt.stopPropagation()
                     return false
-
-        @breadcrumb_dom = new_dom_element
+        
+        @client_side = new_dom_element
                 parentNode: @container                
+                nodeName  : "div"
+                
+        @upload_form = new_dom_element
+                parentNode: @client_side
+                nodeName  : "form"
+        @upload = new_dom_element
+                parentNode: @upload_form
+                nodeName  : "input"
+                type      : "file"
+                accept    : "image/*"
+                multiple  : "true"
+                onchange: ( evt ) ->
+                    console.log evt
+                    console.log this
+#                     @handleFiles '', this.files
+                
+        @server_side = new_dom_element
+            parentNode: @container                
+            nodeName  : "div"
+        
+        @breadcrumb_dom = new_dom_element
+                parentNode: @server_side                
                 nodeName  : "div"
                     
         @all_file_container = new_dom_element
-                parentNode: @container                
+                parentNode: @server_side
                 nodeName  : "div"
+#                 ondragover: ( evt ) =>
+#                     @all_file_container.id = "drop_zone"
+#                     return false
+#                 ondragleave: ( evt ) =>
+#                     @all_file_container.id = ""
+#                     return false
+#                 ondrop: ( evt ) =>
+#                     @all_file_container.id = ""
+#                     evt.stopPropagation()
+#                     return false
 
         @refresh()
         
@@ -479,5 +511,11 @@ class ModelEditorItem_Directory extends ModelEditorItem
                 
         @draw_breadcrumb()
         
+        # use for dropable area
+        bottom = new_dom_element
+            parentNode: @all_file_container
+            nodeName  : "div"
+            style:
+                clear: "both"
 
 ModelEditor.default_types.push ( model ) -> ModelEditorItem_Directory if model instanceof Directory
