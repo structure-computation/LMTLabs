@@ -31,3 +31,13 @@ class TreeAppModule_Filter extends TreeAppModule
                 app.undo_manager.snapshot()
             key: [ "Shift+P" ]
             
+        @actions.push
+            ico: "img/filter_z_32.png"
+            siz: 1
+            ina: _ina
+            txt: "Show value on z"
+            fun: ( evt, app ) =>
+                console.log "Show value on z"
+                app.undo_manager.snapshot()
+            key: [ "Shift+V+Z" ]
+            
