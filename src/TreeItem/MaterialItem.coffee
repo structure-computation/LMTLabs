@@ -15,9 +15,9 @@ Class Steel\n
     Poisson := 0.28\n
     Young := 210\n", "ruby", @parse_code_onchange)
     
-        @lst_variables = new Lst
-        @old_lst_variables = new Lst
-        @lst_variables_value = new Lst
+        @_lst_variables = new Lst
+#         @_old_lst_variables = new Lst
+#         @_lst_variables_value = new Lst
         @parse_code_onchange()
         
     accept_child: ( ch ) ->
@@ -35,9 +35,10 @@ Class Steel\n
         
     parse_code_onchange: =>
         # first delete all variables from textarea
-        for attr in @lst_variables
-            @rem_attr attr.get() # focus seems to be loose when deleting
-        @lst_variables.clear()
+        if @_lst_variables.length > 0
+            for attr in @_lst_variables
+                @rem_attr attr.get() # focus seems to be loose when deleting
+            @_lst_variables.clear()
         
         # then search all variables of type string := value
         reg = /(\w+?) *:= *([0-9\.]+)/g # option g select all occurrence
@@ -50,13 +51,15 @@ Class Steel\n
             variable = RegExp.$1
             variable_value = parseFloat RegExp.$2
             # add founded variable as attributes
-            if not @[ variable ]?                                 # if variable doesn't exist
+            if not @[ variable ]? # if variable doesn't exist
                 @add_attr variable, [ variable_value, false ]
-                @lst_variables.push variable
-            else # never call
-                @set_attr @[ variable ], variable_value
-                
+                @_lst_variables.push variable
+#             else # never call
+#                 @set_attr @[ variable ], variable_value
+#                 
             i++
+
+
 #     parse_code_onchange: =>
 #         # search all variables of type string := value
 #         reg = /(\w+?) *:= *([0-9\.]+)/g # option g select all occurrence
