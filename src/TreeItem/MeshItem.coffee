@@ -38,3 +38,7 @@ class MeshItem extends TreeItem
     sub_canvas_items: ->
         [ @mesh_item ]
 
+    # use on directory when browsing
+    get_file_info: ( info ) ->
+        info.model_type = "Mesh"
+        info.icon = "mesh"
