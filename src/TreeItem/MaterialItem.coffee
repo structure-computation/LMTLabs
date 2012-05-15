@@ -58,33 +58,3 @@ Class Steel\n
 #                 @set_attr @[ variable ], variable_value
 #                 
             i++
-
-
-#     parse_code_onchange: =>
-#         # search all variables of type string := value
-#         reg = /(\w+?) *:= *([0-9\.]+)/g # option g select all occurrence
-#         i = 0
-#         @old_lst_variables = @lst_variables
-#         @lst_variables.clear()
-#         while reg.exec @code.get()
-#             if i > 1000
-#                 console.error 'Too much variables'
-#                 break
-#             console.log 'variable ',  RegExp.$1 ,' founded, value :', RegExp.$2
-#             variable = RegExp.$1
-#             variable_value = parseFloat RegExp.$2
-#             @lst_variables.push variable
-#             @lst_variables_value.push variable_value
-#             i++
-#             
-#             
-#         for variable, i in @lst_variables
-#             if not @[ variable ]?                                 # if variable doesn't exist
-#                 @add_attr variable, [ @lst_variables_value[ i ], false ]
-#             else
-#                 @mod_attr @[ variable ], @lst_variables_value[ i ]
-#                 
-#         for variable in @old_lst_variables when variable not in @lst_variables
-#             @rem_attr @[ variable ] # focus seems to be loose when deleting
-            
-        
