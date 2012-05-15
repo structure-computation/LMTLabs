@@ -4,9 +4,9 @@ all: compilation
 	xdotool search "__CorreliOnline__" windowactivate key F5 || ${browser} html/CorreliOnline.html
 
 # launch with server
-srv: compilation Soda
-	make -C Soda
-	Soda/soda --start-page /CorreliOnline.html
+srv: compilation ext/Soda
+	make -C ext/Soda
+	ext/Soda/soda --start-page /CorreliOnline.html
 
 Soda:
 	git clone git@sc1.ens-cachan.fr:Sodat Soda
