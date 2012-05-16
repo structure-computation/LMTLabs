@@ -1,6 +1,6 @@
 #
 class MeshItem extends TreeItem
-    constructor: ( legend ) ->
+    constructor: ( legend = undefined ) ->
         super()
         
         # attributes
