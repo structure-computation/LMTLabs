@@ -5253,6 +5253,8 @@ class TreeAppModule_Sketch extends TreeAppModule
             txt: "Create a Square edge"
             ina: _ina_cm
             fun: ( evt, app ) =>
+                @create_mesher app
+                        
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                 
                 @sketch.mesh.move_scheme = MoveScheme_2D
@@ -5278,6 +5280,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             txt: "Create a Circle edge"
             ina: _ina_cm
             fun: ( evt, app ) =>
+                @create_mesher app
 
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                     
@@ -5296,6 +5299,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             txt: "Create a Triangle edge"
             ina: _ina_cm
             fun: ( evt, app ) =>
+                @create_mesher app
 
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                     
@@ -5324,4 +5328,18 @@ class TreeAppModule_Sketch extends TreeAppModule
                     
             key: [ "Del" ]
             
+    create_mesher: ( app ) =>
+        create_mesher = true
+        discret = false
+        for it in app.data.get_selected_tree_items() when it instanceof DiscretizationItem
+            discret = true
+            if it._children.length > 0
+                for ch in it._children
+                    if ch instanceof MesherItem
+                        create_mesher = false
+                        
+        if discret == false
+            create_mesher = false
             
+        if create_mesher == true
+            @add_item_depending_selected_tree app, MesherItem
