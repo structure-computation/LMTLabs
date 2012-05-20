@@ -13,12 +13,36 @@ launch_CorreliOnline = ->
     m.modules.push new TreeAppModule_Filter
     m.modules.push new TreeAppModule_ShapeFunction
     m.modules.push new TreeAppModule_MechanicalData
-#     m.modules.push new TreeAppModule_Photo
+    # m.modules.push new TreeAppModule_Photo
     m.modules.push new TreeAppModule_TreeView
-    
-    m.new_session "LMT"
-    
-    s = m.selected_session()
-    
-    v = new TreeApp document.getElementById( "main_window" ), m
+
+    w = document.getElementById "main_window"
+
+    # make session list
+    f = new FileSystem
+    f.load_or_make_dir "/home/monkey/sessions", ( session_dir, err ) ->
+        div = new_dom_element
+            parentNode: w
+        
+        new_dom_element
+            txt: "New session"
+            parentNode: div
+            onclick: ->
+                w.removeChild div
+                name = "session " + new Date()
+                s = m.new_session name
+                session_dir.add_file name, s
+                new TreeApp w, m
+
+        for session in session_dir
+            do ( session ) ->
+                new_dom_element
+                    txt: session.name.get()
+                    parentNode: div
+                    onclick: ->
+                        w.removeChild div
+                        console.log "reload " + session.name.get()
+                        m.add_session session
+                        new TreeApp w, m
+                
     

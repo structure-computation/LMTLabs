@@ -6,7 +6,7 @@ all: compilation
 # launch with server
 soda: compilation ext/Soda
 	make -C ext/Soda
-	ext/Soda/soda --base-dir html -l --start-page /CorreliOnline.html
+	ext/Soda/soda --base-dir html -l --start-page /CorreliOnline.html --title-page __CorreliOnline__
 
 Soja:
 	test -e Soja || ( test -e ../Soja && ln -s `pwd`/../Soja . ) || git clone git@github.com:hleclerc/Soja.git
