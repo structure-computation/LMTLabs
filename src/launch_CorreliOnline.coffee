@@ -19,7 +19,7 @@ launch_CorreliOnline = ->
     w = document.getElementById "main_window"
 
     if false
-        s = m.new_session name
+        s = m.new_session "Session"
         new TreeApp w, m
     else
         # make session list (to create or reload a session)
@@ -49,7 +49,8 @@ launch_CorreliOnline = ->
                             w.removeChild div
                             console.log "reload " + session.name.get()
                             session.load ( model, err ) ->
+                                console.log model
                                 m.add_session model
-                                new TreeApp w, model
+                                new TreeApp w, m
                     
     
