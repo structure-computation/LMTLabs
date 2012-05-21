@@ -18,7 +18,9 @@ launch_CorreliOnline = ->
 
     w = document.getElementById "main_window"
 
-    # make session list
+    # make session list (to create or reload a session)
+    FileSystem._disp = true
+    
     f = new FileSystem
     f.load_or_make_dir "/home/monkey/sessions", ( session_dir, err ) ->
         div = new_dom_element
