@@ -58,13 +58,17 @@ launch_CorreliOnline = ->
                     show_windows()
                     name = "session " + new Date()
                     make_TreeApp main_window, ( m ) ->
+                        item_cp.allow_shortkey = false
+                        item_cp = undefined
                         s = m.new_session name
                         session_dir.add_file name, s, model_type: "Session", icon: "session"
                         
             ModelEditorItem_Directory.add_action "Session", ( file, path, browser ) ->
+                item_cp.allow_shortkey = false
+                item_cp = undefined
                 w.removeChild div
                 show_windows()
-                session.load ( model, err ) ->
+                file.load ( model, err ) ->
                     make_TreeApp main_window, ( m ) ->
                         s = m.add_session model
 

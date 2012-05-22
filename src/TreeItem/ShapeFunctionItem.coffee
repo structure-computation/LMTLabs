@@ -29,5 +29,5 @@ Class Fissure\n
         [  ]
 
     on_mouse_down: ( cm, evt ) ->
-        e = cm._get_movable_entities 0
+#         e = cm._get_movable_entities 0
         true
