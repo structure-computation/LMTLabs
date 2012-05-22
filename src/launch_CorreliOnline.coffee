@@ -1,5 +1,4 @@
-
-launch_CorreliOnline = ->
+make_TreeApp = ( w, f ) ->
     m = new TreeAppData
     m.modules.push new TreeAppModule_Session
     m.modules.push new TreeAppModule_File
@@ -13,33 +12,37 @@ launch_CorreliOnline = ->
     m.modules.push new TreeAppModule_Filter
     m.modules.push new TreeAppModule_ShapeFunction
     m.modules.push new TreeAppModule_MechanicalData
-    # m.modules.push new TreeAppModule_Photo
     m.modules.push new TreeAppModule_TreeView
 
+    f m
+    new TreeApp w, m
+
+launch_CorreliOnline = ->
     w = document.getElementById "main_window"
 
     if false
-        s = m.new_session "Session"
-        new TreeApp w, m
+        make_TreeApp w, ( m ) -> m.new_session "Session"
     else
         # make session list (to create or reload a session)
-        FileSystem._disp = true
+        # FileSystem._disp = true
         
         f = new FileSystem
         f.load_or_make_dir "/home/monkey/sessions", ( session_dir, err ) ->
             div = new_dom_element
                 parentNode: w
-            
+
+            # NEW SESSION
             new_dom_element
                 txt: "New session"
                 parentNode: div
                 onclick: ->
                     w.removeChild div
                     name = "session " + new Date()
-                    s = m.new_session name
-                    session_dir.add_file name, s
-                    new TreeApp w, m
+                    make_TreeApp w, ( m ) ->
+                        s = m.new_session name
+                        session_dir.add_file name, s
 
+            # OLD OnE
             for session in session_dir
                 do ( session ) ->
                     new_dom_element
@@ -47,10 +50,8 @@ launch_CorreliOnline = ->
                         parentNode: div
                         onclick: ->
                             w.removeChild div
-                            console.log "reload " + session.name.get()
                             session.load ( model, err ) ->
-                                console.log model
-                                m.add_session model
-                                new TreeApp w, m
+                                make_TreeApp w, ( m ) ->
+                                   s = m.add_session model
                     
     
