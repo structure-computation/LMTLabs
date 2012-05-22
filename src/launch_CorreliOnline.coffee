@@ -64,24 +64,23 @@ launch_CorreliOnline = ->
 #             session_dir.info.model_type = "Session"
                                     
             ModelEditorItem_Directory.add_action "Session", ( file, path, browser ) ->
-                console.log "open session"
                 show_windows()
                 w.removeChild div
-                session.load ( model, err ) ->
+                file.load ( model, err ) ->
                     make_TreeApp main_window, ( m ) ->
                         s = m.add_session model
 
 
             # OLD OnE
-            for session in session_dir
-                do ( session ) ->
-                    new_dom_element
-                        txt: session.name.get()
-                        parentNode: div
-                        onclick: ->
-                            w.removeChild div
-                            show_windows()
-                            session.load ( model, err ) ->
-                                make_TreeApp main_window, ( m ) ->
-                                   s = m.add_session model
+            #             for session in session_dir
+            #                 do ( session ) ->
+            #                     new_dom_element
+            #                         txt: session.name.get()
+            #                         parentNode: div
+            #                         onclick: ->
+            #                             w.removeChild div
+            #                             show_windows()
+            #                             session.load ( model, err ) ->
+            #                                 make_TreeApp main_window, ( m ) ->
+            #                                    s = m.add_session model
 
