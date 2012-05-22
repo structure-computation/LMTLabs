@@ -44,9 +44,13 @@ launch_CorreliOnline = ->
             div = new_dom_element
                 parentNode: w
 
-            
+            item_cp = new ModelEditorItem_Directory
+                el    : div
+                model : session_dir
+
             # NEW SESSION
             new_dom_element
+                nodeName: "button"
                 txt: "New session"
                 parentNode: div
                 onclick: ->
@@ -57,31 +61,24 @@ launch_CorreliOnline = ->
                         s = m.new_session name
                         session_dir.add_file name, s, model_type: "Session", icon: "session"
                         
-            console.log session_dir
-            item_cp = new ModelEditorItem_Directory
-                                    el    : div
-                                    model : session_dir
-#             session_dir.info.model_type = "Session"
-                                    
             ModelEditorItem_Directory.add_action "Session", ( file, path, browser ) ->
-                console.log "open session"
-                show_windows()
                 w.removeChild div
+                show_windows()
                 session.load ( model, err ) ->
                     make_TreeApp main_window, ( m ) ->
                         s = m.add_session model
 
 
             # OLD OnE
-            for session in session_dir
-                do ( session ) ->
-                    new_dom_element
-                        txt: session.name.get()
-                        parentNode: div
-                        onclick: ->
-                            w.removeChild div
-                            show_windows()
-                            session.load ( model, err ) ->
-                                make_TreeApp main_window, ( m ) ->
-                                   s = m.add_session model
+            #             for session in session_dir
+            #                 do ( session ) ->
+            #                     new_dom_element
+            #                         txt: session.name.get()
+            #                         parentNode: div
+            #                         onclick: ->
+            #                             w.removeChild div
+            #                             show_windows()
+            #                             session.load ( model, err ) ->
+            #                                 make_TreeApp main_window, ( m ) ->
+            #                                    s = m.add_session model
 
