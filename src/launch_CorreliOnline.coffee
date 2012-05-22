@@ -24,7 +24,7 @@ launch_CorreliOnline = ->
         make_TreeApp w, ( m ) -> m.new_session "Session"
     else
         # make session list (to create or reload a session)
-        FileSystem._disp = true
+        # FileSystem._disp = true
         
         f = new FileSystem
         f.load_or_make_dir "/home/monkey/sessions", ( session_dir, err ) ->
