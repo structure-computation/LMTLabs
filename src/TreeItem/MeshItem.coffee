@@ -22,17 +22,11 @@ class MeshItem extends TreeItem
         #         @mesh_item.elementary_fields.set
         #             elem : [ 3.2, -4.7 ]
         
-        ef = new Elementary_Fields "toto", [ 3.2, -4.7 ]
-        #ef.add_display_style "Wireframe"
-        #ef.add_display_style "Surface"
+        ef = new ElementaryField "Ele", [ 3.2, -4.7 ]
         @mesh_item.add_field ef
         
-        nf = new Nodal_Fields "toto", [ 3.2, -4.7, -0.74, 1.2 ]
+        nf = new NodalField "Noda", [ 3.2, -4.7, -0.74, 1.2 ]
         @mesh_item.add_field nf
-        #         nf.add_display_style "Wireframe"
-        #         nf.add_display_style "Surface"
-        #         nf._warp_by.push "Something"
-        #         @mesh_item._field.push nf
         
         #         if @mesh_item._field.length > 0
         #             for df in @mesh_item._field
