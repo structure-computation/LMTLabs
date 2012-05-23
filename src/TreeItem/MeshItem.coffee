@@ -22,10 +22,10 @@ class MeshItem extends TreeItem
         #         @mesh_item.elementary_fields.set
         #             elem : [ 3.2, -4.7 ]
         
-        ef = new ElementaryField "Ele", [ 3.2, -4.7 ]
+        ef = new ElementaryField "Elementary", [ 3.2, -4.7 ]
         @mesh_item.add_field ef
         
-        nf = new NodalField "Noda", [ 3.2, -4.7, -0.74, 1.2 ]
+        nf = new NodalField "Nodal", [ 3.2, -4.7, -0.74, 1.2 ]
         @mesh_item.add_field nf
         
         #         if @mesh_item._field.length > 0
