@@ -5322,9 +5322,10 @@ class TreeAppModule_Sketch extends TreeAppModule
             txt: "Delete Point"
             ina: _ina
             fun: ( evt, app ) =>
-                cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
-                @sketch.mesh.delete_selected_point( cam_info )
-                app.undo_manager.snapshot()
+                if @sketch?
+                    cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
+                    @sketch.mesh.delete_selected_point( cam_info )
+                    app.undo_manager.snapshot()
                     
             key: [ "Del" ]
             
