@@ -13,30 +13,18 @@ class MeshItem extends TreeItem
         @mesh_item.points.push [ 0.25, 0.25, 0 ]
         @mesh_item.triangles.push [ 0, 1, 2 ]
         @mesh_item.triangles.push [ 1, 3, 2 ]
-        #         @mesh_item.displayed_field.lst.set [ "elem", "nodal" ]
-        #         @mesh_item.displayed_field.set 1
         
-        #         @mesh_item.nodal_fields.set
-        #             nodal: [ 3.2, -4.7, -0.74, 1.2 ]
-        #             
-        #         @mesh_item.elementary_fields.set
-        #             elem : [ 3.2, -4.7 ]
+        dis_x = new NodalField "Displacement X", [ 3.2, -4.7, -0.74, 1.2 ]
+        @mesh_item.add_field dis_x
+        dis_y = new NodalField "Displacement Y", [ -2, -7, 2, 1.05 ]
+        @mesh_item.add_field dis_y
+        dis_z = new NodalField "Displacement Z", [ 3, 5, 0.7, 2 ]
+        @mesh_item.add_field dis_z
         
-        ef = new ElementaryField "Elementary", [ 3.2, -4.7 ]
-        @mesh_item.add_field ef
+        displacement = new VectorialFields "Displacement", [ dis_x, dis_y, dis_z ]
         
-        nf = new NodalField "Nodal", [ 3.2, -4.7, -0.74, 1.2 ]
+        nf = new ElementaryField "Strain", [ 3.2, -4.7 ]
         @mesh_item.add_field nf
-        
-        #         if @mesh_item._field.length > 0
-        #             for df in @mesh_item._field
-        #                 @mesh_item.displayed_field.lst.push df.name.get()
-        #                 
-        #             for ds in @mesh_item._field[ @mesh_item.displayed_field.num.get() ]._display_style
-        #                 @mesh_item.displayed_style.lst.push ds.get()
-        #             
-        #             for wb in @mesh_item._field[ @mesh_item.displayed_field.num.get() ]._warp_by
-        #                 @mesh_item.warp_by.lst.push wb.get()
             
         # default values
         @_name.set "Displacement"
