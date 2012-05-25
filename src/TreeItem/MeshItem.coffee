@@ -14,14 +14,15 @@ class MeshItem extends TreeItem
         @mesh_item.triangles.push [ 0, 1, 2 ]
         @mesh_item.triangles.push [ 1, 3, 2 ]
         
-        dis_x = new NodalField "Displacement X", [ 3.2, -4.7, -0.74, 1.2 ]
+        dis_x = new NodalField "Displacement X", [ 0.002, -0.0047, -0.0074, 0.002 ]
         @mesh_item.add_field dis_x
-        dis_y = new NodalField "Displacement Y", [ -2, -7, 2, 1.05 ]
+        dis_y = new NodalField "Displacement Y", [ -0.002, -0.007, 0.002, 0.0015 ]
         @mesh_item.add_field dis_y
-        dis_z = new NodalField "Displacement Z", [ 3, 5, 0.7, 2 ]
+        dis_z = new NodalField "Displacement Z", [ 0.003, 0.005, 0.007, 0.002 ]
         @mesh_item.add_field dis_z
         
         displacement = new VectorialFields "Displacement", [ dis_x, dis_y, dis_z ]
+        @mesh_item.add_vectorial_field displacement
         
         nf = new ElementaryField "Strain", [ 3.2, -4.7 ]
         @mesh_item.add_field nf
