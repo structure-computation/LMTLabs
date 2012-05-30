@@ -45,18 +45,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             fun: ( evt, app ) =>
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                 @sketch.mesh.move_scheme = MoveScheme_3D
-                load_ref @sketch.mesh
-                
-        @actions.push
-            ico: "img/cube3d_32.png"
-            siz: 1
-            txt: "def"
-            ina: _ina
-            fun: ( evt, app ) =>
-                @sketch = @add_item_depending_selected_tree app, SketchItem
-                @sketch.mesh.move_scheme = MoveScheme_3D
-                load_def @sketch.mesh
-
+                load_croix @sketch.mesh
         
         @actions.push
             ico: "img/cube3d_32.png"

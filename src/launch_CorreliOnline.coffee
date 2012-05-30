@@ -13,9 +13,10 @@ make_TreeApp = ( w, f ) ->
     m.modules.push new TreeAppModule_ShapeFunction
     m.modules.push new TreeAppModule_MechanicalData
     m.modules.push new TreeAppModule_TreeView
-
+    
     f m
     new TreeApp w, m
+    console.log '::'
 
     
 hide_windows = ->
@@ -32,8 +33,11 @@ launch_CorreliOnline = ->
     
     main_window = document.getElementById('main_window')
     
-    if false
-        make_TreeApp main_window, ( m ) -> m.new_session "Session"
+    if location.protocol == 'file:'
+        show_windows()
+        
+        make_TreeApp main_window, ( m ) ->
+            m.new_session "Session"
     else
         # make session list (to create or reload a session)
         # FileSystem._disp = true
@@ -70,7 +74,7 @@ launch_CorreliOnline = ->
                 show_windows()
                 file.load ( model, err ) ->
                     make_TreeApp main_window, ( m ) ->
-                        s = m.add_session model
+                        m.add_session model
 
 
             # OLD OnE
