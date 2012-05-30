@@ -16,7 +16,6 @@ make_TreeApp = ( w, f ) ->
     
     f m
     new TreeApp w, m
-    console.log '::'
 
     
 hide_windows = ->
