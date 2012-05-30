@@ -5184,7 +5184,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 mesh.lines.push( [ old_nb_nodes + 1843, old_nb_nodes + 1838 ] );
                 
                 
-                #building automatic triangle (which are not correct)
+                # building automatic triangle (which are not correct)
                 for p, i in mesh.points by 3
                     if mesh.points[ i ] != undefined and mesh.points[ i + 1 ] != undefined and mesh.points[ i + 2 ] != undefined
                         mesh.triangles.push( [ i, i + 1, i + 2 ] )
