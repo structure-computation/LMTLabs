@@ -21,7 +21,7 @@ class MeshItem extends TreeItem
         dis_z = new NodalField "Displacement Z", [ 0.003, 0.005, 0.007, 0.002 ]
         @mesh_item.add_field dis_z
         
-        displacement = new VectorialFields "Displacement", [ dis_x, dis_y, dis_z ]
+        displacement = new VectorialField "Displacement", [ dis_x, dis_y, dis_z ]
         @mesh_item.add_field displacement
         
         nf = new ElementaryField "Strain", [ 3.2, -4.7 ]

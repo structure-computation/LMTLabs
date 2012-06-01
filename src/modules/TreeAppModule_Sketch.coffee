@@ -46,6 +46,18 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                 @sketch.mesh.move_scheme = MoveScheme_3D
                 load_croix @sketch.mesh
+                
+        @actions.push
+            ico: "img/break.png"
+            siz: 1
+            txt: "Break curve to line"
+            ina: _ina_cm
+            fun: ( evt, app ) =>
+                cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
+                @sketch.mesh.break_line_from_selected(cam_info)
+                app.undo_manager.snapshot()
+            key: [ "Shift+B" ]
+        
         
         @actions.push
             ico: "img/cube3d_32.png"
@@ -5173,24 +5185,6 @@ class TreeAppModule_Sketch extends TreeAppModule
                 mesh.lines.push( [ old_nb_nodes + 1843, old_nb_nodes + 1838 ] );
                 
                 
-                # building automatic triangle (which are not correct)
-                for p, i in mesh.points by 3
-                    if mesh.points[ i ] != undefined and mesh.points[ i + 1 ] != undefined and mesh.points[ i + 2 ] != undefined
-                        mesh.triangles.push( [ i, i + 1, i + 2 ] )
-                
-                # building a NodalField with random value
-                data = new Lst
-                for p, i in mesh.points
-                    data.push Math.random()
-                dis_x = new NodalField "Displacement X", data
-                mesh.add_field dis_x
-                
-                # building a ElementaryField with ranged value
-                strain = new ElementaryField "Strain"
-                for p, i in mesh.points by 3
-                    strain._data.push i
-                mesh.add_field strain
-
                 #                 xhr_object = Synchronizer.my_xml_http_request()
                 #                 xhr_object.open "GET", "carter.js", true
                 #                 xhr_object.onreadystatechange = =>
@@ -5231,17 +5225,6 @@ class TreeAppModule_Sketch extends TreeAppModule
                 
             key: [ "Shift+T" ]
 
-        
-        @actions.push
-            ico: "img/break.png"
-            siz: 1
-            txt: "Break curve to line"
-            ina: _ina_cm
-            fun: ( evt, app ) =>
-                cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
-                @sketch.mesh.break_line_from_selected(cam_info)
-                app.undo_manager.snapshot()
-            key: [ "Shift+B" ]
         
                     
         mesher_sub =
