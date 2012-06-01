@@ -5184,6 +5184,8 @@ class TreeAppModule_Sketch extends TreeAppModule
                 mesh.lines.push( [ old_nb_nodes + 1844, old_nb_nodes + 1838 ] );
                 mesh.lines.push( [ old_nb_nodes + 1843, old_nb_nodes + 1838 ] );
                 
+                mesh.editable_points.set false
+                mesh.displayed_style.set "Wireframe"
                 
                 #                 xhr_object = Synchronizer.my_xml_http_request()
                 #                 xhr_object.open "GET", "carter.js", true
@@ -5241,7 +5243,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         mesher_sub.sub.act.push 
             ico: "img/shape.png"
             siz: 1
-            txt: "Create a Square edge"
+            txt: "Create a Square"
             ina: _ina_cm
             fun: ( evt, app ) =>
                 @create_mesher app
@@ -5262,6 +5264,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.lines.push [ current_point + 3, current_point ]
                 
                 @sketch.mesh.polygons.push [ current_line, current_line + 1, current_line + 2, current_line + 3 ]
+                @sketch.mesh.displayed_style.set "Wireframe"
                 
                 app.undo_manager.snapshot()
         
@@ -5282,6 +5285,8 @@ class TreeAppModule_Sketch extends TreeAppModule
                     @sketch.mesh.add_point point
                     
                 @sketch.mesh.lines.push [ current_point, current_point + 1, current_point + 2, current_point ]
+                @sketch.mesh.displayed_style.set "Wireframe"
+                
                 app.undo_manager.snapshot()
                 
         mesher_sub.sub.act.push 
@@ -5305,6 +5310,8 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.lines.push [ current_point + 1, current_point + 2 ]
                 @sketch.mesh.lines.push [ current_point + 2, current_point ]
                 @sketch.mesh.polygons.push [ current_line, current_line + 1, current_line + 2 ]
+                @sketch.mesh.displayed_style.set "Wireframe"
+                
                 app.undo_manager.snapshot()
         
         @actions.push

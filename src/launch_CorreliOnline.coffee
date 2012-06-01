@@ -1,18 +1,19 @@
-make_TreeApp = ( w, f ) ->
+make_TreeApp = ( w, f, load_modules = true ) ->
     m = new TreeAppData
-    m.modules.push new TreeAppModule_Session
-    m.modules.push new TreeAppModule_File
-    m.modules.push new TreeAppModule_UndoManager
-    m.modules.push new TreeAppModule_PanelManager
-    m.modules.push new TreeAppModule_Correlation
-    m.modules.push new TreeAppModule_ImageSet
-    m.modules.push new TreeAppModule_Animation m
-    m.modules.push new TreeAppModule_Sketch
-    m.modules.push new TreeAppModule_Transform
-    m.modules.push new TreeAppModule_Filter
-    m.modules.push new TreeAppModule_ShapeFunction
-    m.modules.push new TreeAppModule_MechanicalData
-    m.modules.push new TreeAppModule_TreeView
+    if load_modules
+        m.modules.push new TreeAppModule_Session
+        m.modules.push new TreeAppModule_File
+        m.modules.push new TreeAppModule_UndoManager
+        m.modules.push new TreeAppModule_PanelManager
+        m.modules.push new TreeAppModule_Correlation
+        m.modules.push new TreeAppModule_ImageSet
+        m.modules.push new TreeAppModule_Animation m
+        m.modules.push new TreeAppModule_Sketch
+        m.modules.push new TreeAppModule_Transform
+        m.modules.push new TreeAppModule_Filter
+        m.modules.push new TreeAppModule_ShapeFunction
+        m.modules.push new TreeAppModule_MechanicalData
+        m.modules.push new TreeAppModule_TreeView
     
     f m
     new TreeApp w, m
@@ -42,8 +43,8 @@ launch_CorreliOnline = ->
         # FileSystem._disp = true
         
         f = new FileSystem
-        f.load_or_make_dir "/home/monkey/sessions", ( session_dir, err ) ->
-        
+        d = "/home/monkey/sessions"
+        f.load_or_make_dir d, ( session_dir, err ) ->
             div = new_dom_element
                 parentNode: w
 
@@ -60,6 +61,7 @@ launch_CorreliOnline = ->
                     w.removeChild div
                     show_windows()
                     name = "session " + new Date()
+                    # window.location = "#" + encodeURI( "#{d}/#{name}" )
                     make_TreeApp main_window, ( m ) ->
                         item_cp.allow_shortkey = false
                         item_cp = undefined
@@ -74,18 +76,4 @@ launch_CorreliOnline = ->
                 file.load ( model, err ) ->
                     make_TreeApp main_window, ( m ) ->
                         m.add_session model
-
-
-            # OLD OnE
-            #             for session in session_dir
-            #                 do ( session ) ->
-            #                     new_dom_element
-            #                         txt: session.name.get()
-            #                         parentNode: div
-            #                         onclick: ->
-            #                             w.removeChild div
-            #                             show_windows()
-            #                             session.load ( model, err ) ->
-            #                                 make_TreeApp main_window, ( m ) ->
-            #                                    s = m.add_session model
 
