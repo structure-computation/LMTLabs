@@ -46,6 +46,9 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                 @sketch.mesh.move_scheme = MoveScheme_3D
                 load_croix @sketch.mesh
+                for p in @sketch.mesh.displayed_field.lst[ 1 ]._data
+                    p.set( - p.get() )
+                
                 
         @actions.push
             ico: "img/break.png"
@@ -54,7 +57,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ina: _ina_cm
             fun: ( evt, app ) =>
                 cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
-                @sketch.mesh.break_line_from_selected(cam_info)
+                @sketch.mesh.break_line_from_selected( cam_info )
                 app.undo_manager.snapshot()
             key: [ "Shift+B" ]
         
