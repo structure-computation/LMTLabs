@@ -33,7 +33,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ina: _ina_cm
             fun: ( evt, app ) =>
                 cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
-                @sketch.mesh.make_curve_line_from_selected(cam_info)
+                @sketch.mesh.make_curve_line_from_selected( cam_info )
                 app.undo_manager.snapshot()
             key: [ "Shift+C" ]
         
