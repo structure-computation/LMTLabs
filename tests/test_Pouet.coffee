@@ -31,7 +31,7 @@ test_Pouet = ->
         marker_color: "#f00"
         line_width  : 3,
         line_color: new Color 75, 150, 175
-        size_marker: 10,
+        marker_size: 10,
         x_axis: 'label X',
         y_axis: 'label Y'
         
@@ -68,7 +68,7 @@ test_Pouet = ->
         marker: 'bar',
         marker_color: new Color 255, 0, 0
         shadow: false,
-        size_marker: 2,
+        marker_size: 2,
         show_line: false,
         show_grid: false,
         x_axis: 'Day',
