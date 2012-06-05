@@ -112,10 +112,10 @@ class TreeAppModule_Session extends TreeAppModule
                 parentNode: parent
                 style     : { width: 700, height: 400 }
                 
-            m = new Graph marker: 'dot', x_axis: 'Iteration', y_axis: 'Error', line_color: "#00f", marker_color: "#f00", marker_size: 8
+            m = new Graph marker: 'dot', x_axis: 'Iteration', y_axis: 'Error', line_color: "#00f", marker_color: "#f00", marker_size: 8, movable_hl_infos: false
             for i in [ 0 .. 10 ]
-                m.points.push [ i , 9 - i, 0 ]
-
+                m.points.push [ i , Math.exp( - i ) * 10, 0 ]
+                
             
             @cm = new CanvasManager el: d, want_aspect_ratio: true, padding_ratio: 1.4, constrain_zoom: 'x'
             @cm.cam.threeD.set false
@@ -139,7 +139,8 @@ class TreeAppModule_Session extends TreeAppModule
 
         session = app.data.selected_session()
         
-        
+    
+        @get_convergence_curve parent
         
         for correlation in session._children when correlation instanceof CorrelationItem
 #             console.log correlation
