@@ -17,7 +17,7 @@ class CorrelationItem extends TreeItem
             pre_fft: true
             luminosity_correction: true
             convergence: [ new Choice( 0, [ "||dU||2", "||dU||inf"] ) ,1e-5]
-# <math>\delta \infty</math>            mod: [ 1e-5, new Choice( 0, [ "||&#8710;u||2", "||&#8710;u||&#x221E;"] ) ]
+            # <math>\delta \infty</math>            mod: [ 1e-5, new Choice( 0, [ "||&#8710;u||2", "||&#8710;u||&#x221E;"] ) ]
 
             # con: 1e-5
             multi_resolution: new ConstrainedVal( 0, { min: 0, max: 10, div: 10 } )
