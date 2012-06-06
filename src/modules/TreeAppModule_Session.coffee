@@ -152,12 +152,12 @@ class TreeAppModule_Session extends TreeAppModule
             From picture name " + ic._children[ 0 ].img.src + " to " + ic._children[ ic._children.length - 1 ].img.src + "<br>
             Updates have been done on " + ic._children[ 0 ].img.src + "<br><br>
             With following parameters :<br>
-        Prefft : " + correlation.pre_fft.get() + "<br>
-        Luminosity : " + correlation.luminosity_correction.get() + "<br>
-        Norm : " + correlation.convergence[ 0 ].get() + " with value "+ correlation.convergence[ 1 ].get() + "<br>
-        Multi resolution : " + correlation.multi_resolution.get() + "<br>
-        Number max of iterations : " + correlation.iteration.get() + "<br>
-        "
+            Prefft : " + correlation.pre_fft.get() + "<br>
+            Luminosity : " + correlation.luminosity_correction.get() + "<br>
+            Norm : " + correlation.convergence[ 0 ].get() + " with value "+ correlation.convergence[ 1 ].get() + "<br>
+            Multi resolution : " + correlation.multi_resolution.get() + "<br>
+            Number max of iterations : " + correlation.iteration.get() + "<br>
+            "
         
         
             correlation_parameters = new_dom_element
