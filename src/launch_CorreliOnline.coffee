@@ -8,6 +8,7 @@ make_TreeApp = ( w, f, load_modules = true ) ->
         m.modules.push new TreeAppModule_Correlation
         m.modules.push new TreeAppModule_ImageSet
         m.modules.push new TreeAppModule_Animation m
+        m.modules.push new TreeAppModule_Mesher
         m.modules.push new TreeAppModule_Sketch
         m.modules.push new TreeAppModule_Transform
         m.modules.push new TreeAppModule_Filter
