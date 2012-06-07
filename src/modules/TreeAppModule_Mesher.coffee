@@ -24,7 +24,7 @@ class TreeAppModule_Mesher extends TreeAppModule
             key: [ "Shift+M" ]
 
         @actions.push
-            ico: "img/node_del_24.png"
+            ico: "img/point_mesher_remove_24.png"
             siz: 1
             txt: "Remove a mesher point"
             fun: ( evt, app ) =>
@@ -37,7 +37,7 @@ class TreeAppModule_Mesher extends TreeAppModule
                                 @mesher.remove_point pm
         
         @actions.push
-            ico: "img/node_add_24.png"
+            ico: "img/point_mesher_add_24.png"
             siz: 1
             txt: "Add a mesher point"
             fun: ( evt, app ) =>
