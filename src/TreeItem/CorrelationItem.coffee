@@ -16,21 +16,20 @@ class CorrelationItem extends TreeItem
         @add_attr
             pre_fft: true
             luminosity_correction: true
-            convergence: [ new Choice( 0, [ "||dU||2", "||dU||inf"] ) ,1e-5]
+            convergence     : [ new Choice( 0, [ "||dU||2", "||dU||inf"] ) ,1e-5 ]
             # <math>\delta \infty</math>            mod: [ 1e-5, new Choice( 0, [ "||&#8710;u||2", "||&#8710;u||&#x221E;"] ) ]
 
             # con: 1e-5
             multi_resolution: new ConstrainedVal( 0, { min: 0, max: 10, div: 10 } )
-            iteration: 50
-            preview_result: false
-            element_size: [ 16, 16 ]
-            correlation: new Button "Compute", "Connecting (click to abort)"
+            iteration       : 50
+            preview_result  : false
+            element_size    : [ 16, 16 ]
+            correlation     : new Button "Compute", "Connecting (click to abort)"
+            # _can_be_computed: 
         
-#         @correlation = new_dom_element
-#             typeName  : "button"
 
-        @correlation.change_allowed = ( state ) ->
-            state or confirm "Are you sure you want to abort ?"
+        #@correlation.change_allowed = ( state ) ->
+        #    state or confirm "Are you sure you want to abort ?"
 
         # with choice roll
         @pre_fft._model_editor_item_type = ModelEditorItem_Bool_Img
