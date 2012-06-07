@@ -10,7 +10,6 @@ class CorrelationItem extends TreeItem
         @add_child new ImgSetItem
         @add_child new MaskItem
         @add_child new DiscretizationItem
-
         
         # attributes
         @add_attr
@@ -55,10 +54,3 @@ class CorrelationItem extends TreeItem
         ch instanceof SketchItem or 
         ch instanceof ImgSetItem or
         ch instanceof TransformItem
-        
-    z_index: ->
-        #
-        
-    
-    sub_canvas_items: ->
-        [ ]
