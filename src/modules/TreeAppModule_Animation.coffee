@@ -1,5 +1,5 @@
 class TreeAppModule_Animation extends TreeAppModule
-    constructor: ( app_data ) ->
+    constructor: ->
         super()
         
         @play_state = false
@@ -91,9 +91,9 @@ class TreeAppModule_Animation extends TreeAppModule
             key: [ "Shift+6" ]
         
         # constrained value
-        @actions.push
-            mod: app_data.time
-            siz: 1
+        #         @actions.push
+        #             mod: app_data.time
+        #             siz: 1
                 
                     
     run_timer : ( app ) =>

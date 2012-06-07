@@ -5,15 +5,16 @@ class MesherItem extends TreeItem
         
         # attributes
         @add_attr
-            cell_type  : new Choice( 0, [ "Triangle 3", "Triangle 6", "Quad 4",  "Quad 8" ] )
-            size_X     : 8
-            size_Y     : 8
-            link_size  : true
-            _mesh      : new Mesh
-            density    : 16
-            radius     : 48
-            mesh       : new Button "Start Mesh", "Doing the Mesh (click to abort)"
-            p_mesher   : new Lst
+            cell_type        : new Choice( 0, [ "Triangle 3", "Triangle 6", "Quad 4",  "Quad 8" ] )
+            size_X           : 8
+            size_Y           : 8
+            link_size        : true
+            _mesh            : new Mesh
+            density          : 16
+            radius           : 48
+            _can_be_computed : 2 # 0 / 1 / 2 respectively uncheck / manually computable / auto-computable
+            mesh             : new Button "Start Mesh", "Doing the Mesh (click to abort)"
+            p_mesher         : new Lst
         
         @mesh.change_allowed = ( state ) ->
             state or confirm "Are you sure you want to abort ?"
@@ -36,15 +37,14 @@ class MesherItem extends TreeItem
             @p_mesher.push p            
     
     remove_point: ( p ) ->
-        console.log 'p ', p
         if p instanceof PointMesher
             ind = @p_mesher.indexOf p
             if ind != -1
                 @p_mesher.splice ind, 1
             
-        if p isnt NaN # p is an indice
+        else if p isnt NaN # p is an indice
             @p_mesher.splice p, 1
-    
+        
     accept_child: ( ch ) ->
         ch instanceof MaskItem or 
         ch instanceof MesherItem or 
