@@ -36,15 +36,14 @@ class MesherItem extends TreeItem
             @p_mesher.push p            
     
     remove_point: ( p ) ->
-        console.log 'p ', p
         if p instanceof PointMesher
             ind = @p_mesher.indexOf p
             if ind != -1
                 @p_mesher.splice ind, 1
             
-        if p isnt NaN # p is an indice
+        else if p isnt NaN # p is an indice
             @p_mesher.splice p, 1
-    
+        
     accept_child: ( ch ) ->
         ch instanceof MaskItem or 
         ch instanceof MesherItem or 

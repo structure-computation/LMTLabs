@@ -33,12 +33,9 @@ class TreeAppModule_Mesher extends TreeAppModule
                     if @mesher.p_mesher.length > 0
                         for ind in [ @mesher.p_mesher.length - 1 .. 0 ]
                             pm = @mesher.p_mesher[ ind ]
-                            if pm._selected.length
+                            if pm._selected.indexOf(pm.point) >= 0
                                 @mesher.remove_point pm
-#                         selected_point = @mesher.p_mesher._selected
-#                         console.log selected_point
-#                         @mesher.remove_point selected_point
-#                         
+        
         @actions.push
             ico: "img/node_add_24.png"
             siz: 1
