@@ -16,7 +16,7 @@ launch_CorreliOnline = ->
         td.modules.push new TreeAppModule_Filter
         td.modules.push new TreeAppModule_ShapeFunction
         td.modules.push new TreeAppModule_MechanicalData
-        m.modules.push new TreeAppModule_Compute
+        td.modules.push new TreeAppModule_Compute
         td.modules.push new TreeAppModule_TreeView
         
         td
