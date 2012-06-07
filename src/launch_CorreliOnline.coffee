@@ -14,6 +14,7 @@ make_TreeApp = ( w, f, load_modules = true ) ->
         m.modules.push new TreeAppModule_Filter
         m.modules.push new TreeAppModule_ShapeFunction
         m.modules.push new TreeAppModule_MechanicalData
+        m.modules.push new TreeAppModule_Compute
         m.modules.push new TreeAppModule_TreeView
     
     f m
