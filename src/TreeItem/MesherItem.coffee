@@ -6,31 +6,24 @@ class MesherItem extends TreeItem
         # attributes
         @add_attr
             cell_type        : new Choice( 0, [ "Triangle 3", "Triangle 6", "Quad 4",  "Quad 8" ] )
-            size_X           : 8
-            size_Y           : 8
-            link_size        : true
-            _mesh            : new Mesh
+            base_size        : 8
             density          : 16
             radius           : 48
-            _can_be_computed : 2 # 0 / 1 / 2 respectively uncheck / manually computable / auto-computable
-            #mesh             : new Button "Start Mesh", "Doing the Mesh (click to abort)"
             p_mesher         : new Lst
-        
-#         @mesh.change_allowed = ( state ) ->
-#             state or confirm "Are you sure you want to abort ?"
+            _mesh            : new Mesh
+            _can_be_computed : 2 # 0 / 1 / 2 respectively uncheck / manually computable / auto-computable
             
-        # default values
         @_name.set name
         @_ico.set "img/mesher.png"
         @_viewable.set true
     
-        @size_X.bind =>
-            if @link_size.get() == true
-                @size_Y.set @size_X.get()
-    
-        @size_Y.bind =>
-            if @link_size.get() == true
-                @size_X.set @size_Y.get()
+        #         @size_X.bind =>
+        #             if @link_size.get() == true
+        #                 @size_Y.set @size_X.get()
+        #     
+        #         @size_Y.bind =>
+        #             if @link_size.get() == true
+        #                 @size_X.set @size_Y.get()
         
     add_point: ( p = new PointMesher ) ->
         if p instanceof PointMesher
@@ -78,3 +71,4 @@ class MesherItem extends TreeItem
     on_mouse_move: ( cm, evt, pos, b, old ) ->
         for pm in @p_mesher
             pm.on_mouse_move cm, evt, pos, b, old
+            
