@@ -63,11 +63,10 @@ class BoundariesSelectionItem extends TreeItem
         if b == "LEFT"
             if cm._flat?
                 res = []
-                app_data = @get_app_data()                
-                
+                app_data = @get_app_data()
                 for ch in @_children when ch instanceof PickedZoneItem
                     ch.get_movable_entities res, cm.cam_info, pos, 1, true
-                
+                    
                 if res.length # delete a line in PickedZoneItem
                     res.sort ( a, b ) -> b.dist - a.dist
                     @delete_from_tree app_data, res[ 0 ].pzi
@@ -77,6 +76,7 @@ class BoundariesSelectionItem extends TreeItem
                     for el in cm._flat when el instanceof Mesh
                         if el.lines and el.get_movable_entities?
                             el.get_movable_entities res, cm.cam_info, pos, 1, true
+                            
                     if res.length # add a new line in PickedZoneItem
                         res.sort ( a, b ) -> b.dist - a.dist
                         @_may_need_snapshot = true
@@ -86,8 +86,8 @@ class BoundariesSelectionItem extends TreeItem
                         pzi.points.push res[ 0 ].item[ 1 ].model_id
                         pzi.points.push res[ 0 ].item[ 2 ].model_id
                         pzi.lines.push line.model_id
-                            
-                    return true
+                        
+                    return false
                     
         return false
         
@@ -127,3 +127,4 @@ class BoundariesSelectionItem extends TreeItem
                 else # mean we found something in Mesh
                     if line not in res[ 0 ].prov._pre_sele
                         res[ 0 ].prov._pre_sele.push line
+        return false

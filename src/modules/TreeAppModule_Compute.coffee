@@ -10,16 +10,11 @@ class TreeAppModule_Compute extends TreeAppModule
         _ina = ( app ) =>
             app.data.focus.get() != app.treeview.view_id
         
-        _ina_cm = ( app ) =>
-            app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id and 
-            app.data.focus.get() != app.treeview.view_id
-        
         _draw_loc = ( app ) ->
             for path in app.data.selected_tree_items
                 if path.length > 1
                     m = path[ path.length - 1 ]
                     if m._can_be_computed?
-                        console.log m._can_be_computed.get(), this
                         if m._can_be_computed.get() == 0
                             this.ico = "img/manual_compute_inactive_24.png"
                         else if m._can_be_computed.get() == 1

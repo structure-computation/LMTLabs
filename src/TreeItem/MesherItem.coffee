@@ -74,7 +74,10 @@ class MesherItem extends TreeItem
     on_mouse_down: ( cm, evt, pos, b ) ->
         for pm in @p_mesher
             pm.on_mouse_down cm, evt, pos, b
+        return false
             
     on_mouse_move: ( cm, evt, pos, b, old ) ->
         for pm in @p_mesher
             pm.on_mouse_move cm, evt, pos, b, old
+        return false
+        
