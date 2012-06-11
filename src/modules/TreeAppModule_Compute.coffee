@@ -46,7 +46,7 @@ class TreeAppModule_Compute extends TreeAppModule
                     if path.length > 1
                         m = path[ path.length - 1 ]
                         if m._can_be_computed?
-                            m._can_be_computed.set 2
+                            m._can_be_computed.set 3
                             
         @actions.push
             txt: "Compute"
