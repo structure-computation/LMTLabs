@@ -33,10 +33,10 @@ launch_CorreliOnline = ->
             if hash.length > 1
                 path = decodeURIComponent hash.slice 1
                 FileSystem.get_inst().load path, ( td, err ) ->
-                    #if err
-                    #    window.location = "#"
-                    #else
-                    new TreeApp document.body, td
+                    if err
+                        window.location = "#"
+                    else
+                        new TreeApp document.body, td
                     
             # else, browse old session
             else
