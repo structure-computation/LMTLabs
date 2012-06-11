@@ -19,9 +19,9 @@ class TreeAppModule_Sketch extends TreeAppModule
             txt: "Transform line to curve"
             ina: _ina_cm
             fun: ( evt, app ) =>
+                app.undo_manager.snapshot()
                 cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
                 @sketch.mesh.make_curve_line_from_selected( cam_info )
-                app.undo_manager.snapshot()
             key: [ "Shift+C" ]
         
         @actions.push
@@ -43,9 +43,9 @@ class TreeAppModule_Sketch extends TreeAppModule
             txt: "Break curve to line"
             ina: _ina_cm
             fun: ( evt, app ) =>
+                app.undo_manager.snapshot()
                 cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
                 @sketch.mesh.break_line_from_selected( cam_info )
-                app.undo_manager.snapshot()
             key: [ "Shift+B" ]
         
         
@@ -56,6 +56,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ina: _ina_cm
             fun: ( evt, app ) =>
                 #
+                app.undo_manager.snapshot()
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                 @sketch.mesh.move_scheme = MoveScheme_3D
 
@@ -102,7 +103,6 @@ class TreeAppModule_Sketch extends TreeAppModule
                 #                 @sketch.mesh.lines.push [ currentPoint + 3, currentPoint + 7 ]
                 
                 app.fit()
-                app.undo_manager.snapshot()
                 
             key: [ "Shift+T" ]
 
@@ -125,6 +125,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             txt: "Create a Square"
             ina: _ina_cm
             fun: ( evt, app ) =>
+                app.undo_manager.snapshot()
                 @create_mesher app
                         
                 @sketch = @add_item_depending_selected_tree app, SketchItem
@@ -145,7 +146,6 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.polygons.push [ current_line, current_line + 1, current_line + 2, current_line + 3 ]
                 @sketch.mesh.displayed_style.set "Wireframe"
                 
-                app.undo_manager.snapshot()
         
         mesher_sub.sub.act.push 
             ico: "img/circle.png"
@@ -153,6 +153,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             txt: "Create a Circle edge"
             ina: _ina_cm
             fun: ( evt, app ) =>
+                app.undo_manager.snapshot()
                 @create_mesher app
 
                 @sketch = @add_item_depending_selected_tree app, SketchItem
@@ -166,14 +167,13 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.lines.push [ current_point, current_point + 1, current_point + 2, current_point ]
                 @sketch.mesh.displayed_style.set "Wireframe"
                 
-                app.undo_manager.snapshot()
-                
         mesher_sub.sub.act.push 
             ico: "img/triangle.png"
             siz: 1
             txt: "Create a Triangle edge"
             ina: _ina_cm
             fun: ( evt, app ) =>
+                app.undo_manager.snapshot()
                 @create_mesher app
 
                 @sketch = @add_item_depending_selected_tree app, SketchItem
@@ -191,7 +191,6 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.polygons.push [ current_line, current_line + 1, current_line + 2 ]
                 @sketch.mesh.displayed_style.set "Wireframe"
                 
-                app.undo_manager.snapshot()
         
         @actions.push
             ico: "img/deletePoint_24.png"
@@ -200,9 +199,9 @@ class TreeAppModule_Sketch extends TreeAppModule
             ina: _ina
             fun: ( evt, app ) =>
                 if @sketch?
+                    app.undo_manager.snapshot()
                     cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
                     @sketch.mesh.delete_selected_point( cam_info )
-                    app.undo_manager.snapshot()
                     
             key: [ "Del" ]
             
