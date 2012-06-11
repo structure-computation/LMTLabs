@@ -10,12 +10,18 @@ class MesherItem extends TreeItem
             density          : 16
             radius           : 48
             p_mesher         : new Lst
-            _mesh            : new Mesh
-            _can_be_computed : 2 # 0 / 1 / 2 respectively uncheck / manually computable / auto-computable
+            mesh             : new Mesh
+            _can_be_computed : 3 # 0 / 1 / 2 respectively uncheck / manually computable / auto-computable
             
         @_name.set name
         @_ico.set "img/mesher.png"
         @_viewable.set true
+        
+        @bind =>
+            if @_can_be_computed.get() == 0
+                @_can_be_computed.set 1
+            if @_can_be_computed.get() == 2
+                @_can_be_computed.set 3
     
         #         @size_X.bind =>
         #             if @link_size.get() == true
@@ -46,7 +52,7 @@ class MesherItem extends TreeItem
         ch instanceof TransformItem
         
     sub_canvas_items: ->
-        [ @_mesh ]
+        [ @mesh ]
     
     draw: ( info ) ->
         if @p_mesher.length
