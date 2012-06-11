@@ -11,7 +11,7 @@ class MesherItem extends TreeItem
             radius           : 48
             p_mesher         : new Lst
             _mesh            : new Mesh
-            _can_be_computed : 2 # 0 / 1 / 2 respectively uncheck / manually computable / auto-computable
+            _can_be_computed : 2 # 0 / 1 / 2 / 3 respectively uncheck / manually computable / auto-computable which is calculated / auto-computable who needs to be calculated
             
         @_name.set name
         @_ico.set "img/mesher.png"
