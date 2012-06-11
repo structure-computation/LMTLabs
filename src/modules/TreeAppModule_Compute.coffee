@@ -20,6 +20,8 @@ class TreeAppModule_Compute extends TreeAppModule
                         else if m._can_be_computed.get() == 1
                             this.ico = "img/manual_compute_24.png"
                         else if m._can_be_computed.get() == 2
+                            this.ico = "img/auto_compute_24.png" #could be replaced by a gif
+                        else if m._can_be_computed.get() == 3
                             this.ico = "img/auto_compute_24.png"
                         return true
             return false

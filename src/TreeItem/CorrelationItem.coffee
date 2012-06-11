@@ -23,7 +23,7 @@ class CorrelationItem extends TreeItem
             iteration             : 50
             preview_result        : false
             element_size          : [ 16, 16 ]
-            _can_be_computed      : 0 # 0 / 1 / 2 respectively uncheck / manually computable / auto-computable
+            _can_be_computed      : 2 # 0 / 1 / 2 / 3 respectively uncheck / manually computable / auto-computable which is calculated / auto-computable who needs to be calculated
             #correlation           : new Button "Compute", "Connecting (click to abort)"
         
 
