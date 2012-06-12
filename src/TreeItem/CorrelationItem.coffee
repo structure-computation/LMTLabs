@@ -1,5 +1,5 @@
 #
-class CorrelationItem extends TreeItem
+class CorrelationItem extends TreeItem_Computable
     constructor: ->
         super()
         
@@ -23,12 +23,6 @@ class CorrelationItem extends TreeItem
             iteration             : 50
             preview_result        : false
             element_size          : [ 16, 16 ]
-            _can_be_computed      : 2 # 0 / 1 / 2 / 3 respectively uncheck / manually computable / auto-computable which is calculated / auto-computable who needs to be calculated
-            #correlation           : new Button "Compute", "Connecting (click to abort)"
-        
-
-        #         @correlation.change_allowed = ( state ) ->
-        #             state or confirm "Are you sure you want to abort ?"
 
         # with choice roll
         @pre_fft._model_editor_item_type = ModelEditorItem_Bool_Img
