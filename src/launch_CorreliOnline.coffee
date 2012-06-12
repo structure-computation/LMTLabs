@@ -20,8 +20,16 @@ launch_CorreliOnline = ->
         td.modules.push new TreeAppModule_TreeView
         
         td
+        
+    clear_page = ->
+        while document.body.firstChild?
+            document.body.removeChild document.body.firstChild
+
 
     bs = new BrowserState
+    fs = new FileSystem
+    # FileSystem._disp = true
+    
     bs.location.bind ->
         # file -> make a new session
         if bs.location.protocol.get() == 'file:'
@@ -31,18 +39,20 @@ launch_CorreliOnline = ->
             hash = bs.location.hash.get()
             # something to reload ?
             if hash.length > 1
+                clear_page()
                 path = decodeURIComponent hash.slice 1
                 FileSystem.get_inst().load path, ( td, err ) ->
-#                     if err
-#                         window.location = "#"
-#                     else
+                    if err
+                        window.location = "#"
+                    else
                         new TreeApp document.body, td
                     
             # else, browse old session
             else
-                f = new FileSystem
                 d = "/home/monkey/sessions"
-                f.load_or_make_dir d, ( session_dir, err ) ->
+                fs.load_or_make_dir d, ( session_dir, err ) ->
+                    clear_page()
+                    
                     div = new_dom_element
                         parentNode: document.body
 
@@ -56,7 +66,7 @@ launch_CorreliOnline = ->
                         txt: "New session"
                         parentNode: div
                         onclick: ->
-                            div.parentNode.removeChild div
+                            clear_page()
                             
                             name = "session " + new Date()
                             td = new_session()
@@ -66,5 +76,5 @@ launch_CorreliOnline = ->
 
                     # RELOAD
                     ModelEditorItem_Directory.add_action "Session", ( file, path, browser ) ->
-                        div.parentNode.removeChild div
+                        clear_page()
                         window.location = "#" + encodeURI( "#{d}/#{file.name.get()}" )
