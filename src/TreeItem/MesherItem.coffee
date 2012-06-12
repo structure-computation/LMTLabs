@@ -7,27 +7,24 @@ class MesherItem extends TreeItem
         @add_attr
             cell_type        : new Choice( 0, [ "Triangle 3", "Triangle 6", "Quad 4",  "Quad 8" ] )
             base_size        : 200
-            density          : 16
-            radius           : 48
-            toto             : false
             p_mesher         : new Lst
             _mesh            : new Mesh
             _can_be_computed : 3 # 0 / 1 / 2 / 3 respectively uncheck / manually computable / auto-computable which is calculated / auto-computable who needs to be calculated
-
-        @add_attr
-            mesh             : @_mesh
 
         @_name.set name
         @_ico.set "img/mesher.png"
         @_viewable.set true
         
+        @_mesh.editable_points.set false
+        
         @bind =>
-            if @_can_be_computed.has_been_modified()
-                return
-            if @_can_be_computed.get() == 0
-                @_can_be_computed.set 1
-            if @_can_be_computed.get() == 2
-                @_can_be_computed.set 3
+            if @real_change()
+                if @_can_be_computed.has_been_modified()
+                    return
+                if @_can_be_computed.get() == 0
+                    @_can_be_computed.set 1
+                if @_can_be_computed.get() == 2
+                    @_can_be_computed.set 3
     
         #         @size_X.bind =>
         #             if @link_size.get() == true
