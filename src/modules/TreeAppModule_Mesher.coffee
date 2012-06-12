@@ -14,8 +14,8 @@ class TreeAppModule_Mesher extends TreeAppModule
             txt: "Mesher"
             ina: _ina
             fun: ( evt, app ) =>
-                @mesher = @add_item_depending_selected_tree app, MesherItem
                 app.undo_manager.snapshot()
+                @mesher = @add_item_depending_selected_tree app, MesherItem
         
             key: [ "Shift+M" ]
 
@@ -37,6 +37,7 @@ class TreeAppModule_Mesher extends TreeAppModule
             siz: 1
             txt: "Add a mesher point"
             fun: ( evt, app ) =>
+                app.undo_manager.snapshot()
                 canvas = app.selected_canvas_inst()[ 0 ].div
                 #if we click on ico
                 if evt.clientY < get_top( canvas )
@@ -49,6 +50,5 @@ class TreeAppModule_Mesher extends TreeAppModule
                 @mesher = @add_item_depending_selected_tree app, MesherItem
                 pm = new PointMesher p
                 @mesher.add_point pm
-                app.undo_manager.snapshot()
         
             

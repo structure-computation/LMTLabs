@@ -12,10 +12,10 @@ class TreeAppModule_Transform extends TreeAppModule
             txt: "Start making transformation"
             fun: ( evt, app ) =>
                 #
+                app.undo_manager.snapshot()
                 selected_items = app.data.get_selected_tree_items()
                 @transf = @add_item_depending_selected_tree app, TransformItem
                 @child_in_selected app, TransformItem, selected_items, @transf
-                app.undo_manager.snapshot()
                 
                 
         @actions.push
@@ -23,6 +23,7 @@ class TreeAppModule_Transform extends TreeAppModule
             siz: 1
             txt: "Add a transformation node"
             fun: ( evt, app ) =>
+                app.undo_manager.snapshot()
                 canvas = app.selected_canvas_inst()[ 0 ].div
                 #if we click on ico
                 if evt.clientY < get_top( canvas )
@@ -47,7 +48,6 @@ class TreeAppModule_Transform extends TreeAppModule
                 @transf.transform.cur_points.push p
                 @transf.transform.old_points.push p_cur
                 
-                app.undo_manager.snapshot()
         
         @actions.push
             ico: "img/node_del_24.png"
@@ -62,6 +62,6 @@ class TreeAppModule_Transform extends TreeAppModule
                         selected_point = @transf.transform._selected
                         if selected_point.length > 0
                             for i in [ selected_point.length-1..0 ]                    
+                                app.undo_manager.snapshot()
                                 @transf.transform.cur_points.splice( selected_point[ i ], 1 )
                                 @transf.transform.old_points.splice( selected_point[ i ], 1 )
-                                app.undo_manager.snapshot()

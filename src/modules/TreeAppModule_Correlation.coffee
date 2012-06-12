@@ -10,11 +10,11 @@ class TreeAppModule_Correlation extends TreeAppModule
             txt: "Correlation"
             fun: ( evt, app ) =>
                 #
+                app.undo_manager.snapshot()
                 m = @add_item_depending_selected_tree app, CorrelationItem
                 #leg = new Legend "Displacement X"
                 #res = new MeshItem leg
                 #m.add_output res
                 #@watch_item app, res
                 @watch_item app, m
-                app.undo_manager.snapshot()
                 

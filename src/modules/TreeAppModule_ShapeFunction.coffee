@@ -15,7 +15,6 @@ class TreeAppModule_ShapeFunction extends TreeAppModule
             ina: _ina
             txt: "Use shape function"
             fun: ( evt, app ) =>                
-                shape_function = @add_item_depending_selected_tree app, ShapeFunctionItem
-                
                 app.undo_manager.snapshot()
+                shape_function = @add_item_depending_selected_tree app, ShapeFunctionItem
             key: [ "Shift+F" ]
