@@ -167,15 +167,15 @@ class TreeAppModule_Session extends TreeAppModule
                 
             @get_convergence_curve parent
             
-            for result in correlation._children when result instanceof ResultItem
-                break
+#             for result in correlation._children when result instanceof ResultItem
+#                 break
                 
-            for displacement in result._children when displacement instanceof MeshItem
-                break
+
             
             disp_txt = ""
-            for p in displacement.mesh_item.points
-                disp_txt += "(" + p.pos.get() + "),"
+#             @displayed_field.lst[ @displayed_field.num.get() ]
+#             for p in displacement.mesh_item.points
+#                 disp_txt += "(" + p.pos.get() + "),"
                 
             displacement_title = new_dom_element
                 parentNode: parent
