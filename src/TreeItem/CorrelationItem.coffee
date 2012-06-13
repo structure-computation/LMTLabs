@@ -15,7 +15,7 @@ class CorrelationItem extends TreeItem_Computable
         @add_attr
             pre_fft               : true
             luminosity_correction : true
-            convergence           : [ new Choice( 0, [ "||dU||2", "||dU||inf"] ) ,1e-5]
+            convergence           : [ new Choice( 0, [ "||dU||2", "||dU||inf"] ) ,1e-5 ]
             # <math>\delta \infty</math>            mod: [ 1e-5, new Choice( 0, [ "||&#8710;u||2", "||&#8710;u||&#x221E;"] ) ]
 
             # con: 1e-5
@@ -23,6 +23,8 @@ class CorrelationItem extends TreeItem_Computable
             iteration             : 50
             preview_result        : false
             element_size          : [ 16, 16 ]
+            
+            # results
             _mesh                 : new Mesh
             
         # meshattributes
