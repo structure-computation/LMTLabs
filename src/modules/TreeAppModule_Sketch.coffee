@@ -164,7 +164,9 @@ class TreeAppModule_Sketch extends TreeAppModule
                     point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
                     @sketch.mesh.add_point point
                     
+                current_line = @sketch.mesh.lines.length
                 @sketch.mesh.lines.push [ current_point, current_point + 1, current_point + 2, current_point ]
+                @sketch.mesh.polygons.push [ current_line ]
                 @sketch.mesh.displayed_style.set "Wireframe"
                 
         mesher_sub.sub.act.push 
