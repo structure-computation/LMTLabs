@@ -17,4 +17,5 @@ class TreeAppModule_Correlation extends TreeAppModule
                 #m.add_output res
                 #@watch_item app, res
                 @watch_item app, m
+                @watch_item app, m._children[ 0 ]
                 

@@ -23,6 +23,16 @@ class CorrelationItem extends TreeItem_Computable
             iteration             : 50
             preview_result        : false
             element_size          : [ 16, 16 ]
+            _mesh                 : new Mesh
+            
+        # meshattributes
+        @add_attr
+            displayed_field  : @_mesh.displayed_field
+            displayed_style  : @_mesh.displayed_style 
+            warp_by          : @_mesh.warp_by         
+            warp_factor      : @_mesh.warp_factor     
+        @_mesh.editable_points.set false
+            
 
         # with choice roll
         @pre_fft._model_editor_item_type = ModelEditorItem_Bool_Img
@@ -48,3 +58,10 @@ class CorrelationItem extends TreeItem_Computable
         ch instanceof SketchItem or 
         ch instanceof ImgSetItem or
         ch instanceof TransformItem
+        
+    sub_canvas_items: ->
+        [ @_mesh ]
+        
+    cosmetic_attribute: ( name ) ->
+        name in [ "displayed_field", "displayed_style", "warp_by", "warp_factor" ]
+        
