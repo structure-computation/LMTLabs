@@ -62,5 +62,5 @@ class CorrelationItem extends TreeItem_Computable
         [ @_mesh ]
         
     cosmetic_attribute: ( name ) ->
-        name in [ "visualisation.displayed_field", "visualisation.displayed_style", "visualisation.warp_by", "visualisation.warp_factor" ]
+        name in [ "visualisation" ]
         
