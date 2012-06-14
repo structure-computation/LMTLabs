@@ -6,7 +6,7 @@ class MesherItem extends TreeItem_Computable
         # attributes
         @add_attr
             cell_type        : new Choice( 0, [ "Triangle 3", "Triangle 6", "Quad 4",  "Quad 8" ] )
-            base_size        : 200
+            base_size        : 100
             p_mesher         : new Lst
             _mesh            : new Mesh
 
