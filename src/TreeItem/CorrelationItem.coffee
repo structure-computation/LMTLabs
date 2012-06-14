@@ -29,10 +29,7 @@ class CorrelationItem extends TreeItem_Computable
             
         # meshattributes
         @add_attr
-            displayed_field  : @_mesh.displayed_field
-            displayed_style  : @_mesh.displayed_style 
-            warp_by          : @_mesh.warp_by         
-            warp_factor      : @_mesh.warp_factor     
+            visualisation : @_mesh.visualisation
         @_mesh.editable_points.set false
             
 
@@ -65,5 +62,5 @@ class CorrelationItem extends TreeItem_Computable
         [ @_mesh ]
         
     cosmetic_attribute: ( name ) ->
-        name in [ "displayed_field", "displayed_style", "warp_by", "warp_factor" ]
+        name in [ "visualisation.displayed_field", "visualisation.displayed_style", "visualisation.warp_by", "visualisation.warp_factor" ]
         

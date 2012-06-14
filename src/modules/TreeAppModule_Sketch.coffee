@@ -64,7 +64,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 load_truc_3d mesh
                 
                 mesh.editable_points.set false
-                mesh.displayed_style.set "Wireframe"
+                mesh.visualisation.displayed_style.set "Wireframe"
                 
                 #                 xhr_object = Synchronizer.my_xml_http_request()
                 #                 xhr_object.open "GET", "carter.js", true
@@ -144,7 +144,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.lines.push [ current_point + 3, current_point ]
                 
                 @sketch.mesh.polygons.push [ current_line, current_line + 1, current_line + 2, current_line + 3 ]
-                @sketch.mesh.displayed_style.set "Wireframe"
+                @sketch.mesh.visualisation.displayed_style.set "Wireframe"
                 
         
         mesher_sub.sub.act.push 
@@ -167,7 +167,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 current_line = @sketch.mesh.lines.length
                 @sketch.mesh.lines.push [ current_point, current_point + 1, current_point + 2, current_point ]
                 @sketch.mesh.polygons.push [ current_line ]
-                @sketch.mesh.displayed_style.set "Wireframe"
+                @sketch.mesh.visualisation.displayed_style.set "Wireframe"
                 
         mesher_sub.sub.act.push 
             ico: "img/triangle.png"
@@ -191,7 +191,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.lines.push [ current_point + 1, current_point + 2 ]
                 @sketch.mesh.lines.push [ current_point + 2, current_point ]
                 @sketch.mesh.polygons.push [ current_line, current_line + 1, current_line + 2 ]
-                @sketch.mesh.displayed_style.set "Wireframe"
+                @sketch.mesh.visualisation.displayed_style.set "Wireframe"
                 
         
         @actions.push
