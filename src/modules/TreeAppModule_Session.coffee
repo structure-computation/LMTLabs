@@ -105,18 +105,19 @@ class TreeAppModule_Session extends TreeAppModule
     onPopupClose: ( app ) ->
         app.active_key.set true
     
-    get_convergence_curve: ( parent ) ->
-        if not @cm?
+    get_convergence_curve: ( parent, data ) ->
+#         if not @cm?
+        if data?.length
                 
             d = new_dom_element
                 parentNode: parent
                 style     : { width: 700, height: 400 }
                 
             m = new Graph marker: 'dot', x_axis: 'Iteration', y_axis: 'Error', line_color: "#00f", marker_color: "#f00", marker_size: 8, movable_hl_infos: false
-            for i in [ 0 .. 10 ]
-                m.points.push [ i , Math.exp( - i ) * 10, 0 ]
                 
-            
+            for p in data
+                m.points.push p
+                
             @cm = new CanvasManager el: d, want_aspect_ratio: true, padding_ratio: 1.4, constrain_zoom: 'x'
             @cm.cam.threeD.set false
             @cm.resize 700, 400
@@ -125,7 +126,7 @@ class TreeAppModule_Session extends TreeAppModule
             @cm.fit()
 
 
-        @cm.draw()
+            @cm.draw()
 
     
     
@@ -140,8 +141,6 @@ class TreeAppModule_Session extends TreeAppModule
         session = app.data.selected_session()
         
     
-        @get_convergence_curve parent
-        
         for correlation in session._children when correlation instanceof CorrelationItem
 #             console.log correlation
             for ic in correlation._children when ic instanceof ImgSetItem
@@ -165,7 +164,10 @@ class TreeAppModule_Session extends TreeAppModule
                 nodeName  : "div"
                 txt       : text
                 
-            @get_convergence_curve parent
+            data = []
+            for i in [ 0 .. 10 ]
+                data.push [ i , Math.exp( - i ) * 10, 0 ]
+            @get_convergence_curve parent, data
             
 #             for result in correlation._children when result instanceof ResultItem
 #                 break
