@@ -22,7 +22,6 @@ class CorrelationItem extends TreeItem_Computable
             multi_resolution      : new ConstrainedVal( 0, { min: 0, max: 10, div: 10 } )
             iteration             : 50
             preview_result        : false
-            element_size          : [ 16, 16 ]
             
             # results
             _mesh                 : new Mesh
