@@ -26,6 +26,9 @@ class CorrelationItem extends TreeItem_Computable
             
             # results
             _mesh                 : new Mesh
+            _norm_i_history       : []
+            _norm_2_history       : []
+            _residual_history     : []
             
         # meshattributes
         @add_attr
@@ -64,3 +67,4 @@ class CorrelationItem extends TreeItem_Computable
     cosmetic_attribute: ( name ) ->
         name in [ "visualisation" ]
         
+    
