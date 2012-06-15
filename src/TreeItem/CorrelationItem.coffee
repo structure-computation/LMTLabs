@@ -67,3 +67,12 @@ class CorrelationItem extends TreeItem_Computable
         name in [ "visualisation" ]
         
     
+    information: ( div ) ->
+        if not @txt?
+            @txt = new_dom_element
+                parentNode: div
+                
+        @txt.innerHTML = @_norm_2_history.get()
+
+
+            
