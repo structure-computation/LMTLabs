@@ -115,8 +115,8 @@ class TreeAppModule_Session extends TreeAppModule
                 
             m = new Graph marker: 'dot', x_axis: 'Iteration', y_axis: 'Error', line_color: "#00f", marker_color: "#f00", marker_size: 8, movable_hl_infos: false
                 
-            for p in data
-                m.points.push p
+            for p, i in data
+                m.points.push [ i, p, 0 ]
                 
             @cm = new CanvasManager el: d, want_aspect_ratio: true, padding_ratio: 1.4, constrain_zoom: 'x'
             @cm.cam.threeD.set false
@@ -156,6 +156,7 @@ class TreeAppModule_Session extends TreeAppModule
             Norm : " + correlation.convergence[ 0 ].get() + " with value "+ correlation.convergence[ 1 ].get() + "<br>
             Multi resolution : " + correlation.multi_resolution.get() + "<br>
             Number max of iterations : " + correlation.iteration.get() + "<br>
+            Residual : " + correlation._residual_history.get() + "<br>
             "
         
         
@@ -167,17 +168,22 @@ class TreeAppModule_Session extends TreeAppModule
             data = []
             for i in [ 0 .. 10 ]
                 data.push [ i , Math.exp( - i ) * 10, 0 ]
-            @get_convergence_curve parent, data
+            
+            if correlation.convergence[ 0 ].num.get() == 0
+                data = correlation._norm_2_history.get()
+            else
+                data = correlation._norm_i_history.get()
+            if data?
+                console.log data
+                @get_convergence_curve parent, data
             
 #             for result in correlation._children when result instanceof ResultItem
 #                 break
                 
 
             
-            disp_txt = ""
-#             @displayed_field.lst[ @displayed_field.num.get() ]
-#             for p in displacement.mesh_item.points
-#                 disp_txt += "(" + p.pos.get() + "),"
+            console.log correlation.visualisation.displayed_field.lst[ correlation.visualisation.displayed_field.num.get() ].get().data.get()
+            disp_txt = correlation.visualisation.displayed_field.lst[ correlation.visualisation.displayed_field.num.get() ].get().data.get()
                 
             displacement_title = new_dom_element
                 parentNode: parent
