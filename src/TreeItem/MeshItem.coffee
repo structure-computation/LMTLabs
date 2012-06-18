@@ -5,7 +5,7 @@ class MeshItem extends TreeItem
         
         # attributes
         @add_attr
-            mesh_item: new Mesh legend
+            mesh_item: new Mesh
         
         # default values
         @_name.set "Displacement"

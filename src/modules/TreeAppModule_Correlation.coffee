@@ -13,7 +13,7 @@ class TreeAppModule_Correlation extends TreeAppModule
                 app.undo_manager.snapshot()
                 m = @add_item_depending_selected_tree app, CorrelationItem
                 #leg = new Legend "Displacement X"
-                #res = new MeshItem leg
+                #res = new MeshItem
                 #m.add_output res
                 #@watch_item app, res
                 @watch_item app, m
