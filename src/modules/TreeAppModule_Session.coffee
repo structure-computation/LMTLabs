@@ -143,51 +143,58 @@ class TreeAppModule_Session extends TreeAppModule
     
         for correlation in session._children when correlation instanceof CorrelationItem
 #             console.log correlation
-            for ic in correlation._children when ic instanceof ImgSetItem
-                break
-#             console.log ic
-            text = 
-            "Correlation used " + ic._children.length + " pictures<br>
-            From picture name " + ic._children[ 0 ].img.src + " to " + ic._children[ ic._children.length - 1 ].img.src + "<br>
-            Updates have been done on " + ic._children[ 0 ].img.src + "<br><br>
-            With following parameters :<br>
-            Prefft : " + correlation.pre_fft.get() + "<br>
-            Luminosity : " + correlation.luminosity_correction.get() + "<br>
-            Norm : " + correlation.convergence[ 0 ].get() + " with value "+ correlation.convergence[ 1 ].get() + "<br>
-            Multi resolution : " + correlation.multi_resolution.get() + "<br>
-            Number max of iterations : " + correlation.iteration.get() + "<br>
-            Residual : " + correlation._residual_history.get() + "<br>
-            "
-        
-        
-            correlation_parameters = new_dom_element
-                parentNode: parent
-                nodeName  : "div"
-                txt       : text
-                
-            data = []
-            for i in [ 0 .. 10 ]
-                data.push [ i , Math.exp( - i ) * 10, 0 ]
-            
-            if correlation.convergence[ 0 ].num.get() == 0
-                data = correlation._norm_2_history.get()
-            else
-                data = correlation._norm_i_history.get()
-            if data?
-                console.log data
-                @get_convergence_curve parent, data
-            
-#             for result in correlation._children when result instanceof ResultItem
-#                 break
+            if correlation._children.length
+                for ic in correlation._children when ic instanceof ImgSetItem
+                    break
+    #             console.log ic
+                if ic._children.length
+                    if not correlation._residual_history? #no correlation have been done
+                        no_correlation = new_dom_element
+                            parentNode: parent
+                            nodeName  : "span"
+                            txt       : "Correlation from picture name " + ic._children[ 0 ].img.src + " to " + ic._children[ ic._children.length - 1 ].img.src + " have not been launched yet"
+                        break 
+                    
+                    else
+                        text = 
+                        "Correlation used " + ic._children.length + " pictures<br>
+                        From picture name " + ic._children[ 0 ].img.src + " to " + ic._children[ ic._children.length - 1 ].img.src + "<br>
+                        Updates have been done on " + ic._children[ 0 ].img.src + "<br><br>
+                        With following parameters :<br>
+                        Prefft : " + correlation.pre_fft.get() + "<br>
+                        Luminosity : " + correlation.luminosity_correction.get() + "<br>
+                        Norm : " + correlation.convergence[ 0 ].get() + " with value "+ correlation.convergence[ 1 ].get() + "<br>
+                        Multi resolution : " + correlation.multi_resolution.get() + "<br>
+                        Number max of iterations : " + correlation.iteration.get() + "<br>
+                        Residual : " + correlation._residual_history.get() + "<br>
+                        "
+                        correlation_parameters = new_dom_element
+                            parentNode: parent
+                            nodeName  : "div"
+                            txt       : text
+                            
+                        data = []
+                        for i in [ 0 .. 10 ]
+                            data.push [ i , Math.exp( - i ) * 10, 0 ]
+                        
+                        if correlation.convergence[ 0 ].num.get() == 0
+                            data = correlation._norm_2_history.get()
+                        else
+                            data = correlation._norm_i_history.get()
+                        if data?
+                            @get_convergence_curve parent, data
+                        
+            #             for result in correlation._children when result instanceof ResultItem
+            #                 break
 
-            disp_txt = correlation.visualisation.displayed_field.lst[ correlation.visualisation.displayed_field.num.get() ].get()
-                
-            displacement_title = new_dom_element
-                parentNode: parent
-                nodeName  : "span"
-                txt       : "Displacement :<br>"
-                
-            displacement_points = new_dom_element
-                parentNode: parent
-                nodeName  : "textarea"
-                txt       : disp_txt
+                        disp_txt = correlation.visualisation.displayed_field.lst[ correlation.visualisation.displayed_field.num.get() ].get()
+                            
+                        displacement_title = new_dom_element
+                            parentNode: parent
+                            nodeName  : "span"
+                            txt       : "Displacement :<br>"
+                            
+                        displacement_points = new_dom_element
+                            parentNode: parent
+                            nodeName  : "textarea"
+                            txt       : disp_txt

@@ -54,7 +54,7 @@ class MesherItem extends TreeItem_Computable
         #we may need to add @_mesh.draw info and remove it from sub_canvas_items
     
     z_index: ->
-        return 1000
+        @_mesh.z_index()
         
     disp_only_in_model_editor: ->
 #         @mesh

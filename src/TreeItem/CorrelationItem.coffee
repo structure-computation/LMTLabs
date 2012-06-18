@@ -63,6 +63,9 @@ class CorrelationItem extends TreeItem_Computable
     sub_canvas_items: ->
         [ @_mesh ]
         
+    z_index: () ->
+        return @_mesh.z_index()
+        
     cosmetic_attribute: ( name ) ->
         name in [ "visualisation" ]
         
