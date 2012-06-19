@@ -43,8 +43,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ina: _ina_cm
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
-                @sketch.mesh.break_line_from_selected( cam_info )
+                @sketch.mesh.break_line_from_selected()
             key: [ "Shift+B" ]
         
         
@@ -62,7 +61,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 mesh = @sketch.mesh
                 load_truc_3d mesh
                 
-                mesh.editable_points.set false
+                mesh.visualization.point_edition.set false
                 mesh.visualization.displayed_style.set "Wireframe"
                 
                 app.fit()

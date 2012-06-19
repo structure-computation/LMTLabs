@@ -14,7 +14,7 @@ class MesherItem extends TreeItem_Computable
         @_ico.set "img/mesher.png"
         @_viewable.set true
         
-        @_mesh.editable_points.set false
+        @_mesh.visualization.point_edition.set false
     
         #         @size_X.bind =>
         #             if @link_size.get() == true
