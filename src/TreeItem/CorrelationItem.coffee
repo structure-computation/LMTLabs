@@ -32,7 +32,7 @@ class CorrelationItem extends TreeItem_Computable
         # meshattributes
         @add_attr
             visualisation : @_mesh.visualisation
-        @_mesh.editable_points.set false
+        @_mesh.visualization.point_edition.set false
             
 
         # with choice roll

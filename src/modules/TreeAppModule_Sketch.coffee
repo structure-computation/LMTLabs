@@ -62,8 +62,8 @@ class TreeAppModule_Sketch extends TreeAppModule
                 mesh = @sketch.mesh
                 load_truc_3d mesh
                 
-                mesh.editable_points.set false
                 mesh.visualization.displayed_style.set "Wireframe"
+                mesh.visualization.point_edition.set false
                 
                 app.fit()
                 

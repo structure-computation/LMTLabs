@@ -5,16 +5,16 @@ class MesherItem extends TreeItem_Computable
         
         # attributes
         @add_attr
-            cell_type        : new Choice( 0, [ "Triangle 3", "Triangle 6", "Quad 4",  "Quad 8" ] )
-            base_size        : 100
-            p_mesher         : new Lst
-            _mesh            : new Mesh
+            cell_type: new Choice( 0, [ "Triangle 3", "Triangle 6", "Quad 4",  "Quad 8" ] )
+            base_size: 100
+            p_mesher : new Lst
+            _mesh    : new Mesh
 
         @_name.set name
         @_ico.set "img/mesher.png"
         @_viewable.set true
         
-        @_mesh.editable_points.set false
+        @_mesh.visualization.point_edition.set false
     
         #         @size_X.bind =>
         #             if @link_size.get() == true
