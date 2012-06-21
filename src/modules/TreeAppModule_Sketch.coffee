@@ -61,10 +61,6 @@ class TreeAppModule_Sketch extends TreeAppModule
                 mesh = @sketch.mesh
                 load_truc_3d mesh
                 
-<<<<<<< HEAD
-=======
-                mesh.visualization.point_edition.set false
->>>>>>> b92619c8a2fd2832b77081879f436d2c978f5061
                 mesh.visualization.displayed_style.set "Wireframe"
                 mesh.visualization.point_edition.set false
                 
