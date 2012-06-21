@@ -31,7 +31,7 @@ class CorrelationItem extends TreeItem_Computable
             
         # meshattributes
         @add_attr
-            visualisation : @_mesh.visualisation
+            visualization : @_mesh.visualization
         @_mesh.visualization.point_edition.set false
             
 
@@ -63,8 +63,11 @@ class CorrelationItem extends TreeItem_Computable
     sub_canvas_items: ->
         [ @_mesh ]
         
+    z_index: () ->
+        return @_mesh.z_index()
+        
     cosmetic_attribute: ( name ) ->
-        name in [ "visualisation" ]
+        name in [ "visualization" ]
         
     
     information: ( div ) ->
