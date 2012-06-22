@@ -16,7 +16,6 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Configure comportemental law"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                selected_items = app.data.get_selected_tree_items()
                 physics = @add_item_depending_selected_tree app, PhysicsItem
                 
             key: [ "Shift+L" ]
@@ -28,7 +27,6 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Constrain boundaries with displacement"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                selected_items = app.data.get_selected_tree_items()
                 constrain_border = @add_item_depending_selected_tree app, BorderDisplacementItem
             key: [ "Shift+G" ]
             
@@ -39,7 +37,6 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Constrain boundaries with strain"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                selected_items = app.data.get_selected_tree_items()
                 constrain_border = @add_item_depending_selected_tree app, BorderStrainItem
             key: [ "Shift+G" ]
             
@@ -50,7 +47,6 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Constrain boundaries with pressure"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                selected_items = app.data.get_selected_tree_items()
                 constrain_border = @add_item_depending_selected_tree app, BorderPressureItem
             key: [ "Shift+G" ]
             
@@ -61,7 +57,6 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Make a border out of any constrain"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                selected_items = app.data.get_selected_tree_items()
                 free_border = @add_item_depending_selected_tree app, BorderFreeItem
 
             key: [ "Shift+F" ]

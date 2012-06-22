@@ -46,7 +46,6 @@ class TreeAppModule_Mesher extends TreeAppModule
                     pos_x = evt.clientX - get_left( canvas )
                     pos_y = evt.clientY - get_top ( canvas )
                     p = app.selected_canvas_inst()[ 0 ].cm.cam_info.sc_2_rw.pos pos_x, pos_y
-                selected_items = app.data.get_selected_tree_items()
                 @mesher = @add_item_depending_selected_tree app, MesherItem
                 pm = new PointMesher p
                 @mesher.add_point pm
