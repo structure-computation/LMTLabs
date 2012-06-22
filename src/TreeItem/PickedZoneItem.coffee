@@ -13,7 +13,7 @@ class PickedZoneItem extends TreeItem
             _border_type     : _border_type
             points           : new Lst # contains model_id of points in mesh child
             lines            : new Lst # contains model_id of lines in mesh child
-            _pre_sele        : new Lst # contains model_id of points/lines/surfaces in mesh child
+            _pelected        : new Lst # contains model_id of points/lines/surfaces in mesh child
     
     accept_child: ( ch ) ->
         ch instanceof MaskItem or 
@@ -57,7 +57,7 @@ class PickedZoneItem extends TreeItem
                 
         # draw lines
         for l, j in lines when l.length == 2
-            if l in @_pre_sele
+            if l in @_pelected
                 info.ctx.lineWidth = 2
             else
                 info.ctx.lineWidth = 1

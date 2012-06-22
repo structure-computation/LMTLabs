@@ -32,7 +32,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch = @add_item_depending_selected_tree app, SketchItem
                 @sketch.mesh.move_scheme = MoveScheme_3D
                 load_croix @sketch.mesh
-                for p in @sketch.mesh.displayed_field.lst[ 1 ]._data
+                for p in @sketch.mesh.display_field.lst[ 1 ]._data
                     p.set( - p.get() )
                 
                 
@@ -61,7 +61,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 mesh = @sketch.mesh
                 load_truc_3d mesh
                 
-                mesh.visualization.displayed_style.set "Wireframe"
+                mesh.visualization.display_style.set "Wireframe"
                 mesh.visualization.point_edition.set false
                 
                 app.fit()
@@ -127,7 +127,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 current_line = @sketch.mesh.lines.length
                 @sketch.mesh.lines.push [ current_point, current_point + 1, current_point + 2, current_point ]
                 @sketch.mesh.polygons.push [ current_line ]
-                @sketch.mesh.visualization.displayed_style.set "Wireframe"
+                @sketch.mesh.visualization.display_style.set "Wireframe"
                 
         mesher_sub.sub.act.push 
             ico: "img/triangle.png"
@@ -151,7 +151,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 @sketch.mesh.lines.push [ current_point + 1, current_point + 2 ]
                 @sketch.mesh.lines.push [ current_point + 2, current_point ]
                 @sketch.mesh.polygons.push [ current_line, current_line + 1, current_line + 2 ]
-                @sketch.mesh.visualization.displayed_style.set "Wireframe"
+                @sketch.mesh.visualization.display_style.set "Wireframe"
                 
         
         @actions.push
