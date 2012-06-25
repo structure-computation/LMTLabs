@@ -11,11 +11,18 @@ class TreeAppModule_Sketch extends TreeAppModule
         _ina = ( app ) =>
             app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
         
+        _ctx_act = ( act ) =>
+            if act.sub?
+                return false
+            else
+                return true
+        
         @actions.push
             ico: "img/curve.png"
             siz: 1
             txt: "Transform line to curve"
             ina: _ina_cm
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
                 for it in app.data.get_selected_tree_items() when it instanceof SketchItem
@@ -28,6 +35,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "ref"
             ina: _ina
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 sketch = @add_item_depending_selected_tree app, SketchItem
                 sketch.mesh.move_scheme = MoveScheme_3D
@@ -41,6 +49,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Break curve to line"
             ina: _ina_cm
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
                 for it in app.data.get_selected_tree_items() when it instanceof SketchItem
@@ -54,6 +63,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Create a sample complex 3D shape"
             ina: _ina_cm
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 #
                 app.undo_manager.snapshot()
@@ -77,6 +87,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Create Shape"
             ina: _ina_cm
+            ctx: _ctx_act
             sub:
                 prf: "list"
                 act: [ ]
@@ -88,6 +99,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Create a Square"
             ina: _ina_cm
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
                 @create_mesher app # TODO: ca n'a pas grand chose a faire la !!
@@ -114,6 +126,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Create a Circle edge"
             ina: _ina_cm
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
                 @create_mesher app
@@ -136,6 +149,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Create a Triangle edge"
             ina: _ina_cm
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
                 @create_mesher app
@@ -161,6 +175,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Delete Point"
             ina: _ina
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
                 cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info                    

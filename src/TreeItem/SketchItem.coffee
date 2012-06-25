@@ -26,3 +26,8 @@ class SketchItem extends TreeItem
 
     get_movable_entities: ( res, info, pos, phase, dry = false ) ->
         @mesh.get_movable_entities res, info, pos, phase, dry
+        
+    contextual_actions: ( res, module ) ->
+        for act in module when act.ctx_act() == true
+            res.push act
+        return res
