@@ -1,9 +1,7 @@
 class TreeAppModule_Sketch extends TreeAppModule
     constructor: ->
         super()
-        
-        sketch = ''
-        
+                
         @name = 'Sketch'
 
         _ina_cm = ( app ) =>
@@ -13,14 +11,24 @@ class TreeAppModule_Sketch extends TreeAppModule
         _ina = ( app ) =>
             app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
         
+        _ctx_act = ( act ) =>
+            if act.sub?
+                return false
+            else
+                return true
+        
         @actions.push
             ico: "img/curve.png"
             siz: 1
             txt: "Transform line to curve"
-            ina: _ina_cm
+            ina: ( app ) ->
+                _ina_cm( app ) and ...
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                @sketch.mesh.make_curve_line_from_selected()
+                for it in app.data.get_selected_tree_items() when it instanceof SketchItem
+                    if it.mesh?
+                        it.mesh.make_curve_line_from_selected()
             key: [ "Shift+C" ]
         
         @actions.push
@@ -28,11 +36,12 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "ref"
             ina: _ina
+            ctx: _ctx_act
             fun: ( evt, app ) =>
-                @sketch = @add_item_depending_selected_tree app, SketchItem
-                @sketch.mesh.move_scheme = MoveScheme_3D
-                load_croix @sketch.mesh
-                for p in @sketch.mesh.displayed_field.lst[ 1 ]._data
+                sketch = @add_item_depending_selected_tree app, SketchItem
+                sketch.mesh.move_scheme = MoveScheme_3D
+                load_croix sketch.mesh
+                for p in sketch.mesh.display_field.lst[ 1 ]._data
                     p.set( - p.get() )
                 
                 
@@ -41,9 +50,12 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Break curve to line"
             ina: _ina_cm
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                @sketch.mesh.break_line_from_selected()
+                for it in app.data.get_selected_tree_items() when it instanceof SketchItem
+                    if it.mesh?
+                        it.mesh.break_line_from_selected()
             key: [ "Shift+B" ]
         
         
@@ -52,16 +64,17 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Create a sample complex 3D shape"
             ina: _ina_cm
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 #
                 app.undo_manager.snapshot()
-                @sketch = @add_item_depending_selected_tree app, SketchItem
-                @sketch.mesh.move_scheme = MoveScheme_3D
+                sketch = @add_item_depending_selected_tree app, SketchItem
+                sketch.mesh.move_scheme = MoveScheme_3D
 
-                mesh = @sketch.mesh
+                mesh = sketch.mesh
                 load_truc_3d mesh
                 
-                mesh.visualization.displayed_style.set "Wireframe"
+                mesh.visualization.display_style.set "Wireframe"
                 mesh.visualization.point_edition.set false
                 
                 app.fit()
@@ -75,6 +88,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Create Shape"
             ina: _ina_cm
+            ctx: _ctx_act
             sub:
                 prf: "list"
                 act: [ ]
@@ -86,20 +100,21 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Create a Square"
             ina: _ina_cm
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
                 @create_mesher app # TODO: ca n'a pas grand chose a faire la !!
                         
-                @sketch = @add_item_depending_selected_tree app, SketchItem
-                @sketch.mesh.visualization.display_style.set "Wireframe"
-                @sketch.mesh.move_scheme = new MoveScheme_2D
+                sketch = @add_item_depending_selected_tree app, SketchItem
+                sketch.mesh.visualization.display_style.set "Wireframe"
+                sketch.mesh.move_scheme = new MoveScheme_2D
                 
-                current_point = @sketch.mesh.points.length
+                current_point = sketch.mesh.points.length
                 for coord in [ [ -0.333, -0.333 ], [ 0.333, -0.333 ], [ 0.333, 0.333 ], [ -0.333, 0.333 ] ]
                     point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
-                    @sketch.mesh.add_point point
+                    sketch.mesh.add_point point
                 
-                @sketch.mesh.add_element new Element_BoundedSurf [
+                sketch.mesh.add_element new Element_BoundedSurf [
                     { o: +1, e: new Element_Line [ current_point + 0, current_point + 1 ] }
                     { o: +1, e: new Element_Line [ current_point + 1, current_point + 2 ] }
                     { o: +1, e: new Element_Line [ current_point + 2, current_point + 3 ] }
@@ -112,46 +127,48 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Create a Circle edge"
             ina: _ina_cm
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
                 @create_mesher app
 
-                @sketch = @add_item_depending_selected_tree app, SketchItem
+                sketch = @add_item_depending_selected_tree app, SketchItem
                     
-                current_point = @sketch.mesh.points.length
+                current_point = sketch.mesh.points.length
                 
                 for coord in [ [ -0.33, 0 ], [ 0, 0.33 ], [ 0.33, 0 ] ]
                     point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
-                    @sketch.mesh.add_point point
+                    sketch.mesh.add_point point
                     
-                current_line = @sketch.mesh.lines.length
-                @sketch.mesh.lines.push [ current_point, current_point + 1, current_point + 2, current_point ]
-                @sketch.mesh.polygons.push [ current_line ]
-                @sketch.mesh.visualization.displayed_style.set "Wireframe"
+                sketch.mesh.add_element new Element_BoundedSurf [
+                    { o: +1, e: new Element_Arc [ current_point + 0, current_point + 1, current_point + 2, current_point + 0 ] }
+                ]
+                sketch.mesh.visualization.display_style.set "Wireframe"
                 
         mesher_sub.sub.act.push 
             ico: "img/triangle.png"
             siz: 1
             txt: "Create a Triangle edge"
             ina: _ina_cm
+            ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
                 @create_mesher app
 
-                @sketch = @add_item_depending_selected_tree app, SketchItem
+                sketch = @add_item_depending_selected_tree app, SketchItem
                     
-                current_point = @sketch.mesh.points.length
+                current_point = sketch.mesh.points.length
                 
                 for coord in [ [ 0, 0.33 ], [ -0.33, -0.333 ], [ 0.33, -0.333 ] ]
                     point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
-                    @sketch.mesh.add_point point
+                    sketch.mesh.add_point point
                     
-                current_line = @sketch.mesh.lines.length
-                @sketch.mesh.lines.push [ current_point, current_point + 1 ]
-                @sketch.mesh.lines.push [ current_point + 1, current_point + 2 ]
-                @sketch.mesh.lines.push [ current_point + 2, current_point ]
-                @sketch.mesh.polygons.push [ current_line, current_line + 1, current_line + 2 ]
-                @sketch.mesh.visualization.displayed_style.set "Wireframe"
+                sketch.mesh.add_element new Element_BoundedSurf [
+                    { o: +1, e: new Element_Line [ current_point + 0, current_point + 1 ] }
+                    { o: +1, e: new Element_Line [ current_point + 1, current_point + 2 ] }
+                    { o: +1, e: new Element_Line [ current_point + 2, current_point + 0 ] }
+                ]
+                sketch.mesh.visualization.display_style.set "Wireframe"
                 
         
         @actions.push
@@ -159,12 +176,14 @@ class TreeAppModule_Sketch extends TreeAppModule
             siz: 1
             txt: "Delete Point"
             ina: _ina
+            ctx: _ctx_act
             fun: ( evt, app ) =>
-                if @sketch?
-                    app.undo_manager.snapshot()
-                    cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info
-                    @sketch.mesh.delete_selected_point( cam_info )
-                    
+                app.undo_manager.snapshot()
+                cam_info = app.selected_canvas_inst()[ 0 ].cm.cam_info                    
+                for it in app.data.get_selected_tree_items() when it instanceof SketchItem
+                    if it.mesh?
+                        it.mesh.delete_selected_point cam_info
+                        
             key: [ "Del" ]
             
     create_mesher: ( app ) =>

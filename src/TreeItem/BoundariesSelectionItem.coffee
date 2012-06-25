@@ -98,9 +98,9 @@ class BoundariesSelectionItem extends TreeItem
         sketch_child = app_data.get_child_of_type session, SketchItem
         if sketch_child != false and sketch_child.length > 0
             for sc in sketch_child
-                sc.mesh._pre_sele.clear()
+                sc.mesh._pelected_points.clear()
         for ch in @_children when ch instanceof PickedZoneItem
-            ch._pre_sele.clear()
+            ch._pelected_points.clear()
         
         if cm._flat?
             res = []
@@ -121,10 +121,10 @@ class BoundariesSelectionItem extends TreeItem
                 P0   = res[ 0 ].item[ 1 ]
                 P1   = res[ 0 ].item[ 2 ]
                 if res[ 0 ].pzi? # mean we found something in pikcedzonitem
-                    if line not in res[ 0 ].pzi._pre_sele
-                        res[ 0 ].pzi._pre_sele.push line
+                    if line not in res[ 0 ].pzi._pelected_points
+                        res[ 0 ].pzi._pelected_points.push line
                         
                 else # mean we found something in Mesh
-                    if line not in res[ 0 ].prov._pre_sele
-                        res[ 0 ].prov._pre_sele.push line
+                    if line not in res[ 0 ].prov._pelected_points
+                        res[ 0 ].prov._pelected_points.push line
         return false

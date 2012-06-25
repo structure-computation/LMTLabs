@@ -187,7 +187,7 @@ class TreeAppModule_Session extends TreeAppModule
             #             for result in correlation._children when result instanceof ResultItem
             #                 break
 
-                        disp_txt = correlation.visualisation.displayed_field.lst[ correlation.visualisation.displayed_field.num.get() ].get()
+                        disp_txt = correlation.visualisation.display_field.lst[ correlation.visualisation.display_field.num.get() ].get()
                             
                         displacement_title = new_dom_element
                             parentNode: parent
