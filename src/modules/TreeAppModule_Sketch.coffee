@@ -16,13 +16,44 @@ class TreeAppModule_Sketch extends TreeAppModule
                 return false
             else
                 return true
-        
+
+        @actions.push
+            ico: "img/curve.png"
+            siz: 1
+            txt: "ex triangles"
+            ina: _ina_cm
+            ctx: _ctx_act
+            fun: ( evt, app ) =>
+                app.undo_manager.snapshot()
+                
+                el = new Element_TriangleList
+                el.indices.resize [ 1, 3 ]
+                el.indices.set_val [ 0, 0 ], 0
+                el.indices.set_val [ 0, 1 ], 1
+                el.indices.set_val [ 0, 2 ], 2
+                
+                mesh = new Mesh
+                mesh.add_point [ 0, 0, 0 ]
+                mesh.add_point [ 1, 0, 0 ]
+                mesh.add_point [ 0, 1, 0 ]
+                mesh.add_element el
+                
+                nf = new NodalField "toto", mesh
+                nf._data.set_val 0, 0
+                nf._data.set_val 1, 1
+                nf._data.set_val 2, 2
+                
+                it = new FieldItem "toto", nf
+                @watch_item app, it
+                app.data.tree_items.push it
+                        
+            key: [ "Shift+C" ]
+
         @actions.push
             ico: "img/curve.png"
             siz: 1
             txt: "Transform line to curve"
-            ina: ( app ) ->
-                _ina_cm( app ) and ...
+            ina: _ina_cm
             ctx: _ctx_act
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
