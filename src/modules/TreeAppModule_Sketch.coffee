@@ -26,6 +26,8 @@ class TreeAppModule_Sketch extends TreeAppModule
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
                 
+                interpolated_field = new InterpolatedField "Advancement Line"
+                
                 el = new Element_TriangleList
                 el.indices.resize [ 1, 3 ]
                 el.indices.set_val [ 0, 0 ], 0
@@ -46,7 +48,63 @@ class TreeAppModule_Sketch extends TreeAppModule
                 it = new FieldItem "toto", nf
                 @watch_item app, it
                 app.data.tree_items.push it
+                
+                item =
+                    pos  :
+                        axe_name : "time"
+                        axe_value: 0
+                        field    : it
                         
+                interpolated_field.data.push item
+                
+                #----
+                
+                
+                el = new Element_TriangleList
+                el.indices.resize [ 1, 3 ]
+                el.indices.set_val [ 0, 0 ], 0
+                el.indices.set_val [ 0, 1 ], 2
+                el.indices.set_val [ 0, 2 ], 1
+                
+                mesh = new Mesh
+                mesh.add_point [ 0, 0, 0 ]
+                mesh.add_point [ 1.1, 0, 0 ]
+                mesh.add_point [ 0, 1.1, 0 ]
+                mesh.add_element el
+                
+                nf = new NodalField "toto bis", mesh
+                nf._data.set_val 0, 0
+                nf._data.set_val 1, 1
+                nf._data.set_val 2, 2
+                
+                it_bis = new FieldItem "toto bis", nf
+                @watch_item app, it_bis
+                app.data.tree_items.push it_bis                
+                
+                item_bis =
+                    pos  :
+                        axe_name : "time"
+                        axe_value: 2
+                        field    : it_bis
+                        
+                interpolated_field.data.push item_bis
+                
+                #----
+                
+                imf = new ImageField "test_pic", "img/curve.png"
+                it_ter = new FieldItem "picture", imf
+                @watch_item app, it_ter
+                app.data.tree_items.push it_ter
+
+                item_ter =
+                    pos  :
+                        axe_name : "time"
+                        axe_value: 0
+                        field    : it_ter
+                        
+                interpolated_field.data.push item_ter
+                
+                
             key: [ "Shift+C" ]
 
         @actions.push
