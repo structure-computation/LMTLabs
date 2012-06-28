@@ -4,7 +4,7 @@ class MesherItem extends TreeItem_Computable
         super()
 
         @add_attr
-            _mesh        : new Mesh
+            _mesh        : new Mesh false
 
         @add_attr
             visualization: @_mesh.visualization
