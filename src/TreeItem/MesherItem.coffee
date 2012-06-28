@@ -26,7 +26,7 @@ class MesherItem extends TreeItem_Computable
         #                 @size_X.set @size_Y.get()
         
     cosmetic_attribute: ( name ) ->
-        name in [ "visualization" ]
+        super( name ) or ( name in [ "visualization" ] )
         
     add_point: ( p = new PointMesher ) ->
         if p instanceof PointMesher
