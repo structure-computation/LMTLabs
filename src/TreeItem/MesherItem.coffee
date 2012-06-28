@@ -2,9 +2,8 @@
 class MesherItem extends TreeItem_Computable
     constructor: ( name = "Mesher" ) ->
         super()
-
         @add_attr
-            _mesh        : new Mesh false
+            _mesh        : new Mesh(editable: false)
 
         @add_attr
             visualization: @_mesh.visualization
