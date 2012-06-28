@@ -4,10 +4,10 @@ class MesherItem extends TreeItem_Computable
         super()
 
         @add_attr
-            _mesh        : new Mesh
+            _field        : new NodalField
 
         @add_attr
-            visualization: @_mesh.visualization            
+            visualization: @_field.visualization
             cell_type    : new Choice( 0, [ "Triangle 3", "Triangle 6", "Quad 4",  "Quad 8" ] )
             base_size    : 100
             p_mesher     : new Lst
@@ -16,7 +16,7 @@ class MesherItem extends TreeItem_Computable
         @_ico.set "img/mesher.png"
         @_viewable.set true
         
-        @visualization.point_edition.set false
+#         @visualization.point_edition.set false
     
         #         @size_X.bind =>
         #             if @link_size.get() == true
@@ -50,16 +50,16 @@ class MesherItem extends TreeItem_Computable
         ch instanceof TransformItem
         
     sub_canvas_items: ->
-        [ @_mesh ]
+        [ @_field ]
     
     draw: ( info ) ->
         if @p_mesher.length
             for pm in @p_mesher
                 pm.draw info
-        #we may need to add @_mesh.draw info and remove it from sub_canvas_items
+        #we may need to add @_field.draw info and remove it from sub_canvas_items
     
     z_index: ->
-        @_mesh.z_index()
+        @_field.z_index()
         
     disp_only_in_model_editor: ->
 #         @mesh

@@ -31,7 +31,7 @@ class CorrelationItem extends TreeItem_Computable
             
         # meshattributes
         @add_attr
-            visualization : @_mesh.visualization
+            visualization : @_mesh.visualization            
         @_mesh.visualization.point_edition.set false
             
 
