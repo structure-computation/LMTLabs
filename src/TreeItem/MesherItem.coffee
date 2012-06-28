@@ -15,7 +15,7 @@ class MesherItem extends TreeItem_Computable
         @_ico.set "img/mesher.png"
         @_viewable.set true
         
-#         @visualization.point_edition.set false
+        #         @visualization.point_edition.set false
     
         #         @size_X.bind =>
         #             if @link_size.get() == true
@@ -26,7 +26,7 @@ class MesherItem extends TreeItem_Computable
         #                 @size_X.set @size_Y.get()
         
     cosmetic_attribute: ( name ) ->
-        super( name ) or ( name in [ "visualization" ] )
+        super( name ) or ( name in [ "_mesh", "visualization" ] )
         
     add_point: ( p = new PointMesher ) ->
         if p instanceof PointMesher

@@ -9,45 +9,42 @@ class TreeAppModule_Compute extends TreeAppModule
         
         _ina = ( app ) =>
             app.data.focus.get() != app.treeview.view_id
-        
-        _draw_loc = ( app ) ->
-            for path in app.data.selected_tree_items
-                if path.length > 1
-                    m = path[ path.length - 1 ]
-                    if m._can_be_computed?
-                        if m._can_be_computed.get() == 0
-                            this.ico = "img/manual_compute_inactive_24.png"
-                        else if m._can_be_computed.get() == 1
-                            this.ico = "img/manual_compute_24.png"
-                        else if m._can_be_computed.get() == 2
-                            this.ico = "img/auto_compute_24.png" #could be replaced by a gif
-                        else if m._can_be_computed.get() == 3
-                            this.ico = "img/auto_compute_24.png"
-                        return true
-            return false
             
         @actions.push
             txt: "Manual Compute"
             ico: "img/manual_compute_24.png"
             ina: _ina
             fun: ( evt, app ) =>
-                for path in app.data.selected_tree_items
-                    if path.length > 1
-                        m = path[ path.length - 1 ]
-                        if m._can_be_computed?
-                            m._can_be_computed.set 1
+                for path in app.data.selected_tree_items when path.length > 1
+                    m = path[ path.length - 1 ]
+                    if m instanceof TreeItem_Computable
+                        m._computation_mode.set 1
                             
         @actions.push
             txt: "Auto Compute"
             ico: "img/auto_compute_24.png"
             ina: _ina
             fun: ( evt, app ) =>
-                for path in app.data.selected_tree_items
-                    if path.length > 1
-                        m = path[ path.length - 1 ]
-                        if m._can_be_computed?
-                            m._can_be_computed.set 3
+                for path in app.data.selected_tree_items when path.length > 1
+                    m = path[ path.length - 1 ]
+                    if m instanceof TreeItem_Computable
+                        m._computation_mode.set 2
                             
+        
+        # TODO at least one manual update...
+        _draw_loc = ( app ) ->
+            for path in app.data.selected_tree_items when path.length > 1
+                m = path[ path.length - 1 ]
+                if m instanceof TreeItem_Computable
+                    if m.nothing_to_do() # stopped / or notn
+                        @ico = "img/manual_compute_inactive_24.png"
+                    else if m._computation_mode.get() == 1 # manual
+                        @ico = "img/manual_compute_24.png"
+                    else if m._computation_mode.get() == 2 #
+                        @ico = "img/auto_compute_24.png"
+                    return true
+            return false
+            
         @actions.push
             txt: "Compute"
             ico: ""
