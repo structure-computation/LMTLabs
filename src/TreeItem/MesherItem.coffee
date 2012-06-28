@@ -4,10 +4,10 @@ class MesherItem extends TreeItem_Computable
         super()
 
         @add_attr
-            _field        : new NodalField
+            _mesh        : new Mesh
 
         @add_attr
-            visualization: @_field.visualization
+            visualization: @_mesh.visualization
             cell_type    : new Choice( 0, [ "Triangle 3", "Triangle 6", "Quad 4",  "Quad 8" ] )
             base_size    : 100
             p_mesher     : new Lst
@@ -50,16 +50,16 @@ class MesherItem extends TreeItem_Computable
         ch instanceof TransformItem
         
     sub_canvas_items: ->
-        [ @_field ]
+        [ @_mesh ]
     
     draw: ( info ) ->
         if @p_mesher.length
             for pm in @p_mesher
                 pm.draw info
-        #we may need to add @_field.draw info and remove it from sub_canvas_items
+        #we may need to add @_mesh.draw info and remove it from sub_canvas_items
     
     z_index: ->
-        @_field.z_index()
+        @_mesh.z_index()
         
     disp_only_in_model_editor: ->
 #         @mesh
