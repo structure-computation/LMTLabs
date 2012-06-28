@@ -30,6 +30,11 @@ class CorrelationItem extends TreeItem_Computable
             _norm_2_history       : []
             _residual_history     : []
             
+        # meshattributes
+        @add_attr
+            visualization : @_mesh.visualization            
+        @_mesh.visualization.point_edition.set false
+            
         # with choice roll
         #         @pre_fft._model_editor_item_type = ModelEditorItem_Bool_Img
         #         @pre_fft._model_editor_display_name = "Pre-fft"

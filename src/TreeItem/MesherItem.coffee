@@ -2,12 +2,11 @@
 class MesherItem extends TreeItem_Computable
     constructor: ( name = "Mesher" ) ->
         super()
+        @add_attr
+            _mesh        : new Mesh(editable: false)
 
         @add_attr
-            _mesh        : new Mesh
-
-        @add_attr
-            visualization: @_mesh.visualization            
+            visualization: @_mesh.visualization
             cell_type    : new Choice( 0, [ "Triangle 3", "Triangle 6", "Quad 4",  "Quad 8" ] )
             base_size    : 100
             p_mesher     : new Lst
@@ -16,7 +15,7 @@ class MesherItem extends TreeItem_Computable
         @_ico.set "img/mesher.png"
         @_viewable.set true
         
-        @visualization.point_edition.set false
+#         @visualization.point_edition.set false
     
         #         @size_X.bind =>
         #             if @link_size.get() == true
