@@ -59,7 +59,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                     pos  :
                         axe_name : "time"
                         axe_value: 0
-                        field    : nf
+                    field    : nf
                         
                 interpolated_field.data.push item
                 
