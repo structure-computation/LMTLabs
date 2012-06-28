@@ -46,7 +46,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 mesh.add_point [ 0, 1, 0 ]
                 mesh.add_element el
                 
-                nf = new NodalField "toto", mesh
+                nf = new NodalField mesh
                 nf._data.set_val 0, 0
                 nf._data.set_val 1, 1
                 nf._data.set_val 2, 2
@@ -78,7 +78,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 mesh.add_point [ 0, 1.1, 0 ]
                 mesh.add_element el
                 
-                nf = new NodalField "toto bis", mesh
+                nf = new NodalField mesh
                 nf._data.set_val 0, 0
                 nf._data.set_val 1, 1
                 nf._data.set_val 2, 2

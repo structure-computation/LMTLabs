@@ -14,8 +14,8 @@ class CorrelationItem extends TreeItem_Computable
         # attributes
         @add_attr
             visualization         : new Choice
-            pre_fft               : true
-            luminosity_correction : true
+            rigid_body_corr       : true
+            lum_corr              : true
             wanted_norm_inf       : 1e-3 # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
             wanted_norm_2         : 0 # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
             # <math>\delta \infty</math>            mod: [ 1e-5, new Choice( 0, [ "||&#8710;u||2", "||&#8710;u||&#x221E;"] ) ]
@@ -31,17 +31,17 @@ class CorrelationItem extends TreeItem_Computable
             _residual_history     : []
             
         # with choice roll
-        @pre_fft._model_editor_item_type = ModelEditorItem_Bool_Img
-        @pre_fft._model_editor_display_name = "Pre-fft"
-        
-        @luminosity_correction._model_editor_item_type = ModelEditorItem_Bool_Img
-        
-        # @convergence[ 0 ]._model_editor_item_type = ModelEditorItem_Choice_Roll
-       
-        @preview_result._model_editor_item_type = ModelEditorItem_Bool_Img
-        @preview_result._model_editor_display_name = "Preview result"
-
-        @multi_resolution._model_editor_display_name = "Multi-resolution"
+        #         @pre_fft._model_editor_item_type = ModelEditorItem_Bool_Img
+        #         @pre_fft._model_editor_display_name = "Pre-fft"
+        #         
+        #         @luminosity_correction._model_editor_item_type = ModelEditorItem_Bool_Img
+        #         
+        #         # @convergence[ 0 ]._model_editor_item_type = ModelEditorItem_Choice_Roll
+        #        
+        #         @preview_result._model_editor_item_type = ModelEditorItem_Bool_Img
+        #         @preview_result._model_editor_display_name = "Preview result"
+        # 
+        #         @multi_resolution._model_editor_display_name = "Multi-resolution"
         
         #         @correlation._model_editor_item_type = ModelEditorItem_Button
         
@@ -56,7 +56,7 @@ class CorrelationItem extends TreeItem_Computable
         ch instanceof TransformItem
         
     sub_canvas_items: ->
-        d = @visualization.get()
+        d = @visualization.item()
         if d?
             [ d ]
         else
