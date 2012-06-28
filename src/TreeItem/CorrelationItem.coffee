@@ -56,10 +56,11 @@ class CorrelationItem extends TreeItem_Computable
         ch instanceof TransformItem
         
     sub_canvas_items: ->
-        [ @visualization.get() ]
-        
-    z_index: ->
-        return @_mesh.z_index()
+        d = @visualization.get()
+        if d?
+            [ d ]
+        else
+            []
         
     cosmetic_attribute: ( name ) ->
         name in [ "visualization" ]
