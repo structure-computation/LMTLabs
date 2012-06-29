@@ -52,7 +52,8 @@ class MesherItem extends TreeItem_Computable
         [ @_mesh ]
     
     draw: ( info ) ->
-        if @p_mesher.length
+        draw_point = info.sel_item[ @model_id ]
+        if @p_mesher.length && draw_point
             for pm in @p_mesher
                 pm.draw info
         #we may need to add @_mesh.draw info and remove it from sub_canvas_items
