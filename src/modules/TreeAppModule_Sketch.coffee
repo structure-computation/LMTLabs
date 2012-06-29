@@ -26,11 +26,6 @@ class TreeAppModule_Sketch extends TreeAppModule
         #             fun: ( evt, app ) =>
         #                 app.undo_manager.snapshot()
         #                 
-        #                 interpolated_field = new InterpolatedField "Advancement Line"
-        #                 
-        #                 it = new FieldItem "Interpolated", interpolated_field
-        #                 @watch_item app, it
-        #                 app.data.tree_items.push it
         #                 
         #                 #----
         #                 
