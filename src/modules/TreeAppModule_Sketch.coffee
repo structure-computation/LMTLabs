@@ -17,101 +17,98 @@ class TreeAppModule_Sketch extends TreeAppModule
             else
                 return true
 
-        @actions.push
-            ico: "img/curve.png"
-            siz: 1
-            txt: "ex triangles"
-            ina: _ina_cm
-            ctx: _ctx_act
-            fun: ( evt, app ) =>
-                app.undo_manager.snapshot()
-                
-                interpolated_field = new InterpolatedField "Advancement Line"
-                
-                it = new FieldItem "Interpolated", interpolated_field
-                @watch_item app, it
-                app.data.tree_items.push it
-                
-                #----
-                
-                el = new Element_TriangleList
-                el.indices.resize [ 1, 3 ]
-                el.indices.set_val [ 0, 0 ], 0
-                el.indices.set_val [ 0, 1 ], 1
-                el.indices.set_val [ 0, 2 ], 2
-                
-                mesh = new Mesh
-                mesh.add_point [ 0, 0, 0 ]
-                mesh.add_point [ 1, 0, 0 ]
-                mesh.add_point [ 0, 1, 0 ]
-                mesh.add_element el
-                
-                nf = new NodalField mesh
-                nf._data.set_val 0, 0
-                nf._data.set_val 1, 1
-                nf._data.set_val 2, 2
-                
-                #                 it = new FieldItem "toto", nf
-                #                 @watch_item app, it
-                #                 app.data.tree_items.push it
-                
-                item =
-                    pos  :
-                        axe_name : "time"
-                        axe_value: 0
-                    field    : nf
-                        
-                interpolated_field.data.push item
-                
-                #----
-                
-                
-                el = new Element_TriangleList
-                el.indices.resize [ 1, 3 ]
-                el.indices.set_val [ 0, 0 ], 0
-                el.indices.set_val [ 0, 1 ], 2
-                el.indices.set_val [ 0, 2 ], 1
-                
-                mesh = new Mesh
-                mesh.add_point [ 0, 0, 0 ]
-                mesh.add_point [ 1.1, 0, 0 ]
-                mesh.add_point [ 0, 1.1, 0 ]
-                mesh.add_element el
-                
-                nf = new NodalField mesh
-                nf._data.set_val 0, 0
-                nf._data.set_val 1, 1
-                nf._data.set_val 2, 2
-                
-                #                 it_bis = new FieldItem "toto bis", nf
-                #                 @watch_item app, it_bis
-                #                 app.data.tree_items.push it_bis                
-                #                 
-                item_bis =
-                    pos  :
-                        axe_name : "time"
-                        axe_value: 2
-                        field    : nf
-                        
-                interpolated_field.data.push item_bis
-                
-                #----
-                
-                imf = new ImageField "test_pic", "img/curve.png"
-                #                 it_ter = new FieldItem "picture", imf
-                #                 @watch_item app, it_ter
-                #                 app.data.tree_items.push it_ter
-
-                item_ter =
-                    pos  :
-                        axe_name : "time"
-                        axe_value: 0
-                        field    : imf
-                        
-                interpolated_field.data.push item_ter
-                
-                
-            key: [ "Shift+C" ]
+        #         @actions.push
+        #             ico: "img/curve.png"
+        #             siz: 1
+        #             txt: "ex triangles"
+        #             ina: _ina_cm
+        #             ctx: _ctx_act
+        #             fun: ( evt, app ) =>
+        #                 app.undo_manager.snapshot()
+        #                 
+        #                 interpolated_field = new InterpolatedField "Advancement Line"
+        #                 
+        #                 it = new FieldItem "Interpolated", interpolated_field
+        #                 @watch_item app, it
+        #                 app.data.tree_items.push it
+        #                 
+        #                 #----
+        #                 
+        #                 el = new Element_TriangleList
+        #                 el.indices.resize [ 1, 3 ]
+        #                 el.indices.set_val [ 0, 0 ], 0
+        #                 el.indices.set_val [ 0, 1 ], 1
+        #                 el.indices.set_val [ 0, 2 ], 2
+        #                 
+        #                 mesh = new Mesh
+        #                 mesh.add_point [ 0, 0, 0 ]
+        #                 mesh.add_point [ 1, 0, 0 ]
+        #                 mesh.add_point [ 0, 1, 0 ]
+        #                 mesh.add_element el
+        #                 
+        #                 nf = new NodalField mesh
+        #                 nf._data.set_val 0, 0
+        #                 nf._data.set_val 1, 1
+        #                 nf._data.set_val 2, 2
+        #                 
+        #                 #                 it = new FieldItem "toto", nf
+        #                 #                 @watch_item app, it
+        #                 #                 app.data.tree_items.push it
+        #                 
+        #                 item =
+        #                     pos  :
+        #                         axe_name : "time"
+        #                         axe_value: 0
+        #                     field    : nf
+        #                         
+        #                 interpolated_field.data.push item
+        #                 
+        #                 #----
+        #                 
+        #                 
+        #                 el = new Element_TriangleList
+        #                 el.indices.resize [ 1, 3 ]
+        #                 el.indices.set_val [ 0, 0 ], 0
+        #                 el.indices.set_val [ 0, 1 ], 2
+        #                 el.indices.set_val [ 0, 2 ], 1
+        #                 
+        #                 mesh = new Mesh
+        #                 mesh.add_point [ 0, 0, 0 ]
+        #                 mesh.add_point [ 1.1, 0, 0 ]
+        #                 mesh.add_point [ 0, 1.1, 0 ]
+        #                 mesh.add_element el
+        #                 
+        #                 nf = new NodalField mesh
+        #                 nf._data.set_val 0, 0
+        #                 nf._data.set_val 1, 1
+        #                 nf._data.set_val 2, 2
+        #                 
+        #                 #                 it_bis = new FieldItem "toto bis", nf
+        #                 #                 @watch_item app, it_bis
+        #                 #                 app.data.tree_items.push it_bis                
+        #                 #                 
+        #                 item_bis =
+        #                     pos  :
+        #                         axe_name : "time"
+        #                         axe_value: 2
+        #                         field    : nf
+        #                         
+        #                 interpolated_field.data.push item_bis
+        #                 
+        #                 #----
+        #                 
+        #                 imf = new ImageField "test_pic", "img/curve.png"
+        #                 #                 it_ter = new FieldItem "picture", imf
+        #                 #                 @watch_item app, it_ter
+        #                 #                 app.data.tree_items.push it_ter
+        # 
+        #                 item_ter =
+        #                     pos  :
+        #                         axe_name : "time"
+        #                         axe_value: 0
+        #                         field    : imf
+        #                         
+        #                 interpolated_field.data.push item_ter
 
         @actions.push
             ico: "img/curve.png"
