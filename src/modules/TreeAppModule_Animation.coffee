@@ -90,7 +90,7 @@ class TreeAppModule_Animation extends TreeAppModule
             key: [ "Shift+6" ]
         
         @actions.push
-            mod: app_data.time
+            mod: ( app ) -> app.data.time
             siz: 1
                 
     run_timer : ( app ) =>

@@ -54,4 +54,4 @@ class ModelEditorItem_Browse extends ModelEditorItem
 
         return false
 # 
-ModelEditor.default_types.push ( model ) -> ModelEditorItem_Browse if model instanceof Browse
+ModelEditorItem.default_types.push ( model ) -> ModelEditorItem_Browse if model instanceof Browse
