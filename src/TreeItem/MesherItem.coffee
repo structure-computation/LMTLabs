@@ -16,14 +16,6 @@ class MesherItem extends TreeItem_Computable
         @_viewable.set true
         
         @visualization.display_style.num.set 1
-    
-        #         @size_X.bind =>
-        #             if @link_size.get() == true
-        #                 @size_Y.set @size_X.get()
-        #     
-        #         @size_Y.bind =>
-        #             if @link_size.get() == true
-        #                 @size_X.set @size_Y.get()
         
     cosmetic_attribute: ( name ) ->
         super( name ) or ( name in [ "_mesh", "visualization" ] )

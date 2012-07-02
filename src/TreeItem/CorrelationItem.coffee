@@ -29,7 +29,7 @@ class CorrelationItem extends TreeItem_Computable
             _norm_i_history       : []
             _norm_2_history       : []
             _residual_history     : []
-            
+
         # with choice roll
         #         @pre_fft._model_editor_item_type = ModelEditorItem_Bool_Img
         #         @pre_fft._model_editor_display_name = "Pre-fft"
@@ -47,6 +47,10 @@ class CorrelationItem extends TreeItem_Computable
         
         #         @elX._model_editor_display_name = "Element size X"
         #         @elY._model_editor_display_name = "Element size Y"
+        
+    get_model_editor_parameters: ( res ) ->
+        res.model_editor[ "visualization" ] = ModelEditorItem_ChoiceWithEditableItems
+            
 
     accept_child: ( ch ) ->
         ch instanceof MaskItem or 
