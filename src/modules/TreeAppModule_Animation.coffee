@@ -89,9 +89,9 @@ class TreeAppModule_Animation extends TreeAppModule
                 @clear_timer()
             key: [ "Shift+6" ]
         
-        @actions.push
-            mod: app_data.time
-            siz: 1
+        #@actions.push
+        ##    mod: app_data.time
+        #    siz: 1
                 
     run_timer : ( app ) =>
         if app.data.time.get() < app.data.time._max.get() and @play_state == true
