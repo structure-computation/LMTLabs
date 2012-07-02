@@ -16,14 +16,6 @@ class MesherItem extends TreeItem_Computable
         @_viewable.set true
         
         @visualization.display_style.num.set 1
-    
-        #         @size_X.bind =>
-        #             if @link_size.get() == true
-        #                 @size_Y.set @size_X.get()
-        #     
-        #         @size_Y.bind =>
-        #             if @link_size.get() == true
-        #                 @size_X.set @size_Y.get()
         
     cosmetic_attribute: ( name ) ->
         super( name ) or ( name in [ "_mesh", "visualization" ] )
@@ -52,7 +44,8 @@ class MesherItem extends TreeItem_Computable
         [ @_mesh ]
     
     draw: ( info ) ->
-        if @p_mesher.length
+        draw_point = info.sel_item[ @model_id ]
+        if @p_mesher.length && draw_point
             for pm in @p_mesher
                 pm.draw info
         #we may need to add @_mesh.draw info and remove it from sub_canvas_items
