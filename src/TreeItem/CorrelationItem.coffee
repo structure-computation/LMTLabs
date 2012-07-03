@@ -1,3 +1,4 @@
+
 #
 class CorrelationItem extends TreeItem_Computable
     constructor: ->
@@ -13,17 +14,19 @@ class CorrelationItem extends TreeItem_Computable
         
         # attributes
         @add_attr
-            visualization         : new Choice
-            rigid_body_corr       : true
-            lum_corr              : true
-            wanted_norm_inf       : 1e-3 # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
-            wanted_norm_2         : 0 # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
-            # <math>\delta \infty</math>            mod: [ 1e-5, new Choice( 0, [ "||&#8710;u||2", "||&#8710;u||&#x221E;"] ) ]
+            visualization: new Choice
+            vispouet     : new FieldSet
+            parameters   :
+                rigid_body_corr : true
+                lum_corr        : true
+                wanted_norm_inf : 1e-3 # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
+                wanted_norm_2   : 0    # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
+                # <math>\delta \infty</math>            mod: [ 1e-5, new Choice( 0, [ "||&#8710;u||2", "||&#8710;u||&#x221E;"] ) ]
 
-            # con: 1e-5
-            multi_resolution      : new ConstrainedVal( 0, { min: 0, max: 10, div: 10 } )
-            nb_iter_max           : 50
-            preview_result        : false
+                # con: 1e-5
+                multi_resolution: new ConstrainedVal( 0, { min: 0, max: 10, div: 10 } )
+                nb_iter_max     : 50
+                preview_result  : false
             
             # results
             _norm_i_history       : []

@@ -1,4 +1,4 @@
-launch_CorreliOnline = ->
+launch_CorreliOnline = ( main = document.body ) ->
     new_session = ->
         td = new TreeAppData
         td.new_session()
@@ -22,8 +22,8 @@ launch_CorreliOnline = ->
         td
         
     clear_page = ->
-        while document.body.firstChild?
-            document.body.removeChild document.body.firstChild
+        while main.firstChild?
+            main.removeChild main.firstChild
 
 
     bs = new BrowserState
@@ -34,7 +34,7 @@ launch_CorreliOnline = ->
         # file -> make a new session
         if bs.location.protocol.get() == 'file:'
             td = new_session()
-            new TreeApp document.body, td
+            new TreeApp main, td
         else
             hash = bs.location.hash.get()
             # something to reload ?
@@ -45,7 +45,7 @@ launch_CorreliOnline = ->
                     if err
                         window.location = "#"
                     else
-                        new TreeApp document.body, td
+                        new TreeApp main, td
                     
             # else, browse old session
             else
@@ -54,7 +54,7 @@ launch_CorreliOnline = ->
                     clear_page()
                     
                     div = new_dom_element
-                        parentNode: document.body
+                        parentNode: main
 
                     item_cp = new ModelEditorItem_Directory
                         el    : div
