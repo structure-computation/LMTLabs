@@ -15,7 +15,7 @@ class CorrelationItem extends TreeItem_Computable
         # attributes
         @add_attr
             visualization: new Choice
-            vispouet     : new FieldSet
+#             vispouet     : new FieldSet
             parameters   :
                 rigid_body_corr : true
                 lum_corr        : true
