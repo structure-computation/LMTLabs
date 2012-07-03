@@ -9,7 +9,7 @@ launch_CorreliOnline = ->
         td.modules.push new TreeAppModule_PanelManager
         td.modules.push new TreeAppModule_Correlation
         td.modules.push new TreeAppModule_ImageSet
-        td.modules.push new TreeAppModule_Animation td
+        td.modules.push new TreeAppModule_Animation
         td.modules.push new TreeAppModule_Mesher
         td.modules.push new TreeAppModule_Sketch
         td.modules.push new TreeAppModule_Transform
