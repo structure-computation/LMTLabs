@@ -100,6 +100,7 @@ class TreeAppModule_Compute extends TreeAppModule
                         2
                     return true
             return false
+
                 
         
 #         @_draw_loc = ( app ) ->

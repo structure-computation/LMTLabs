@@ -31,7 +31,12 @@ class CorrelationItem extends TreeItem_Computable
             _norm_i_history       : []
             _norm_2_history       : []
             _residual_history     : []
+            
+            _residual             : new NamedParametrizedDrawable( "residual", new InterpolatedField )
 
+         # @visualization: new FieldSet
+
+            
     accept_child: ( ch ) ->
         ch instanceof MaskItem or 
         ch instanceof DiscretizationItem or
