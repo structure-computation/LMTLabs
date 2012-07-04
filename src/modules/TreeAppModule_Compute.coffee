@@ -9,6 +9,14 @@ class TreeAppModule_Compute extends TreeAppModule
         
         _ina = ( app ) =>
             app.data.focus.get() != app.treeview.view_id
+        
+        _ina_build = ( app ) =>
+            for el in app.treeview.flat when el.item instanceof TreeItem_Computable
+                cm = el.item._computation_mode
+                cs = el.item._computation_state
+                if cm == false and cs == false
+                    return false
+            return true
             
         @actions.push
             txt: "Manual Compute"
@@ -16,11 +24,21 @@ class TreeAppModule_Compute extends TreeAppModule
             ina: _ina
             fun: ( evt, app ) =>
                 for el in app.treeview.flat when el.item instanceof TreeItem_Computable
-                    el.item._computation_mode.set 1
+                    el.item._computation_mode.set false
                 #                 for path in app.data.selected_tree_items when path.length > 1
                 #                     m = path[ path.length - 1 ]
                 #                     if m instanceof TreeItem_Computable
                 #                         m._computation_mode.set 1
+                
+        @actions.push
+            txt: "Build"
+            ico: "img/play_24.png"
+            ina: _ina_build
+            vis: _ina_build # TODO, we expect this icon to disappear or be transformed in white and black when auto compute is true
+            fun: ( evt, app ) =>
+                for el in app.treeview.flat when el.item instanceof TreeItem_Computable
+                    el.item._computation_state.set true
+            key: [ "X" ]
                             
         @actions.push
             txt: "Auto Compute"
@@ -28,12 +46,8 @@ class TreeAppModule_Compute extends TreeAppModule
             ina: _ina
             fun: ( evt, app ) =>
                 for el in app.treeview.flat when el.item instanceof TreeItem_Computable
-                    el.item._computation_mode.set 2
-                #                 for path in app.data.selected_tree_items when path.length > 1
-                #                     m = path[ path.length - 1 ]
-                #                     if m instanceof TreeItem_Computable
-                #                         m._computation_mode.set 2
-
+                    el.item._computation_mode.set true
+                    
         # loc icon ( use in edit view )
         @actions.push
             txt: "Already computed"
@@ -44,7 +58,8 @@ class TreeAppModule_Compute extends TreeAppModule
                 for path in app.data.selected_tree_items when path.length > 1
                     m = path[ path.length - 1 ]
                     if m instanceof TreeItem_Computable
-                        m._computation_mode.set 0
+                        m._computation_mode.set false
+                        m._computation_state.set false
 #                 @_toggle_inactive app
                 
         @actions.push
@@ -56,7 +71,8 @@ class TreeAppModule_Compute extends TreeAppModule
                 for path in app.data.selected_tree_items when path.length > 1
                     m = path[ path.length - 1 ]
                     if m instanceof TreeItem_Computable
-                        m._computation_mode.set 1
+                        m._computation_mode.set false
+                        m._computation_state.set true
 #                 @_toggle_inactive app
                 
         @actions.push
@@ -68,7 +84,8 @@ class TreeAppModule_Compute extends TreeAppModule
                 for path in app.data.selected_tree_items when path.length > 1
                     m = path[ path.length - 1 ]
                     if m instanceof TreeItem_Computable
-                        m._computation_mode.set 2
+                        m._computation_mode.set true
+                        m._computation_state.set true
 #                 @_toggle_inactive app
                 
         @_toggle_inactive = ( app ) ->
