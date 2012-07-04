@@ -15,46 +15,107 @@ class TreeAppModule_Compute extends TreeAppModule
             ico: "img/manual_compute_24.png"
             ina: _ina
             fun: ( evt, app ) =>
-                for path in app.data.selected_tree_items when path.length > 1
-                    m = path[ path.length - 1 ]
-                    if m instanceof TreeItem_Computable
-                        m._computation_mode.set 1
+                for el in app.treeview.flat when el.item instanceof TreeItem_Computable
+                    el.item._computation_mode.set 1
+                #                 for path in app.data.selected_tree_items when path.length > 1
+                #                     m = path[ path.length - 1 ]
+                #                     if m instanceof TreeItem_Computable
+                #                         m._computation_mode.set 1
                             
         @actions.push
             txt: "Auto Compute"
             ico: "img/auto_compute_24.png"
             ina: _ina
             fun: ( evt, app ) =>
+                for el in app.treeview.flat when el.item instanceof TreeItem_Computable
+                    el.item._computation_mode.set 2
+                #                 for path in app.data.selected_tree_items when path.length > 1
+                #                     m = path[ path.length - 1 ]
+                #                     if m instanceof TreeItem_Computable
+                #                         m._computation_mode.set 2
+
+        # loc icon ( use in edit view )
+        @actions.push
+            txt: "Already computed"
+            ico: "img/manual_compute_inactive_24.png"
+            ina: _ina
+            loc: true
+            fun: ( evt, app ) =>
                 for path in app.data.selected_tree_items when path.length > 1
                     m = path[ path.length - 1 ]
                     if m instanceof TreeItem_Computable
-                        m._computation_mode.set 2
-                            
-        
-        # TODO at least one manual update...
-        _draw_loc = ( app ) ->
-            for path in app.data.selected_tree_items when path.length > 1
-                m = path[ path.length - 1 ]
-                if m instanceof TreeItem_Computable
-                    if m.nothing_to_do() # stopped / or notn
-                        @ico = "img/manual_compute_inactive_24.png"
-                    else if m._computation_mode.get() == 1 # manual
-                        @ico = "img/manual_compute_24.png"
-                    else if m._computation_mode.get() == 2 #
-                        @ico = "img/auto_compute_24.png"
-                    return true
-            return false
-            
+                        m._computation_mode.set 0
+#                 @_toggle_inactive app
+                
         @actions.push
-            txt: "Compute"
-            ico: ''
+            txt: "Set Item to manual compute"
+            ico: "img/manual_compute_24.png"
             ina: _ina
-            dra: _draw_loc
             loc: true
             fun: ( evt, app ) =>
                 for path in app.data.selected_tree_items when path.length > 1
                     m = path[ path.length - 1 ]
                     if m instanceof TreeItem_Computable
                         m._computation_mode.set 1
-                        
-                this.actions[ 2 ].dra app
+#                 @_toggle_inactive app
+                
+        @actions.push
+            txt: "Set Item to auto compute"
+            ico: "img/auto_compute_24.png"
+            ina: _ina
+            loc: true
+            fun: ( evt, app ) =>
+                for path in app.data.selected_tree_items when path.length > 1
+                    m = path[ path.length - 1 ]
+                    if m instanceof TreeItem_Computable
+                        m._computation_mode.set 2
+#                 @_toggle_inactive app
+                
+        @_toggle_inactive = ( app ) ->
+            for path in app.data.selected_tree_items when path.length > 1
+                m = path[ path.length - 1 ]
+                if m instanceof TreeItem_Computable
+                    if m.nothing_to_do() # stopped / or notn
+                        0
+                    else if m._computation_mode.get() == 1 # manual
+                        1
+                    else if m._computation_mode.get() == 2 #
+                        2
+                    return true
+            return false
+                
+        
+#         @_draw_loc = ( app ) ->
+#             for path in app.data.selected_tree_items when path.length > 1
+#                 m = path[ path.length - 1 ]
+#                 if m instanceof TreeItem_Computable
+#                     if m.nothing_to_do() # stopped / or notn
+#                         ico = "img/manual_compute_inactive_24.png"
+#                         txt = "Already computed"
+#                         computation_mode = 0
+#                         
+#                     else if m._computation_mode.get() == 1 # manual
+#                         ico = "img/manual_compute_24.png"
+#                         txt = "Set Item to manual compute"
+#                         computation_mode = 1
+#                         
+#                     else if m._computation_mode.get() == 2 #
+#                         ico = "img/auto_compute_24.png"
+#                         txt = "Set Item to auto compute"
+#                         computation_mode = 2
+#                         
+#                     @_add_loc_actions txt, ico, computation_mode
+#                     return true
+#             return false
+    
+#     _add_loc_actions: ( txt="", ico="", computation_mode = 2 ) ->
+#         @actions.push
+#             txt: txt
+#             ico: ico
+#             loc: true
+#             fun: ( evt, app ) =>
+#                 for path in app.data.selected_tree_items when path.length > 1
+#                     m = path[ path.length - 1 ]
+#                     if m instanceof TreeItem_Computable
+#                         m._computation_mode.set computation_mode
+#                 @_draw_loc app
