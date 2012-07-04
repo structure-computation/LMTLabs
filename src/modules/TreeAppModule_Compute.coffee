@@ -47,13 +47,14 @@ class TreeAppModule_Compute extends TreeAppModule
             
         @actions.push
             txt: "Compute"
-            ico: ""
+            ico: ''
             ina: _ina
             dra: _draw_loc
             loc: true
             fun: ( evt, app ) =>
-                for path in app.data.selected_tree_items
-                    if path.length > 1
-                        m = path[ path.length - 1 ]
-                        if m._can_be_computed?
-                            m._can_be_computed.set 1
+                for path in app.data.selected_tree_items when path.length > 1
+                    m = path[ path.length - 1 ]
+                    if m instanceof TreeItem_Computable
+                        m._computation_mode.set 1
+                        
+                this.actions[ 2 ].dra app
