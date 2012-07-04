@@ -58,3 +58,4 @@ class TreeAppModule_Compute extends TreeAppModule
                         m._computation_mode.set 1
                         
                 this.actions[ 2 ].dra app
+                
