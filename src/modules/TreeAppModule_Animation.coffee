@@ -1,5 +1,5 @@
 class TreeAppModule_Animation extends TreeAppModule
-    constructor: ( app_data )->
+    constructor: ->
         super()
         @play_state = false
         @img_per_sec = 2
