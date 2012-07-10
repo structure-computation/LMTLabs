@@ -11,7 +11,7 @@ class TreeAppModule_Compute extends TreeAppModule
             app.data.focus.get() != app.treeview.view_id
         
         _ina_build = ( app ) =>
-            for el in app.treeview.flat when el.item instanceof TreeItem_Computable
+            for el in app.treeview.flat? when el.item instanceof TreeItem_Computable
                 cm = el.item._computation_mode
                 cs = el.item._computation_state
                 if cm == false and cs == false
