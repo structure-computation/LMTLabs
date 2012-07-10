@@ -29,6 +29,16 @@ class TreeAppModule_Session extends TreeAppModule
             
         session_info.sub.act.push 
             ico: ""
+            txt: "Open in Tree"
+            fun: ( evt, app ) ->
+                @modules = app.data.modules
+                for m in @modules
+                    if m instanceof TreeAppModule_File
+                        m.actions[ 1 ].fun evt, app
+            key: [ "Shift+I" ]
+            
+        session_info.sub.act.push 
+            ico: ""
             txt: "Watch result"
             fun: ( evt, app ) =>
                 @d = new_dom_element
