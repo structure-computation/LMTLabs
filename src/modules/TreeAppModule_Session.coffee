@@ -171,11 +171,12 @@ class TreeAppModule_Session extends TreeAppModule
                         From picture name " + ic._children[ 0 ].img.src + " to " + ic._children[ ic._children.length - 1 ].img.src + "<br>
                         Updates have been done on " + ic._children[ 0 ].img.src + "<br><br>
                         With following parameters :<br>
-                        Prefft : " + correlation.pre_fft.get() + "<br>
-                        Luminosity : " + correlation.luminosity_correction.get() + "<br>
-                        Norm : " + correlation.convergence[ 0 ].get() + " with value "+ correlation.convergence[ 1 ].get() + "<br>
-                        Multi resolution : " + correlation.multi_resolution.get() + "<br>
-                        Number max of iterations : " + correlation.iteration.get() + "<br>
+                        Rigid body : " + correlation.parameters.rigid_body.get() + "<br>
+                        Luminosity : " + correlation.parameters.lum_corr.get() + "<br>
+                        Norm infinite with value "+ correlation.parameters.norm_inf.get() + "<br>
+                        Norm 2 with value "+ correlation.parameters.norm_2.get() + "<br>
+                        Multi resolution : " + correlation.parameters.multi_res.get() + "<br>
+                        Number max of iterations : " + correlation.parameters.nb_iter_max.get() + "<br>
                         Residual : " + correlation._residual_history.get() + "<br>
                         "
                         correlation_parameters = new_dom_element
@@ -187,7 +188,7 @@ class TreeAppModule_Session extends TreeAppModule
                         for i in [ 0 .. 10 ]
                             data.push [ i , Math.exp( - i ) * 10, 0 ]
                         
-                        if correlation.convergence[ 0 ].num.get() == 0
+                        if correlation.parameters.norm_2.get() != 0
                             data = correlation._norm_2_history.get()
                         else
                             data = correlation._norm_i_history.get()
@@ -197,7 +198,7 @@ class TreeAppModule_Session extends TreeAppModule
             #             for result in correlation._children when result instanceof ResultItem
             #                 break
 
-                        disp_txt = correlation.visualisation.display_field.lst[ correlation.visualisation.display_field.num.get() ].get()
+                        disp_txt = correlation._residual_history.get() + '<br>' + correlation._norm_2_history.get() + '<br>' + correlation._norm_i_history.get() + '<br>' 
                             
                         displacement_title = new_dom_element
                             parentNode: parent
