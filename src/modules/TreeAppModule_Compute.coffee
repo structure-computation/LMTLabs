@@ -11,10 +11,26 @@ class TreeAppModule_Compute extends TreeAppModule
             app.data.focus.get() != app.treeview.view_id
         
         _ina_build = ( app ) =>
-            for el in app.treeview.flat when el.item instanceof TreeItem_Computable
+            for el in app.treeview.flat? when el.item instanceof TreeItem_Computable
                 cm = el.item._computation_mode
                 cs = el.item._computation_state
                 if cm == false and cs == false
+                    return false
+            return true
+            
+        _ina_builded = ( app ) =>
+            for el in app.treeview.flat? when el.item instanceof TreeItem_Computable
+                cm = el.item._computation_mode
+                cs = el.item._computation_state
+                if cm == false and cs == true
+                    return false
+            return true
+            
+        _ina_auto = ( app ) =>
+            for el in app.treeview.flat? when el.item instanceof TreeItem_Computable
+                cm = el.item._computation_mode
+                cs = el.item._computation_state
+                if cm == true
                     return false
             return true
             
@@ -52,7 +68,7 @@ class TreeAppModule_Compute extends TreeAppModule
         @actions.push
             txt: "Already computed"
             ico: "img/manual_compute_inactive_24.png"
-            ina: _ina
+            ina: _ina_builded
             loc: true
             fun: ( evt, app ) =>
                 for path in app.data.selected_tree_items when path.length > 1
@@ -65,7 +81,7 @@ class TreeAppModule_Compute extends TreeAppModule
         @actions.push
             txt: "Set Item to manual compute"
             ico: "img/manual_compute_24.png"
-            ina: _ina
+            ina: _ina_build
             loc: true
             fun: ( evt, app ) =>
                 for path in app.data.selected_tree_items when path.length > 1
@@ -78,7 +94,7 @@ class TreeAppModule_Compute extends TreeAppModule
         @actions.push
             txt: "Set Item to auto compute"
             ico: "img/auto_compute_24.png"
-            ina: _ina
+            ina: _ina_auto
             loc: true
             fun: ( evt, app ) =>
                 for path in app.data.selected_tree_items when path.length > 1
