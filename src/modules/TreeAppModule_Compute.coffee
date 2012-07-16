@@ -11,31 +11,33 @@ class TreeAppModule_Compute extends TreeAppModule
             app.data.focus.get() != app.treeview.view_id
         
         _ina_build = ( app ) =>
-            for el in app.treeview.flat? when el.item instanceof TreeItem_Computable
-                cm = el.item._computation_mode
-                cs = el.item._computation_state
-                console.log 'build', cm, cs
-                if cm == false and cs == false
-                    return false
-            return true
+            if app.treeview.flat?
+                for el in app.treeview.flat when el.item instanceof TreeItem_Computable
+                    cm = el.item._computation_mode.get()
+                    cs = el.item._computation_state.get()
+                    if cm == false and cs == true
+                        return true
+            return false
             
         _ina_builded = ( app ) =>
-            for el in app.treeview.flat? when el.item instanceof TreeItem_Computable
-                cm = el.item._computation_mode
-                cs = el.item._computation_state
-                console.log 'builded', cm, cs
-                if cm == false and cs == true
-                    return false
-            return true
+            if app.treeview.flat?
+                for el in app.treeview.flat when el.item instanceof TreeItem_Computable
+                    cm = el.item._computation_mode.get()
+                    cs = el.item._computation_state.get()
+                    if cm == false and cs == false
+                        return true
+                    else if cm == true
+                        return true
+            return false
             
         _ina_auto = ( app ) =>
-            for el in app.treeview.flat? when el.item instanceof TreeItem_Computable
-                cm = el.item._computation_mode
-                cs = el.item._computation_state
-                console.log 'auto', cm, cs
-                if cm == true
-                    return false
-            return true
+            if app.treeview.flat?
+                for el in app.treeview.flat when el.item instanceof TreeItem_Computable
+                    cm = el.item._computation_mode.get()
+                    cs = el.item._computation_state.get()
+                    if cm == true
+                        return true
+            return false
             
         @actions.push
             txt: "Manual Compute"
@@ -72,9 +74,9 @@ class TreeAppModule_Compute extends TreeAppModule
             txt: "Already computed"
             ico: "img/manual_compute_inactive_24.png"
             bnd: ( app ) => app
-            vis: _ina_build                
             loc: true
-            ina: _ina_builded
+            vis: _ina_builded
+#             ina: _ina_builded
             fun: ( evt, app ) =>
                 for path in app.data.selected_tree_items when path.length > 1
                     m = path[ path.length - 1 ]
@@ -87,7 +89,9 @@ class TreeAppModule_Compute extends TreeAppModule
             txt: "Set Item to manual compute"
             ico: "img/manual_compute_24.png"
             loc: true
-            ina: _ina_build
+            bnd: ( app ) => app
+            vis: _ina_build
+#             ina: _ina_build
             fun: ( evt, app ) =>
                 for path in app.data.selected_tree_items when path.length > 1
                     m = path[ path.length - 1 ]
@@ -100,7 +104,9 @@ class TreeAppModule_Compute extends TreeAppModule
             txt: "Set Item to auto compute"
             ico: "img/auto_compute_24.png"
             loc: true
-            ina: _ina_auto
+            bnd: ( app ) => app
+#             ina: _ina_auto
+            vis: _ina_auto
             fun: ( evt, app ) =>
                 for path in app.data.selected_tree_items when path.length > 1
                     m = path[ path.length - 1 ]
