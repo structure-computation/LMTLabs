@@ -71,6 +71,8 @@ class TreeAppModule_Compute extends TreeAppModule
         @actions.push
             txt: "Already computed"
             ico: "img/manual_compute_inactive_24.png"
+            bnd: ( app ) => app
+            vis: _ina_build                
             loc: true
             ina: _ina_builded
             fun: ( evt, app ) =>
