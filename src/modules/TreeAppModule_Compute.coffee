@@ -14,6 +14,7 @@ class TreeAppModule_Compute extends TreeAppModule
             for el in app.treeview.flat? when el.item instanceof TreeItem_Computable
                 cm = el.item._computation_mode
                 cs = el.item._computation_state
+                console.log 'build', cm, cs
                 if cm == false and cs == false
                     return false
             return true
@@ -22,6 +23,7 @@ class TreeAppModule_Compute extends TreeAppModule
             for el in app.treeview.flat? when el.item instanceof TreeItem_Computable
                 cm = el.item._computation_mode
                 cs = el.item._computation_state
+                console.log 'builded', cm, cs
                 if cm == false and cs == true
                     return false
             return true
@@ -30,6 +32,7 @@ class TreeAppModule_Compute extends TreeAppModule
             for el in app.treeview.flat? when el.item instanceof TreeItem_Computable
                 cm = el.item._computation_mode
                 cs = el.item._computation_state
+                console.log 'auto', cm, cs
                 if cm == true
                     return false
             return true
@@ -50,7 +53,7 @@ class TreeAppModule_Compute extends TreeAppModule
             txt: "Build"
             ico: "img/play_24.png"
             ina: _ina_build
-            vis: _ina_build # TODO, we expect this icon to disappear or be transformed in white and black when auto compute is true
+#             vis: _ina_build # TODO, we expect this icon to disappear or be transformed in white and black when auto compute is true
             fun: ( evt, app ) =>
                 for el in app.treeview.flat when el.item instanceof TreeItem_Computable
                     el.item._computation_state.set true
@@ -68,8 +71,8 @@ class TreeAppModule_Compute extends TreeAppModule
         @actions.push
             txt: "Already computed"
             ico: "img/manual_compute_inactive_24.png"
-            ina: _ina_builded
             loc: true
+            ina: _ina_builded
             fun: ( evt, app ) =>
                 for path in app.data.selected_tree_items when path.length > 1
                     m = path[ path.length - 1 ]
@@ -81,8 +84,8 @@ class TreeAppModule_Compute extends TreeAppModule
         @actions.push
             txt: "Set Item to manual compute"
             ico: "img/manual_compute_24.png"
-            ina: _ina_build
             loc: true
+            ina: _ina_build
             fun: ( evt, app ) =>
                 for path in app.data.selected_tree_items when path.length > 1
                     m = path[ path.length - 1 ]
@@ -94,8 +97,8 @@ class TreeAppModule_Compute extends TreeAppModule
         @actions.push
             txt: "Set Item to auto compute"
             ico: "img/auto_compute_24.png"
-            ina: _ina_auto
             loc: true
+            ina: _ina_auto
             fun: ( evt, app ) =>
                 for path in app.data.selected_tree_items when path.length > 1
                     m = path[ path.length - 1 ]
