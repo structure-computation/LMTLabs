@@ -13,12 +13,5 @@ class BorderStrainItem extends BoundariesSelectionItem
         @_ico.set "img/border_constrain_strain_16.png"
         @_viewable.set false
         
-        
-    accept_child: ( ch ) ->
-        ch instanceof PickedZoneItem or
-        ch instanceof DiscretizationItem or
-        ch instanceof SketchItem or 
-        ch instanceof MeshItem
-
     sub_canvas_items: ->
         [ ]

@@ -21,7 +21,8 @@ class PhysicsItem extends TreeItem
         ch instanceof SketchItem or 
         ch instanceof MeshItem or 
         ch instanceof ImgSetItem or
-        ch instanceof ImgItem
+        ch instanceof ImgItem or
+        ch instanceof BoundariesSelectionItem
                 
         
     sub_canvas_items: ->

@@ -42,7 +42,9 @@ class CorrelationItem extends TreeItem_Computable
         ch instanceof DiscretizationItem or
         ch instanceof SketchItem or 
         ch instanceof ImgSetItem or
-        ch instanceof TransformItem
+        ch instanceof TransformItem or
+        ch instanceof PhysicsItem or
+        ch instanceof BoundariesSelectionItem
         
     sub_canvas_items: ->
         [ @visualization ]

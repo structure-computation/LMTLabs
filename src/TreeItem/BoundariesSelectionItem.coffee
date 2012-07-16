@@ -6,6 +6,12 @@ class BoundariesSelectionItem extends TreeItem
     z_index: ->
         return 1000
     
+    accept_child: ( ch ) ->
+        ch instanceof PickedZoneItem or
+        ch instanceof DiscretizationItem or
+        ch instanceof SketchItem or 
+        ch instanceof MeshItem
+        
     is_app_data: ( item ) ->
         if item instanceof TreeAppData
             return true
@@ -73,7 +79,7 @@ class BoundariesSelectionItem extends TreeItem
                     return true
                         
                 else
-                    for el in cm._flat when el instanceof Mesh
+                    for el in cm._flat when el instanceof Mesh #TODO check only parents
                         if el.lines and el.get_movable_entities?
                             el.get_movable_entities res, cm.cam_info, pos, 1, true
                             
