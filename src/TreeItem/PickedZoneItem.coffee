@@ -29,27 +29,19 @@ class PickedZoneItem extends TreeItem
         
     z_index: ->
         return 1000
-        
+
+    
     draw: ( info ) ->
-        if @_border_type.get() == 'constrain_displacement'
-            theme = info.theme.constrain_boundary_displacement
-        else if @_border_type.get() == 'constrain_strain'
-            theme = info.theme.constrain_boundary_strain
-        else if @_border_type.get() == 'constrain_pressure'
-            theme = info.theme.constrain_boundary_pressure
-        else if @_border_type.get() == 'free'
-            theme = info.theme.free_boundary
         for pe in @picked_element
             mesh = pe.mesh
             elem = pe.element
             proj = for p in mesh.points
                 info.re_2_sc.proj p.pos.get()
             if elem in @_pelected
-                if info.theme.pre_selected_boundary_width?
-                    theme.width.set info.theme.pre_selected_boundary_width
+                theme = @_get_theme info, true
                 elem.draw info, mesh, proj, true, theme
             else
-                theme.width.set 1
+                theme = @_get_theme info, false
                 elem.draw info, mesh, proj, true, theme
     
     closest_point_closer_than: ( best, info, pos ) ->
@@ -63,4 +55,25 @@ class PickedZoneItem extends TreeItem
             #add information of current picked_zone_item in best
             if best.disp?
                 best.pzi = this
-            
+                
+    
+    _get_theme: ( info, hover = false ) ->
+        if hover == false
+            if @_border_type.get() == 'constrain_displacement'
+                theme = info.theme.constrain_boundary_displacement
+            else if @_border_type.get() == 'constrain_strain'
+                theme = info.theme.constrain_boundary_strain
+            else if @_border_type.get() == 'constrain_pressure'
+                theme = info.theme.constrain_boundary_pressure
+            else if @_border_type.get() == 'free'
+                theme = info.theme.free_boundary
+        else
+            if @_border_type.get() == 'constrain_displacement'
+                theme = info.theme.constrain_boundary_displacement_hover
+            else if @_border_type.get() == 'constrain_strain'
+                theme = info.theme.constrain_boundary_strain_hover
+            else if @_border_type.get() == 'constrain_pressure'
+                theme = info.theme.constrain_boundary_pressure_hover
+            else if @_border_type.get() == 'free'
+                theme = info.theme.free_boundary_hover
+        return theme

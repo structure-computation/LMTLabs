@@ -101,6 +101,8 @@ class BoundariesSelectionItem extends TreeItem
         # clear all _pre_selected array
         for ch in @_children when ch instanceof PickedZoneItem
             ch._pelected.clear()
+        for msh in cm._flat when msh instanceof Mesh
+            msh._pelected_elements.clear()
         
         if cm._flat?
             res = []
@@ -129,8 +131,8 @@ class BoundariesSelectionItem extends TreeItem
                         
                     if best.disp? # mean we found something in Mesh
                         elem = best.inst
-                        if elem not in msh._pelected_points
-                            msh._pelected_points.push elem
+                        if elem not in msh._pelected_elements
+                            msh._pelected_elements.push elem
         return false
 
 #       on_mouse_move: ( cm, evt, pos, b ) ->
