@@ -33,7 +33,7 @@ class CorrelationItem extends TreeItem_Computable
             _norm_2_history       : []
             _residual_history     : []
             
-            _residual             : new NamedParametrizedDrawable( "residual", new InterpolatedField )
+            _residual             : new NamedParametrizedDrawable( "Residual", new InterpolatedField )
 
          # @visualization: new FieldSet
 
@@ -48,10 +48,13 @@ class CorrelationItem extends TreeItem_Computable
         ch instanceof BoundariesSelectionItem
         
     sub_canvas_items: ->
-        [ @visualization ]
+        if @nothing_to_do()
+            [ @visualization ]
+        else
+            []
         
     cosmetic_attribute: ( name ) ->
-        super( name ) or ( name in [ "visualization" ] )
+        super( name ) or ( name in [ "visualization", "_residual", "_norm_i_history", "_norm_2_history", "_residual_history" ] )
         
     
     information: ( div ) ->
