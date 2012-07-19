@@ -53,7 +53,7 @@ class CorrelationItem extends TreeItem_Computable
             []
         
     cosmetic_attribute: ( name ) ->
-        super( name ) or ( name in [ "visualization" ] )
+        super( name ) or ( name in [ "visualization", "_residual", "_norm_i_history", "_norm_2_history", "_residual_history" ] )
         
     
     information: ( div ) ->

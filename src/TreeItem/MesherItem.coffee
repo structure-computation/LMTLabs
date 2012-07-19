@@ -42,7 +42,10 @@ class MesherItem extends TreeItem_Computable
         ch instanceof TransformItem
         
     sub_canvas_items: ->
-        [ @_mesh ]
+        if @nothing_to_do()
+            [ @_mesh ]
+        else
+            []
     
     draw: ( info ) ->
         draw_point = info.sel_item[ @model_id ]

@@ -11,9 +11,9 @@ class PickedZoneItem extends TreeItem
         @add_attr
             # geometry
             _border_type     : _border_type
-            points           : new Lst # contains model_id of points in mesh child
+            points           : [] # contains model_id of points in mesh child
             picked_element   : [] # contains item mesh and element
-            _pelected        : new Lst # contains pre_selected element
+            _pelected        : [] # contains pre_selected element
     
     accept_child: ( ch ) ->
         ch instanceof MaskItem or 
@@ -22,6 +22,9 @@ class PickedZoneItem extends TreeItem
         ch instanceof MeshItem or 
         ch instanceof ImgSetItem or
         ch instanceof ImgItem
+        
+    cosmetic_attribute: ( name ) ->
+        super( name ) or ( name in [ "_pelected" ] )
                 
         
     sub_canvas_items: ->
