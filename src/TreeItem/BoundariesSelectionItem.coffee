@@ -25,22 +25,6 @@ class BoundariesSelectionItem extends TreeItem
         return it[ 0 ]
         
     
-    delete_from_tree: ( app_data,  item ) ->
-        # delete children
-        for c in item._children
-            if c._children.length > 0
-                @delete_from_tree app, c
-            item.rem_child c
-            app_data.closed_tree_items.remove c
-            for p in app_data.panel_id_list()
-                app_data.visible_tree_items[ p ].remove c
-        
-        # delete item
-        this.rem_child item
-        app_data.closed_tree_items.remove item
-        for p in app_data.panel_id_list()
-            app_data.visible_tree_items[ p ].remove item
-    
     add_child_mesh : ( msh ) ->
         app_data = @get_app_data()
         if this._children.length <= 0
@@ -72,7 +56,7 @@ class BoundariesSelectionItem extends TreeItem
                     ch.closest_point_closer_than best, cm.cam_info, pos
                     
                     if best.disp? # delete a line in PickedZoneItem
-                        @delete_from_tree app_data, best.pzi
+                        app_data.delete_from_tree best.pzi
                         return true
                         
                 if not best.disp?
