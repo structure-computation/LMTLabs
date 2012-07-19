@@ -32,7 +32,7 @@ class CorrelationItem extends TreeItem_Computable
             _norm_2_history       : []
             _residual_history     : []
             
-            _residual             : new NamedParametrizedDrawable( "residual", new InterpolatedField )
+            _residual             : new NamedParametrizedDrawable( "Residual", new InterpolatedField )
 
          # @visualization: new FieldSet
 
