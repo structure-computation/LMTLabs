@@ -9,9 +9,6 @@ class PhysicsItem extends TreeItem
         @_viewable.set false
         
         @add_child new MaterialItem
-        # attributes
-#         @add_attr
-            #
     
     accept_child: ( ch ) ->
         ch instanceof MaterialItem or

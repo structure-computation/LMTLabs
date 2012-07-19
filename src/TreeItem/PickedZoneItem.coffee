@@ -25,7 +25,6 @@ class PickedZoneItem extends TreeItem
         
     cosmetic_attribute: ( name ) ->
         super( name ) or ( name in [ "_pelected" ] )
-                
         
     sub_canvas_items: ->
         [ ]

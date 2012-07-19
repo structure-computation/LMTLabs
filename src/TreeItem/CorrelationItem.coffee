@@ -26,6 +26,7 @@ class CorrelationItem extends TreeItem_Computable
                 multi_res       : new ConstrainedVal( 0, { min: 0, max: 10, div: 10 } )
                 nb_iter_max     : 50
                 preview_result  : false
+                clear_lst       : false
             
             # results
             _norm_i_history       : []
