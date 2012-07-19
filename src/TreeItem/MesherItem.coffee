@@ -16,6 +16,7 @@ class MesherItem extends TreeItem_Computable
         @_viewable.set true
         
         @visualization.display_style.num.set 1
+        @_computation_mode.set true
         
     cosmetic_attribute: ( name ) ->
         super( name ) or ( name in [ "_mesh", "visualization" ] )
