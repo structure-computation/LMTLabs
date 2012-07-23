@@ -49,10 +49,10 @@ class CorrelationItem extends TreeItem_Computable
         ch instanceof BoundariesSelectionItem
         
     sub_canvas_items: ->
+        res = []
         if @nothing_to_do()
-            [ @visualization ]
-        else
-            []
+            res.push @visualization
+        return res
         
     cosmetic_attribute: ( name ) ->
         super( name ) or ( name in [ "visualization", "_residual", "_norm_i_history", "_norm_2_history", "_residual_history" ] )

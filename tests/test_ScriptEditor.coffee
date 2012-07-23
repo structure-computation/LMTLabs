@@ -54,10 +54,10 @@ Class Steel\n
             if i > 1000
                 console.error 'Too much variables'
                 break
-            console.log 'variable ',  RegExp.$1 ,' founded, value :', RegExp.$2
+            console.log 'variable ',  RegExp.$1 ,' found, value :', RegExp.$2
             variable = RegExp.$1
             variable_value = parseFloat RegExp.$2
-            # add founded variable as attributes
+            # add found variable as attributes
             if not @[ variable ]?                                 # if variable doesn't exist
                 @add_attr variable, [ variable_value, false ]
                 @lst_variables.push variable
