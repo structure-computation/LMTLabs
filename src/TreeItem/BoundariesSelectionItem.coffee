@@ -59,7 +59,7 @@ class BoundariesSelectionItem extends TreeItem
         pzi_path = app_data.get_root_path pzi
         app_data.close_item pzi_path[ 0 ]
         
-        app_data.watch_item pzi
+        #         app_data.watch_item pzi
         
         return pzi
     
