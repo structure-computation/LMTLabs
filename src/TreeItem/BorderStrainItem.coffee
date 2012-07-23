@@ -11,7 +11,6 @@ class BorderStrainItem extends BoundariesSelectionItem
         # default values
         @_name.set "Strain boundary"
         @_ico.set "img/border_constrain_strain_16.png"
-        @_viewable.set false
         
     sub_canvas_items: ->
         [ ]

@@ -2,9 +2,11 @@
 class BoundariesSelectionItem extends TreeItem
     constructor: ( ) ->
         super()
+        
+        @_viewable.set true
     
     z_index: ->
-        return 1000
+        return 2000
     
     accept_child: ( ch ) ->
         ch instanceof PickedZoneItem or
@@ -24,6 +26,20 @@ class BoundariesSelectionItem extends TreeItem
         it = @get_parents_that_check @is_app_data
         return it[ 0 ]
         
+    draw: ( info ) ->
+        for ch in @_children when ch instanceof PickedZoneItem
+            for pe in ch.picked_element
+                mesh = pe.mesh
+                elem = pe.element
+                proj = for p in mesh.points
+                    info.re_2_sc.proj p.pos.get()
+                if elem in ch._pelected
+                    theme = @_get_theme info, true
+                    elem.draw info, mesh, proj, true, theme
+                else
+                    theme = @_get_theme info, false
+                    elem.draw info, mesh, proj, true, theme
+    
     
     add_child_mesh : ( msh ) ->
         app_data = @get_app_data()
@@ -118,7 +134,31 @@ class BoundariesSelectionItem extends TreeItem
                         if elem not in msh._pelected_elements
                             msh._pelected_elements.push elem
         return false
-
+        
+    _get_theme: ( info, hover = false ) ->
+        if @_border_type?
+            if hover == false
+                if @_border_type.get() == 'constrain_displacement'
+                    theme = info.theme.constrain_boundary_displacement
+                else if @_border_type.get() == 'constrain_strain'
+                    theme = info.theme.constrain_boundary_strain
+                else if @_border_type.get() == 'constrain_pressure'
+                    theme = info.theme.constrain_boundary_pressure
+                else if @_border_type.get() == 'free'
+                    theme = info.theme.free_boundary
+            else
+                if @_border_type.get() == 'constrain_displacement'
+                    theme = info.theme.constrain_boundary_displacement_hover
+                else if @_border_type.get() == 'constrain_strain'
+                    theme = info.theme.constrain_boundary_strain_hover
+                else if @_border_type.get() == 'constrain_pressure'
+                    theme = info.theme.constrain_boundary_pressure_hover
+                else if @_border_type.get() == 'free'
+                    theme = info.theme.free_boundary_hover
+            return theme
+        else
+            return info.theme.lines
+            
 #       on_mouse_move: ( cm, evt, pos, b ) ->
 #          #clear all _pre_selected array
 #         app_data = @get_app_data()

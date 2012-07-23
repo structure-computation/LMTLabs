@@ -9,7 +9,6 @@ class BorderFreeItem extends BoundariesSelectionItem
         # default values
         @_name.set "Free boundary"
         @_ico.set "img/border_free_16.png"
-        @_viewable.set false
                 
     sub_canvas_items: ->
         [ ]
