@@ -16,6 +16,7 @@ class MesherItem extends TreeItem_Computable
         @_viewable.set true
         
         @visualization.display_style.num.set 1
+        @_computation_mode.set true
         
     cosmetic_attribute: ( name ) ->
         super( name ) or ( name in [ "_mesh", "visualization" ] )
@@ -41,7 +42,10 @@ class MesherItem extends TreeItem_Computable
         ch instanceof TransformItem
         
     sub_canvas_items: ->
-        [ @_mesh ]
+        if @nothing_to_do()
+            [ @_mesh ]
+        else
+            []
     
     draw: ( info ) ->
         draw_point = info.sel_item[ @model_id ]

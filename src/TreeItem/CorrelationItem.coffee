@@ -8,6 +8,7 @@ class CorrelationItem extends TreeItem_Computable
         @_name.set "Correlation"
         @_ico.set "img/correlation_19.png"
         @_viewable.set true
+        @add_child new PhysicsItem
         @add_child new ImgSetItem
         @add_child new MaskItem
         @add_child new DiscretizationItem
@@ -26,13 +27,14 @@ class CorrelationItem extends TreeItem_Computable
                 multi_res       : new ConstrainedVal( 0, { min: 0, max: 10, div: 10 } )
                 nb_iter_max     : 50
                 preview_result  : false
+                clear_lst       : false
             
             # results
             _norm_i_history       : []
             _norm_2_history       : []
             _residual_history     : []
             
-            _residual             : new NamedParametrizedDrawable( "residual", new InterpolatedField )
+            _residual             : new NamedParametrizedDrawable( "Residual", new InterpolatedField )
 
          # @visualization: new FieldSet
 
@@ -42,13 +44,18 @@ class CorrelationItem extends TreeItem_Computable
         ch instanceof DiscretizationItem or
         ch instanceof SketchItem or 
         ch instanceof ImgSetItem or
-        ch instanceof TransformItem
+        ch instanceof TransformItem or
+        ch instanceof PhysicsItem or
+        ch instanceof BoundariesSelectionItem
         
     sub_canvas_items: ->
-        [ @visualization ]
+        res = []
+        if @nothing_to_do()
+            res.push @visualization
+        return res
         
     cosmetic_attribute: ( name ) ->
-        super( name ) or ( name in [ "visualization" ] )
+        super( name ) or ( name in [ "visualization", "_residual", "_norm_i_history", "_norm_2_history", "_residual_history" ] )
         
     
     information: ( div ) ->

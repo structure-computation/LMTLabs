@@ -1,6 +1,8 @@
 browser = google-chrome
-soda_cm = ext/Soda/soda --base-dir html -C "xterm -e 'make -C../CorrelationClient; exit' &" -l --start-page /CorreliOnline.html --title-page __CorreliOnline__
-sceen_cm = ext/Soda/soda --base-dir html -C "xterm -e 'make -C../CorrelationClient; exit' &"
+soda_cm = ext/Soda/soda --base-dir html -l --start-page /CorreliOnline.html --title-page __CorreliOnline__
+sceen_cm = ext/Soda/soda --base-dir html
+#  -C "xterm -e 'make -C../CorrelationClient; exit' &"
+
 
 all: compilation
 	xdotool search "__CorreliOnline__" windowactivate key F5 || ${browser} html/CorreliOnline.html
