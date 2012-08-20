@@ -70,8 +70,6 @@ class BoundariesSelectionItem extends TreeItem
         
         # adding callback for when a point is deleted (call in mesh)
         msh.delete_selected_points_callback.push ( msh, index_selected_points ) =>
-            console.log '---------'
-            console.log index_selected_points
             for ch in @_children when ch instanceof PickedZoneItem
                 for pe in ch.picked_element
                     for ind in pe.element.indices.get()
@@ -88,7 +86,7 @@ class BoundariesSelectionItem extends TreeItem
             modify_line = elem
             modify_line.indices[ 0 ].set indices[ 0 ].get()
             modify_line.indices[ 1 ].set np
-            #TODO recursivity doesn't work on this two new lines
+            #TODO recursivity doesn't work on this two new element_line
             @create_pzi msh, modify_line
             @create_pzi msh, new_line
     
