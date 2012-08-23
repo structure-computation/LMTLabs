@@ -46,10 +46,6 @@ class TreeAppModule_Session extends TreeAppModule
                     
                 @fill_notice_popup(@d, app )
                 
-#                 @item_cp = new ModelEditorItem_Directory
-#                     el    : @d
-#                     model : @model
-
                 p = new_popup "Notice", event : evt, width : 70, height : 70, child: @d, onclose: =>
                     @onPopupClose( app )
                 app.active_key.set false
