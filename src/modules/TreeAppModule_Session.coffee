@@ -212,7 +212,7 @@ class TreeAppModule_Session extends TreeAppModule
                         for mesherit in di._children when mesherit instanceof MesherItem
                             break
                             
-                        mesh_text = "Mesh type " + mesherit.cell_type.toString() + "<br>
+                        mesh_text = "Mesh type : " + mesherit.cell_type.toString() + "<br>
                         Base size : " + mesherit.base_size.toString() + "px<br>
                         Mesh got " + mesherit._mesh.points.length + " points<br>"
                         

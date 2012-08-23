@@ -57,8 +57,10 @@ launch_CorreliOnline = ( main = document.body ) ->
                         parentNode: main
 
                     item_cp = new ModelEditorItem_Directory
-                        el    : div
-                        model : session_dir
+                        el             : div
+                        model          : session_dir
+                        use_icons      : false
+                        use_breadcrumb : false
 
                     # NEW SESSION
                     new_dom_element
