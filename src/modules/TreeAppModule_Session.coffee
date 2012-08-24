@@ -3,7 +3,7 @@ class TreeAppModule_Session extends TreeAppModule
     constructor: ->
         super()
         
-        @name = 'Session'
+        @name = 'Correli'
         
         session_info =
             ico: "img/correli.png"
