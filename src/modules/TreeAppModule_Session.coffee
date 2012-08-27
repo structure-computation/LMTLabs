@@ -258,17 +258,44 @@ class TreeAppModule_Session extends TreeAppModule
                             nodeName  : "h3"
                             txt       : "Results"
                             
+#                         disp_txt = correlation._residual_history.get()
+#                             
+#                         new_dom_element
+#                             parentNode: parent
+#                             nodeName  : "span"
+#                             txt       : "Displacement :<br>"
+#                             
+#                         new_dom_element
+#                             parentNode: parent
+#                             nodeName  : "textarea"
+#                             txt       : disp_txt
                             
-                        disp_txt = correlation._residual_history.get() + '<br>' + correlation._norm_2_history.get() + '<br>' + correlation._norm_i_history.get() + '<br>' 
                             
-                        displacement_title = new_dom_element
+                        res_txt = correlation._residual_history.get()
+                            
+                        new_dom_element
                             parentNode: parent
                             nodeName  : "span"
-                            txt       : "Displacement :<br>"
+                            txt       : "Residual history :<br>"
                             
-                        displacement_points = new_dom_element
+                        new_dom_element
                             parentNode: parent
                             nodeName  : "textarea"
-                            txt       : disp_txt
+                            txt       : res_txt
+                            
+                            
+                            
+                        norm_txt = data
+                        
+                        new_dom_element
+                            parentNode: parent
+                            nodeName  : "span"
+                            txt       : "<br>Norm :<br>"
+                            
+                        new_dom_element
+                            parentNode: parent
+                            nodeName  : "textarea"
+                            txt       : norm_txt
+                        
                             
                             
