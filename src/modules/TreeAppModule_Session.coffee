@@ -3,7 +3,7 @@ class TreeAppModule_Session extends TreeAppModule
     constructor: ->
         super()
         
-        @name = 'Session'
+        @name = 'Correli'
         
         session_info =
             ico: "img/correli.png"
@@ -46,11 +46,7 @@ class TreeAppModule_Session extends TreeAppModule
                     
                 @fill_notice_popup(@d, app )
                 
-#                 @item_cp = new ModelEditorItem_Directory
-#                     el    : @d
-#                     model : @model
-
-                p = new_popup "Notice", event : evt, width : 70, child: @d, onclose: =>
+                p = new_popup "Notice", event : evt, width : 70, height : 70, child: @d, onclose: =>
                     @onPopupClose( app )
                 app.active_key.set false
                 
@@ -146,8 +142,6 @@ class TreeAppModule_Session extends TreeAppModule
             nodeName  : "h2"
             txt       : "Correlation informations"
         
-#         console.log app
-
         session = app.data.selected_session()
         
     
@@ -157,6 +151,12 @@ class TreeAppModule_Session extends TreeAppModule
                 for ic in correlation._children when ic instanceof ImgSetItem
                     break
     #             console.log ic
+    
+                new_dom_element
+                    parentNode: parent
+                    nodeName  : "h3"
+                    txt       : "General informations"
+                    
                 if ic._children.length
                     if not correlation._residual_history? #no correlation have been done
                         no_correlation = new_dom_element
@@ -169,20 +169,55 @@ class TreeAppModule_Session extends TreeAppModule
                         text = 
                         "Correlation used " + ic._children.length + " pictures<br>
                         From picture name " + ic._children[ 0 ].img.src + " to " + ic._children[ ic._children.length - 1 ].img.src + "<br>
-                        Updates have been done on " + ic._children[ 0 ].img.src + "<br><br>
-                        With following parameters :<br>
-                        Rigid body : " + correlation.parameters.rigid_body.get() + "<br>
+                        Updates have been done on " + ic._children[ 0 ].img.src + "<br>"
+                        
+                        general_informations = new_dom_element
+                            parentNode: parent
+                            nodeName  : "div"
+                            txt       : text
+                            
+                            
+                            
+                        new_dom_element
+                            parentNode: parent
+                            nodeName  : "h3"
+                            txt       : "Correlation parameters"
+                            
+                        text_correlation_parameters = "Rigid body : " + correlation.parameters.rigid_body.get() + "<br>
                         Luminosity : " + correlation.parameters.lum_corr.get() + "<br>
                         Norm infinite with value "+ correlation.parameters.norm_inf.get() + "<br>
                         Norm 2 with value "+ correlation.parameters.norm_2.get() + "<br>
                         Multi resolution : " + correlation.parameters.multi_res.get() + "<br>
                         Number max of iterations : " + correlation.parameters.nb_iter_max.get() + "<br>
-                        Residual : " + correlation._residual_history.get() + "<br>
                         "
+#                         Residual : " + correlation._residual_history.get() + "<br>
                         correlation_parameters = new_dom_element
                             parentNode: parent
                             nodeName  : "div"
-                            txt       : text
+                            txt       : text_correlation_parameters
+                            
+                            
+                            
+                        new_dom_element
+                            parentNode: parent
+                            nodeName  : "h3"
+                            txt       : "Mesh parameters"
+                            
+                        for di in correlation._children when di instanceof DiscretizationItem
+                            break
+                        for mesherit in di._children when mesherit instanceof MesherItem
+                            break
+                            
+                        mesh_text = "Mesh type : " + mesherit.cell_type.toString() + "<br>
+                        Base size : " + mesherit.base_size.toString() + "px<br>
+                        Mesh got " + mesherit._mesh.points.length + " points<br>"
+                        
+                        
+                        mesh_parameters = new_dom_element
+                            parentNode: parent
+                            nodeName  : "div"
+                            txt       : mesh_text
+                            
                             
                         data = []
                         for i in [ 0 .. 10 ]
@@ -192,20 +227,75 @@ class TreeAppModule_Session extends TreeAppModule
                             data = correlation._norm_2_history.get()
                         else
                             data = correlation._norm_i_history.get()
+                        
+                        error = 0
+                        for res in correlation._residual_history.get()
+                            error += res
+                        avg_cor_error = (error / correlation._residual_history.length ).toExponential( 2 )
+                            
+                            
                         if data?
+                            new_dom_element
+                                parentNode: parent
+                                nodeName  : "h3"
+                                txt       : "Convergence"
+                                
+                            text = "Average correlation convergence is reached after " + ( data.length / ( ic._children.length - 1 ) ).toFixed( 1 ) + " iterations<br>
+                            Average correlation error is " + avg_cor_error + "<br>"
+                                
+                            average_correlation_convergence_error = new_dom_element
+                                parentNode: parent
+                                nodeName  : "div"
+                                txt       : text
+                                
                             @get_convergence_curve parent, data
                         
             #             for result in correlation._children when result instanceof ResultItem
             #                 break
 
-                        disp_txt = correlation._residual_history.get() + '<br>' + correlation._norm_2_history.get() + '<br>' + correlation._norm_i_history.get() + '<br>' 
+                        new_dom_element
+                            parentNode: parent
+                            nodeName  : "h3"
+                            txt       : "Results"
                             
-                        displacement_title = new_dom_element
+#                         disp_txt = correlation._residual_history.get()
+#                             
+#                         new_dom_element
+#                             parentNode: parent
+#                             nodeName  : "span"
+#                             txt       : "Displacement :<br>"
+#                             
+#                         new_dom_element
+#                             parentNode: parent
+#                             nodeName  : "textarea"
+#                             txt       : disp_txt
+                            
+                            
+                        res_txt = correlation._residual_history.get()
+                            
+                        new_dom_element
                             parentNode: parent
                             nodeName  : "span"
-                            txt       : "Displacement :<br>"
+                            txt       : "Residual history :<br>"
                             
-                        displacement_points = new_dom_element
+                        new_dom_element
                             parentNode: parent
                             nodeName  : "textarea"
-                            txt       : disp_txt
+                            txt       : res_txt
+                            
+                            
+                            
+                        norm_txt = data
+                        
+                        new_dom_element
+                            parentNode: parent
+                            nodeName  : "span"
+                            txt       : "<br>Norm :<br>"
+                            
+                        new_dom_element
+                            parentNode: parent
+                            nodeName  : "textarea"
+                            txt       : norm_txt
+                        
+                            
+                            

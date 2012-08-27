@@ -12,7 +12,6 @@ class BorderDisplacementItem extends BoundariesSelectionItem
         # default values
         @_name.set "Displacement boundary"
         @_ico.set "img/border_constrain_displacement_16.png"
-        @_viewable.set false
         
     sub_canvas_items: ->
         [  ]

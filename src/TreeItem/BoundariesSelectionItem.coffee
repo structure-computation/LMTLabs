@@ -3,8 +3,10 @@ class BoundariesSelectionItem extends TreeItem
     constructor: ( ) ->
         super()
         
+        @_viewable.set true
+
     z_index: ->
-        return 1000
+        return 2000
     
     accept_child: ( ch ) ->
         ch instanceof PickedZoneItem or
@@ -24,6 +26,20 @@ class BoundariesSelectionItem extends TreeItem
         it = @get_parents_that_check @is_app_data
         return it[ 0 ]
         
+    draw: ( info ) ->
+        for ch in @_children when ch instanceof PickedZoneItem
+            for pe in ch.picked_element
+                mesh = pe.mesh
+                elem = pe.element
+                proj = for p in mesh.points
+                    info.re_2_sc.proj p.pos.get()
+                if elem in ch._pelected
+                    theme = @_get_theme info, true
+                    elem.draw info, mesh, proj, true, theme
+                else
+                    theme = @_get_theme info, false
+                    elem.draw info, mesh, proj, true, theme
+    
     
     add_child_mesh : ( msh ) ->
         app_data = @get_app_data()
@@ -43,9 +59,38 @@ class BoundariesSelectionItem extends TreeItem
         pzi_path = app_data.get_root_path pzi
         app_data.close_item pzi_path[ 0 ]
         
-        app_data.watch_item pzi
+        #         app_data.watch_item pzi
         
         return pzi
+        
+    create_pzi: ( msh, elem ) ->
+        pzi = @add_child_mesh msh
+        pe = mesh : msh, element : elem
+        pzi.picked_element.push pe
+        
+        # adding callback for when a point is deleted (call in mesh)
+        msh.delete_selected_points_callback.push ( msh, index_selected_points ) =>
+            for ch in @_children when ch instanceof PickedZoneItem
+                for pe in ch.picked_element
+                    for ind in pe.element.indices.get()
+                        for isp in index_selected_points
+                            if ind == isp
+                                # It means there is a selected point in this picked zone item, we now can delete the correct pzi
+                                app_data = @get_app_data()
+                                app_data.delete_from_tree ch
+        
+        # adding callback for when a point is added between a boundaries (call in element_line)
+        elem.cut_with_point_callback = []
+        elem.cut_with_point_callback.push ( msh, indices, np ) =>
+            new_line = new Element_Line [ np, indices[ 1 ].get() ]
+            modify_line = elem
+            modify_line.indices[ 0 ].set indices[ 0 ].get()
+            modify_line.indices[ 1 ].set np
+            #TODO recursivity doesn't work on this two new element_line
+            @create_pzi msh, modify_line
+            @create_pzi msh, new_line
+    
+    
     
     on_mouse_down: ( cm, evt, pos, b ) ->
         if b == "LEFT"
@@ -73,10 +118,8 @@ class BoundariesSelectionItem extends TreeItem
                         
                         if best.disp?
                             @_may_need_snapshot = true
-                            pzi = @add_child_mesh msh
-                            pe = mesh : msh, element : best.inst
-                            pzi.picked_element.push pe
-                                
+                            @create_pzi msh, best.inst
+        
                 return false
                 
         return false  
@@ -118,7 +161,31 @@ class BoundariesSelectionItem extends TreeItem
                         if elem not in msh._pelected_elements
                             msh._pelected_elements.push elem
         return false
-
+        
+    _get_theme: ( info, hover = false ) ->
+        if @_border_type?
+            if hover == false
+                if @_border_type.get() == 'constrain_displacement'
+                    theme = info.theme.constrain_boundary_displacement
+                else if @_border_type.get() == 'constrain_strain'
+                    theme = info.theme.constrain_boundary_strain
+                else if @_border_type.get() == 'constrain_pressure'
+                    theme = info.theme.constrain_boundary_pressure
+                else if @_border_type.get() == 'free'
+                    theme = info.theme.free_boundary
+            else
+                if @_border_type.get() == 'constrain_displacement'
+                    theme = info.theme.constrain_boundary_displacement_hover
+                else if @_border_type.get() == 'constrain_strain'
+                    theme = info.theme.constrain_boundary_strain_hover
+                else if @_border_type.get() == 'constrain_pressure'
+                    theme = info.theme.constrain_boundary_pressure_hover
+                else if @_border_type.get() == 'free'
+                    theme = info.theme.free_boundary_hover
+            return theme
+        else
+            return info.theme.lines
+            
 #       on_mouse_move: ( cm, evt, pos, b ) ->
 #          #clear all _pre_selected array
 #         app_data = @get_app_data()
