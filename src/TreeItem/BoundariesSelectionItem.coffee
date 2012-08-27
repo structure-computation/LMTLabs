@@ -2,7 +2,7 @@
 class BoundariesSelectionItem extends TreeItem
     constructor: ( ) ->
         super()
-    
+        
     z_index: ->
         return 1000
     
