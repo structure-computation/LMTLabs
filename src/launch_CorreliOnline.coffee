@@ -59,8 +59,9 @@ launch_CorreliOnline = ( main = document.body ) ->
                     item_cp = new ModelEditorItem_Directory
                         el             : div
                         model          : session_dir
-                        use_icons      : false
-                        use_breadcrumb : false
+                        use_icons      : true
+                        use_upload     : false
+                        use_breadcrumb : true
 
                     # NEW SESSION
                     new_dom_element
