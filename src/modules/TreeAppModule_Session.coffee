@@ -46,7 +46,7 @@ class TreeAppModule_Session extends TreeAppModule
                     
                 @fill_notice_popup(@d, app )
                 
-                p = new_popup "Notice", event : evt, width : 70, height : 70, child: @d, onclose: =>
+                p = new_popup "Notice", event : evt, height : 70, child: @d, onclose: =>
                     @onPopupClose( app )
                 app.active_key.set false
                 
@@ -228,10 +228,7 @@ class TreeAppModule_Session extends TreeAppModule
                         else
                             data = correlation._norm_i_history.get()
                         
-                        error = 0
-                        for res in correlation._residual_history.get()
-                            error += res
-                        avg_cor_error = (error / correlation._residual_history.length ).toExponential( 2 )
+                        cor_error = ( correlation._residual_history[ correlation._residual_history.length - 1 ] ).toExponential( 2 )
                             
                             
                         if data?
@@ -241,7 +238,7 @@ class TreeAppModule_Session extends TreeAppModule
                                 txt       : "Convergence"
                                 
                             text = "Average correlation convergence is reached after " + ( data.length / ( ic._children.length - 1 ) ).toFixed( 1 ) + " iterations<br>
-                            Average correlation error is " + avg_cor_error + "<br>"
+                            Average correlation error is " + cor_error + "<br>"
                                 
                             average_correlation_convergence_error = new_dom_element
                                 parentNode: parent
