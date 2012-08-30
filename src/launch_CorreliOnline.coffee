@@ -84,10 +84,8 @@ launch_CorreliOnline = ( main = document.body, model_id = -1 ) ->
                             session_dir.add_file name, td, model_type: "Session", icon: "session"
                             window.location = "#" + encodeURI( "#{d}/#{name}" )
                             
-                            #FIXME Is it necessary to create a new treeapp here ?
-                            app = new TreeApp main, td
                             for correlation in td.modules when correlation instanceof TreeAppModule_Correlation
-                                correlation.actions[ 0 ].fun( evt, app )
+                                correlation.add_corr td
 
                     # RELOAD
                     ModelEditorItem_Directory.add_action "Session", ( file, path, browser ) ->
