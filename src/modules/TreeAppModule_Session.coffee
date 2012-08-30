@@ -227,8 +227,7 @@ class TreeAppModule_Session extends TreeAppModule
                             data = correlation._norm_2_history.get()
                         else
                             data = correlation._norm_i_history.get()
-                        
-                        cor_error = ( correlation._residual_history[ correlation._residual_history.length - 1 ] ).toExponential( 2 )
+                        cor_error = ( correlation._residual_history[ correlation._residual_history.length - 1 ] ).get().toExponential( 2 )
                             
                             
                         if data?
@@ -238,7 +237,7 @@ class TreeAppModule_Session extends TreeAppModule
                                 txt       : "Convergence"
                                 
                             text = "Average correlation convergence is reached after " + ( data.length / ( ic._children.length - 1 ) ).toFixed( 1 ) + " iterations<br>
-                            Average correlation error is " + cor_error + "<br>"
+                            Correlation error is " + cor_error + "<br>"
                                 
                             average_correlation_convergence_error = new_dom_element
                                 parentNode: parent
@@ -269,6 +268,8 @@ class TreeAppModule_Session extends TreeAppModule
                             
                             
                         res_txt = correlation._residual_history.get()
+                            
+                        #TODO Add point position, point correspondance, border etc
                             
                         new_dom_element
                             parentNode: parent
