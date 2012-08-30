@@ -30,3 +30,12 @@ class SketchItem extends TreeItem
     contextual_actions: ( res, module ) ->
         for act in module when act.ctx_act() == true
             res.push act
+            
+#     on_mouse_down: ( cm, evt, pos, b ) ->
+#         for m in @sub_canvas_items() when m instanceof Mesh
+#             m.on_mouse_down cm, evt, pos, b
+#         return false
+        
+    _closest_point_closer_than: ( proj, pos, dist ) ->
+        for m in @sub_canvas_items() when m instanceof Mesh
+            m._closest_point_closer_than proj, pos, dist

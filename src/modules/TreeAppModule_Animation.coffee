@@ -2,9 +2,11 @@ class TreeAppModule_Animation extends TreeAppModule
     constructor: ->
         super()
         @play_state = false
-        @img_per_sec = 2
+        @add_attr
+            img_per_sec: 2
         
         @name = 'Time'
+        @timeline = true
         
         _ina = ( app ) =>
             app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id and 

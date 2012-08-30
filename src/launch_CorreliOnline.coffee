@@ -19,6 +19,7 @@ launch_CorreliOnline = ( main = document.body, model_id = -1 ) ->
         td.modules.push new TreeAppModule_Compute
         td.modules.push new TreeAppModule_TreeView
         
+        
         td
         
     clear_page = ->
@@ -34,7 +35,9 @@ launch_CorreliOnline = ( main = document.body, model_id = -1 ) ->
         # file -> make a new session
         if bs.location.protocol.get() == 'file:'
             td = new_session()
-            new TreeApp main, td
+            app = new TreeApp main, td
+            for correlation in td.modules when correlation instanceof TreeAppModule_Correlation
+                correlation.actions[ 0 ].fun( '', app )
         else
             
             hash = bs.location.hash.get()
@@ -61,15 +64,18 @@ launch_CorreliOnline = ( main = document.body, model_id = -1 ) ->
                         parentNode: main
 
                     item_cp = new ModelEditorItem_Directory
-                        el    : div
-                        model : session_dir
+                        el             : div
+                        model          : session_dir
+                        use_icons      : true
+                        use_upload     : false
+                        use_breadcrumb : true
 
                     # NEW SESSION
                     new_dom_element
                         nodeName: "button"
                         txt: "New session"
                         parentNode: div
-                        onclick: ->
+                        onclick: ( evt ) ->
                             clear_page()
                             
                             name = "session " + new Date()
@@ -77,6 +83,11 @@ launch_CorreliOnline = ( main = document.body, model_id = -1 ) ->
                             
                             session_dir.add_file name, td, model_type: "Session", icon: "session"
                             window.location = "#" + encodeURI( "#{d}/#{name}" )
+                            
+                            #FIXME Is it necessary to create a new treeapp here ?
+                            app = new TreeApp main, td
+                            for correlation in td.modules when correlation instanceof TreeAppModule_Correlation
+                                correlation.actions[ 0 ].fun( evt, app )
 
                     # RELOAD
                     ModelEditorItem_Directory.add_action "Session", ( file, path, browser ) ->

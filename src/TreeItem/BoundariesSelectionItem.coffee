@@ -62,6 +62,35 @@ class BoundariesSelectionItem extends TreeItem
         #         app_data.watch_item pzi
         
         return pzi
+        
+    create_pzi: ( msh, elem ) ->
+        pzi = @add_child_mesh msh
+        pe = mesh : msh, element : elem
+        pzi.picked_element.push pe
+        
+        # adding callback for when a point is deleted (call in mesh)
+        msh.delete_selected_points_callback.push ( msh, index_selected_points ) =>
+            for ch in @_children when ch instanceof PickedZoneItem
+                for pe in ch.picked_element
+                    for ind in pe.element.indices.get()
+                        for isp in index_selected_points
+                            if ind == isp
+                                # It means there is a selected point in this picked zone item, we now can delete the correct pzi
+                                app_data = @get_app_data()
+                                app_data.delete_from_tree ch
+        
+        # adding callback for when a point is added between a boundaries (call in element_line)
+        elem.cut_with_point_callback = []
+        elem.cut_with_point_callback.push ( msh, indices, np ) =>
+            new_line = new Element_Line [ np, indices[ 1 ].get() ]
+            modify_line = elem
+            modify_line.indices[ 0 ].set indices[ 0 ].get()
+            modify_line.indices[ 1 ].set np
+            #TODO recursivity doesn't work on this two new element_line
+            @create_pzi msh, modify_line
+            @create_pzi msh, new_line
+    
+    
     
     on_mouse_down: ( cm, evt, pos, b ) ->
         if b == "LEFT"
@@ -89,10 +118,8 @@ class BoundariesSelectionItem extends TreeItem
                         
                         if best.disp?
                             @_may_need_snapshot = true
-                            pzi = @add_child_mesh msh
-                            pe = mesh : msh, element : best.inst
-                            pzi.picked_element.push pe
-                                
+                            @create_pzi msh, best.inst
+        
                 return false
                 
         return false  
