@@ -19,6 +19,7 @@ launch_CorreliOnline = ( main = document.body ) ->
         td.modules.push new TreeAppModule_Compute
         td.modules.push new TreeAppModule_TreeView
         
+        
         td
         
     clear_page = ->
@@ -34,7 +35,9 @@ launch_CorreliOnline = ( main = document.body ) ->
         # file -> make a new session
         if bs.location.protocol.get() == 'file:'
             td = new_session()
-            new TreeApp main, td
+            app = new TreeApp main, td
+            for correlation in td.modules when correlation instanceof TreeAppModule_Correlation
+                correlation.actions[ 0 ].fun( '', app )
         else
             hash = bs.location.hash.get()
             # something to reload ?
@@ -68,7 +71,7 @@ launch_CorreliOnline = ( main = document.body ) ->
                         nodeName: "button"
                         txt: "New session"
                         parentNode: div
-                        onclick: ->
+                        onclick: ( evt ) ->
                             clear_page()
                             
                             name = "session " + new Date()
@@ -76,6 +79,11 @@ launch_CorreliOnline = ( main = document.body ) ->
                             
                             session_dir.add_file name, td, model_type: "Session", icon: "session"
                             window.location = "#" + encodeURI( "#{d}/#{name}" )
+                            
+                            #FIXME Is it necessary to create a new treeapp here ?
+                            app = new TreeApp main, td
+                            for correlation in td.modules when correlation instanceof TreeAppModule_Correlation
+                                correlation.actions[ 0 ].fun( evt, app )
 
                     # RELOAD
                     ModelEditorItem_Directory.add_action "Session", ( file, path, browser ) ->
