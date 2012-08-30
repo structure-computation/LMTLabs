@@ -125,7 +125,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             ina: _ina
             ctx: _ctx_act
             fun: ( evt, app ) =>
-                sketch = @add_item_depending_selected_tree app, SketchItem
+                sketch = @add_item_depending_selected_tree app.data, SketchItem
                 sketch.mesh.move_scheme = MoveScheme_3D
                 load_croix sketch.mesh
                 for p in sketch.mesh.display_field.lst[ 1 ]._data
@@ -155,7 +155,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             fun: ( evt, app ) =>
                 #
                 app.undo_manager.snapshot()
-                sketch = @add_item_depending_selected_tree app, SketchItem
+                sketch = @add_item_depending_selected_tree app.data, SketchItem
                 sketch.mesh.move_scheme = MoveScheme_3D
 
                 mesh = sketch.mesh
@@ -192,7 +192,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 app.undo_manager.snapshot()
                 @create_mesher app # TODO: ca n'a pas grand chose a faire la !!
                         
-                sketch = @add_item_depending_selected_tree app, SketchItem
+                sketch = @add_item_depending_selected_tree app.data, SketchItem
                 sketch.mesh.visualization.display_style.set "Wireframe"
                 sketch.mesh.move_scheme = new MoveScheme_2D
                 
@@ -219,7 +219,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 app.undo_manager.snapshot()
                 @create_mesher app
 
-                sketch = @add_item_depending_selected_tree app, SketchItem
+                sketch = @add_item_depending_selected_tree app.data, SketchItem
                     
                 current_point = sketch.mesh.points.length
                 
@@ -242,7 +242,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                 app.undo_manager.snapshot()
                 @create_mesher app
 
-                sketch = @add_item_depending_selected_tree app, SketchItem
+                sketch = @add_item_depending_selected_tree app.data, SketchItem
                     
                 current_point = sketch.mesh.points.length
                 
@@ -287,4 +287,4 @@ class TreeAppModule_Sketch extends TreeAppModule
             create_mesher = false
             
         if create_mesher == true
-            @add_item_depending_selected_tree app, MesherItem
+            @add_item_depending_selected_tree app.data, MesherItem

@@ -14,7 +14,7 @@ class TreeAppModule_Transform extends TreeAppModule
                 #
                 app.undo_manager.snapshot()
                 selected_items = app.data.get_selected_tree_items()
-                transf = @add_item_depending_selected_tree app, TransformItem
+                transf = @add_item_depending_selected_tree app.data, TransformItem
                 @child_in_selected app, TransformItem, selected_items, transf
                 
                 
@@ -35,7 +35,7 @@ class TreeAppModule_Transform extends TreeAppModule
                  
 
                 selected_items = app.data.get_selected_tree_items()                
-                transf = @add_item_depending_selected_tree app, TransformItem
+                transf = @add_item_depending_selected_tree app.data, TransformItem
                 @child_in_selected app, TransformItem, selected_items, transf
                 
                 # inverse transform position for origin (old_point)

@@ -16,7 +16,7 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Configure comportemental law"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                physics = @add_item_depending_selected_tree app, PhysicsItem
+                physics = @add_item_depending_selected_tree app.data, PhysicsItem
                 
             key: [ "Shift+L" ]
 
@@ -27,7 +27,7 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Constrain boundaries with displacement"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                constrain_border = @add_item_depending_selected_tree app, BorderDisplacementItem
+                constrain_border = @add_item_depending_selected_tree app.data, BorderDisplacementItem
             key: [ "Shift+G" ]
             
         @actions.push
@@ -37,7 +37,7 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Constrain boundaries with strain"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                constrain_border = @add_item_depending_selected_tree app, BorderStrainItem
+                constrain_border = @add_item_depending_selected_tree app.data, BorderStrainItem
             key: [ "Shift+G" ]
             
         @actions.push
@@ -47,7 +47,7 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Constrain boundaries with pressure"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                constrain_border = @add_item_depending_selected_tree app, BorderPressureItem
+                constrain_border = @add_item_depending_selected_tree app.data, BorderPressureItem
             key: [ "Shift+G" ]
             
         @actions.push
@@ -57,7 +57,7 @@ class TreeAppModule_MechanicalData extends TreeAppModule
             txt: "Make a border out of any constrain"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                free_border = @add_item_depending_selected_tree app, BorderFreeItem
+                free_border = @add_item_depending_selected_tree app.data, BorderFreeItem
 
             key: [ "Shift+F" ]
             
