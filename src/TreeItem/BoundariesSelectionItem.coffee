@@ -4,7 +4,7 @@ class BoundariesSelectionItem extends TreeItem
         super()
         
         @_viewable.set true
-    
+
     z_index: ->
         return 2000
     
