@@ -1,4 +1,4 @@
-launch_CorreliOnline = ( main = document.body ) ->
+launch_CorreliOnline = ( main = document.body, model_id = -1 ) ->
     new_session = ->
         td = new TreeAppData
         td.new_session()
@@ -36,6 +36,7 @@ launch_CorreliOnline = ( main = document.body ) ->
             td = new_session()
             new TreeApp main, td
         else
+            
             hash = bs.location.hash.get()
             # something to reload ?
             if hash.length > 1
@@ -49,7 +50,10 @@ launch_CorreliOnline = ( main = document.body ) ->
                     
             # else, browse old session
             else
-                d = "/home/monkey/sessions"
+                if !model_id? or model_id == -1
+                  d = "/home/monkey/sessions"
+                else
+                  d = "/home/projet_" + model_id
                 fs.load_or_make_dir d, ( session_dir, err ) ->
                     clear_page()
                     
