@@ -7,7 +7,7 @@ class ScillsInterfaceSetItem extends TreeItem
         @_name.set "Interface collection"
         @_ico.set "img/interface_collection.png"
         @_viewable.set false
-        @add_child new ScillsInterfaceItem
+        #@add_child new ScillsInterfaceItem
         
         # attributes
         @add_attr

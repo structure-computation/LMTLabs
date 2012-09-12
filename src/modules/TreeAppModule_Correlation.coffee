@@ -16,5 +16,5 @@ class TreeAppModule_Correlation extends TreeAppModule
     add_corr: ( app_data ) =>
         #
         m = @add_item_depending_selected_tree app_data, CorrelationItem
-        app_data.watch_item m
-        app_data.watch_item m._children[ 0 ]
+        #app_data.watch_item m
+        #app_data.watch_item m._children[ 0 ]

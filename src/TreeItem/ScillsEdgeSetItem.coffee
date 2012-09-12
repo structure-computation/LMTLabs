@@ -5,9 +5,8 @@ class ScillsEdgeSetItem extends TreeItem
         
         # default values
         @_name.set "Edge collection"
-        @_ico.set "img/interface_collection.png"
+        @_ico.set "img/edge_collection.png"
         @_viewable.set false
-        @add_child new ScillsEdgeItem
         
         # attributes
         @add_attr

@@ -1,4 +1,4 @@
-launch_ComputationLab = ( main = document.body, model_id = -1 ) ->
+launch_Sceen = ( main = document.body, model_id = -1 ) ->
     new_session = ->
         td = new TreeAppData
         td.new_session()
@@ -7,18 +7,19 @@ launch_ComputationLab = ( main = document.body, model_id = -1 ) ->
         td.modules.push new TreeAppModule_File
         td.modules.push new TreeAppModule_UndoManager
         td.modules.push new TreeAppModule_PanelManager
-        td.modules.push new TreeAppModule_Correlation
-        td.modules.push new TreeAppModule_ImageSet
-        td.modules.push new TreeAppModule_Animation
+        td.modules.push new TreeAppModule_ScillsAssembly
+        #td.modules.push new TreeAppModule_Correlation
+        #td.modules.push new TreeAppModule_ImageSet
+        #td.modules.push new TreeAppModule_Animation
         td.modules.push new TreeAppModule_Mesher
         td.modules.push new TreeAppModule_Sketch
         td.modules.push new TreeAppModule_Transform
         td.modules.push new TreeAppModule_Filter
-        td.modules.push new TreeAppModule_ShapeFunction
-        td.modules.push new TreeAppModule_MechanicalData
-        td.modules.push new TreeAppModule_Compute
+        #td.modules.push new TreeAppModule_ShapeFunction
+        #td.modules.push new TreeAppModule_MechanicalData
+        #td.modules.push new TreeAppModule_Compute
         td.modules.push new TreeAppModule_TreeView
-        td.modules.push new TreeAppModule_ScillsAssembly
+        
 
         td
         
