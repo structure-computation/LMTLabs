@@ -19,7 +19,7 @@ class CorrelationItem extends TreeItem_Computable
             parameters   :
                 rigid_body      : true
                 lum_corr        : true
-                uncertainty     : true
+                uncertainty     : false
                 norm_inf        : 1e-3 # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
                 norm_2          : 0    # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
                 # <math>\delta \infty</math> mod: [ 1e-5, new Choice( 0, [ "||&#8710;u||2", "||&#8710;u||&#x221E;"] ) ]
