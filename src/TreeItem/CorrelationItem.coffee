@@ -27,6 +27,8 @@ class CorrelationItem extends TreeItem_Computable
                 # con: 1e-5
                 multi_res       : new ConstrainedVal( 0, { min: 0, max: 10, div: 10 } )
                 nb_iter_max     : 50
+                lambda_bulk     : 0
+                max_displacement: -1
 #                 preview_result  : false
                 #                 clear_lst       : false
             
@@ -35,7 +37,10 @@ class CorrelationItem extends TreeItem_Computable
             _norm_2_history       : []
             _residual_history     : []
             
-            _residual             : new NamedParametrizedDrawable( "Residual", new InterpolatedField )
+            _residual_adv         : new NamedParametrizedDrawable( "Residual adv"    , new InterpolatedField )
+            _residual             : new NamedParametrizedDrawable( "Residual"        , new InterpolatedField )
+            _residual_int_adv     : new NamedParametrizedDrawable( "Residual int adv", new InterpolatedField )
+            _residual_int         : new NamedParametrizedDrawable( "Residual int"    , new InterpolatedField )
 
          # @visualization: new FieldSet
 
@@ -56,7 +61,7 @@ class CorrelationItem extends TreeItem_Computable
         return res
         
     cosmetic_attribute: ( name ) ->
-        super( name ) or ( name in [ "visualization", "_residual", "_norm_i_history", "_norm_2_history", "_residual_history" ] )
+        super( name ) or ( name in [ "visualization", "_residual", "_residual_adv", "_residual_int", "_residual_int_adv", "_norm_i_history", "_norm_2_history", "_residual_history" ] )
         
     
     information: ( div ) ->
