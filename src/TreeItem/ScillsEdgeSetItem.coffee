@@ -11,6 +11,9 @@ class ScillsEdgeSetItem extends TreeItem
         # attributes
         @add_attr
             edge_collection: new Lst
+            
+        @add_attr
+            _edge_profile: new ScillsEdgeItem 
                 
     accept_child: ( ch ) ->
         ch instanceof ScillsEdgeItem

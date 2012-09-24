@@ -15,6 +15,9 @@ class ScillsEdgeItem extends TreeItem
         @_ico.set "img/edge.png"
         @_viewable.set true
     
+    cosmetic_attribute: ( name ) ->
+        super( name ) or ( name in [ "_mesh", "visualization" ] )    
+        
     accept_child: ( ch ) ->
         #
         
@@ -22,4 +25,4 @@ class ScillsEdgeItem extends TreeItem
         @_mesh.z_index()
     
     sub_canvas_items: ->
-        [ ]
+        [ @_mesh ]

@@ -2,19 +2,24 @@
 class ScillsAssemblyItem extends TreeItem_Computable
     constructor: (name = "Assembly" ) ->
         super()
+        @add_attr
+            _mesh        : new Mesh( not_editable: true )
         
+        @add_attr
+            visualization: @_mesh.visualization
+            
         # default values
         @_name.set name
         @_ico.set "img/assembly_15.png"
-        @_viewable.set false
+        @_viewable.set true
         @add_child new ScillsPartSetItem
         @add_child new ScillsInterfaceSetItem
         @add_child new ScillsEdgeSetItem
         
         # attributes
         @add_attr
-            id_model: -1
-            id_calcul: -2
+            id_model: 217
+            id_calcul: -1
             nb_parts: 0
             nb_interfaces: 0
             nb_edges: 0
@@ -24,10 +29,16 @@ class ScillsAssemblyItem extends TreeItem_Computable
         ch instanceof ScillsPartSetItem or 
         ch instanceof ScillsInterfaceSetItem or
         ch instanceof ScillsEdgeSetItem
-     
-    z_index: ->
-        return 1000
-        
+    
+    cosmetic_attribute: ( name ) ->
+        super( name ) or ( name in [ "_mesh", "visualization" ] )    
+    
     sub_canvas_items: ->
-        [ ]
-        
+        if @nothing_to_do()
+            [ @_mesh ]
+        else
+            []
+    
+    z_index: ->
+        @_mesh.z_index()
+     
