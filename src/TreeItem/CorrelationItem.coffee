@@ -29,6 +29,8 @@ class CorrelationItem extends TreeItem_Computable
                 nb_iter_max     : 50
                 lambda_bulk     : 0
                 max_displacement: -1
+                crack_eps_threshold: -1
+                ident: false
 #                 preview_result  : false
                 #                 clear_lst       : false
             
