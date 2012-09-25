@@ -44,6 +44,10 @@ class CorrelationItem extends TreeItem_Computable
 
          # @visualization: new FieldSet
 
+    #     get_disp: ->
+    #         for f in visualization.warp_by
+    #             if f.name == "Displacement"
+    #                 re
             
     accept_child: ( ch ) ->
         ch instanceof MaskItem or 
