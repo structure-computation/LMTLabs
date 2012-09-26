@@ -30,7 +30,8 @@ class CorrelationItem extends TreeItem_Computable
                 lambda_bulk     : 0
                 max_displacement: -1
                 crack_eps_threshold: -1
-                ident: false
+                ident           : false
+                crack_dir       : [ 1, 0, 0 ]
 #                 preview_result  : false
                 #                 clear_lst       : false
             
