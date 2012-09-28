@@ -58,7 +58,7 @@ class TreeAppModule_Compute extends TreeAppModule
 #             vis: _ina_build # TODO, we expect this icon to disappear or be transformed in white and black when auto compute is true
             fun: ( evt, app ) =>
                 for el in app.treeview.flat when el.item instanceof TreeItem_Computable
-                    el.item._computation_state.set true
+                    el.item.do_it()
             key: [ "X" ]
                             
         @actions.push
@@ -97,7 +97,7 @@ class TreeAppModule_Compute extends TreeAppModule
                     m = path[ path.length - 1 ]
                     if m instanceof TreeItem_Computable
                         m._computation_mode.set false
-                        m._computation_state.set true
+                        m.do_it()
 #                 @_toggle_inactive app
                 
         @actions.push
@@ -112,7 +112,7 @@ class TreeAppModule_Compute extends TreeAppModule
                     m = path[ path.length - 1 ]
                     if m instanceof TreeItem_Computable
                         m._computation_mode.set true
-                        m._computation_state.set true
+                        m.do_it()
 #                 @_toggle_inactive app
                 
         @_toggle_inactive = ( app ) ->

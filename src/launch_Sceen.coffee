@@ -46,11 +46,15 @@ launch_Sceen = ( main = document.body, model_id = -1 ) ->
             if hash.length > 1
                 clear_page()
                 path = decodeURIComponent hash.slice 1
-                FileSystem.get_inst().load path, ( td, err ) ->
+                fs.load path, ( td, err ) ->
                     if err
                         window.location = "#"
                     else
-                        new TreeApp main, td
+                        app = new TreeApp main, td
+                            
+                        # visualisation
+                        fs.load_or_make_dir "/sessions/" + fs._session_num, ( session_dir, err ) ->
+                            session_dir.add_file "server_assisted_visualization", new ServerAssistedVisualization app, bs
                     
             # else, browse old session
             else
@@ -66,7 +70,7 @@ launch_Sceen = ( main = document.body, model_id = -1 ) ->
 
                     item_cp = new ModelEditorItem_Directory
                         el             : div
-                        model          : session_dir
+                        model          : home_dir
                         use_icons      : true
                         use_upload     : false
                         use_breadcrumb : true
@@ -82,7 +86,7 @@ launch_Sceen = ( main = document.body, model_id = -1 ) ->
                             name = "session " + new Date()
                             td = new_session()
                             
-                            session_dir.add_file name, td, model_type: "Session", icon: "session"
+                            home_dir.add_file name, td, model_type: "Session", icon: "session"
                             window.location = "#" + encodeURI( "#{d}/#{name}" )
                             
                             #FIXME Is it necessary to create a new treeapp here ?

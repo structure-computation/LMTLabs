@@ -211,6 +211,26 @@ class TreeAppModule_Session extends TreeAppModule
                         mesh_text = "Mesh type : " + mesherit.cell_type.toString() + "<br>
                         Base size : " + mesherit.base_size.toString() + "px<br>
                         Mesh got " + mesherit._mesh.points.length + " points<br>"
+
+                        # console.log mesherit._mesh.points.get()
+                        mesh_text += "Points<br>"
+                        for p in mesherit._mesh.points
+                            for v in p.pos.get()
+                                mesh_text += v + " "
+                            mesh_text += "<br>"
+                            
+                        mesh_text += "Elements<br>"
+                        for le in mesherit._mesh._elements
+                            for v in le.indices._data
+                                mesh_text += v + " "
+                        mesh_text += "<br>"
+                            
+                        mesh_text += "Displacement<br>"
+                        for le in mesherit._mesh._elements
+                            for v in le.indices._data
+                                mesh_text += v + " "
+                        mesh_text += "<br>"
+                            
                         
                         
                         mesh_parameters = new_dom_element

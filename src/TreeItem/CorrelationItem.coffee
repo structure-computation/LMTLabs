@@ -19,7 +19,7 @@ class CorrelationItem extends TreeItem_Computable
             parameters   :
                 rigid_body      : true
                 lum_corr        : true
-                uncertainty     : true
+                uncertainty     : false
                 norm_inf        : 1e-3 # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
                 norm_2          : 0    # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
                 # <math>\delta \infty</math> mod: [ 1e-5, new Choice( 0, [ "||&#8710;u||2", "||&#8710;u||&#x221E;"] ) ]
@@ -27,6 +27,11 @@ class CorrelationItem extends TreeItem_Computable
                 # con: 1e-5
                 multi_res       : new ConstrainedVal( 0, { min: 0, max: 10, div: 10 } )
                 nb_iter_max     : 50
+                lambda_bulk     : 0
+                max_displacement: -1
+                crack_eps_threshold: -1
+                ident           : false
+                crack_dir       : [ 1, 0, 0 ]
 #                 preview_result  : false
                 #                 clear_lst       : false
             
@@ -35,10 +40,17 @@ class CorrelationItem extends TreeItem_Computable
             _norm_2_history       : []
             _residual_history     : []
             
-            _residual             : new NamedParametrizedDrawable( "Residual", new InterpolatedField )
+            _residual_adv         : new NamedParametrizedDrawable( "Residual adv"    , new InterpolatedField )
+            _residual             : new NamedParametrizedDrawable( "Residual"        , new InterpolatedField )
+            _residual_int_adv     : new NamedParametrizedDrawable( "Residual int adv", new InterpolatedField )
+            _residual_int         : new NamedParametrizedDrawable( "Residual int"    , new InterpolatedField )
 
          # @visualization: new FieldSet
 
+    #     get_disp: ->
+    #         for f in visualization.warp_by
+    #             if f.name == "Displacement"
+    #                 re
             
     accept_child: ( ch ) ->
         ch instanceof MaskItem or 
@@ -56,7 +68,7 @@ class CorrelationItem extends TreeItem_Computable
         return res
         
     cosmetic_attribute: ( name ) ->
-        super( name ) or ( name in [ "visualization", "_residual", "_norm_i_history", "_norm_2_history", "_residual_history" ] )
+        super( name ) or ( name in [ "visualization", "_residual", "_residual_adv", "_residual_int", "_residual_int_adv", "_norm_i_history", "_norm_2_history", "_residual_history" ] )
         
     
     information: ( div ) ->
