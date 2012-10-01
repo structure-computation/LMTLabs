@@ -70,7 +70,7 @@ launch_Sceen = ( main = document.body, model_id = -1 ) ->
 
                     item_cp = new ModelEditorItem_Directory
                         el             : div
-                        model          : home_dir
+                        model          : session_dir
                         use_icons      : true
                         use_upload     : false
                         use_breadcrumb : true
@@ -86,7 +86,7 @@ launch_Sceen = ( main = document.body, model_id = -1 ) ->
                             name = "session " + new Date()
                             td = new_session()
                             
-                            home_dir.add_file name, td, model_type: "Session", icon: "session"
+                            session_dir.add_file name, td, model_type: "Session", icon: "session"
                             window.location = "#" + encodeURI( "#{d}/#{name}" )
                             
                             #FIXME Is it necessary to create a new treeapp here ?
