@@ -78,7 +78,8 @@ launch_CorreliOnline = ( main = document.body ) ->
                         onclick: ( evt ) ->
                             clear_page()
                             
-                            name = "session " + new Date()
+                            name = prompt "Session name", "session " + new Date()
+                            # name = "session " + new Date()
                             td = new_session()
                             
                             home_dir.add_file name, td, model_type: "Session", icon: "session"

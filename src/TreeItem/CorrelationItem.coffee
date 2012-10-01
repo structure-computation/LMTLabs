@@ -32,6 +32,7 @@ class CorrelationItem extends TreeItem_Computable
                 crack_eps_threshold: -1
                 ident           : false
                 crack_dir       : [ 1, 0, 0 ]
+                rb_guess        : [ 0, 0, 0 ]
 #                 preview_result  : false
                 #                 clear_lst       : false
             
