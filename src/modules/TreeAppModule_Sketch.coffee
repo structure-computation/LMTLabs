@@ -177,7 +177,7 @@ class TreeAppModule_Sketch extends TreeAppModule
             fun: ( evt, app ) =>
                 sketch = @add_item_depending_selected_tree app.data, SketchItem
                 sketch.mesh.visualization.display_style.set "Wireframe"
-                sketch.mesh.move_scheme = new MoveScheme_3D
+                sketch.mesh.move_scheme = MoveScheme_3D
                 
                 current_point = sketch.mesh.points.length
                 for coord in [ [ -0.333, -0.333, -0.333 ], [ 0.333, -0.333, -0.333 ], [ 0.333, 0.333, -0.333 ], [ -0.333, 0.333, -0.333 ], [ -0.333, -0.333, +0.333 ], [ 0.333, -0.333, +0.333 ], [ 0.333, 0.333, +0.333 ], [ -0.333, 0.333, +0.333 ] ]
@@ -245,7 +245,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                         
                 sketch = @add_item_depending_selected_tree app.data, SketchItem
                 sketch.mesh.visualization.display_style.set "Wireframe"
-                sketch.mesh.move_scheme = new MoveScheme_2D
+                sketch.mesh.move_scheme = MoveScheme_2D
                 
                 current_point = sketch.mesh.points.length
                 for coord in [ [ -0.333, -0.333 ], [ 0.333, -0.333 ], [ 0.333, 0.333 ], [ -0.333, 0.333 ] ]
