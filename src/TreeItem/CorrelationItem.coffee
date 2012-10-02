@@ -20,13 +20,13 @@ class CorrelationItem extends TreeItem_Computable
                 rigid_body      : true
                 lum_corr        : true
                 uncertainty     : false
-                norm_inf        : 1e-3 # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
+                norm_inf        : 1e-2 # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
                 norm_2          : 0    # [ new Choice( 0, [ "||dU||2", "||dU||inf"] ), 1e-5 ]
                 # <math>\delta \infty</math> mod: [ 1e-5, new Choice( 0, [ "||&#8710;u||2", "||&#8710;u||&#x221E;"] ) ]
 
                 # con: 1e-5
                 multi_res       : new ConstrainedVal( 0, { min: 0, max: 10, div: 10 } )
-                nb_iter_max     : 50
+                nb_iter_max     : 10
                 lambda_bulk     : 0
                 max_displacement: -1
                 crack_eps_threshold: -1
