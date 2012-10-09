@@ -7,8 +7,8 @@ class ScillsEdgeItem extends TreeItem
         @add_attr
             _mesh        : new Mesh( not_editable: true )
             
-        @add_attr
-            visualization: @_mesh.visualization
+        #@add_attr
+        #    visualization: @_mesh.visualization
         
         # default values
         @_name.set name
@@ -22,7 +22,9 @@ class ScillsEdgeItem extends TreeItem
         #
         
     z_index: ->
-        @_mesh.z_index()
+        [ ]
+        #@_mesh.z_index()
     
     sub_canvas_items: ->
-        [ @_mesh ]
+        [ ]
+        #[ @_mesh ]

@@ -19,6 +19,7 @@ class ScillsEdgeSetItem extends TreeItem
         ch instanceof ScillsEdgeItem
 
     z_index: ->
+        [ ]
         #
         
     sub_canvas_items: ->

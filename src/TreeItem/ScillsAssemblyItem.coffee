@@ -2,11 +2,11 @@
 class ScillsAssemblyItem extends TreeItem_Computable
     constructor: (name = "Assembly" ) ->
         super()
-        @add_attr
-            _mesh        : new Mesh( not_editable: true )
-        
-        @add_attr
-            visualization: @_mesh.visualization
+        #@add_attr
+        #    _mesh        : new Mesh( not_editable: true )
+        # 
+        #@add_attr
+        #    visualization: @_mesh.visualization
             
         # default values
         @_name.set name
@@ -30,15 +30,12 @@ class ScillsAssemblyItem extends TreeItem_Computable
         ch instanceof ScillsInterfaceSetItem or
         ch instanceof ScillsEdgeSetItem
     
-    cosmetic_attribute: ( name ) ->
-        super( name ) or ( name in [ "_mesh", "visualization" ] )    
+    #cosmetic_attribute: ( name ) ->
+    #    super( name ) or ( name in [ "_mesh", "visualization" ] )    
     
     sub_canvas_items: ->
-        if @nothing_to_do()
-            [ @_mesh ]
-        else
-            []
+         []
     
-    z_index: ->
-        @_mesh.z_index()
+    #z_index: ->
+    #    @_mesh.z_index()
      
