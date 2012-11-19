@@ -1,6 +1,6 @@
 #
-class ScillsInterfaceItem extends TreeItem
-    constructor: (name = "Interface" ) ->
+class ScillsEdgeItem extends TreeItem
+    constructor: (name = "Edge" ) ->
         super()
         
         # attributes
@@ -9,12 +9,16 @@ class ScillsInterfaceItem extends TreeItem
             
         @add_attr
             visualization: @_mesh.visualization
-            
+            id: -1
+        
         # default values
         @_name.set name
-        @_ico.set "img/interface.png"
+        @_ico.set "img/edge.png"
         @_viewable.set true
     
+    cosmetic_attribute: ( name ) ->
+        super( name ) or ( name in [ "_mesh", "visualization" ] )    
+        
     accept_child: ( ch ) ->
         #
         
@@ -22,4 +26,4 @@ class ScillsInterfaceItem extends TreeItem
         @_mesh.z_index()
     
     sub_canvas_items: ->
-        [ ]
+        [ @_mesh ]

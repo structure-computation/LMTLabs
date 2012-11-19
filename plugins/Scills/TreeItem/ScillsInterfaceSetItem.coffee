@@ -12,6 +12,9 @@ class ScillsInterfaceSetItem extends TreeItem
         # attributes
         @add_attr
             interface_collection: new Lst
+            
+        @add_attr
+            _interface_profile: new ScillsInterfaceItem 
                 
     accept_child: ( ch ) ->
         ch instanceof ScillsInterfaceItem

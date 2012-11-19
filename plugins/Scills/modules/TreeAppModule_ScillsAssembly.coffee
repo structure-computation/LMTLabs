@@ -7,11 +7,12 @@ class TreeAppModule_ScillsAssembly extends TreeAppModule
         @actions.push
             ico: "img/assembly.png"
             txt: "Assembly"
-            siz: 2
+            siz: 1
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
                 #@add_ass app.data
                 m = @add_item_depending_selected_tree app.data, ScillsAssemblyItem
+                
                 
                 
     add_ass: ( app_data ) =>

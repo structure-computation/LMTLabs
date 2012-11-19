@@ -9,22 +9,24 @@ class ScillsPartItem extends TreeItem
             
         @add_attr
             visualization: @_mesh.visualization
+            id: -1 
+            material_id: -1
+         
         
         # default values
         @_name.set name
         @_ico.set "img/part.png"
         @_viewable.set true
     
-    #cosmetic_attribute: ( name ) ->
-    #    super( name ) or ( name in [ "_mesh", "visualization" ] )    
+    cosmetic_attribute: ( name ) ->
+        super( name ) or ( name in [ "_mesh", "visualization" ] )    
         
     accept_child: ( ch ) ->
-        ch instanceof SketchItem or
-        ch instanceof MeshItem
+      #
 
     z_index: ->
         @_mesh.z_index()
          
     sub_canvas_items: ->
-        []
+        [@_mesh]
         

@@ -8,6 +8,8 @@ launch_Sceen = ( main = document.body, model_id = -1 ) ->
         td.modules.push new TreeAppModule_UndoManager
         td.modules.push new TreeAppModule_PanelManager
         td.modules.push new TreeAppModule_ScillsAssembly
+        td.modules.push new TreeAppModule_UnvReader2D
+        td.modules.push new TreeAppModule_UnvReader3D
         #td.modules.push new TreeAppModule_Correlation
         #td.modules.push new TreeAppModule_ImageSet
         #td.modules.push new TreeAppModule_Animation
