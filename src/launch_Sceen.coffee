@@ -12,13 +12,15 @@ launch_Sceen = ( main = document.body, model_id = -1 ) ->
         td.modules.push new TreeAppModule_UnvReader3D
         td.modules.push new TreeAppModule_Scult2D
         td.modules.push new TreeAppModule_Scult3D
+        td.modules.push new TreeAppModule_Scills3D
+        td.modules.push new TreeAppModule_TFunction
         #td.modules.push new TreeAppModule_Correlation
         #td.modules.push new TreeAppModule_ImageSet
         #td.modules.push new TreeAppModule_Animation
         td.modules.push new TreeAppModule_Mesher
         td.modules.push new TreeAppModule_Sketch
         td.modules.push new TreeAppModule_Transform
-        td.modules.push new TreeAppModule_Filter
+        #td.modules.push new TreeAppModule_Filter
         #td.modules.push new TreeAppModule_ShapeFunction
         #td.modules.push new TreeAppModule_MechanicalData
         #td.modules.push new TreeAppModule_Compute
