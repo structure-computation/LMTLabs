@@ -1,29 +1,22 @@
-launch_Sceen = ( main = document.body, model_id = -1 ) ->
+launch_ecosystem_mecanic = ( main = document.body, model_id = -1 ) ->
     new_session = ->
         td = new TreeAppData
         td.new_session()
         
-        td.modules.push new TreeAppModule_Session
         td.modules.push new TreeAppModule_File
         td.modules.push new TreeAppModule_UndoManager
         td.modules.push new TreeAppModule_PanelManager
-        td.modules.push new TreeAppModule_ScillsAssembly
-        td.modules.push new TreeAppModule_UnvReader2D
-        td.modules.push new TreeAppModule_UnvReader3D
-        td.modules.push new TreeAppModule_Scult2D
-        td.modules.push new TreeAppModule_Scult3D
-        td.modules.push new TreeAppModule_Scills3D
-        td.modules.push new TreeAppModule_TFunction
-        #td.modules.push new TreeAppModule_Correlation
-        #td.modules.push new TreeAppModule_ImageSet
-        #td.modules.push new TreeAppModule_Animation
+       
         td.modules.push new TreeAppModule_Mesher
         td.modules.push new TreeAppModule_Sketch
         td.modules.push new TreeAppModule_Transform
-        #td.modules.push new TreeAppModule_Filter
-        #td.modules.push new TreeAppModule_ShapeFunction
-        #td.modules.push new TreeAppModule_MechanicalData
-        #td.modules.push new TreeAppModule_Compute
+        td.modules.push new TreeAppModule_Correlation
+        td.modules.push new TreeAppModule_Animation
+        td.modules.push new TreeAppModule_Scills3D
+        td.modules.push new TreeAppModule_TFunction
+        td.modules.push new TreeAppModule_DeepCopy
+
+        td.modules.push new TreeAppModule_Compute
         td.modules.push new TreeAppModule_TreeView
         
 
@@ -43,8 +36,8 @@ launch_Sceen = ( main = document.body, model_id = -1 ) ->
         if bs.location.protocol.get() == 'file:'
             td = new_session()
             app = new TreeApp main, td
-            for correlation in td.modules when correlation instanceof TreeAppModule_Correlation
-                correlation.actions[ 0 ].fun( '', app )
+#             for correlation in td.modules when correlation instanceof TreeAppModule_Correlation
+#                 correlation.actions[ 0 ].fun( '', app )
         else
             
             hash = bs.location.hash.get()
@@ -89,7 +82,8 @@ launch_Sceen = ( main = document.body, model_id = -1 ) ->
                         onclick: ( evt ) ->
                             clear_page()
                             
-                            name = "session " + new Date()
+                            name = prompt "Session name", "session " + new Date()
+                            # name = "session " + new Date()
                             td = new_session()
                             
                             session_dir.add_file name, td, model_type: "Session", icon: "session"
@@ -97,8 +91,8 @@ launch_Sceen = ( main = document.body, model_id = -1 ) ->
                             
                             #FIXME Is it necessary to create a new treeapp here ?
                             app = new TreeApp main, td
-                            for correlation in td.modules when correlation instanceof TreeAppModule_Correlation
-                                correlation.actions[ 0 ].fun( evt, app )
+#                             for correlation in td.modules when correlation instanceof TreeAppModule_Correlation
+#                                 correlation.actions[ 0 ].fun( evt, app )
 
                     # RELOAD
                     ModelEditorItem_Directory.add_action "Session", ( file, path, browser ) ->

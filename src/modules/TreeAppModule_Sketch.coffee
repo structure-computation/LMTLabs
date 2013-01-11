@@ -118,18 +118,18 @@ class TreeAppModule_Sketch extends TreeAppModule
                         it.mesh.make_curve_line_from_selected()
             key: [ "Shift+C" ]
         
-        @actions.push
-            ico: "img/cube3d_32.png"
-            siz: 1
-            txt: "ref"
-            ina: _ina
-            ctx: _ctx_act
-            fun: ( evt, app ) =>
-                sketch = @add_item_depending_selected_tree app.data, SketchItem
-                sketch.mesh.move_scheme = MoveScheme_3D
-                load_croix sketch.mesh
-                for p in sketch.mesh.display_field.lst[ 1 ]._data
-                    p.set( - p.get() )
+        #         @actions.push
+        #             ico: "img/cube3d_32.png"
+        #             siz: 1
+        #             txt: "ref"
+        #             ina: _ina
+        #             ctx: _ctx_act
+        #             fun: ( evt, app ) =>
+        #                 sketch = @add_item_depending_selected_tree app.data, SketchItem
+        #                 sketch.mesh.move_scheme = MoveScheme_3D
+        #                 load_croix sketch.mesh
+        #                 for p in sketch.mesh.display_field.lst[ 1 ]._data
+        #                     p.set( - p.get() )
                 
                 
         @actions.push
@@ -146,27 +146,78 @@ class TreeAppModule_Sketch extends TreeAppModule
             key: [ "Shift+B" ]
         
         
+        #         @actions.push
+        #             ico: "img/cube3d_32.png"
+        #             siz: 1
+        #             txt: "Create a sample complex 3D shape"
+        #             ina: _ina_cm
+        #             ctx: _ctx_act
+        #             fun: ( evt, app ) =>
+        #                 #
+        #                 app.undo_manager.snapshot()
+        #                 sketch = @add_item_depending_selected_tree app.data, SketchItem
+        #                 sketch.mesh.move_scheme = MoveScheme_3D
+        # 
+        #                 mesh = sketch.mesh
+        #                 load_truc_3d mesh
+        #                 
+        #                 mesh.visualization.display_style.set "Wireframe"
+        #                 mesh.visualization.point_edition.set false
+        #                 
+        #                 app.fit()
+        #                 
+        #             key: [ "Shift+T" ]
+
         @actions.push
             ico: "img/cube3d_32.png"
             siz: 1
-            txt: "Create a sample complex 3D shape"
-            ina: _ina_cm
+            txt: "Create a cube"
+            ina: _ina
             ctx: _ctx_act
             fun: ( evt, app ) =>
-                #
-                app.undo_manager.snapshot()
                 sketch = @add_item_depending_selected_tree app.data, SketchItem
+                sketch.mesh.visualization.display_style.set "Wireframe"
                 sketch.mesh.move_scheme = MoveScheme_3D
+                
+                current_point = sketch.mesh.points.length
+                for coord in [ [ -0.333, -0.333, -0.333 ], [ 0.333, -0.333, -0.333 ], [ 0.333, 0.333, -0.333 ], [ -0.333, 0.333, -0.333 ], [ -0.333, -0.333, +0.333 ], [ 0.333, -0.333, +0.333 ], [ 0.333, 0.333, +0.333 ], [ -0.333, 0.333, +0.333 ] ]
+                    point = app.selected_canvas_inst()[ 0 ].cm.cam.get_screen_coord coord
+                    sketch.mesh.add_point point
 
-                mesh = sketch.mesh
-                load_truc_3d mesh
+                lines = [
+                    new Element_Line [ current_point + 0, current_point + 1 ]
+                    new Element_Line [ current_point + 1, current_point + 2 ]
+                    new Element_Line [ current_point + 2, current_point + 3 ]
+                    new Element_Line [ current_point + 3, current_point + 0 ]
+                    
+                    new Element_Line [ current_point + 0, current_point + 4 ]
+                    new Element_Line [ current_point + 1, current_point + 5 ]
+                    new Element_Line [ current_point + 2, current_point + 6 ]
+                    new Element_Line [ current_point + 3, current_point + 7 ]
+                    
+                    new Element_Line [ current_point + 4, current_point + 5 ]
+                    new Element_Line [ current_point + 5, current_point + 6 ]
+                    new Element_Line [ current_point + 6, current_point + 7 ]
+                    new Element_Line [ current_point + 7, current_point + 4 ]
+                ]
                 
-                mesh.visualization.display_style.set "Wireframe"
-                mesh.visualization.point_edition.set false
+                surfaces = for ls in [ [ +1, 0, +1, 1, +1, 2, +1, 3 ], [ +1, 0, +1, 5, -1, 8, -1, 4 ], [ +1, 1, +1, 6, -1, 9, -1, 5 ], [ +1, 2, +1, 7, -1,10, -1, 6 ], [ -1, 3, +1, 7, +1,11, -1, 4 ], [ +1, 8, +1, 9, +1,10, +1,11 ] ]
+                    new Element_BoundedSurf [
+                        { o: ls[ 0 ], e: lines[ ls[ 1 ] ] }
+                        { o: ls[ 2 ], e: lines[ ls[ 3 ] ] }
+                        { o: ls[ 4 ], e: lines[ ls[ 5 ] ] }
+                        { o: ls[ 6 ], e: lines[ ls[ 7 ] ] }
+                    ]
                 
-                app.fit()
                 
-            key: [ "Shift+T" ]
+                sketch.mesh.add_element new Element_BoundedVolume [
+                    { o: -1, e: surfaces[ 0 ] }
+                    { o: +1, e: surfaces[ 1 ] }
+                    { o: +1, e: surfaces[ 2 ] }
+                    { o: +1, e: surfaces[ 3 ] }
+                    { o: -1, e: surfaces[ 4 ] }
+                    { o: +1, e: surfaces[ 5 ] }
+                ]
 
         
                     
@@ -185,7 +236,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         mesher_sub.sub.act.push 
             ico: "img/shape.png"
             siz: 1
-            txt: "Create a Square"
+            txt: "Create a square"
             ina: _ina_cm
             ctx: _ctx_act
             fun: ( evt, app ) =>
@@ -194,7 +245,7 @@ class TreeAppModule_Sketch extends TreeAppModule
                         
                 sketch = @add_item_depending_selected_tree app.data, SketchItem
                 sketch.mesh.visualization.display_style.set "Wireframe"
-                sketch.mesh.move_scheme = new MoveScheme_2D
+                sketch.mesh.move_scheme = MoveScheme_2D
                 
                 current_point = sketch.mesh.points.length
                 for coord in [ [ -0.333, -0.333 ], [ 0.333, -0.333 ], [ 0.333, 0.333 ], [ -0.333, 0.333 ] ]
@@ -212,7 +263,7 @@ class TreeAppModule_Sketch extends TreeAppModule
         mesher_sub.sub.act.push 
             ico: "img/circle.png"
             siz: 1
-            txt: "Create a Circle edge"
+            txt: "Create a disc"
             ina: _ina_cm
             ctx: _ctx_act
             fun: ( evt, app ) =>
