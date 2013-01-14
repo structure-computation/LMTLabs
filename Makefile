@@ -1,21 +1,28 @@
 browser = google-chrome
-soda_cm = ext/Soda/soda --base-dir html -l --start-page /EcosystemMecanic.html --title-page __EcosystemMecanic__
-sceen_cm = ext/Soda/soda --base-dir html
+mecanic_cm = ext/Soda/soda --base-dir html -l --start-page /EcosystemMecanic.html --title-page __EcosystemMecanic__
+biologic_cm = ext/Soda/soda --base-dir html -l --start-page /EcosystemBiologic.html --title-page __EcosystemBiologic__
+science_store_cm = ext/Soda/soda --base-dir html
 
 
 
 all: compilation
 	xdotool search "__EcosystemMecanic__" windowactivate key F5 || ${browser} html/EcosystemMecanic.html
+	xdotool search "__EcosystemBiologic__" windowactivate key F5 || ${browser} html/EcosystemBiologic.html
 
 # launch with server
-soda: compilation ext/Soda
+mecanic: compilation ext/Soda
 	make -C ext/Soda
-	${soda_cm}
+	${mecanic_cm}
 
 # launch with server
-sceen: compilation ext/Soda
+biologic: compilation ext/Soda
 	make -C ext/Soda
-	${sceen_cm}
+	${biologic_cm}
+
+# launch with server
+sc: compilation ext/Soda
+	make -C ext/Soda
+	${science_store_cm}
 
 # launch with server
 soda_valgrind: compilation ext/Soda
