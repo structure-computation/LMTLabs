@@ -10,12 +10,12 @@ all: compilation
 	xdotool search "__EcosystemBiologic__" windowactivate key F5 || ${browser} html/EcosystemBiologic.html
 
 # launch with server
-mecanic: compilation ext/Soda
+mechanic: compilation ext/Soda
 	make -C ext/Soda
 	${mecanic_cm}
 
 # launch with server
-biologic: compilation ext/Soda
+biotech: compilation ext/Soda
 	make -C ext/Soda
 	${biologic_cm}
 
