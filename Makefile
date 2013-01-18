@@ -6,8 +6,8 @@ science_store_cm = ext/Soda/soda --base-dir html
 
 
 all: Soja_javascripts
-	xdotool search "__EcosystemMecanic__"  windowactivate key F5 || ${browser} html/EcosystemMechanic.html
-	xdotool search "__EcosystemBiologic__" windowactivate key F5 || ${browser} html/EcosystemBiotech.html
+  # xdotool search "__EcosystemMecanic__"  windowactivate key F5 || ${browser} html/EcosystemMechanic.html
+  # xdotool search "__EcosystemBiologic__" windowactivate key F5 || ${browser} html/EcosystemBiotech.html
 
 # launch with server
 mechanic: Soja_javascripts ext/Soda
