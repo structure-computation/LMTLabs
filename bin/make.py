@@ -1,4 +1,4 @@
-execfile( "Soja/bin/concat_js.py" )
+execfile( "ext/Soja/bin/concat_js.py" )
 
 # main lib
 concat_js( "src", "html/gen/EcosystemScience.js", "html/gen/EcosystemScience.css" )

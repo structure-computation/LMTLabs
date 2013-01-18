@@ -1,0 +1,6 @@
+[submodule "ext/Soja"]
+	path = ext/Soja
+	url = git@github.com:structure-computation/Soja.git
+[submodule "ext/Soda"]
+	path = ext/Soda
+	url = git@github.com:structure-computation/Soda.git
