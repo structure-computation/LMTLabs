@@ -8,7 +8,7 @@ soda_serve	= ext/Soda/soda --base-dir html
 
 
 
-all: Soja_javascripts
+all: Soja_javascripts ext/Soda
 	# xdotool search "__EcosystemMecanic__"	 windowactivate key F5 || ${browser} html/EcosystemMechanic.html
 	# xdotool search "__EcosystemBiologic__" windowactivate key F5 || ${browser} html/EcosystemBiotech.html
 
