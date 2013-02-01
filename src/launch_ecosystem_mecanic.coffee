@@ -3,22 +3,28 @@ launch_ecosystem_mecanic = ( main = document.body, model_id = -1 ) ->
         td = new TreeAppData
         td.new_session()
         
+        td.applications.push new TreeAppApplication_Correlation
+        td.applications.push new TreeAppApplication_Scills3D
+        td.applications.push new TreeAppApplication_Mesher
+        td.applications.push new TreeAppApplication_Plot
+        td.applications.push new TreeAppApplication_DeepCopy
+        
+        
         td.modules.push new TreeAppModule_File
         td.modules.push new TreeAppModule_Apps
         td.modules.push new TreeAppModule_UndoManager
         td.modules.push new TreeAppModule_PanelManager
-       
-        td.modules.push new TreeAppModule_Mesher
-        td.modules.push new TreeAppModule_Sketch
-        td.modules.push new TreeAppModule_Transform
-        td.modules.push new TreeAppModule_Correlation
-        td.modules.push new TreeAppModule_Animation
-        td.modules.push new TreeAppModule_Scills3D
-        td.modules.push new TreeAppModule_TFunction
-        td.modules.push new TreeAppModule_DeepCopy
-
-        td.modules.push new TreeAppModule_Compute
         td.modules.push new TreeAppModule_TreeView
+       
+        #td.modules.clear()
+        #td.modules.concat td.base_modules
+       
+#         td.modules.push new TreeAppModule_Mesher
+#         td.modules.push new TreeAppModule_Sketch
+#         td.modules.push new TreeAppModule_Transform
+#         td.modules.push new TreeAppModule_Animation
+#         td.modules.push new TreeAppModule_Compute
+
         
 
         td

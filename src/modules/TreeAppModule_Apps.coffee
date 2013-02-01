@@ -42,9 +42,9 @@ class TreeAppModule_Apps extends TreeAppModule
                     id        : "id_apps_container"
                 
                 #alert app.data.modules.length
-                for i_app in [0 .. app.data.modules.length]
+                for i_app in [0 .. app.data.applications.length]
                     #alert app.data.modules[i_app].name
-                    @display_app( app, app.data.modules[i_app] ) if app.data.modules[i_app]?
+                    @display_app( app, app.data.applications[i_app] ) if app.data.applications[i_app]?
 #                           src       : "img/parent.png"
 #                           alt       : "Parent"
 #                           title     : "App"
@@ -65,9 +65,18 @@ class TreeAppModule_Apps extends TreeAppModule
         
     display_app: ( app, application ) =>
         if application.actions?
+            group_app = new_dom_element
+                parentNode: @d
+                className : "app_group"
+                nodeName  : "div"
+            group_name = new_dom_element
+                parentNode: group_app
+                className : "app_group_name"
+                nodeName  : "div"
+                txt       : application.name
             for act in application.actions
                 ico_app = new_dom_element
-                      parentNode: @d
+                      parentNode: group_app
                       className : "app_icon"
                       nodeName  : "div"
                       onclick: ( evt ) =>
