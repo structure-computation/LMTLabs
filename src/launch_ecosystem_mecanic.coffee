@@ -14,6 +14,7 @@ launch_ecosystem_mecanic = ( main = document.body, model_id = -1 ) ->
         td.modules.push new TreeAppModule_Apps
         td.modules.push new TreeAppModule_UndoManager
         td.modules.push new TreeAppModule_PanelManager
+        td.modules.push new TreeAppModule_Animation
         td.modules.push new TreeAppModule_TreeView
        
         #td.modules.clear()
