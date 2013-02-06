@@ -11,6 +11,10 @@ class SketchItem extends TreeItem
         @_name.set name
         @_ico.set "img/mesh_24.png"
         @_viewable.set true
+        
+        @add_action_modules  new TreeAppModule_Mesher   
+        @add_action_modules  new TreeAppModule_Sketch
+        @add_action_modules  new TreeAppModule_Transform
     
     accept_child: ( ch ) ->
         false

@@ -79,8 +79,11 @@ class TreeAppModule_Apps extends TreeAppModule
                       parentNode: group_app
                       className : "app_icon"
                       nodeName  : "div"
-                      onclick: ( evt ) =>
-                           act.fun( evt, app )
+                      onmousedown: ( evt ) =>
+                                act.fun evt, app
+#                                 parent.classList.toggle "block"
+#                       onclick: ( evt ) =>
+#                            act.fun( evt, app )
                 @picture = new_dom_element
                       parentNode: ico_app
                       className : "picture"
