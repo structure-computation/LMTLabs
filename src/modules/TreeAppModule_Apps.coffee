@@ -65,10 +65,10 @@ class TreeAppModule_Apps extends TreeAppModule
         
     display_app: ( app, application ) =>
         if application.actions?
-#             group_app = new_dom_element
-#                 parentNode: @d
-#                 className : "app_group"
-#                 nodeName  : "div"
+            group_app = new_dom_element
+                parentNode: @d
+                className : "app_group"
+                nodeName  : "div"
 #             group_name = new_dom_element
 #                 parentNode: group_app
 #                 className : "app_group_name"
@@ -76,12 +76,12 @@ class TreeAppModule_Apps extends TreeAppModule
 #                 txt       : application.name
             for act in application.actions
                 ico_app = new_dom_element
-                      parentNode: @d
+                      parentNode: group_app
                       className : "app_icon"
                       nodeName  : "div"
                       onmousedown: ( evt ) =>
                           act.fun evt, app
-                          group_app.classList.toggle "block"
+#                           group_app.classList.toggle "block"
 #                       onclick: ( evt ) =>
 #                            act.fun( evt, app )
                 @picture = new_dom_element
@@ -92,5 +92,11 @@ class TreeAppModule_Apps extends TreeAppModule
                       alt       : act.txt
                       title     : act.txt
                       style:
-                          maxWidth : 60
-                          maxHeight: 70
+                          maxWidth : 70
+                          maxHeight: 80
+                
+                @text_app = new_dom_element
+                      parentNode: group_app
+                      className : "app_group_name"
+                      nodeName  : "div"
+                      txt       : application.name
