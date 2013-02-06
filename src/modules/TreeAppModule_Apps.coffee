@@ -65,23 +65,23 @@ class TreeAppModule_Apps extends TreeAppModule
         
     display_app: ( app, application ) =>
         if application.actions?
-            group_app = new_dom_element
-                parentNode: @d
-                className : "app_group"
-                nodeName  : "div"
-            group_name = new_dom_element
-                parentNode: group_app
-                className : "app_group_name"
-                nodeName  : "div"
-                txt       : application.name
+#             group_app = new_dom_element
+#                 parentNode: @d
+#                 className : "app_group"
+#                 nodeName  : "div"
+#             group_name = new_dom_element
+#                 parentNode: group_app
+#                 className : "app_group_name"
+#                 nodeName  : "div"
+#                 txt       : application.name
             for act in application.actions
                 ico_app = new_dom_element
-                      parentNode: group_app
+                      parentNode: @d
                       className : "app_icon"
                       nodeName  : "div"
                       onmousedown: ( evt ) =>
-                                act.fun evt, app
-#                                 parent.classList.toggle "block"
+                          act.fun evt, app
+                          group_app.classList.toggle "block"
 #                       onclick: ( evt ) =>
 #                            act.fun( evt, app )
                 @picture = new_dom_element

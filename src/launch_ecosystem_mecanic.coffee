@@ -5,8 +5,14 @@ launch_ecosystem_mecanic = ( main = document.body, model_id = -1 ) ->
         
         td.applications.push new TreeAppApplication_Correlation
         td.applications.push new TreeAppApplication_Scills3D
+        td.applications.push new TreeAppApplication_Scills2D
+        td.applications.push new TreeAppApplication_Scult3D
+        td.applications.push new TreeAppApplication_Scult2D
+        td.applications.push new TreeAppApplication_UnvReader3D
+        td.applications.push new TreeAppApplication_UnvReader2D
         td.applications.push new TreeAppApplication_Mesher
-        td.applications.push new TreeAppApplication_Plot
+        td.applications.push new TreeAppApplication_Plot2D
+        td.applications.push new TreeAppApplication_Plot3D
         td.applications.push new TreeAppApplication_DeepCopy
         
         
