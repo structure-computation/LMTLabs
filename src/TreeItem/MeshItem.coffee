@@ -12,9 +12,9 @@ class MeshItem extends TreeItem
         @_ico.set "img/displacement_16.png"
         @_viewable.set true
         
-        @add_action_modules  new TreeAppModule_Mesher   
-        @add_action_modules  new TreeAppModule_Sketch
-        @add_action_modules  new TreeAppModule_Transform
+        @add_context_modules  new TreeAppModule_Mesher   
+        @add_context_modules  new TreeAppModule_Sketch
+        @add_context_modules  new TreeAppModule_Transform
 
     accept_child: ( ch ) ->
         ch instanceof SketchItem or
