@@ -17,6 +17,22 @@
  along with Soda. If not, see <http://www.gnu.org/licenses/>.
 */
 
+
+h1 {
+    padding     :0px;
+    margin      :0px;
+    height      :3em;
+    line-height :2em;
+    text-indent :5%;
+    color       :#eee;
+}
+body {
+    margin: 0 auto;
+    background: #262626;
+    color : white;
+}
+
+
 .apps_container{
     height:     300px;
     width:      600px;

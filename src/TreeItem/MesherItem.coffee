@@ -15,9 +15,9 @@ class MesherItem extends TreeItem_Computable
         @_ico.set "img/mesher.png"
         @_viewable.set true
         
-        @add_context_modules  new TreeAppModule_Mesher   
-        @add_context_modules  new TreeAppModule_Sketch
-        @add_context_modules  new TreeAppModule_Transform
+        @add_context_actions  new TreeAppModule_Mesher   
+        @add_context_actions  new TreeAppModule_Sketch
+        @add_context_actions  new TreeAppModule_Transform 
         
         @visualization.display_style.num.set 1
         @_computation_mode.set false
