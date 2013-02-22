@@ -16,6 +16,7 @@ launch_ecosystem_mecanic = ( main = document.body, model_id = -1 ) ->
         td.applications.push new TreeAppApplication_DeepCopy
         
         
+        td.modules.push new TreeAppModule_Logo_SC
         td.modules.push new TreeAppModule_File
         td.modules.push new TreeAppModule_Apps
         td.modules.push new TreeAppModule_UndoManager
