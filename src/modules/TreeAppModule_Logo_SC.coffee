@@ -37,4 +37,4 @@ class TreeAppModule_Logo_SC extends TreeAppModule
             txt: "Structure Computation"
             ina: _ina
             fun: ( evt, app ) =>
-                alert "no action"
+                #alert "no action"
