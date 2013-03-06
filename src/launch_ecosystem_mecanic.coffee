@@ -1,4 +1,4 @@
-launch_ecosystem_mecanic = ( main = document.body, model_id = -1 ) ->
+launch_ecosystem_mecanic = ( main = document.body, SC_MODEL_ID = -1 ) ->
     new_session = ->
         td = new TreeAppData
         td.new_session()
@@ -17,6 +17,7 @@ launch_ecosystem_mecanic = ( main = document.body, model_id = -1 ) ->
         td.applications.push new TreeAppApplication_CsvReader
         
         
+        td.modules.push new TreeAppModule_Logo_SC
         td.modules.push new TreeAppModule_File
         td.modules.push new TreeAppModule_Apps
         td.modules.push new TreeAppModule_UndoManager
@@ -72,10 +73,10 @@ launch_ecosystem_mecanic = ( main = document.body, model_id = -1 ) ->
                     
             # else, browse old session
             else
-                if !model_id? or model_id == -1
+                if !SC_MODEL_ID? or SC_MODEL_ID == -1
                   d = "/home/monkey/sessions"
                 else
-                  d = "/home/projet_" + model_id
+                  d = "/home/projet_" + SC_MODEL_ID
                 fs.load_or_make_dir d, ( session_dir, err ) ->
                     clear_page()
                     
@@ -86,7 +87,7 @@ launch_ecosystem_mecanic = ( main = document.body, model_id = -1 ) ->
                         el             : div
                         model          : session_dir
                         use_icons      : true
-                        use_upload     : false
+                        use_upload     : true
                         use_breadcrumb : true
 
                     # NEW SESSION

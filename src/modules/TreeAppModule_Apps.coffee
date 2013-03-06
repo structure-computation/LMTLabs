@@ -32,7 +32,7 @@ class TreeAppModule_Apps extends TreeAppModule
         @icon_app = new Lst
         
         @actions.push
-            ico: "img/screenshots.png"
+            ico: "img/Apps.png"
             siz: 2
             txt: "Load app in tree"
             ina: _ina
