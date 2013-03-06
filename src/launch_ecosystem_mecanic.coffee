@@ -14,6 +14,7 @@ launch_ecosystem_mecanic = ( main = document.body, model_id = -1 ) ->
         td.applications.push new TreeAppApplication_Plot2D
         td.applications.push new TreeAppApplication_Plot3D
         td.applications.push new TreeAppApplication_DeepCopy
+        td.applications.push new TreeAppApplication_CsvReader
         
         
         td.modules.push new TreeAppModule_File
