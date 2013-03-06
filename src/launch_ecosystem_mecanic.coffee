@@ -86,7 +86,7 @@ launch_ecosystem_mecanic = ( main = document.body, SC_MODEL_ID = -1 ) ->
                         el             : div
                         model          : session_dir
                         use_icons      : true
-                        use_upload     : false
+                        use_upload     : true
                         use_breadcrumb : true
 
                     # NEW SESSION
