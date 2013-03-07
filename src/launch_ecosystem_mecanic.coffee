@@ -1,4 +1,4 @@
-launch_ecosystem_mecanic = ( main = document.body, SC_MODEL_ID = -1 ) ->
+launch_ecosystem_mecanic = ( main = document.body ) ->
     new_session = ->
         td = new TreeAppData
         td.new_session()
