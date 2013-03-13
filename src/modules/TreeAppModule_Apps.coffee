@@ -33,7 +33,7 @@ class TreeAppModule_Apps extends TreeAppModule
         
         @actions.push
             ico: "img/Apps.png"
-            siz: 2
+            siz: 0.9
             txt: "Load app in tree"
             ina: _ina
             fun: ( evt, app ) =>
