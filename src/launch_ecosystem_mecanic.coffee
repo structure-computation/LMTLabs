@@ -17,11 +17,9 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
         td.applications.push new TreeAppApplication_CsvReader
         
         
-        td.modules.push new TreeAppModule_Logo_SC
         td.modules.push new TreeAppModule_File
         td.modules.push new TreeAppModule_Apps
         td.modules.push new TreeAppModule_UndoManager
-        td.modules.push new TreeAppModule_PanelManager
         td.modules.push new TreeAppModule_Animation
         td.modules.push new TreeAppModule_TreeView
        
@@ -37,11 +35,11 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
         
 
         td
-        
+    
+    
     clear_page = ->
         while main.firstChild?
             main.removeChild main.firstChild
-
 
     bs = new BrowserState
     fs = new FileSystem
@@ -52,8 +50,7 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
         if bs.location.protocol.get() == 'file:'
             td = new_session()
             app = new TreeApp main, td
-#             for correlation in td.modules when correlation instanceof TreeAppModule_Correlation
-#                 correlation.actions[ 0 ].fun( '', app )
+            
         else
             
             hash = bs.location.hash.get()
@@ -104,6 +101,7 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
                             
                             session_dir.add_file name, td, model_type: "Session", icon: "session"
                             window.location = "#" + encodeURI( "#{d}/#{name}" )
+                            
                             
                             #FIXME Is it necessary to create a new treeapp here ?
 #                             app = new TreeApp main, td
