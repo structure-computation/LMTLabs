@@ -17,10 +17,10 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
         td.applications.push new TreeAppApplication_CsvReader
         
         
+        td.modules.push new TreeAppModule_UndoManager
         td.modules.push new TreeAppModule_File
         td.modules.push new TreeAppModule_Apps
-        td.modules.push new TreeAppModule_UndoManager
-        #td.modules.push new TreeAppModule_Animation
+        td.modules.push new TreeAppModule_Animation
         td.modules.push new TreeAppModule_TreeView
        
         #td.modules.clear()
