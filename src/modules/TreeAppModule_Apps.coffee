@@ -52,7 +52,22 @@ class TreeAppModule_Apps extends TreeAppModule
 #                               app.undo_manager.snapshot()
 #                               @mesher = @add_item_depending_selected_tree app.data, MesherItem
                 
-                p = new_popup "Apps store", event: evt, child: @d, onclose: =>
+                inst = undefined
+                for inst_i in app.selected_canvas_inst()
+                    inst = inst_i
+                    
+                Ptop   = @getTop( inst.div )  
+                Pleft  = @getLeft( inst.div )  
+                Pwidth = inst.divCanvas.offsetWidth
+                Pheight = inst.divCanvas.offsetHeight
+                Pheight = Pheight + 22
+                
+                
+                    #position = inst.div.position()
+                    #alert inst.div.offsetLeft + " " + inst.div.offsetTop + " " +  inst.div.offsetHeight + " " + inst.div.offsetWidth
+                #alert "top : " + Ptop + " left : " + Pleft + " width : " +  Pwidth + " height : " + Pheight
+                
+                p = new_popup "Apps store", event: evt, child: @d, top_x: Pleft, top_y: Ptop, width: Pwidth, height: Pheight, onclose: =>
                     @onPopupClose( app )
                 app.active_key.set false
                 
@@ -61,7 +76,21 @@ class TreeAppModule_Apps extends TreeAppModule
     onPopupClose: ( app ) =>
         document.onkeydown = undefined
         app.active_key.set true
-        
+    
+    # obtenir la position réelle dans le canvas
+    getLeft: ( l ) ->
+      if l.offsetParent?
+          return l.offsetLeft + @getLeft( l.offsetParent )
+      else
+          return l.offsetLeft
+
+    # obtenir la position réelle dans le canvas
+    getTop: ( l ) ->
+        if l.offsetParent?
+            return l.offsetTop + @getTop( l.offsetParent )
+        else
+            return l.offsetTop
+    
         
     display_app: ( app, application ) =>
         if application.actions?
