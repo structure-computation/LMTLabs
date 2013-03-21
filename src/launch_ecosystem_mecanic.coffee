@@ -1,3 +1,75 @@
+#convertir une array en json string
+array2json = ( arr ) -> 
+    parts = []
+    is_list = (Object.prototype.toString.apply(arr) == '[object Array]')
+    is_list2 = (Object.prototype.toString.apply(arr) == '[object Object]')
+    virgule ='on'
+
+    for key in arr
+        value = arr[key]
+        if(typeof value == "object") #Custom handling for arrays
+            str = ""
+            str2 = ""
+            #alert('object_' + key)
+            if is_list2
+                str =  '\"' + key + '\":'
+                virgule = 'on'
+                str2 = array2json(value) #/* :RECURSION: */
+                str += str2
+                #str = '{' + str + '}'
+                parts.push(str)
+            else if is_list
+                if isNaN(key)
+                    str =  '\"' + key + '\":'
+                    virgule ='on'
+                    str2 = array2json(value) # /* :RECURSION: */
+                    str += str2
+                    #str = '{' + str + '}'
+                    parts.push(str)
+                else
+                    virgule ='off'
+                    parts.push(array2json(value)) #/* :RECURSION: */
+            else
+                parts[key] = array2json(value) # /* :RECURSION: */
+
+            #else parts.push('"' + key + '":' + returnedVal);
+        else
+            if typeof value != "function"
+                #virgule ='on';
+                str = ""
+                #if(!is_list) 
+                str =  '\"' + key + '\":'
+    
+                #Custom handling for multiple data types
+                if typeof value == "number"
+                    str += value #Numbers
+                else if value == false  
+                    str += 'false' #The booleans
+                else if value == true 
+                    str += 'true'
+                else 
+                    str +=  '\"' + value + '\"' #All other things
+                # :TODO: Is there any more datatype we should be in the lookout for? (Functions?)
+                parts.push(str)
+
+                
+    if virgule =='on'
+      json = parts.join(", ")
+      return '{' + json + '}' #Return numerical JSON
+
+    else if virgule =='off'
+      json = parts.join(", ")
+      return '[' + json + ']' #Return associative JSON
+    
+    #if(is_list) return '{' + json + '}';//Return numerical JSON
+    #return '{' + json + '}';//Return associative JSON
+
+
+
+
+
+
+
 launch_ecosystem_mecanic = ( main = document.body ) ->
     new_session = ->
         td = new TreeAppData
@@ -81,21 +153,22 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
                     div = new_dom_element
                         parentNode: main
 
-                    item_cp = new ModelEditorItem_Directory
-                        el             : div
-                        model          : session_dir
-                        use_icons      : true
-                        use_upload     : true
-                        use_breadcrumb : true
-
+                    div_top = new_dom_element
+                        parentNode: div
+                        style:
+                           width: "100%"
+                           padding: "10px 20px 10px 20px"
+                           height: "50px"
+                           #background: "#e5e5e5"
+                        
+                        
                     # NEW SESSION
                     new_dom_element
                         nodeName: "button"
                         txt: "New session"
-                        parentNode: div
+                        parentNode: div_top
                         onclick: ( evt ) ->
-                            clear_page()
-                            
+                            clear_page() 
                             name = prompt "Session name", "session " + new Date()
                             # name = "session " + new Date()
                             td = new_session()
@@ -103,11 +176,16 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
                             session_dir.add_file name, td, model_type: "Session", icon: "session"
                             window.location = "#" + encodeURI( "#{d}/#{name}" )
                             
-                            
-                            #FIXME Is it necessary to create a new treeapp here ?
-#                             app = new TreeApp main, td
-#                             for correlation in td.modules when correlation instanceof TreeAppModule_Correlation
-#                                 correlation.actions[ 0 ].fun( evt, app )
+                    
+                    item_cp = new ModelEditorItem_Directory
+                        el             : div
+                        model          : session_dir
+                        use_icons      : false
+                        use_upload     : false
+                        use_breadcrumb : false
+                        display        : "Session" 
+
+                    
 
                     # RELOAD
                     ModelEditorItem_Directory.add_action "Session", ( file, path, browser ) ->
