@@ -65,54 +65,44 @@ array2json = ( arr ) ->
     #return '{' + json + '}';//Return associative JSON
 
 
+#clear page
+MAIN_DIV = document.body
+clear_page = ->
+    while MAIN_DIV.firstChild?
+        MAIN_DIV.removeChild MAIN_DIV.firstChild
 
-
-
-
-
+#type de nouvelle session
+new_session = ->
+    td = new TreeAppData
+    td.new_session()
+    
+    td.applications.push new TreeAppApplication_Correlation
+    td.applications.push new TreeAppApplication_Scills3D
+    td.applications.push new TreeAppApplication_Scills2D
+    td.applications.push new TreeAppApplication_Scult3D
+    td.applications.push new TreeAppApplication_Scult2D
+    td.applications.push new TreeAppApplication_UnvReader3D
+    td.applications.push new TreeAppApplication_UnvReader2D
+    td.applications.push new TreeAppApplication_Mesher
+    td.applications.push new TreeAppApplication_Plot2D
+    td.applications.push new TreeAppApplication_Plot3D
+    td.applications.push new TreeAppApplication_DeepCopy
+    td.applications.push new TreeAppApplication_CsvReader
+    
+    
+    td.modules.push new TreeAppModule_UndoManager
+    td.modules.push new TreeAppModule_File
+    td.modules.push new TreeAppModule_Apps
+    td.modules.push new TreeAppModule_Sessions
+    td.modules.push new TreeAppModule_PanelManager
+    td.modules.push new TreeAppModule_Animation
+    td.modules.push new TreeAppModule_TreeView
+    
+    td
+        
+        
 launch_ecosystem_mecanic = ( main = document.body ) ->
-    new_session = ->
-        td = new TreeAppData
-        td.new_session()
-        
-        td.applications.push new TreeAppApplication_Correlation
-        td.applications.push new TreeAppApplication_Scills3D
-        td.applications.push new TreeAppApplication_Scills2D
-        td.applications.push new TreeAppApplication_Scult3D
-        td.applications.push new TreeAppApplication_Scult2D
-        td.applications.push new TreeAppApplication_UnvReader3D
-        td.applications.push new TreeAppApplication_UnvReader2D
-        td.applications.push new TreeAppApplication_Mesher
-        td.applications.push new TreeAppApplication_Plot2D
-        td.applications.push new TreeAppApplication_Plot3D
-        td.applications.push new TreeAppApplication_DeepCopy
-        td.applications.push new TreeAppApplication_CsvReader
-        
-        
-        td.modules.push new TreeAppModule_UndoManager
-        td.modules.push new TreeAppModule_File
-        td.modules.push new TreeAppModule_Apps
-        td.modules.push new TreeAppModule_PanelManager
-        td.modules.push new TreeAppModule_Animation
-        td.modules.push new TreeAppModule_TreeView
-       
-        #td.modules.clear()
-        #td.modules.concat td.base_modules
-       
-#         td.modules.push new TreeAppModule_Mesher
-#         td.modules.push new TreeAppModule_Sketch
-#         td.modules.push new TreeAppModule_Transform
-#         td.modules.push new TreeAppModule_Animation
-#         td.modules.push new TreeAppModule_Compute
-
-        
-
-        td
-    
-    
-    clear_page = ->
-        while main.firstChild?
-            main.removeChild main.firstChild
+    MAIN_DIV = main
 
     bs = new BrowserState
     fs = new FileSystem

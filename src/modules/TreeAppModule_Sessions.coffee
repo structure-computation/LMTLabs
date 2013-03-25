@@ -25,83 +25,88 @@ class TreeAppModule_Sessions extends TreeAppModule
         @name = 'Sessions'
         @visible = true
                 
-        _ina = ( app ) =>
-            app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id and 
-            app.data.focus.get() != app.treeview.view_id
-      
-        @icon_app = new Lst
-        
+
         @actions.push
             ico: "img/proprietes-session-icone-5116-128.png"
             siz: 0.9
-            txt: "Browse your sessions"
-            ina: _ina
+            txt: "Open in Tree"
             fun: ( evt, app ) =>
-                if !SC_MODEL_ID? or SC_MODEL_ID == -1
-                  d = "/home/monkey/sessions"
+                @d = new_dom_element
+                    className : "browse_container"
+                    id        : "id_browse_container"
+                
+                if FileSystem? and FileSystem.get_inst()?
+                    fs = FileSystem.get_inst()
                 else
-                  d = "/home/projet_" + SC_MODEL_ID
-                fs.load_or_make_dir d, ( session_dir, err ) ->
-                    clear_page()
-                    
-                    div = new_dom_element
+                    fs = new FileSystem
+                    FileSystem._disp = false
+                 
+                if !SC_MODEL_ID? or  SC_MODEL_ID == -1
+                  dir = "/home/monkey/test_browser"
+                else
+                  dir = "/home/projet_" + SC_MODEL_ID
+                  
+                #alert dir
+                fs.load_or_make_dir dir, ( session_dir, err ) =>     
+                    t = new Directory
 
                     div_top = new_dom_element
-                        parentNode: div
+                        parentNode: @d
                         style:
-                           width: "100%"
-                           padding: "10px 20px 10px 20px"
-                           height: "50px"
-                           #background: "#e5e5e5"
-                        
-                        
+                            width: "90%"
+                            padding: "10px 20px 10px 20px"
+                            height: "50px"
+                            #background: "#e5e5e5"
+                                              
                     # NEW SESSION
-                    new_dom_element
+                    button_new = new_dom_element
                         nodeName: "button"
                         txt: "New session"
                         parentNode: div_top
                         onclick: ( evt ) ->
-                            clear_page() 
+                            clear_page()
                             name = prompt "Session name", "session " + new Date()
                             # name = "session " + new Date()
                             td = new_session()
                             
                             session_dir.add_file name, td, model_type: "Session", icon: "session"
-                            window.location = "#" + encodeURI( "#{d}/#{name}" )
-                            
+                            window.location = "#" + encodeURI( "#{dir}/#{name}" )   
+                    
+                    
+                    
+#                   RELOAD
+                    ModelEditorItem_Directory.add_action "Session", ( file, path, browser ) ->
+                        file.load ( object, err ) =>
+                            clear_page()
+                            window.location = "#" + encodeURI( "#{dir}/#{file.name.get()}" )    
                     
                     item_cp = new ModelEditorItem_Directory
-                        el             : div
-                        model          : session_dir
+                        el          : @d
+                        model       : session_dir
+                        initial_path: dir
                         use_icons      : false
                         use_upload     : false
                         use_breadcrumb : false
                         display        : "Session" 
-
+                
+                inst = undefined
+                for inst_i in app.selected_canvas_inst()
+                    inst = inst_i
                     
-
-                    # RELOAD
-                    ModelEditorItem_Directory.add_action "Session", ( file, path, browser ) ->
-                        clear_page()
-                        window.location = "#" + encodeURI( "#{d}/#{file.name.get()}" )
-                    
-                    
-                    inst = undefined
-                    for inst_i in app.selected_canvas_inst()
-                        inst = inst_i
-                        
-                    Ptop   = @getTop( inst.div )  
-                    Pleft  = @getLeft( inst.div )  
-                    Pwidth = inst.divCanvas.offsetWidth
-                    Pheight = inst.divCanvas.offsetHeight
-                    Pheight = Pheight + 22
-                    p = new_popup "Browse sessions", event: evt, child: div, top_x: Pleft, top_y: Ptop, width: Pwidth, height: Pheight, onclose: =>
+                Ptop   = @getTop( inst.div )  
+                Pleft  = @getLeft( inst.div )  
+                Pwidth = inst.divCanvas.offsetWidth
+                Pheight = inst.divCanvas.offsetHeight
+                Pheight = Pheight + 22
+                
+                #alert "ok"
+                
+                p = new_popup "Browse Folder", event: evt, child: @d, top_x: Pleft, top_y: Ptop, width: Pwidth, height: Pheight, onclose: =>
                     @onPopupClose( app )
+                app.active_key.set false
+                
+#             key: [ "Shift+O" ]
 
-    onPopupClose: ( app ) =>
-        document.onkeydown = undefined
-        app.active_key.set true
-    
     # obtenir la position réelle dans le canvas
     getLeft: ( l ) ->
       if l.offsetParent?
@@ -116,4 +121,6 @@ class TreeAppModule_Sessions extends TreeAppModule
         else
             return l.offsetTop
     
-        
+    onPopupClose: ( app ) =>
+        document.onkeydown = undefined
+        app.active_key.set true
