@@ -93,7 +93,7 @@ new_session = ->
     td.modules.push new TreeAppModule_UndoManager
     td.modules.push new TreeAppModule_File
     td.modules.push new TreeAppModule_Apps
-    td.modules.push new TreeAppModule_Sessions
+    td.modules.push new TreeAppModule_Projects
     td.modules.push new TreeAppModule_PanelManager
     td.modules.push new TreeAppModule_Animation
     td.modules.push new TreeAppModule_TreeView
@@ -155,11 +155,11 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
                     # NEW SESSION
                     new_dom_element
                         nodeName: "button"
-                        txt: "New session"
+                        txt: "New project"
                         parentNode: div_top
                         onclick: ( evt ) ->
                             clear_page() 
-                            name = prompt "Session name", "session " + new Date()
+                            name = prompt "Project name", "project " + new Date()
                             # name = "session " + new Date()
                             td = new_session()
                             

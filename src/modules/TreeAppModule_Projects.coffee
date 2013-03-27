@@ -18,11 +18,11 @@
 
 
 #
-class TreeAppModule_Sessions extends TreeAppModule
+class TreeAppModule_Projects extends TreeAppModule
     constructor: ->
         super()
         
-        @name = 'Sessions'
+        @name = 'Projects'
         @visible = true
                 
 
@@ -61,11 +61,11 @@ class TreeAppModule_Sessions extends TreeAppModule
                     # NEW SESSION
                     button_new = new_dom_element
                         nodeName: "button"
-                        txt: "New session"
+                        txt: "New project"
                         parentNode: div_top
                         onclick: ( evt ) ->
                             clear_page()
-                            name = prompt "Session name", "session " + new Date()
+                            name = prompt "Project name", "project " + new Date()
                             # name = "session " + new Date()
                             td = new_session()
                             
