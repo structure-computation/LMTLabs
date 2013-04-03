@@ -89,6 +89,7 @@ new_session = ->
     td.applications.push new TreeAppApplication_DeepCopy
     td.applications.push new TreeAppApplication_CsvReader
     td.applications.push new TreeAppApplication_Annotation
+    td.applications.push new TreeAppApplication_Scilab
     
     
     td.modules.push new TreeAppModule_UndoManager
