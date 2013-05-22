@@ -24,6 +24,12 @@ class TreeAppApplication extends Model
         @name    = ''      # indicate the module name
         @visible = true # all module can be hidden from menu by setting this to false
         @actions = []   # list of actions depending of the module
+        
+        @powered_with    = ''
+        @company         = ''
+        @link            = ""     
+        @group           = ""
+        @key_words       = []
 
         # actions is assumed to be formatted like this :
         #     ico: path to a picture

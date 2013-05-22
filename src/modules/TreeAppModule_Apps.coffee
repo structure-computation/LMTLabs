@@ -124,8 +124,28 @@ class TreeAppModule_Apps extends TreeAppModule
                           maxWidth : 70
                           maxHeight: 80
                 
-                @text_app = new_dom_element
+                text_app = new_dom_element
                       parentNode: group_app
-                      className : "app_group_name"
+                      className : "app_group_text"
+                      nodeName  : "div"
+                      onmousedown: ( evt ) =>
+                          act.fun evt, app
+                
+                @name_app = new_dom_element
+                      parentNode: text_app
+                      className : "app_group_title"
                       nodeName  : "div"
                       txt       : application.name
+                
+                @editor_app = new_dom_element
+                      parentNode: text_app
+                      className : "app_group_name"
+                      nodeName  : "div"
+                      txt       : application.company
+                      
+                @powered_app = new_dom_element
+                      parentNode: text_app
+                      className : "app_group_name"
+                      nodeName  : "div"
+                      txt       : application.powered_with
+

@@ -3,6 +3,11 @@ class TreeAppApplication_Scills2D extends TreeAppApplication
         super()
          
         @name = 'Scills apps'
+        @powered_with    = 'Structure Computation'
+        @company         = 'Structure Computation'
+        @link            = ""     
+        @group           = "scills"
+        @key_words       = ["structure"," analisys", "LATIN", "mechanic"]
         
         _ina = ( app ) =>
             app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
