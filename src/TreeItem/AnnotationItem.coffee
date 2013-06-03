@@ -10,6 +10,7 @@ class AnnotationItem extends TreeItem
         @add_attr
             point        : @_point.point
 
+        @note.set "test"
         @_name.set name
         @_ico.set "img/note.png"
         @_viewable.set true
