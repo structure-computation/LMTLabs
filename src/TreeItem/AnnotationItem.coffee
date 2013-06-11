@@ -5,7 +5,7 @@ class AnnotationItem extends TreeItem
         @add_attr
             title        : @_name
             _point       : new PointMesher
-            note         : new Text "test"
+            note         : "test"
         
         @add_attr
             point        : @_point.point
@@ -28,7 +28,10 @@ class AnnotationItem extends TreeItem
         
     z_index: ->
         @_point.z_index()
-        
+    
+    get_model_editor_parameters: ( res ) ->
+       res.model_editor[ "note" ] = ModelEditorItem_TextArea
+    
     draw: ( info ) ->
         draw_point = info.sel_item[ @model_id ]
         if @_point.length && draw_point
