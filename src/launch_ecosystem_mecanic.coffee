@@ -24,6 +24,7 @@ new_session = ->
     td.applications.push new TreeAppApplication_Annotation
     td.applications.push new TreeAppApplication_Scilab
     td.applications.push new TreeAppApplication_Acquisition
+    td.applications.push new TreeAppApplication_Test
     
     
     td.modules.push new TreeAppModule_UndoManager

@@ -11,10 +11,11 @@ class SketchItem extends TreeItem
         @_name.set name
         @_ico.set "img/mesh_24.png"
         @_viewable.set true
-        
-        @add_context_actions  new TreeAppModule_Mesher   
-        @add_context_actions  new TreeAppModule_Sketch
-        @add_context_actions  new TreeAppModule_Transform   
+    
+    display_suppl_context_actions: ( context_action )  ->
+        context_action.push new TreeAppModule_Mesher
+        context_action.push new TreeAppModule_Sketch
+        #context_action.push new TreeAppModule_Transform
     
     accept_child: ( ch ) ->
         false

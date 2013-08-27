@@ -9,8 +9,8 @@ class TreeAppModule_Collection extends TreeAppModule
           _collection_size: collection_size
         
         
-        _ina = ( app ) =>
-            app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
+        #_ina = ( app ) =>
+        #    app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
 
         @actions.push
             txt: "add boundary condition"

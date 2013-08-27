@@ -15,11 +15,6 @@ class AnnotationItem extends TreeItem
         @_ico.set "img/note.png"
         @_viewable.set true
         
-        #@add_context_actions  new TreeAppModule_Mesher   
-        #@add_context_actions  new TreeAppModule_Sketch
-        
-        
-        
     accept_child: ( ch ) ->
         false
     
