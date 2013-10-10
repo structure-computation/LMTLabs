@@ -4,11 +4,9 @@ clear_page = ->
     while MAIN_DIV.firstChild?
         MAIN_DIV.removeChild MAIN_DIV.firstChild
 
-#type de nouvelle session
-new_session = ->
-    td = new TreeAppData
-    td.new_session()
-    
+        
+#inclusion dans une nouvelle session        
+include_session = (td) ->    
     td.applications.push new TreeAppApplication_Correlation
     td.applications.push new TreeAppApplication_Scills3D
     td.applications.push new TreeAppApplication_Scills2D
@@ -28,16 +26,30 @@ new_session = ->
     
     
     td.modules.push new TreeAppModule_UndoManager
+    td.modules.push new TreeAppModule_PanelManager
     td.modules.push new TreeAppModule_File
     td.modules.push new TreeAppModule_Apps
     td.modules.push new TreeAppModule_Projects
-    td.modules.push new TreeAppModule_PanelManager
-    td.modules.push new TreeAppModule_Animation
-    td.modules.push new TreeAppModule_TreeView
     
+    
+    td.modules.push new TreeAppModule_Animation
+    td.modules.push new TreeAppModule_TreeView    
+        
+#type de nouvelle session
+new_session = ->
+    td = new TreeAppData
+    td.new_session()
+    include_session td
     td
-        
-        
+ 
+new_standard_session = ->
+    td = new TreeAppData
+    td.new_standard_session()
+    include_session td
+    td
+
+    
+#main program
 launch_ecosystem_mecanic = ( main = document.body ) ->
     MAIN_DIV = main
 
@@ -92,7 +104,7 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
                     # NEW SESSION
                     new_dom_element
                         nodeName: "button"
-                        txt: "New project"
+                        txt: "New scientific project"
                         parentNode: div_top
                         onclick: ( evt ) ->
                             clear_page() 
@@ -102,7 +114,19 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
                             
                             session_dir.add_file name, td, model_type: "Session", icon: "session"
                             window.location = "#" + encodeURI( "#{d}/#{name}" )
+                    
+                    new_dom_element
+                        nodeName: "button"
+                        txt: "New standard project"
+                        parentNode: div_top
+                        onclick: ( evt ) ->
+                            clear_page() 
+                            name = prompt "Project name", "project " + new Date()
+                            # name = "session " + new Date()
+                            td = new_standard_session()
                             
+                            session_dir.add_file name, td, model_type: "Session", icon: "session"
+                            window.location = "#" + encodeURI( "#{d}/#{name}" )
                     
                     item_cp = new ModelEditorItem_Directory
                         el             : div

@@ -55,14 +55,21 @@ class TreeAppModule_Apps extends TreeAppModule
                 inst = undefined
                 for inst_i in app.selected_canvas_inst()
                     inst = inst_i
-                    
-                Ptop   = @getTop( inst.div )  
-                Pleft  = @getLeft( inst.div )  
-                Pwidth = inst.divCanvas.offsetWidth
-                Pheight = inst.divCanvas.offsetHeight
-                Pheight = Pheight + 22
                 
                 
+                if (inst.divCanvas)?
+                  Ptop   = @getTop( inst.div )  
+                  Pleft  = @getLeft( inst.div )  
+                  Pwidth = inst.divCanvas.offsetWidth
+                  Pheight = inst.divCanvas.offsetHeight
+                  Pheight = Pheight + 22
+                
+                else
+                  Ptop   = 100
+                  Pleft  = 100
+                  Pwidth = 800 
+                  Pheight = 500 
+                  
                     #position = inst.div.position()
                     #alert inst.div.offsetLeft + " " + inst.div.offsetTop + " " +  inst.div.offsetHeight + " " + inst.div.offsetWidth
                 #alert "top : " + Ptop + " left : " + Pleft + " width : " +  Pwidth + " height : " + Pheight
