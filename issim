@@ -1,0 +1,76 @@
+#!/bin/bash
+
+
+######################################################
+#####                 IMPORTANT                  #####
+##### LES PATHS DOIVENT COMPORTER UN / A LA FIN  #####
+######################################################
+path_EcosystemScience="/home/jbellec/code_dev_scwal/EcosystemScience/"
+path_GlobalManager="/home/jbellec/code_dev_scwal/ScwalPlugins/GlobalManagerPlugin/"
+######################################################
+
+
+######################################################
+if [[ $1 == "" ]]; then
+echo "Usage ./issim start/stop"
+fi
+######################################################
+
+
+######################################################
+Stop()
+{
+python kill_services.py
+}
+
+if [[ $1 == "stop" ]]; then
+Stop
+fi
+######################################################
+
+#./compilations/server.cpp.exe
+
+LaunchEcosystemScience()
+{
+cd $path_EcosystemScience ; 
+#rm -r compilations/ ;
+make sc
+sleep 1
+LaunchEcosystemScience
+}
+
+
+LaunchGlobalManager()
+{
+cd $path_GlobalManager ; 
+#rm -r compilations/ ;
+make
+sleep 3
+LaunchGlobalManager
+}
+
+
+
+Start()
+{
+rm ./log/*;
+echo "Démarrage des services"
+
+
+LaunchEcosystemScience > "log/EcosystemScience-"$(date +%F-%R) &
+echo $! >> SC_GlobalManager_PID
+echo "     EcosystemScience server                       [start]" 
+
+LaunchGlobalManager > "log/LaunchGlobalManager-"$(date +%F-%R) &
+echo $! >> SC_GlobalManager_PID
+echo "     GlobalManager server                          [start]"
+
+}
+
+
+if [[ $1 == "start" ]]; then
+Start
+fi
+
+
+

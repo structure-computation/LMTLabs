@@ -1,6 +1,6 @@
 #
 class SketchItem extends TreeItem
-    constructor: ( name = "Mesh" ) ->
+    constructor: ( name = "Sketch" ) ->
         super()
         
         # attributes

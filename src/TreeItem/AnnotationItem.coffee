@@ -2,18 +2,24 @@
 class AnnotationItem extends TreeItem
     constructor: ( name = "Note" ) ->
         super()
-        @add_attr
-            title        : @_name
-            _point       : new PointMesher
-            note         : "test"
-        
-        @add_attr
-            point        : @_point.point
-
-        @note.set "test"
+         
         @_name.set name
         @_ico.set "img/note.png"
         @_viewable.set true
+            
+        @add_attr
+            title        : @_name
+            _point       : new PointMesher [ 0, 0, 0 ], 2, 6
+            note         : "test"
+        
+        @add_attr
+            radius    : new ConstrainedVal( 4, { min: 0, max: 40 } )
+            point     : @_point.point
+
+        @_point.radius = @radius
+        
+        @note.set "test"
+        
         
     accept_child: ( ch ) ->
         false

@@ -2,7 +2,7 @@ class TreeAppApplication_Annotation extends TreeAppApplication
     constructor: ->
         super()
         
-        @mesher = ''
+        @note = ''
         @name = 'Note'
             
         @actions.push
@@ -11,7 +11,7 @@ class TreeAppApplication_Annotation extends TreeAppApplication
             txt: "Note"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                @mesher = @add_item_depending_selected_tree app.data, AnnotationItem
+                @note = @add_item_depending_selected_tree app.data, AnnotationItem
         
 
         
