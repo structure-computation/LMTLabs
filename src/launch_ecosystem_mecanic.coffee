@@ -17,6 +17,7 @@ include_session = (td) ->
     td.applications.push new TreeAppApplication_Mesher
     td.applications.push new TreeAppApplication_Plot2D
     td.applications.push new TreeAppApplication_Plot3D
+    td.applications.push new TreeAppApplication_StepReader
     td.applications.push new TreeAppApplication_DeepCopy
     td.applications.push new TreeAppApplication_CsvReader
     td.applications.push new TreeAppApplication_Annotation
