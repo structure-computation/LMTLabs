@@ -23,7 +23,7 @@ class TreeAppModule_Projects extends TreeAppModule
         super()
         
         @name = 'Projects'
-        @visible = true
+        @visible = false
                 
 
         @actions.push

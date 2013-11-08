@@ -3,7 +3,7 @@ class TreeAppApplication_StepReader extends TreeAppApplication
         super()
         
         @mesher = ''
-        @name = 'StepReader'
+        @name = 'CAO reader step'
         @powered_with    = 'OpenCascade'
         @company         = 'Structure Computation'
         @link            = ""     
@@ -15,7 +15,7 @@ class TreeAppApplication_StepReader extends TreeAppApplication
             app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
             
         @actions.push
-            ico: "img/mesher.png"
+            ico: "img/stepReader_bouton.png"
             siz: 1
             txt: "StepReader"
             ina: _ina

@@ -2,20 +2,16 @@ class TreeAppApplication_Acquisition extends TreeAppApplication
     constructor: ->
         super()
         
-        @mesher = ''
-        @name = 'Acquisition'
+        @name = 'Hardware acquisition'
+        @powered_with    = 'SC'
             
         @actions.push
-            ico: "img/Acquisition.png"
+            ico: "img/acquisition_bouton.png"
             siz: 1
             txt: "Acquisition"
             fun: ( evt, app ) =>
                 app.undo_manager.snapshot()
-                @mesher = @add_item_depending_selected_tree app.data, AcquisitionItem
+                acquisition = @add_item_depending_selected_tree app.data, AcquisitionItem
         
-    add_corr: ( app_data ) =>
-        #
-        m = @add_item_depending_selected_tree app_data, AcquisitionItem
-
         
             

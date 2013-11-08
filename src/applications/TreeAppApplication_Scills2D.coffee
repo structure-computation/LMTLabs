@@ -2,8 +2,8 @@ class TreeAppApplication_Scills2D extends TreeAppApplication
     constructor: ->
         super()
          
-        @name = 'Scills apps'
-        @powered_with    = 'Structure Computation'
+        @name = 'Structure simulation'
+        @powered_with    = 'SC'
         @company         = 'Structure Computation'
         @link            = ""     
         @group           = "scills"
@@ -14,7 +14,7 @@ class TreeAppApplication_Scills2D extends TreeAppApplication
         
          #scills application 2D
         @actions.push
-            ico: "img/scills2D.png"
+            ico: "img/scills2D_bouton.png"
             txt: "Scills2D"
             ina: _ina
             siz: 1

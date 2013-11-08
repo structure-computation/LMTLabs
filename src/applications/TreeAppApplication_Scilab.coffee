@@ -3,13 +3,14 @@ class TreeAppApplication_Scilab extends TreeAppApplication
         super()
         
         @mesher = ''
-        @name = 'Scilab'
+        @name = 'image processing'
+        @powered_with    = 'Scilab'
 
         _ina = ( app ) =>
             app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
             
         @actions.push
-            ico: "img/scilab.png"
+            ico: "img/sobelFilter_bouton.png"
             siz: 1
             txt: "Scilab"
             ina: _ina

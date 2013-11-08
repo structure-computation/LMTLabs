@@ -3,6 +3,7 @@ class TreeAppApplication_Test extends TreeAppApplication
         super()
          
         @name = 'Test apps'
+        @powered_with    = 'SC'
         
         _ina = ( app ) =>
             app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
@@ -10,7 +11,7 @@ class TreeAppApplication_Test extends TreeAppApplication
         
         #unv reader application 3D   
         @actions.push
-            ico: "img/addlist.png"
+            ico: "img/test_bouton.png"
             siz: 1
             txt: "test collection item"
             ina: _ina

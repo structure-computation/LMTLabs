@@ -2,14 +2,15 @@ class TreeAppApplication_Scills3D extends TreeAppApplication
     constructor: ->
         super()
          
-        @name = 'Scills apps'
+        @name = 'Structure simulation'
+        @powered_with    = 'SC'
         
         _ina = ( app ) =>
             app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
         
         #scills application 3D
         @actions.push
-            ico: "img/scills3D.png"
+            ico: "img/scills3D_bouton.png"
             txt: "Scills3D"
             ina: _ina
             siz: 1

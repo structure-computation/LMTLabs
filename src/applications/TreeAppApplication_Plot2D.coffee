@@ -9,7 +9,7 @@ class TreeAppApplication_Plot2D extends TreeAppApplication
             app.data.focus.get() != app.selected_canvas_inst()?[ 0 ]?.cm.view_id
             
         @actions.push
-            ico: "img/plot2D.png"
+            ico: "img/plot2D_bouton.png"
             siz: 1
             txt: "function of t"
             ina: _ina

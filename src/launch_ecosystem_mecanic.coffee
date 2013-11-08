@@ -4,21 +4,37 @@ clear_page = ->
     while MAIN_DIV.firstChild?
         MAIN_DIV.removeChild MAIN_DIV.firstChild
 
+#inclusion dans une nouvelle session        
+include_standard_session = (td) ->    
+    td.applications.push new TreeAppApplication_CRM
+    td.applications.push new TreeAppApplication_Annotation
+    td.applications.push new TreeAppApplication_Test
+    
+    
+    td.modules.push new TreeAppModule_UndoManager
+    td.modules.push new TreeAppModule_PanelManager
+    td.modules.push new TreeAppModule_File
+    td.modules.push new TreeAppModule_Apps
+    #td.modules.push new TreeAppModule_Projects
+    td.modules.push new TreeAppModule_TreeView    
         
 #inclusion dans une nouvelle session        
 include_session = (td) ->    
     td.applications.push new TreeAppApplication_Correlation
     td.applications.push new TreeAppApplication_Scills3D
-    td.applications.push new TreeAppApplication_Scills2D
     td.applications.push new TreeAppApplication_Scult3D
+    td.applications.push new TreeAppApplication_Scills2D
     td.applications.push new TreeAppApplication_Scult2D
-    td.applications.push new TreeAppApplication_UnvReader3D
-    td.applications.push new TreeAppApplication_UnvReader2D
+    #td.applications.push new TreeAppApplication_UnvReader3D
+    #td.applications.push new TreeAppApplication_UnvReader2D
     td.applications.push new TreeAppApplication_Mesher
-    td.applications.push new TreeAppApplication_Plot2D
-    td.applications.push new TreeAppApplication_Plot3D
     td.applications.push new TreeAppApplication_StepReader
-    td.applications.push new TreeAppApplication_DeepCopy
+    
+    td.applications.push new TreeAppApplication_Plot3D
+    td.applications.push new TreeAppApplication_Plot2D
+    
+    
+    #td.applications.push new TreeAppApplication_DeepCopy
     td.applications.push new TreeAppApplication_CsvReader
     td.applications.push new TreeAppApplication_Annotation
     td.applications.push new TreeAppApplication_Scilab
@@ -30,7 +46,7 @@ include_session = (td) ->
     td.modules.push new TreeAppModule_PanelManager
     td.modules.push new TreeAppModule_File
     td.modules.push new TreeAppModule_Apps
-    td.modules.push new TreeAppModule_Projects
+    #td.modules.push new TreeAppModule_Projects
     
     
     td.modules.push new TreeAppModule_Animation
@@ -46,7 +62,7 @@ new_session = ->
 new_standard_session = ->
     td = new TreeAppData
     td.new_standard_session()
-    include_session td
+    include_standard_session td
     td
 
     

@@ -128,8 +128,8 @@ class TreeAppModule_Apps extends TreeAppModule
                       alt       : act.txt
                       title     : act.txt
                       style:
-                          maxWidth : 70
-                          maxHeight: 80
+                          maxWidth : 140
+                          maxHeight: 70
                 
                 text_app = new_dom_element
                       parentNode: group_app
@@ -148,7 +148,9 @@ class TreeAppModule_Apps extends TreeAppModule
                       parentNode: text_app
                       className : "app_group_name"
                       nodeName  : "div"
-                      txt       : application.company
+                      style:
+                          fontWidth : 0.8
+                      txt       : "powered by"
                       
                 @powered_app = new_dom_element
                       parentNode: text_app

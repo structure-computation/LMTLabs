@@ -2,10 +2,11 @@ class TreeAppApplication_Correlation extends TreeAppApplication
     constructor: ->
         super()
                 
-        @name = 'Correlation'
+        @name = 'Image correlation'
+        @powered_with    = 'LMT Cachan'
             
         @actions.push
-            ico: "img/correlation.png"
+            ico: "img/correli_bouton.png"  #"img/correlation.png"
             siz: 2
             txt: "Correlation"
             fun: ( evt, app ) =>
