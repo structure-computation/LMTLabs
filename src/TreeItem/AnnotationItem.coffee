@@ -9,8 +9,10 @@ class AnnotationItem extends TreeItem
             
         @add_attr
             title        : @_name
+            posted_by    : SC_USER_EMAIL
             _point       : new PointMesher [ 0, 0, 0 ], 2, 6
             note         : "test"
+            link         : "http://www.structure-computation.com"
         
         @add_attr
             radius    : new ConstrainedVal( 4, { min: 0, max: 40 } )
@@ -19,7 +21,16 @@ class AnnotationItem extends TreeItem
         @_point.radius = @radius
         
         @note.set "test"
-        
+     
+    display_suppl_context_actions: ( context_action )  ->
+        context_action.push
+            txt: "link"
+            ico: "img/LinkTo.png"
+            fun: ( evt, app ) =>
+                myWindow = window.open '',''
+                myWindow.document.location.href = @link.get()
+                myWindow.focus()
+                
         
     accept_child: ( ch ) ->
         false
