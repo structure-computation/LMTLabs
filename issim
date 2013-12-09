@@ -5,8 +5,8 @@
 #####                 IMPORTANT                  #####
 ##### LES PATHS DOIVENT COMPORTER UN / A LA FIN  #####
 ######################################################
-path_EcosystemScience="/home/jbellec/code_dev_scwal/EcosystemScience/"
-path_GlobalManager="/home/jbellec/code_dev_scwal/ScwalPlugins/GlobalManagerPlugin/"
+path_EcosystemScience="/home/stagiaire/code_dev_scwal/EcosystemScience/"
+path_GlobalManager="/home/stagiaire/code_dev_scwal/ScwalPlugins/GlobalManagerPlugin/"
 ######################################################
 
 
