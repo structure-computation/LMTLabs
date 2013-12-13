@@ -42,7 +42,9 @@ include_session = (td) ->
     td.applications.push new TreeAppApplication_Acquisition
     td.applications.push new TreeAppApplication_Test
     
-    td.applications.push new TreeAppApplication_IpolLsd
+    td.applications.push new TreeAppApplication_IpolACE
+    td.applications.push new TreeAppApplication_IpolLSD
+    td.applications.push new TreeAppApplication_IpolSCA
     
     td.modules.push new TreeAppModule_UndoManager
     td.modules.push new TreeAppModule_PanelManager
