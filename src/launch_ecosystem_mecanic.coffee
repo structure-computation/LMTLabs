@@ -4,47 +4,10 @@ clear_page = ->
     while MAIN_DIV.firstChild?
         MAIN_DIV.removeChild MAIN_DIV.firstChild
 
-#inclusion dans une nouvelle session        
-include_standard_session = (td) ->    
-    td.applications.push new TreeAppApplication_CRM
-    td.applications.push new TreeAppApplication_Annotation
-    td.applications.push new TreeAppApplication_Test
-    
-    
-    td.modules.push new TreeAppModule_UndoManager
-    td.modules.push new TreeAppModule_PanelManager
-    td.modules.push new TreeAppModule_File
-    td.modules.push new TreeAppModule_Apps
-    #td.modules.push new TreeAppModule_Projects
-    td.modules.push new TreeAppModule_TreeView    
+APPS = new Lst
         
 #inclusion dans une nouvelle session        
 include_session = (td) ->    
-    td.applications.push new TreeAppApplication_Correlation
-    td.applications.push new TreeAppApplication_Scills3D
-    td.applications.push new TreeAppApplication_Scult3D
-    td.applications.push new TreeAppApplication_Scills2D
-    td.applications.push new TreeAppApplication_Scult2D
-    td.applications.push new TreeAppApplication_FieldsComparator
-    #td.applications.push new TreeAppApplication_UnvReader3D
-    #td.applications.push new TreeAppApplication_UnvReader2D
-    td.applications.push new TreeAppApplication_Mesher
-    td.applications.push new TreeAppApplication_Sketcher
-    td.applications.push new TreeAppApplication_StepReader
-    td.applications.push new TreeAppApplication_TestFlo
-    td.applications.push new TreeAppApplication_TestReno
-    
-    td.applications.push new TreeAppApplication_Plot3D
-    td.applications.push new TreeAppApplication_Plot2D
-    
-    
-    #td.applications.push new TreeAppApplication_DeepCopy
-    td.applications.push new TreeAppApplication_CsvReader
-    td.applications.push new TreeAppApplication_Annotation
-    td.applications.push new TreeAppApplication_Scilab
-    td.applications.push new TreeAppApplication_Acquisition
-    td.applications.push new TreeAppApplication_Test
-    
     td.modules.push new TreeAppModule_UndoManager
     td.modules.push new TreeAppModule_PanelManager
     td.modules.push new TreeAppModule_File
@@ -61,18 +24,33 @@ new_session = ->
     td.new_session()
     include_session td
     td
- 
-new_standard_session = ->
-    td = new TreeAppData
-    td.new_standard_session()
-    include_standard_session td
-    td
 
     
 #main program
 launch_ecosystem_mecanic = ( main = document.body ) ->
     MAIN_DIV = main
 
+    #ajout des applications de EcosystemMecanics
+    APPS.push new TreeAppApplication_Correlation
+    APPS.push new TreeAppApplication_Scills3D
+    APPS.push new TreeAppApplication_Scult3D
+    APPS.push new TreeAppApplication_Scills2D
+    APPS.push new TreeAppApplication_Scult2D
+    APPS.push new TreeAppApplication_FieldsComparator
+    APPS.push new TreeAppApplication_TestFlo
+    APPS.push new TreeAppApplication_TestReno
+    APPS.push new TreeAppApplication_Mesher
+    #APPS.push new TreeAppApplication_Sketcher
+    APPS.push new TreeAppApplication_StepReader  
+    APPS.push new TreeAppApplication_Plot3D
+    APPS.push new TreeAppApplication_Plot2D
+    #APPS.push new TreeAppApplication_DeepCopy
+    APPS.push new TreeAppApplication_CsvReader
+    APPS.push new TreeAppApplication_Annotation
+    #APPS.push new TreeAppApplication_Scilab
+    #APPS.push new TreeAppApplication_Acquisition
+    APPS.push new TreeAppApplication_Test
+    
     bs = new BrowserState
     fs = new FileSystem
     # FileSystem._disp = true
@@ -135,18 +113,6 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
                             session_dir.add_file name, td, model_type: "Session", icon: "session"
                             window.location = "#" + encodeURI( "#{d}/#{name}" )
                     
-                    new_dom_element
-                        nodeName: "button"
-                        txt: "New standard project"
-                        parentNode: div_top
-                        onclick: ( evt ) ->
-                            clear_page() 
-                            name = prompt "Project name", "project " + new Date()
-                            # name = "session " + new Date()
-                            td = new_standard_session()
-                            
-                            session_dir.add_file name, td, model_type: "Session", icon: "session"
-                            window.location = "#" + encodeURI( "#{d}/#{name}" )
                     
                     item_cp = new ModelEditorItem_Directory
                         el             : div
