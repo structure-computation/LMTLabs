@@ -29,6 +29,3 @@ int main() {
     apply( m.sub_mesh( Number<1>() ).elem_list, DisplayJs(), f );
 }
 
-
-
-
