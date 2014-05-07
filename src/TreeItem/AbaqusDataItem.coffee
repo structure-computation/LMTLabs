@@ -27,8 +27,8 @@ class AbaqusDataItem extends TreeItem
         ch instanceof FieldSetItem or
         ch instanceof FieldItem or
         ch instanceof MeshItem or
-        ch instanceof MaterialABQItem
-        
+        ch instanceof MaterialABQItem or
+        ch instanceof ImgSetItem
 
     disp_only_in_model_editor: ->
 #         @mesh

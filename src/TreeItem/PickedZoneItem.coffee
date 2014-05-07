@@ -10,6 +10,8 @@ class PickedZoneItem extends TreeItem
         # attributes
         @add_attr
             # geometry
+            force : "/media/mathieu/Data/bourgueil/plast_florent/effort.txt"
+            force_sign : new Choice( 0, [ "+", "-", "0"] )
             _border_type     : _border_type
             points           : [] # contains model_id of points in mesh child
             picked_element   : [] # contains item mesh and element
