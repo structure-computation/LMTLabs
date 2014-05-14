@@ -32,6 +32,7 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
 
     #ajout des applications de EcosystemMecanics
     APPS.push new TreeAppApplication_Correlation
+    APPS.push new TreeAppApplication_DicUncertainty
     APPS.push new TreeAppApplication_Scills3D
     APPS.push new TreeAppApplication_Scult3D
     APPS.push new TreeAppApplication_Scills2D
@@ -55,6 +56,7 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
     #APPS.push new TreeAppApplication_Acquisition
     APPS.push new TreeAppApplication_Test
     
+
     bs = new BrowserState
     fs = new FileSystem
     # FileSystem._disp = true
