@@ -13,6 +13,7 @@ class AbaqusDataItem extends TreeItem
             thickness : 0.002
             computation_type : new Choice( 0, [ "Plane Stress 2D", "Plane Strain 2D", "Extruded 3D"] )
             n_el : 1
+            n_timesteps : 1
 
         @add_child new MaterialABQItem
         @add_child new BoundariesSelectionItem
