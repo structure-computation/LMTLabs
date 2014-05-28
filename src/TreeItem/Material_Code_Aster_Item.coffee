@@ -15,7 +15,7 @@ class Material_Code_Aster_Item extends TreeItem
 Class Steel\n
     Poisson := 0.33\n
     Young := 210\n
-    a := 0.3\n
+    a := 300\n
     n := 0.3\n
     sigma_y := 150\n", "ruby", @parse_code_onchange)
     
