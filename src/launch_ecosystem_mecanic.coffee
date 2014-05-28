@@ -39,11 +39,10 @@ launch_ecosystem_mecanic = ( main = document.body ) ->
     APPS.push new TreeAppApplication_Scult2D
     APPS.push new TreeAppApplication_FieldsComparator
     APPS.push new TreeAppApplication_FieldExport
-    APPS.push new TreeAppApplication_AbaqusComputation
-    APPS.push new TreeAppApplication_Code_Aster_Computation
-    APPS.push new TreeAppApplication_IdentificationWithAbaqus
-    APPS.push new TreeAppApplication_IdentificationWithCode_Aster
-    APPS.push new TreeAppApplication_TestReno
+#     APPS.push new TreeAppApplication_AbaqusComputation
+#     APPS.push new TreeAppApplication_Code_Aster_Computation
+#     APPS.push new TreeAppApplication_IdentificationWithAbaqus
+#     APPS.push new TreeAppApplication_IdentificationWithCode_Aster
     APPS.push new TreeAppApplication_Mesher
     #APPS.push new TreeAppApplication_Sketcher
     APPS.push new TreeAppApplication_StepReader  
