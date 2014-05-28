@@ -8,9 +8,10 @@ class PickedZoneItem extends TreeItem
         @_ico.set "img/zone_16.png"
         @_viewable.set true
         # attributes
+        @add_child new BCTypeItem
         @add_attr
             # geometry
-            force : "/media/mathieu/Data/bourgueil/plast_florent/effort.txt"
+            force : "/home/mathieu/test_data/effort.txt"
             force_sign : new Choice( 0, [ "+", "-", "0"] )
             _border_type     : _border_type
             points           : [] # contains model_id of points in mesh child

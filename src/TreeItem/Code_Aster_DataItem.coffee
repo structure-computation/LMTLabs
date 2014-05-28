@@ -1,10 +1,10 @@
 #
-class AbaqusDataItem extends TreeItem
-    constructor: ( name = "AbaqusData" ) ->
+class Code_Aster_DataItem extends TreeItem
+    constructor: ( name = "Code_Aster_Data" ) ->
         super()
         
         @_name.set name
-        @_ico.set "img/AbaqusData_bouton.png"
+        @_ico.set "img/Code_Aster_Data_bouton.png"
         @_viewable.set false
         
         
@@ -15,7 +15,7 @@ class AbaqusDataItem extends TreeItem
             n_el : 1
             n_timesteps : 1
 
-        @add_child new MaterialABQItem
+        @add_child new Material_Code_Aster_Item
         @add_child new BoundariesSelectionItem
         
     
@@ -28,7 +28,7 @@ class AbaqusDataItem extends TreeItem
         ch instanceof FieldSetItem or
         ch instanceof FieldItem or
         ch instanceof MeshItem or
-        ch instanceof MaterialABQItem or
+        ch instanceof Material_Code_Aster_Item or
         ch instanceof ImgSetItem
 
     disp_only_in_model_editor: ->
