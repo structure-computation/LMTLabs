@@ -10,7 +10,7 @@ class Material_Code_Aster_Item extends TreeItem
         
         # attributes
         @add_attr 
-            Comportement : new Choice( 0, [ "Elas_iso", "Powerlaw hardening"] )
+            Law_type : new Choice( 0, [ "Elas_iso", "Powerlaw hardening"] )
             code: new StrLanguage("
 Class Steel\n
     Poisson := 0.33\n

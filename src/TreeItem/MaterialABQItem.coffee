@@ -10,14 +10,14 @@ class MaterialABQItem extends TreeItem
         
         # attributes
         @add_attr 
+            Law_type : new Choice( 0, [ "Elas_iso", "Elas_ortho", "Ramberg-Osgood", "Abaqus UMAT" , "Equation", "Abaqus UMAT : Lemaitre model (AG)"] )
             param_file : "/media/mathieu/Data/bourgueil/plast_florent/damplast_param.txt"
             umat_file : "/media/mathieu/Data/bourgueil/plast_florent/damplast.f"
-            Comportement : new Choice( 0, [ "Elas_iso", "Elas_ortho", "Ramberg-Osgood", "Abaqus UMAT" , "Equation", "Abaqus UMAT : Lemaitre model (AG)"] )
             code: new StrLanguage("
 Class Steel\n
     Poisson := 0.33\n
     Young := 210\n
-    rapport := 1\n
+    elas_ratio := 1\n
     n := 8\n
     sigma_0 := 150\n", "ruby", @parse_code_onchange)
     

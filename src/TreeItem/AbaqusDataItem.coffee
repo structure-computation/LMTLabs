@@ -24,11 +24,9 @@ class AbaqusDataItem extends TreeItem
         
     accept_child: ( ch ) ->
         ch instanceof FieldSetCorreliItem or
-        ch instanceof BoundariesSelectionItem or
         ch instanceof FieldSetItem or
         ch instanceof FieldItem or
         ch instanceof MeshItem or
-        ch instanceof MaterialABQItem or
         ch instanceof ImgSetItem
 
     disp_only_in_model_editor: ->
