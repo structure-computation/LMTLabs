@@ -10,9 +10,9 @@ class BCTypeItem extends TreeItem
         
         @add_attr
             Choice : new Choice( 0, [ "From disp. field", "Disp from text file"] )
+            Data_X : "/home/mathieu/test_data/dx.txt"
+            Data_Y : "/home/mathieu/test_data/dy.txt"
             Input_unit : new Choice( 0, [ "Meter", "Pixel"] )
-            Displacement_X : "/home/mathieu/test_data/dx.txt"
-            Displacement_Y : "/home/mathieu/test_data/dy.txt"
 
     
     display_suppl_context_actions: ( context_action )  ->
