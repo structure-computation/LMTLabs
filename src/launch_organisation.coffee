@@ -69,12 +69,13 @@ create_organisation_view = ( config, main = document.body ) ->
     APPS.push new TreeAppApplication_Mesher
     #APPS.push new TreeAppApplication_Sketcher
     APPS.push new TreeAppApplication_StepReader  
-    APPS.push new TreeAppApplication_StepReaderToNurbs
+#     APPS.push new TreeAppApplication_StepReaderToNurbs
     APPS.push new TreeAppApplication_Plot3D
     APPS.push new TreeAppApplication_Plot2D
     #APPS.push new TreeAppApplication_DeepCopy
     APPS.push new TreeAppApplication_CsvReader
     APPS.push new TreeAppApplication_Annotation
+    APPS.push new TreeAppApplication_TestA
     
     #login bar
     login_bar = new LoginBar main, config
