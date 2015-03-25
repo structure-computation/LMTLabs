@@ -13,9 +13,9 @@ class PickedZoneItem extends TreeItem
             # geometry
             force : "/home/mathieu/test_data/effort.txt"
             force_sign : new Choice( 0, [ "+", "-", "0"] )
-            _border_type     : _border_type
-            points           : [] # contains model_id of points in mesh child
-            picked_element   : [] # contains item mesh and element
+            border_type     : _border_type
+            _points           : [] # contains model_id of points in mesh child
+            _picked_element   : [] # contains item mesh and element
             _pelected        : [] # contains pre_selected element
     
     accept_child: ( ch ) ->
@@ -37,7 +37,7 @@ class PickedZoneItem extends TreeItem
 
     
     draw: ( info ) ->
-        for pe in @picked_element
+        for pe in @_picked_element
             mesh = pe.mesh
             elem = pe.element
             proj = for p in mesh.points
@@ -49,7 +49,7 @@ class PickedZoneItem extends TreeItem
             elem.draw info, mesh, proj, true
     
     closest_point_closer_than: ( best, info, pos ) ->
-        for pe in @picked_element
+        for pe in @_picked_element
             mesh = pe.mesh
             elem = pe.element
             proj = for p in mesh.points

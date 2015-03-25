@@ -15,7 +15,7 @@ class Code_Aster_DataItem extends TreeItem
             n_el : 1
             n_timesteps : 1
 
-        @add_child new Material_Code_Aster_Item
+        @add_child new Code_Aster_MaterialItem
         @add_child new BoundariesSelectionItem
         
     

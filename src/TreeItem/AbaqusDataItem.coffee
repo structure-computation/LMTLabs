@@ -15,7 +15,7 @@ class AbaqusDataItem extends TreeItem
             n_el : 1
             n_timesteps : 1
 
-        @add_child new MaterialABQItem
+        @add_child new ABQMaterialItem
         @add_child new BoundariesSelectionItem
         
     

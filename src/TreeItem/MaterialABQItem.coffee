@@ -10,7 +10,7 @@ class MaterialABQItem extends TreeItem
         
         # attributes
         @add_attr 
-            Law_type : new Choice( 0, [ "Elas_iso", "Elas_ortho", "Ramberg-Osgood", "Abaqus UMAT" , "Equation", "Abaqus UMAT : Lemaitre model (AG)"] )
+            Law_type : new Choice( 0, [ "Elas_iso", "Elas_ortho", "Ramberg-Osgood", "Abaqus UMAT" , "Equation", "Abaqus UMAT : Lemaitre model (AG)", "Drucker-Prager Hardening", "Creep, time-hardening"] )
             param_file : "/media/mathieu/Data/bourgueil/plast_florent/damplast_param.txt"
             umat_file : "/media/mathieu/Data/bourgueil/plast_florent/damplast.f"
             code: new StrLanguage("
@@ -19,7 +19,14 @@ Class Steel\n
     Young := 210\n
     elas_ratio := 1\n
     n := 8\n
-    sigma_0 := 150\n", "ruby", @parse_code_onchange)
+    sigma_0 := 150\n
+    eps_0 := 0\n
+    friction_angle := 0.9\n
+    flowstress_ratio := 0.9\n
+    dilation_angle := 0.9\n
+    pl_multiplier :=4.16\n
+    eq_stress_order := 1\n
+    time_order :=0", "ruby", @parse_code_onchange)
     
         @_lst_variables = new Lst
 #         @_old_lst_variables = new Lst
